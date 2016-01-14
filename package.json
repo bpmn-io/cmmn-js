@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "cmmn-moddle": "^0.1.0",
-    "diagram-js": "^0.11.0",
+    "diagram-js": "^0.12.0",
     "didi": "^0.0.4",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
