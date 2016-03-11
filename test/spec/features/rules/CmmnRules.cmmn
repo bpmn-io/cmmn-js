@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmmn:definitions  id="Test"
+                  targetNamespace="http://bpmn.io/schema/cmmn"
+                  xmlns:dc="http://www.omg.org/spec/CMMN/20150516/DC"
+                  xmlns:di="http://www.omg.org/spec/CMMN/20150516/DI"
+                  xmlns:cmmndi="http://www.omg.org/spec/CMMN/20150516/CMMNDI"
+                  xmlns:cmmn="http://www.omg.org/spec/CMMN/20150516/MODEL"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <cmmn:case name="Case_1" id="Case_1">
+    <cmmn:casePlanModel name="CasePlan_1" id="CasePlan_1">
+      <cmmn:planItem definitionRef="Stage_1" id="PI_Stage_1">
+        <cmmn:exitCriterion name="" sentryRef="Sentry_2" id="Exit_1"/>
+      </cmmn:planItem>
+      <cmmn:planItem definitionRef="Milestone_1" id="PI_Milestone_1"/>    
+      <cmmn:planItem definitionRef="Listener_1" id="PI_Listener_1"/>
+      <cmmn:stage name="Stage_1" id="Stage_1">
+        <cmmn:planItem definitionRef="Task_1" id="PI_Task_1">
+          <cmmn:entryCriterion name="" sentryRef="Sentry_1" id="Entry_1"/>
+        </cmmn:planItem>
+        <cmmn:task name="Task_1" id="Task_1" />
+        <cmmn:sentry id="Sentry_1"/>
+      </cmmn:stage>
+      <cmmn:milestone name="Milestone_1" id="Milestone_1"/>
+      <cmmn:userEventListener name="" id="Listener_1"/>
+      <cmmn:sentry id="Sentry_2"/>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2">
+      <cmmndi:Size height="500" width="500"/>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlan_1" id="DI_CasePlan_1">
+        <dc:Bounds height="250" width="400" x="25" y="25"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Stage_1" id="DI_PI_Stage_1">
+        <dc:Bounds height="175" width="200" x="50" y="50"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Task_1" id="DI_PI_Task_1">
+        <dc:Bounds height="76.0" width="97.0" x="100" y="100"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="Entry_1" id="DI_Entry_1">
+        <dc:Bounds height="28.0" width="20.0" x="90" y="125"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Milestone_1" id="DI_PI_Milestone_1">
+        <dc:Bounds height="40" width="115" x="280" y="100"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Listener_1" id="DI_PI_Listener_1">
+        <dc:Bounds height="36" width="36" x="350" y="170"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="Exit_1" id="DI_Exit_1">
+        <dc:Bounds height="28.0" width="20.0" x="415" y="125"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

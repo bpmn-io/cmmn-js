@@ -35,7 +35,8 @@ var unique = require('lodash/array/unique'),
 
 var TestContainer = require('mocha-test-container-support');
 
-var Viewer = require('../../lib/Viewer');
+var Viewer = require('../../lib/Viewer'),
+    Modeler = require('../../lib/Modeler');
 
 var OPTIONS, CMMN_JS;
 
@@ -191,7 +192,7 @@ function inject(fn) {
 }
 
 
-// module.exports.bootstrapModeler = (window || global).bootstrapModeler = bootstrapModeler;
+module.exports.bootstrapModeler = (window || global).bootstrapModeler = bootstrapModeler;
 module.exports.bootstrapViewer = (window || global).bootstrapViewer = bootstrapViewer;
 module.exports.inject = (window || global).inject = inject;
 
