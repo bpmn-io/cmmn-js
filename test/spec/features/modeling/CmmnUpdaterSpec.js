@@ -24,29 +24,155 @@ describe('features/modeling CmmnUpdater', function() {
         task_PI = elementFactory.createPlanItemShape('cmmn:Task');
       }));
 
-      it('should set case plan', inject(function(modeling, elementRegistry) {
+      describe('set case plan', function() {
 
-        // given
-        var casePlan = elementRegistry.get('CasePlan_1');
+        var casePlan;
 
-        // when
-        modeling.createShape(task_PI, { x: 150, y: 490 }, casePlan);
+        beforeEach(inject(function(elementRegistry, modeling) {
+          casePlan = elementRegistry.get('CasePlan_1');
 
-        var casePlan_BO = casePlan.businessObject,
-            task_PI_BO = task_PI.businessObject;
+          modeling.createShape(task_PI, { x: 150, y: 490 }, casePlan);
+        }));
 
-        // then
-        // check parent PI
-        expect(task_PI.parent).to.equal(casePlan);
+        it('should execute', function() {
 
-        // check semantic parent
-        expect(task_PI_BO.$parent).to.exist;
-        expect(task_PI_BO.$parent).to.equal(casePlan_BO);
+          var casePlan_BO = casePlan.businessObject,
+              task_PI_BO = task_PI.businessObject;
 
-        // check parent containment
-        expect(casePlan_BO.get('planItems')).to.include(task_PI_BO);
-        expect(casePlan_BO.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
-      }));
+          // then
+          // check parent PI
+          expect(task_PI.parent).to.equal(casePlan);
+
+          // check semantic parent
+          expect(task_PI_BO.$parent).to.exist;
+          expect(task_PI_BO.$parent).to.equal(casePlan_BO);
+
+          // check parent containment
+          expect(casePlan_BO.get('planItems')).to.include(task_PI_BO);
+          expect(casePlan_BO.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+
+          commandStack.undo();
+
+          var casePlan_BO = casePlan.businessObject,
+              task_PI_BO = task_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(task_PI.parent).to.be.null;
+
+          // check semantic parent
+          expect(task_PI_BO.$parent).to.be.null;
+
+          // check parent containment
+          expect(casePlan_BO.get('planItems')).not.to.include(task_PI_BO);
+          expect(casePlan_BO.get('planItemDefinitions')).not.to.include(task_PI_BO.definitionRef);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+
+          commandStack.undo();
+          commandStack.redo();
+
+          var casePlan_BO = casePlan.businessObject,
+              task_PI_BO = task_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(task_PI.parent).to.equal(casePlan);
+
+          // check semantic parent
+          expect(task_PI_BO.$parent).to.exist;
+          expect(task_PI_BO.$parent).to.equal(casePlan_BO);
+
+          // check parent containment
+          expect(casePlan_BO.get('planItems')).to.include(task_PI_BO);
+          expect(casePlan_BO.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
+        }));
+
+      });
+
+
+      describe('set stage', function() {
+
+        var stage_PI;
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+          stage_PI = elementRegistry.get('PI_Stage_1');
+
+          modeling.createShape(task_PI, { x: 150, y: 405 }, stage_PI);
+        }));
+
+        it('should execute', function() {
+
+          var stage_PI_BO = stage_PI.businessObject,
+              task_PI_BO = task_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(task_PI.parent).to.equal(stage_PI);
+
+          // check semantic parent
+          expect(task_PI_BO.$parent).to.exist;
+          expect(task_PI_BO.$parent).to.equal(stage_PI_BO);
+
+          // check parent containment
+          expect(stage_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
+          expect(stage_PI_BO.definitionRef.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
+
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+
+          // when
+          commandStack.undo();
+
+          var stage_PI_BO = stage_PI.businessObject,
+              task_PI_BO = task_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(task_PI.parent).to.be.null;
+
+          // check semantic parent
+          expect(task_PI_BO.$parent).to.be.null;
+
+          // check parent containment
+          expect(stage_PI_BO.definitionRef.get('planItems')).not.to.include(task_PI_BO);
+          expect(stage_PI_BO.definitionRef.get('planItemDefinitions')).not.to.include(task_PI_BO.definitionRef);
+
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          var stage_PI_BO = stage_PI.businessObject,
+              task_PI_BO = task_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(task_PI.parent).to.equal(stage_PI);
+
+          // check semantic parent
+          expect(task_PI_BO.$parent).to.exist;
+          expect(task_PI_BO.$parent).to.equal(stage_PI_BO);
+
+          // check parent containment
+          expect(stage_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
+          expect(stage_PI_BO.definitionRef.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
+
+        }));
+
+      });
 
 
       it('should set stage 1', inject(function(modeling, elementRegistry) {
@@ -121,6 +247,7 @@ describe('features/modeling CmmnUpdater', function() {
         expect(stage_3_PI_BO.definitionRef.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
 
       }));
+
     });
 
 
@@ -133,60 +260,159 @@ describe('features/modeling CmmnUpdater', function() {
       }));
 
 
-      it('should set case plan', inject(function(modeling, elementRegistry) {
+      describe('set casePlan', function() {
 
-        // given
-        var casePlan = elementRegistry.get('CasePlan_1');
+        var casePlan;
 
-        // when
-        modeling.createShape(stage_PI, { x: 150, y: 490 }, casePlan);
+        beforeEach(inject(function(modeling, elementRegistry) {
+          casePlan = elementRegistry.get('CasePlan_1');
 
-        var casePlan_BO = casePlan.businessObject,
-            stage_PI_BO = stage_PI.businessObject;
+          modeling.createShape(stage_PI, { x: 150, y: 490 }, casePlan);
+        }));
 
-        // then
-        // check parent PI
-        expect(stage_PI.parent).to.equal(casePlan);
+        it('should execute', function() {
 
-        // check semantic parent
-        expect(stage_PI_BO.$parent).to.exist;
-        expect(stage_PI_BO.$parent).to.equal(casePlan_BO);
+          var casePlan_BO = casePlan.businessObject,
+              stage_PI_BO = stage_PI.businessObject;
 
-        // check parent containment
-        expect(casePlan_BO.get('planItems')).to.include(stage_PI_BO);
-        expect(casePlan_BO.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
-      }));
+          // then
+          // check parent PI
+          expect(stage_PI.parent).to.equal(casePlan);
+
+          // check semantic parent
+          expect(stage_PI_BO.$parent).to.exist;
+          expect(stage_PI_BO.$parent).to.equal(casePlan_BO);
+
+          // check parent containment
+          expect(casePlan_BO.get('planItems')).to.include(stage_PI_BO);
+          expect(casePlan_BO.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
+        });
 
 
-      it('should set stage', inject(function(modeling, elementRegistry) {
+        it('should undo', inject(function(commandStack) {
 
-        // given
-        var stage_1_PI = elementRegistry.get('PI_Stage_1');
+          commandStack.undo();
 
-        // when
-        modeling.createShape(stage_PI, { x: 150, y: 405 }, stage_1_PI);
+          var casePlan_BO = casePlan.businessObject,
+              stage_PI_BO = stage_PI.businessObject;
 
-        var stage_1_PI_BO = stage_1_PI.businessObject,
-            stage_PI_BO = stage_PI.businessObject;
+          // then
+          // check parent PI
+          expect(stage_PI.parent).to.be.null;
 
-        // then
-        // check parent PI
-        expect(stage_PI.parent).to.equal(stage_1_PI);
+          // check semantic parent
+          expect(stage_PI_BO.$parent).to.be.null;
 
-        // check semantic parent
-        expect(stage_PI_BO.$parent).to.exist;
-        expect(stage_PI_BO.$parent).to.equal(stage_1_PI_BO);
+          // check parent containment
+          expect(casePlan_BO.get('planItems')).not.to.include(stage_PI_BO);
+          expect(casePlan_BO.get('planItemDefinitions')).not.to.include(stage_PI_BO.definitionRef);
 
-        // check parent containment
-        expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(stage_PI_BO);
-        expect(stage_1_PI_BO.definitionRef.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
+        }));
 
-      }));
+
+        it('should redo', inject(function(commandStack) {
+
+          commandStack.undo();
+          commandStack.redo();
+
+          var casePlan_BO = casePlan.businessObject,
+              stage_PI_BO = stage_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(stage_PI.parent).to.equal(casePlan);
+
+          // check semantic parent
+          expect(stage_PI_BO.$parent).to.exist;
+          expect(stage_PI_BO.$parent).to.equal(casePlan_BO);
+
+          // check parent containment
+          expect(casePlan_BO.get('planItems')).to.include(stage_PI_BO);
+          expect(casePlan_BO.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
+
+        }));
+
+      });
+
+
+      describe('set stage', function() {
+
+        var stage_1_PI;
+
+        beforeEach(inject(function(modeling, elementRegistry) {
+          stage_1_PI = elementRegistry.get('PI_Stage_1');
+
+          modeling.createShape(stage_PI, { x: 150, y: 405 }, stage_1_PI);
+        }));
+
+        it('should execute', function() {
+
+
+          var stage_1_PI_BO = stage_1_PI.businessObject,
+              stage_PI_BO = stage_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(stage_PI.parent).to.equal(stage_1_PI);
+
+          // check semantic parent
+          expect(stage_PI_BO.$parent).to.exist;
+          expect(stage_PI_BO.$parent).to.equal(stage_1_PI_BO);
+
+          // check parent containment
+          expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(stage_PI_BO);
+          expect(stage_1_PI_BO.definitionRef.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
+
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+
+          commandStack.undo();
+
+          var stage_1_PI_BO = stage_1_PI.businessObject,
+              stage_PI_BO = stage_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(stage_PI.parent).to.be.null;
+
+          // check semantic parent
+          expect(stage_PI_BO.$parent).to.be.null;
+
+          // check parent containment
+          expect(stage_1_PI_BO.definitionRef.get('planItems')).not.to.include(stage_PI_BO);
+          expect(stage_1_PI_BO.definitionRef.get('planItemDefinitions')).not.to.include(stage_PI_BO.definitionRef);
+
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+
+          commandStack.undo();
+          commandStack.redo();
+
+          var stage_1_PI_BO = stage_1_PI.businessObject,
+              stage_PI_BO = stage_PI.businessObject;
+
+          // then
+          // check parent PI
+          expect(stage_PI.parent).to.equal(stage_1_PI);
+
+          // check semantic parent
+          expect(stage_PI_BO.$parent).to.exist;
+          expect(stage_PI_BO.$parent).to.equal(stage_1_PI_BO);
+
+          // check parent containment
+          expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(stage_PI_BO);
+          expect(stage_1_PI_BO.definitionRef.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
+
+        }));
+
+      });
 
     });
 
   });
 
 });
-
-
