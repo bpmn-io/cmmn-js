@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'cmmn';
-  src: url('../font/cmmn.eot?35690633');
-  src: url('../font/cmmn.eot?35690633#iefix') format('embedded-opentype'),
-       url('../font/cmmn.woff2?35690633') format('woff2'),
-       url('../font/cmmn.woff?35690633') format('woff'),
-       url('../font/cmmn.ttf?35690633') format('truetype'),
-       url('../font/cmmn.svg?35690633#cmmn') format('svg');
+  src: url('../font/cmmn.eot?62091645');
+  src: url('../font/cmmn.eot?62091645#iefix') format('embedded-opentype'),
+       url('../font/cmmn.woff2?62091645') format('woff2'),
+       url('../font/cmmn.woff?62091645') format('woff'),
+       url('../font/cmmn.ttf?62091645') format('truetype'),
+       url('../font/cmmn.svg?62091645#cmmn') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'cmmn';
-    src: url('../font/cmmn.svg?35690633#cmmn') format('svg');
+    src: url('../font/cmmn.svg?62091645#cmmn') format('svg');
   }
 }
 */
@@ -55,17 +55,19 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.cmmn-icon-case-plan-model:before { content: '\e800'; } /* '' */
-.cmmn-icon-stage:before { content: '\e801'; } /* '' */
-.cmmn-icon-milestone:before { content: '\e802'; } /* '' */
-.cmmn-icon-task:before { content: '\e803'; } /* '' */
-.cmmn-icon-case-task:before { content: '\e804'; } /* '' */
-.cmmn-icon-decision-task:before { content: '\e805'; } /* '' */
-.cmmn-icon-human-blocking-task:before { content: '\e806'; } /* '' */
-.cmmn-icon-human-non-blocking-task:before { content: '\e807'; } /* '' */
-.cmmn-icon-process-task:before { content: '\e808'; } /* '' */
-.cmmn-icon-hand-tool:before { content: '\e809'; } /* '' */
-.cmmn-icon-lasso-tool:before { content: '\e80a'; } /* '' */
-.cmmn-icon-screw-wrench:before { content: '\e80b'; } /* '' */
-.cmmn-icon-space-tool:before { content: '\e80c'; } /* '' */
-.cmmn-icon-trash:before { content: '\e80d'; } /* '' */
+.cmmn-icon-bpmn-io:before { content: '\e800'; } /* '' */
+.cmmn-icon-screw-wrench:before { content: '\e801'; } /* '' */
+.cmmn-icon-trash:before { content: '\e802'; } /* '' */
+.cmmn-icon-lasso-tool:before { content: '\e803'; } /* '' */
+.cmmn-icon-space-tool:before { content: '\e804'; } /* '' */
+.cmmn-icon-hand-tool:before { content: '\e805'; } /* '' */
+.cmmn-icon-case-plan-model:before { content: '\e806'; } /* '' */
+.cmmn-icon-stage:before { content: '\e807'; } /* '' */
+.cmmn-icon-milestone:before { content: '\e808'; } /* '' */
+.cmmn-icon-text-annotation:before { content: '\e809'; } /* '' */
+.cmmn-icon-task:before { content: '\e80a'; } /* '' */
+.cmmn-icon-case-task:before { content: '\e80b'; } /* '' */
+.cmmn-icon-decision-task:before { content: '\e80c'; } /* '' */
+.cmmn-icon-human-blocking-task:before { content: '\e80d'; } /* '' */
+.cmmn-icon-human-non-blocking-task:before { content: '\e80e'; } /* '' */
+.cmmn-icon-process-task:before { content: '\e80f'; } /* '' */
