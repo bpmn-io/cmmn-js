@@ -11,7 +11,7 @@
       <cmmn:planItem definitionRef="Stage_1" id="PI_Stage_1">
         <cmmn:exitCriterion name="" sentryRef="Sentry_2" id="Exit_1"/>
       </cmmn:planItem>
-      <cmmn:planItem definitionRef="Milestone_1" id="PI_Milestone_1"/>    
+      <cmmn:planItem definitionRef="Milestone_1" id="PI_Milestone_1"/>
       <cmmn:planItem definitionRef="Listener_1" id="PI_Listener_1"/>
       <cmmn:stage name="Stage_1" id="Stage_1">
         <cmmn:planItem definitionRef="Task_1" id="PI_Task_1">
@@ -26,7 +26,7 @@
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmndi:CMMNDI>
-    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2">
+    <cmmndi:CMMNDiagram id="Diagram_1">
       <cmmndi:Size height="500" width="500"/>
       <cmmndi:CMMNShape cmmnElementRef="CasePlan_1" id="DI_CasePlan_1">
         <dc:Bounds height="250" width="400" x="25" y="25"/>

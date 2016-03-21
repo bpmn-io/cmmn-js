@@ -22,8 +22,8 @@ describe('features/modeling/rules - CmmnRules', function() {
 
     describe('drop', function() {
 
-      it('should not be allowed on case', function() {
-        expectCanDrop('PI_Task_1', 'Case_1', false);
+      it('should not be allowed on root', function() {
+        expectCanDrop('PI_Task_1', 'Diagram_1', false);
       });
 
 
@@ -69,8 +69,8 @@ describe('features/modeling/rules - CmmnRules', function() {
 
     describe('drop', function() {
 
-      it('should not be allowed on case', function() {
-        expectCanDrop('PI_Stage_1', 'Case_1', false);
+      it('should not be allowed on root', function() {
+        expectCanDrop('PI_Stage_1', 'Diagram_1', false);
       });
 
 
