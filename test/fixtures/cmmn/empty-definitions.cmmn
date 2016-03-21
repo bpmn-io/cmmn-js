@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cmmn:definitions id="Test"
                   targetNamespace="http://bpmn.io/schema/cmmn"
-                  xmlns:dc="http://www.omg.org/spec/CMMN/20150516/DC"
-                  xmlns:di="http://www.omg.org/spec/CMMN/20150516/DI"
-                  xmlns:cmmndi="http://www.omg.org/spec/CMMN/20150516/CMMNDI"
-                  xmlns:cmmn="http://www.omg.org/spec/CMMN/20150516/MODEL"
+                  xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC"
+                  xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI"
+                  xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI"
+                  xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 </cmmn:definitions>
