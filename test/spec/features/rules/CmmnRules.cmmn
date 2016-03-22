@@ -13,16 +13,21 @@
       </cmmn:planItem>
       <cmmn:planItem definitionRef="Milestone_1" id="PI_Milestone_1"/>
       <cmmn:planItem definitionRef="Listener_1" id="PI_Listener_1"/>
+      <cmmn:planItem definitionRef="CollapsedStage_1" id="PI_CollapsedStage_1"/>
+
+      <cmmn:sentry id="Sentry_2"/>
+
       <cmmn:stage name="Stage_1" id="Stage_1">
         <cmmn:planItem definitionRef="Task_1" id="PI_Task_1">
           <cmmn:entryCriterion name="" sentryRef="Sentry_1" id="Entry_1"/>
         </cmmn:planItem>
-        <cmmn:task name="Task_1" id="Task_1" />
         <cmmn:sentry id="Sentry_1"/>
+        <cmmn:task name="Task_1" id="Task_1" />
       </cmmn:stage>
       <cmmn:milestone name="Milestone_1" id="Milestone_1"/>
       <cmmn:userEventListener name="" id="Listener_1"/>
-      <cmmn:sentry id="Sentry_2"/>
+      <cmmn:stage name="Stage" id="CollapsedStage_1" />
+
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmndi:CMMNDI>
@@ -42,15 +47,19 @@
         <cmmndi:CMMNLabel/>
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape cmmnElementRef="PI_Milestone_1" id="DI_PI_Milestone_1">
-        <dc:Bounds height="40" width="115" x="280" y="100"/>
+        <dc:Bounds height="40" width="115" x="280" y="50"/>
         <cmmndi:CMMNLabel/>
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape cmmnElementRef="PI_Listener_1" id="DI_PI_Listener_1">
-        <dc:Bounds height="36" width="36" x="350" y="170"/>
+        <dc:Bounds height="36" width="36" x="350" y="120"/>
         <cmmndi:CMMNLabel/>
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape cmmnElementRef="Exit_1" id="DI_Exit_1">
         <dc:Bounds height="28.0" width="20.0" x="415" y="125"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_CollapsedStage_1" id="DI_CollapsedStage_1" isCollapsed="true">
+        <dc:Bounds height="76.0" width="97.0" x="280" y="160"/>
         <cmmndi:CMMNLabel/>
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>

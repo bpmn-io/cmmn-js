@@ -61,6 +61,11 @@ describe('features/modeling/rules - CmmnRules', function() {
         expectCanDrop('PI_Task_1', 'PI_Listener_1', false);
       });
 
+
+      it('should not be allowed on a collapsed stage', function() {
+        expectCanDrop('PI_Task_1', 'PI_CollapsedStage_1', false);
+      });
+
     });
 
   });
@@ -106,6 +111,11 @@ describe('features/modeling/rules - CmmnRules', function() {
 
       it('should not be allowed on user event listener', function() {
         expectCanDrop('PI_Stage_1', 'PI_Listener_1', false);
+      });
+
+
+      it('should not be allowed on a collapsed stage', function() {
+        expectCanDrop('PI_Stage_1', 'PI_CollapsedStage_1', false);
       });
 
     });
