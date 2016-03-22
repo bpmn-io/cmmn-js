@@ -47,4 +47,38 @@ describe('Importer', function() {
 
   });
 
+
+  it('should import only first diagram and its cases', function(done) {
+
+    var xml = require('./import-multiple-cases.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      var elementRegistry = modeler.get('elementRegistry');
+
+      expect(elementRegistry.get('CasePlanModel_1')).to.exist;
+      expect(elementRegistry.get('CasePlanModel_2')).to.exist;
+
+      expect(elementRegistry.get('CasePlanModel_3')).not.to.exist;
+
+      done();
+    });
+
+  });
+
+
+  it('should not import case plan model without di information', function(done) {
+
+    var xml = require('./import-case-plan-model-without-di.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      var elementRegistry = modeler.get('elementRegistry');
+
+      expect(elementRegistry.get('CasePlanModel_1')).not.to.exist;
+
+      done();
+    });
+
+  });
 });
