@@ -31,6 +31,23 @@ describe('Importer', function() {
   });
 
 
+  it('should not create a shape for CMMNDiagram', function(done) {
+
+    var xml = require('./Importer.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      var diagram = modeler.get('elementRegistry').get('Diagram_1');
+
+      expect(diagram).to.exist;
+      expect(diagram.businessObject.di).to.be.undefined;
+
+      done();
+    });
+
+  });
+
+
   it('should import only first diagram and its elements', function(done) {
 
     var xml = require('./Importer.cmmn');
