@@ -98,4 +98,22 @@ describe('Importer', function() {
     });
 
   });
+
+
+  it('should not create di for CMMNEdge', function(done) {
+
+    var xml = require('./Importer.discretionary-association.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      var assocation = modeler.get('elementRegistry').get('DiscretionaryAssociation_1');
+
+      expect(assocation).to.exist;
+      expect(assocation.businessObject.di).to.be.undefined;
+
+      done();
+    });
+
+  });
+
 });
