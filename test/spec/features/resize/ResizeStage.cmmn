@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmmn:definitions id="Test"
+                  targetNamespace="http://bpmn.io/schema/cmmn"
+                  xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC"
+                  xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI"
+                  xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI"
+                  xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1">
+      <cmmn:planItem definitionRef="Stage_1" id="PI_Stage_1">
+        <cmmn:exitCriterion sentryRef="Sentry_1" id="Stage_Exit_N"/>
+        <cmmn:exitCriterion sentryRef="Sentry_2" id="Stage_Exit_E"/>
+        <cmmn:exitCriterion sentryRef="Sentry_3" id="Stage_Exit_S"/>
+        <cmmn:exitCriterion sentryRef="Sentry_4" id="Stage_Exit_W"/>
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Task_N" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_E" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_S" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_W" definitionRef="Task_1" />
+
+      <cmmn:sentry id="Sentry_1">
+        <cmmn:planItemOnPart id="OnPart_1" sourceRef="PI_Task_N" />
+      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_2">
+        <cmmn:planItemOnPart id="OnPart_2" sourceRef="PI_Task_E" />
+      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_3">
+        <cmmn:planItemOnPart id="OnPart_3" sourceRef="PI_Task_S" />
+      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_4">
+        <cmmn:planItemOnPart id="OnPart_4" sourceRef="PI_Task_W" />
+      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_5">
+        <cmmn:planItemOnPart id="OnPart_5" sourceRef="PI_Task_N" />
+      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_6">
+        <cmmn:planItemOnPart id="OnPart_6" sourceRef="PI_Task_E" />
+      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_7">
+        <cmmn:planItemOnPart id="OnPart_7" sourceRef="PI_Task_S" />
+      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_8">
+        <cmmn:planItemOnPart id="OnPart_8" sourceRef="PI_Task_W" />
+      </cmmn:sentry>
+
+      <cmmn:stage id="Stage_1" />
+      <cmmn:task id="Task_1" />
+
+      <cmmn:exitCriterion sentryRef="Sentry_5" id="CasePlanModel_Exit_N"/>
+      <cmmn:exitCriterion sentryRef="Sentry_6" id="CasePlanModel_Exit_E"/>
+      <cmmn:exitCriterion sentryRef="Sentry_7" id="CasePlanModel_Exit_S"/>
+      <cmmn:exitCriterion sentryRef="Sentry_8" id="CasePlanModel_Exit_W"/>
+
+    </cmmn:casePlanModel>
+  </cmmn:case>
+
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:Size height="500" width="500"/>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_1" id="DI_CasePlanModel_1">
+        <dc:Bounds height="760" width="900" x="25" y="25"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Stage_1" id="DI_PI_Stage_1">
+        <dc:Bounds height="200.0" width="300.0" x="325" y="305"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Task_N" id="DI_PI_Task_N">
+        <dc:Bounds height="80.0" width="100.0" x="425" y="125"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Task_E" id="DI_PI_Task_E">
+        <dc:Bounds height="80.0" width="100.0" x="725" y="365"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Task_S" id="DI_PI_Task_S">
+        <dc:Bounds height="80.0" width="100.0" x="425" y="605"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Task_W" id="DI_PI_Task_W">
+        <dc:Bounds height="80.0" width="100.0" x="125" y="365"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_Exit_N" id="CasePlanModel_Exit_N_DI">
+        <dc:Bounds height="28.0" width="20.0" x="465" y="11"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_Exit_E" id="CasePlanModel_Exit_E_DI">
+        <dc:Bounds height="28.0" width="20.0" x="915" y="391"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_Exit_S" id="CasePlanModel_Exit_S_DI">
+        <dc:Bounds height="28.0" width="20.0" x="465" y="771"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_Exit_W" id="CasePlanModel_Exit_W_DI">
+        <dc:Bounds height="28.0" width="20.0" x="15" y="391"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="Stage_Exit_N" id="Stage_Exit_N_DI">
+        <dc:Bounds height="28.0" width="20.0" x="465" y="291"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="Stage_Exit_E" id="Stage_Exit_E_DI">
+        <dc:Bounds height="28.0" width="20.0" x="615" y="391"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="Stage_Exit_S" id="Stage_Exit_S_DI">
+        <dc:Bounds height="28.0" width="20.0" x="500" y="491"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="Stage_Exit_W" id="Stage_Exit_W_DI">
+        <dc:Bounds height="28.0" width="20.0" x="315" y="391"/>
+      </cmmndi:CMMNShape>
+
+      <cmmndi:CMMNEdge cmmnElementRef="OnPart_1" targetCMMNElementRef="Stage_Exit_N">
+          <di:waypoint x="475" y="205"/>
+          <di:waypoint x="475" y="291"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge cmmnElementRef="OnPart_2" targetCMMNElementRef="Stage_Exit_E">
+          <di:waypoint x="725" y="405"/>
+          <di:waypoint x="635" y="405"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge cmmnElementRef="OnPart_3" targetCMMNElementRef="Stage_Exit_S">
+          <di:waypoint x="475" y="605"/>
+          <di:waypoint x="510" y="519"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge cmmnElementRef="OnPart_4" targetCMMNElementRef="Stage_Exit_W">
+          <di:waypoint x="225" y="405"/>
+          <di:waypoint x="315" y="405"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+
+      <cmmndi:CMMNEdge cmmnElementRef="OnPart_5" targetCMMNElementRef="CasePlanModel_Exit_N">
+          <di:waypoint x="475" y="125"/>
+          <di:waypoint x="475" y="39"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge cmmnElementRef="OnPart_6" targetCMMNElementRef="CasePlanModel_Exit_E">
+          <di:waypoint x="825" y="405"/>
+          <di:waypoint x="915" y="405"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge cmmnElementRef="OnPart_7" targetCMMNElementRef="CasePlanModel_Exit_S">
+          <di:waypoint x="475" y="685"/>
+          <di:waypoint x="475" y="771"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge cmmnElementRef="OnPart_8" targetCMMNElementRef="CasePlanModel_Exit_W">
+          <di:waypoint x="125" y="405"/>
+          <di:waypoint x="15" y="405"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

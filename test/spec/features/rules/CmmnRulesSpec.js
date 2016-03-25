@@ -3,6 +3,7 @@
 var Helper = require('./Helper');
 
 var expectCanDrop = Helper.expectCanDrop;
+var expectCanResize = Helper.expectCanResize;
 
 /* global bootstrapModeler */
 
@@ -66,6 +67,51 @@ describe('features/modeling/rules - CmmnRules', function() {
         expectCanDrop('PI_Task_1', 'PI_CollapsedStage_1', false);
       });
 
+
+      describe('discretionary item', function() {
+
+        it('should be allowed on a discretionary stage', function() {
+          expectCanDrop('PI_Task_1', 'DIS_Stage_2', true);
+        });
+
+
+        it('should not be allowed on discretionary task', function() {
+          expectCanDrop('PI_Task_1', 'DIS_Task_2', false);
+        });
+
+
+        it('should not be allowed on discretionary milestone', function() {
+          expectCanDrop('PI_Task_1', 'DIS_Milestone_1', false);
+        });
+
+
+        it('should not be allowed on user discretionary event listener', function() {
+          expectCanDrop('PI_Task_1', 'DIS_Listener_1', false);
+        });
+
+
+        it('should not be allowed on a discretionary collapsed stage', function() {
+          expectCanDrop('PI_Task_1', 'DIS_Collapsed_Stage_1', false);
+        });
+
+      });
+
+    });
+
+    describe('resize', function() {
+
+      it('should not be allowed', function() {
+        expectCanResize('PI_Task_1', null, false);
+      });
+
+      describe('discretionary item', function() {
+
+        it('should not be allowed', function() {
+          expectCanResize('DIS_Task_2', null, false);
+        });
+
+      });
+
     });
 
   });
@@ -116,6 +162,145 @@ describe('features/modeling/rules - CmmnRules', function() {
 
       it('should not be allowed on a collapsed stage', function() {
         expectCanDrop('PI_Stage_1', 'PI_CollapsedStage_1', false);
+      });
+
+
+      describe('discretionary item', function() {
+
+        it('should be allowed on a discretionary stage', function() {
+          expectCanDrop('PI_Stage_1', 'DIS_Stage_2', true);
+        });
+
+
+        it('should not be allowed on discretionary task', function() {
+          expectCanDrop('PI_Stage_1', 'DIS_Task_2', false);
+        });
+
+
+        it('should not be allowed on discretionary milestone', function() {
+          expectCanDrop('PI_Stage_1', 'DIS_Milestone_1', false);
+        });
+
+
+        it('should not be allowed on user discretionary event listener', function() {
+          expectCanDrop('PI_Stage_1', 'DIS_Listener_1', false);
+        });
+
+
+        it('should not be allowed on a discretionary collapsed stage', function() {
+          expectCanDrop('PI_Stage_1', 'DIS_Collapsed_Stage_1', false);
+        });
+
+      });
+
+    });
+
+    describe('resize', function() {
+
+      it('should be allowed', function() {
+        expectCanResize('PI_Stage_1', null, true);
+      });
+
+      it('should not be allowed to resize with to small width', function() {
+        expectCanResize('PI_Stage_1', { width: 99, height: 100 }, false);
+      });
+
+
+      it('should not be allowed to resize with to small width', function() {
+        expectCanResize('PI_Stage_1', { width: 100, height: 79 }, false);
+      });
+
+
+      it('should not be allowed to resize a collapsed stage', function() {
+        expectCanResize('PI_CollapsedStage_1', null, false);
+      });
+
+      describe('discretionary item', function() {
+
+        it('should be allowed', function() {
+          expectCanResize('DIS_Stage_2', null, true);
+        });
+
+
+        it('should not be allowed to resize a collapsed stage', function() {
+          expectCanResize('DIS_Collapsed_Stage_1', null, false);
+        });
+
+      });
+
+      describe('case plan model', function() {
+
+        it('should be allowed', function() {
+          expectCanResize('CasePlan_1', null, true);
+        });
+
+
+        it('should not be allowed to resize with to small width', function() {
+          expectCanResize('CasePlan_1', { width: 99, height: 100 }, false);
+        });
+
+
+        it('should not be allowed to resize with to small width', function() {
+          expectCanResize('CasePlan_1', { width: 100, height: 79 }, false);
+        });
+
+      });
+
+    });
+
+  });
+
+  describe('milestone', function() {
+
+    describe('resize', function() {
+
+      it('should not be allowed', function() {
+        expectCanResize('PI_Milestone_1', null, false);
+      });
+
+      describe('discretionary item', function() {
+
+        it('should not be allowed', function() {
+          expectCanResize('DIS_Milestone_1', null, false);
+        });
+
+      });
+
+    });
+
+  });
+
+  describe('event listener', function() {
+
+    describe('resize', function() {
+
+      it('should not be allowed', function() {
+        expectCanResize('PI_Listener_1', null, false);
+      });
+
+      describe('discretionary item', function() {
+
+        it('should not be allowed', function() {
+          expectCanResize('DIS_Listener_1', null, false);
+        });
+
+      });
+
+    });
+
+  });
+
+  describe('criterion', function() {
+
+    describe('resize', function() {
+
+      it('should not be allowed to resize an entry criterion', function() {
+        expectCanResize('Entry_1', null, false);
+      });
+
+
+      it('should not be allowed to resize an exit criterion', function() {
+        expectCanResize('Exit_1', null, false);
       });
 
     });

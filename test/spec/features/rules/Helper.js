@@ -21,3 +21,22 @@ function expectCanDrop(element, target, expectedResult) {
 }
 
 module.exports.expectCanDrop = expectCanDrop;
+
+
+function expectCanResize(element, bounds, expectedResult) {
+
+  var result;
+
+  TestHelper.getCmmnJs().invoke(function(elementRegistry, cmmnRules) {
+
+    element = elementRegistry.get(element);
+
+    expect(element).to.exist;
+
+    result = cmmnRules.canResize(element, bounds);
+  });
+
+  expect(result).to.eql(expectedResult);
+}
+
+module.exports.expectCanResize = expectCanResize;

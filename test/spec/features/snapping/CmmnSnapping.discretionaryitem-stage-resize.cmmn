@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmmn:definitions id="Test"
+                  targetNamespace="http://bpmn.io/schema/cmmn"
+                  xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC"
+                  xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI"
+                  xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI"
+                  xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1">
+      <cmmn:planningTable>
+        <cmmn:discretionaryItem definitionRef="Stage_1" id="DIS_Stage_1" />
+      </cmmn:planningTable>
+      <cmmn:stage id="Stage_1">
+        <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
+        <cmmn:task id="Task_1" />
+      </cmmn:stage>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+
+  <cmmn:case id="Case_2">
+    <cmmn:casePlanModel id="CasePlanModel_2">
+      <cmmn:planningTable>
+        <cmmn:discretionaryItem definitionRef="Stage_2" id="DIS_Stage_2" />
+      </cmmn:planningTable>
+      <cmmn:stage id="Stage_2" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:Size height="500" width="500"/>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_1" id="DI_CasePlanModel_1">
+        <dc:Bounds height="250" width="400" x="25" y="25"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_Stage_1" id="DI_PI_Stage_1">
+        <dc:Bounds height="200.0" width="350.0" x="40" y="40"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Task_1" id="DI_PI_Task_1">
+        <dc:Bounds height="76.0" width="97.0" x="100" y="100"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_2" id="DI_CasePlanModel_2">
+        <dc:Bounds height="250" width="400" x="450" y="25"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_Stage_2" id="DI_PI_Stage_2">
+        <dc:Bounds height="200.0" width="350.0" x="480" y="40"/>
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

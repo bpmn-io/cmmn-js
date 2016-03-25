@@ -17,12 +17,25 @@
 
       <cmmn:sentry id="Sentry_2"/>
 
+      <cmmn:planningTable>
+        <cmmn:discretionaryItem id="DIS_Stage_2" definitionRef="Stage_2" />
+        <cmmn:discretionaryItem id="DIS_Listener_1" definitionRef="Listener_1" />
+        <cmmn:discretionaryItem id="DIS_Milestone_1" definitionRef="Milestone_1" />
+        <cmmn:discretionaryItem id="DIS_Collapsed_Stage_1" definitionRef="CollapsedStage_1" />
+      </cmmn:planningTable>
+
       <cmmn:stage name="Stage_1" id="Stage_1">
         <cmmn:planItem definitionRef="Task_1" id="PI_Task_1">
           <cmmn:entryCriterion name="" sentryRef="Sentry_1" id="Entry_1"/>
         </cmmn:planItem>
         <cmmn:sentry id="Sentry_1"/>
         <cmmn:task name="Task_1" id="Task_1" />
+      </cmmn:stage>
+      <cmmn:stage name="Stage_2" id="Stage_2">
+        <cmmn:planningTable>
+          <cmmn:discretionaryItem definitionRef="Task_2" id="DIS_Task_2" />
+        </cmmn:planningTable>
+        <cmmn:task name="Task_1" id="Task_2" />
       </cmmn:stage>
       <cmmn:milestone name="Milestone_1" id="Milestone_1"/>
       <cmmn:userEventListener name="" id="Listener_1"/>
@@ -34,7 +47,7 @@
     <cmmndi:CMMNDiagram id="Diagram_1">
       <cmmndi:Size height="500" width="500"/>
       <cmmndi:CMMNShape cmmnElementRef="CasePlan_1" id="DI_CasePlan_1">
-        <dc:Bounds height="250" width="400" x="25" y="25"/>
+        <dc:Bounds height="500" width="400" x="25" y="25"/>
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape cmmnElementRef="PI_Stage_1" id="DI_PI_Stage_1">
         <dc:Bounds height="175" width="200" x="50" y="50"/>
@@ -61,6 +74,21 @@
       <cmmndi:CMMNShape cmmnElementRef="PI_CollapsedStage_1" id="DI_CollapsedStage_1" isCollapsed="true">
         <dc:Bounds height="76.0" width="97.0" x="280" y="160"/>
         <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_Stage_2" id="DI_DIS_Stage_2">
+        <dc:Bounds height="175" width="200" x="50" y="280"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_Milestone_1" id="DI_DIS_Milestone_1">
+        <dc:Bounds height="40" width="115" x="280" y="280"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_Listener_1" id="DI_DIS_Listener_1">
+        <dc:Bounds height="36" width="36" x="350" y="350"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_Collapsed_Stage_1" id="DI_DIS_Collapsed_Stage_1" isCollapsed="true">
+        <dc:Bounds height="76.0" width="97.0" x="280" y="400"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_Task_2" id="DI_DIS_Task_2">
+        <dc:Bounds height="76.0" width="97.0" x="100" y="330"/>
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>
   </cmmndi:CMMNDI>
