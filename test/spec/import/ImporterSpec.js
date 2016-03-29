@@ -67,7 +67,7 @@ describe('Importer', function() {
 
   it('should import only first diagram and its cases', function(done) {
 
-    var xml = require('./import-multiple-cases.cmmn');
+    var xml = require('./Importer.multiple-cases.cmmn');
 
     modeler.importXML(xml, function(err, warnings) {
 
@@ -86,7 +86,7 @@ describe('Importer', function() {
 
   it('should not import case plan model without di information', function(done) {
 
-    var xml = require('./import-case-plan-model-without-di.cmmn');
+    var xml = require('./Importer.case-plan-model-without-di.cmmn');
 
     modeler.importXML(xml, function(err, warnings) {
 
@@ -112,6 +112,20 @@ describe('Importer', function() {
       expect(assocation.businessObject.di).to.be.undefined;
 
       done();
+    });
+
+  });
+
+
+  it('should import cases one with connections another without connections', function(done) {
+
+    var xml = require('./Importer.connections.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      expect(warnings.length).to.equal(0);
+
+      done(err);
     });
 
   });
