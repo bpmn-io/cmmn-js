@@ -118,7 +118,7 @@ describe('features/modeling CmmnUpdater', function() {
 
           // check semantic parent
           expect(task_PI_BO.$parent).to.exist;
-          expect(task_PI_BO.$parent).to.equal(stage_PI_BO);
+          expect(task_PI_BO.$parent).to.equal(stage_PI_BO.definitionRef);
 
           // check parent containment
           expect(stage_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
@@ -164,7 +164,7 @@ describe('features/modeling CmmnUpdater', function() {
 
           // check semantic parent
           expect(task_PI_BO.$parent).to.exist;
-          expect(task_PI_BO.$parent).to.equal(stage_PI_BO);
+          expect(task_PI_BO.$parent).to.equal(stage_PI_BO.definitionRef);
 
           // check parent containment
           expect(stage_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
@@ -192,7 +192,7 @@ describe('features/modeling CmmnUpdater', function() {
 
         // check semantic parent
         expect(task_PI_BO.$parent).to.exist;
-        expect(task_PI_BO.$parent).to.equal(stage_1_PI_BO);
+        expect(task_PI_BO.$parent).to.equal(stage_1_PI_BO.definitionRef);
 
         // check parent containment
         expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
@@ -216,7 +216,7 @@ describe('features/modeling CmmnUpdater', function() {
 
         // check semantic parent
         expect(task_PI_BO.$parent).to.exist;
-        expect(task_PI_BO.$parent).to.equal(stage_2_PI_BO);
+        expect(task_PI_BO.$parent).to.equal(stage_2_PI_BO.definitionRef);
 
         // check parent containment
         expect(stage_2_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
@@ -240,7 +240,7 @@ describe('features/modeling CmmnUpdater', function() {
 
         // check semantic parent
         expect(task_PI_BO.$parent).to.exist;
-        expect(task_PI_BO.$parent).to.equal(stage_3_PI_BO);
+        expect(task_PI_BO.$parent).to.equal(stage_3_PI_BO.definitionRef);
 
         // check parent containment
         expect(stage_3_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
@@ -357,7 +357,7 @@ describe('features/modeling CmmnUpdater', function() {
 
           // check semantic parent
           expect(stage_PI_BO.$parent).to.exist;
-          expect(stage_PI_BO.$parent).to.equal(stage_1_PI_BO);
+          expect(stage_PI_BO.$parent).to.equal(stage_1_PI_BO.definitionRef);
 
           // check parent containment
           expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(stage_PI_BO);
@@ -401,7 +401,7 @@ describe('features/modeling CmmnUpdater', function() {
 
           // check semantic parent
           expect(stage_PI_BO.$parent).to.exist;
-          expect(stage_PI_BO.$parent).to.equal(stage_1_PI_BO);
+          expect(stage_PI_BO.$parent).to.equal(stage_1_PI_BO.definitionRef);
 
           // check parent containment
           expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(stage_PI_BO);
