@@ -8,7 +8,6 @@ var modelingModule = require('../../../../lib/features/modeling'),
 
 var domQuery = require('min-dom/lib/query');
 
-
 describe('features/palette', function() {
 
   var diagramXML = require('../../../fixtures/cmmn/simple.cmmn');
@@ -25,7 +24,7 @@ describe('features/palette', function() {
     var entries = domQuery.all('.entry', paletteElement);
 
     // then
-    expect(entries.length).to.equal(2);
+    expect(entries.length).to.equal(3);
   }));
 
 });

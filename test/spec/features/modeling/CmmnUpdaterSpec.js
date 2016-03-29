@@ -3,7 +3,8 @@
 /* global bootstrapModeler, inject */
 
 var modelingModule = require('../../../../lib/features/modeling'),
-    coreModule = require('../../../../lib/core');
+    coreModule = require('../../../../lib/core'),
+    is = require('../../../../lib/util/ModelUtil').is;
 
 
 describe('features/modeling CmmnUpdater', function() {
@@ -13,6 +14,12 @@ describe('features/modeling CmmnUpdater', function() {
   var testXML = require('./CmmnUpdater.cmmn');
 
   beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+  var rootElement;
+
+  beforeEach(inject(function(canvas){
+    rootElement = canvas.getRootElement();
+  }));
 
   describe('update parent', function() {
 
@@ -50,6 +57,12 @@ describe('features/modeling CmmnUpdater', function() {
           // check parent containment
           expect(casePlan_BO.get('planItems')).to.include(task_PI_BO);
           expect(casePlan_BO.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
+
+          // check parent di
+          expect(task_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(task_PI_BO.di);
         });
 
 
@@ -70,6 +83,12 @@ describe('features/modeling CmmnUpdater', function() {
           // check parent containment
           expect(casePlan_BO.get('planItems')).not.to.include(task_PI_BO);
           expect(casePlan_BO.get('planItemDefinitions')).not.to.include(task_PI_BO.definitionRef);
+
+          // check parent di
+          expect(task_PI_BO.di.$parent).to.be.null;
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).not.to.contain(task_PI_BO.di);
         }));
 
 
@@ -92,6 +111,12 @@ describe('features/modeling CmmnUpdater', function() {
           // check parent containment
           expect(casePlan_BO.get('planItems')).to.include(task_PI_BO);
           expect(casePlan_BO.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
+
+          // check parent di
+          expect(task_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(task_PI_BO.di);
         }));
 
       });
@@ -124,6 +149,12 @@ describe('features/modeling CmmnUpdater', function() {
           expect(stage_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
           expect(stage_PI_BO.definitionRef.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
 
+          // check parent di
+          expect(task_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(task_PI_BO.di);
+
         });
 
 
@@ -145,6 +176,12 @@ describe('features/modeling CmmnUpdater', function() {
           // check parent containment
           expect(stage_PI_BO.definitionRef.get('planItems')).not.to.include(task_PI_BO);
           expect(stage_PI_BO.definitionRef.get('planItemDefinitions')).not.to.include(task_PI_BO.definitionRef);
+
+          // check parent di
+          expect(task_PI_BO.di.$parent).to.be.null;
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).not.to.contain(task_PI_BO.di);
 
         }));
 
@@ -169,6 +206,12 @@ describe('features/modeling CmmnUpdater', function() {
           // check parent containment
           expect(stage_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
           expect(stage_PI_BO.definitionRef.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
+
+          // check parent di
+          expect(task_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(task_PI_BO.di);
 
         }));
 
@@ -198,6 +241,11 @@ describe('features/modeling CmmnUpdater', function() {
         expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
         expect(stage_1_PI_BO.definitionRef.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
 
+        // check parent di
+        expect(task_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+        // check parent di containment
+        expect(rootElement.businessObject.diagramElements).to.contain(task_PI_BO.di);
       }));
 
 
@@ -222,6 +270,12 @@ describe('features/modeling CmmnUpdater', function() {
         expect(stage_2_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
         expect(stage_2_PI_BO.definitionRef.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
 
+        // check parent di
+        expect(task_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+        // check parent di containment
+        expect(rootElement.businessObject.diagramElements).to.contain(task_PI_BO.di);
+
       }));
 
 
@@ -245,6 +299,12 @@ describe('features/modeling CmmnUpdater', function() {
         // check parent containment
         expect(stage_3_PI_BO.definitionRef.get('planItems')).to.include(task_PI_BO);
         expect(stage_3_PI_BO.definitionRef.get('planItemDefinitions')).to.include(task_PI_BO.definitionRef);
+
+        // check parent di
+        expect(task_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+        // check parent di containment
+        expect(rootElement.businessObject.diagramElements).to.contain(task_PI_BO.di);
 
       }));
 
@@ -286,6 +346,12 @@ describe('features/modeling CmmnUpdater', function() {
           // check parent containment
           expect(casePlan_BO.get('planItems')).to.include(stage_PI_BO);
           expect(casePlan_BO.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
+
+          // check parent di
+          expect(stage_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(stage_PI_BO.di);
         });
 
 
@@ -307,6 +373,11 @@ describe('features/modeling CmmnUpdater', function() {
           expect(casePlan_BO.get('planItems')).not.to.include(stage_PI_BO);
           expect(casePlan_BO.get('planItemDefinitions')).not.to.include(stage_PI_BO.definitionRef);
 
+          // check parent di
+          expect(stage_PI_BO.di.$parent).to.be.null;
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).not.to.contain(stage_PI_BO.di);
         }));
 
 
@@ -330,6 +401,11 @@ describe('features/modeling CmmnUpdater', function() {
           expect(casePlan_BO.get('planItems')).to.include(stage_PI_BO);
           expect(casePlan_BO.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
 
+          // check parent di
+          expect(stage_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(stage_PI_BO.di);
         }));
 
       });
@@ -363,6 +439,11 @@ describe('features/modeling CmmnUpdater', function() {
           expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(stage_PI_BO);
           expect(stage_1_PI_BO.definitionRef.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
 
+          // check parent di
+          expect(stage_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(stage_PI_BO.di);
         });
 
 
@@ -384,6 +465,11 @@ describe('features/modeling CmmnUpdater', function() {
           expect(stage_1_PI_BO.definitionRef.get('planItems')).not.to.include(stage_PI_BO);
           expect(stage_1_PI_BO.definitionRef.get('planItemDefinitions')).not.to.include(stage_PI_BO.definitionRef);
 
+          // check parent di
+          expect(stage_PI_BO.di.$parent).to.be.null;
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).not.to.contain(stage_PI_BO.di);
         }));
 
 
@@ -407,11 +493,114 @@ describe('features/modeling CmmnUpdater', function() {
           expect(stage_1_PI_BO.definitionRef.get('planItems')).to.include(stage_PI_BO);
           expect(stage_1_PI_BO.definitionRef.get('planItemDefinitions')).to.include(stage_PI_BO.definitionRef);
 
+          // check parent di
+          expect(stage_PI_BO.di.$parent).to.equal(rootElement.businessObject);
+
         }));
 
       });
 
     });
+
+    describe('for case plan model', function() {
+
+      var casePlanModelShape, _case, defintions, rootElement;
+
+      beforeEach(inject(function(elementFactory) {
+        casePlanModelShape = elementFactory.createCasePlanModelShape();
+        _case = casePlanModelShape.businessObject.$parent;
+      }));
+
+      beforeEach(inject(function(elementRegistry) {
+        var casePlan = elementRegistry.get('CasePlan_1');
+        defintions = casePlan.businessObject.$parent.$parent;
+      }));
+
+      beforeEach(inject(function(canvas){
+        rootElement = canvas.getRootElement();
+      }));
+
+      describe('set defintions', function() {
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+          modeling.createShape(casePlanModelShape, { x: 875, y: 150 }, rootElement);
+        }));
+
+        it('should execute', function() {
+
+          var casePlanModelShape_BO = casePlanModelShape.businessObject;
+
+          // then
+          // check parent PI
+          expect(casePlanModelShape.parent).to.equal(rootElement);
+
+          // check semantic parent of case element
+          expect(_case.$parent).to.exist;
+          expect(_case.$parent).to.equal(defintions);
+
+          // check parent containment of case element
+          expect(defintions.get('cases')).to.include(_case);
+
+          // check parent di
+          expect(casePlanModelShape_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(casePlanModelShape_BO.di);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+
+          commandStack.undo();
+
+          var casePlanModelShape_BO = casePlanModelShape.businessObject;
+
+          // then
+          // check parent PI
+          expect(casePlanModelShape.parent).to.be.null;
+
+          // check semantic parent
+          expect(_case.$parent).to.be.null;
+
+          // check parent containment
+          expect(defintions.get('cases')).not.to.include(_case);
+
+          // check parent di
+          expect(casePlanModelShape_BO.di.$parent).to.be.null;
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).not.to.contain(casePlanModelShape_BO.di);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+
+          commandStack.undo();
+          commandStack.redo();
+
+          var casePlanModelShape_BO = casePlanModelShape.businessObject;
+
+          // then
+          // check parent PI
+          expect(casePlanModelShape.parent).to.equal(rootElement);
+
+          // check semantic parent of case element
+          expect(_case.$parent).to.exist;
+          expect(_case.$parent).to.equal(defintions);
+
+          // check parent containment
+          expect(defintions.get('cases')).to.include(_case);
+
+          // check parent di
+          expect(casePlanModelShape_BO.di.$parent).to.equal(rootElement.businessObject);
+
+          // check parent di containment
+          expect(rootElement.businessObject.diagramElements).to.contain(casePlanModelShape_BO.di);
+        }));
+
+      });
+
+    })
 
   });
 

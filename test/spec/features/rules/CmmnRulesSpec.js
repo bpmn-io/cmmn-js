@@ -307,4 +307,50 @@ describe('features/modeling/rules - CmmnRules', function() {
 
   });
 
+  describe('case plan', function() {
+
+    describe('drop', function() {
+
+      it('should be allowed on root', function() {
+        expectCanDrop('CasePlan_1', 'Diagram_1', true);
+      });
+
+
+      it('should not be allowed on case plan', function() {
+        expectCanDrop('CasePlan_1', 'CasePlan_1', false);
+      });
+
+
+      it('should not be allowed on stage', function() {
+        expectCanDrop('CasePlan_1', 'PI_Stage_1', false);
+      });
+
+
+      it('should not be allowed on task', function() {
+        expectCanDrop('CasePlan_1', 'PI_Task_1', false);
+      });
+
+
+      it('should not be allowed on milestone', function() {
+        expectCanDrop('CasePlan_1', 'PI_Milestone_1', false);
+      });
+
+
+      it('should not be allowed on entry criterion', function() {
+        expectCanDrop('CasePlan_1', 'Entry_1', false);
+      });
+
+
+      it('should not be allowed on entry criterion', function() {
+        expectCanDrop('CasePlan_1', 'Exit_1', false);
+      });
+
+
+      it('should not be allowed on user event listener', function() {
+        expectCanDrop('CasePlan_1', 'PI_Listener_1', false);
+      });
+
+    });
+
+  });
 });
