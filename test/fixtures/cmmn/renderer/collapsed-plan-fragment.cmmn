@@ -11,6 +11,10 @@
 
     <cmmn:casePlanModel name="A CasePlanModel" id="CasePlanModel_1">
 
+      <cmmn:planningTable>
+        <cmmn:discretionaryItem definitionRef="Stage_1" id="DIS_PlanFragment_1" />
+      </cmmn:planningTable>
+
       <cmmn:planFragment name="A Plan Fragment" id="Stage_1" />
 
     </cmmn:casePlanModel>
@@ -23,7 +27,7 @@
       <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_1" id="DI_CasePlanModel_1">
         <dc:Bounds height="250" width="400" x="25" y="25"/>
       </cmmndi:CMMNShape>
-      <cmmndi:CMMNShape cmmnElementRef="Stage_1" id="DI_PI_Stage_1" isCollapsed="true">
+      <cmmndi:CMMNShape cmmnElementRef="DIS_PlanFragment_1" id="DI_DIS_PlanFragment_1" isCollapsed="true">
           <dc:Bounds height="172.0" width="250.0" x="80" y="80" />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>
