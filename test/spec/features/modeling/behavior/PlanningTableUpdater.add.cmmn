@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmmn:definitions id="Test"
+                  targetNamespace="http://bpmn.io/schema/cmmn"
+                  xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC"
+                  xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI"
+                  xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI"
+                  xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <cmmn:case id="Case_1">
+
+    <cmmn:casePlanModel id="CasePlanModel_1">
+
+      <cmmn:planItem definitionRef="Stage_1" id="PI_Stage_1" />
+      <cmmn:planItem definitionRef="Stage_2" id="PI_Stage_2" />
+      <cmmn:planItem definitionRef="Stage_3" id="PI_Stage_3" />
+
+      <cmmn:stage id="Stage_1" />
+
+      <cmmn:stage id="Stage_2">
+        <cmmn:planItem definitionRef="HumanTask_1" id="PI_HumanTask_1" />
+
+        <cmmn:planFragment id="PlanFragment_1" />
+        <cmmn:planFragment id="PlanFragment_2">
+          <cmmn:planItem definitionRef="HumanTask_2" id="PI_HumanTask_2" />
+        </cmmn:planFragment>
+        <cmmn:planFragment id="PlanFragment_3" />
+
+        <cmmn:humanTask id="HumanTask_1">
+          <cmmn:planningTable>
+            <cmmn:discretionaryItem definitionRef="PlanFragment_2" id="DIS_PlanFragment_2" />
+          </cmmn:planningTable>
+        </cmmn:humanTask>
+
+        <cmmn:humanTask id="HumanTask_2">
+          <cmmn:planningTable>
+            <cmmn:discretionaryItem definitionRef="PlanFragment_3" id="DIS_PlanFragment_3" />
+          </cmmn:planningTable>
+        </cmmn:humanTask>
+      </cmmn:stage>
+
+      <cmmn:stage id="Stage_3">
+        <cmmn:planningTable>
+          <cmmn:discretionaryItem definitionRef="PlanFragment_4" id="DIS_PlanFragment_4" />
+        </cmmn:planningTable>
+
+        <cmmn:planFragment id="PlanFragment_4" />
+      </cmmn:stage>
+
+    </cmmn:casePlanModel>
+
+  </cmmn:case>
+
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2">
+      <cmmndi:Size height="500" width="500"/>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_1" id="DI_CasePlanModel_1">
+        <dc:Bounds height="550" width="850" x="25" y="25"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Stage_1" id="DI_PI_Stage_1">
+        <dc:Bounds height="200.0" width="200.0" x="200" y="50"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Stage_2" id="DI_PI_Stage_2">
+        <dc:Bounds height="250.0" width="550.0" x="50" y="300"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_HumanTask_1" id="DI_PI_HumanTask_1">
+        <dc:Bounds height="80.0" width="100.0" x="90" y="375"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="DiscretionaryConnection_1" sourceCMMNElementRef="PI_HumanTask_1" targetCMMNElementRef="DIS_PlanFragment_2">
+          <di:waypoint x="190" y="415"/>
+          <di:waypoint x="250" y="415"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_PlanFragment_2" id="DI_DIS_PlanFragment_2">
+        <dc:Bounds height="200.0" width="325.0" x="250" y="315"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_HumanTask_2" id="DI_PI_HumanTask_2">
+        <dc:Bounds height="80.0" width="100.0" x="260" y="375"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="DiscretionaryConnection_2" sourceCMMNElementRef="PI_HumanTask_2" targetCMMNElementRef="DIS_PlanFragment_3">
+          <di:waypoint x="360" y="415"/>
+          <di:waypoint x="390" y="415"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_PlanFragment_3" id="DI_DIS_PlanFragment_3">
+        <dc:Bounds height="165.0" width="150.0" x="390" y="325"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_Stage_3" id="DI_PI_Stage_3">
+        <dc:Bounds height="200.0" width="400.0" x="450" y="50"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_PlanFragment_4" id="DI_DIS_PlanFragment_4">
+        <dc:Bounds height="140.0" width="200.0" x="600" y="75"/>
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

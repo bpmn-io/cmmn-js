@@ -1407,7 +1407,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       target = targetShape.businessObject.definitionRef;
 
       // when
-      modeling.moveElements( [ stageShape, taskShape ], { x: 325, y: 0 }, targetShape, false, { primaryShape: taskShape });
+      modeling.moveElements([ stageShape, taskShape ], { x: 325, y: 0 }, targetShape, false, { primaryShape: taskShape });
     }));
 
 
@@ -1445,7 +1445,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       expect(source.get('planItemDefinitions')).not.to.include(taskDefinition);
       expect(target.get('planItemDefinitions')).to.include(taskDefinition);
       expect(casePlanModel.get('planItemDefinitions')).not.to.include(taskDefinition);
-      
+
       expect(source.get('planItemDefinitions')).not.to.include(stageDefinition);
       expect(target.get('planItemDefinitions')).to.include(stageDefinition);
     }));
@@ -1511,13 +1511,13 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
 
     beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-    var source, target, taskDefinition, stageDefinition, casePlanModel;
+    var source, target, taskDefinition;
 
     beforeEach(inject(function(elementRegistry, modeling) {
       // given
       var taskShape = elementRegistry.get('PI_Task_1');
       var disTaskShape = elementRegistry.get('DIS_Task_2');
-      
+
       taskDefinition = taskShape.businessObject.definitionRef;
 
       source = elementRegistry.get('PI_Stage_2').businessObject.definitionRef;
