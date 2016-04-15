@@ -1383,4 +1383,179 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
 
   });
 
+  describe('move multiple elements with shared plan item definition', function() {
+
+    var diagramXML = require('./PlanItemDefinitionUpdater.move.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var source, target, taskDefinition, stageDefinition, casePlanModel;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+      // given
+      var taskShape = elementRegistry.get('PI_Task_1');
+      taskDefinition = taskShape.businessObject.definitionRef;
+
+      var stageShape = elementRegistry.get('PI_Stage_3');
+      stageDefinition = stageShape.businessObject.definitionRef;
+
+      source = elementRegistry.get('PI_Stage_1').businessObject.definitionRef;
+
+      casePlanModel = elementRegistry.get('CasePlanModel_1').businessObject;
+
+      var targetShape = elementRegistry.get('PI_Stage_2');
+      target = targetShape.businessObject.definitionRef;
+
+      // when
+      modeling.moveElements( [ stageShape, taskShape ], { x: 325, y: 0 }, targetShape, false, { primaryShape: taskShape });
+    }));
+
+
+    it('should execute', function() {
+      expect(source.get('planItemDefinitions')).not.to.include(taskDefinition);
+      expect(target.get('planItemDefinitions')).to.include(taskDefinition);
+      expect(casePlanModel.get('planItemDefinitions')).not.to.include(taskDefinition);
+
+      expect(source.get('planItemDefinitions')).not.to.include(stageDefinition);
+      expect(target.get('planItemDefinitions')).to.include(stageDefinition);
+
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(source.get('planItemDefinitions')).to.include(taskDefinition);
+      expect(target.get('planItemDefinitions')).not.to.include(taskDefinition);
+      expect(casePlanModel.get('planItemDefinitions')).not.to.include(taskDefinition);
+
+      expect(source.get('planItemDefinitions')).to.include(stageDefinition);
+      expect(target.get('planItemDefinitions')).not.to.include(stageDefinition);
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(source.get('planItemDefinitions')).not.to.include(taskDefinition);
+      expect(target.get('planItemDefinitions')).to.include(taskDefinition);
+      expect(casePlanModel.get('planItemDefinitions')).not.to.include(taskDefinition);
+      
+      expect(source.get('planItemDefinitions')).not.to.include(stageDefinition);
+      expect(target.get('planItemDefinitions')).to.include(stageDefinition);
+    }));
+
+  });
+
+  describe('discretionary to human task', function() {
+
+    var diagramXML = require('./PlanItemDefinitionUpdater.discretionary-to-human-task.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var source, target, planItemTaskDefinition, discretionaryItemTaskDefinition;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+      // given
+      var taskShape = elementRegistry.get('PI_HumanTask_1');
+      planItemTaskDefinition = taskShape.businessObject.definitionRef;
+
+      discretionaryItemTaskDefinition = elementRegistry.get('DIS_HumanTask_1').businessObject.definitionRef;
+
+      source = elementRegistry.get('PI_Stage_3').businessObject.definitionRef;
+
+      var targetShape = elementRegistry.get('PI_Stage_1');
+      target = targetShape.businessObject.definitionRef;
+
+      // when
+      modeling.moveElements([ taskShape ], { x: -150, y: 0 }, targetShape, false, { primaryShape: taskShape });
+    }));
+
+    it('should execute', function() {
+      // then
+      expect(target.planItemDefinitions).to.include(planItemTaskDefinition);
+      expect(target.planItemDefinitions).to.include(discretionaryItemTaskDefinition);
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(target.planItemDefinitions).not.to.include(planItemTaskDefinition);
+      expect(target.planItemDefinitions).not.to.include(discretionaryItemTaskDefinition);
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(target.planItemDefinitions).to.include(planItemTaskDefinition);
+      expect(target.planItemDefinitions).to.include(discretionaryItemTaskDefinition);
+    }));
+
+  });
+
+  describe('should not duplicate shared plan item defintion', function() {
+
+    var diagramXML = require('./PlanItemDefinitionUpdater.move-shared-definition.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var source, target, taskDefinition, stageDefinition, casePlanModel;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+      // given
+      var taskShape = elementRegistry.get('PI_Task_1');
+      var disTaskShape = elementRegistry.get('DIS_Task_2');
+      
+      taskDefinition = taskShape.businessObject.definitionRef;
+
+      source = elementRegistry.get('PI_Stage_2').businessObject.definitionRef;
+
+      var targetShape = elementRegistry.get('CasePlanModel_2');
+      target = targetShape.businessObject;
+
+      // when
+      modeling.moveElements( [ disTaskShape, taskShape ], { x: 600, y: 0 }, targetShape, false, { primaryShape: taskShape });
+    }));
+
+
+    it('should execute', function() {
+      // then
+      expect(target.planItemDefinitions).to.have.length(1);
+      expect(target.planItemDefinitions).to.include(taskDefinition);
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(target.planItemDefinitions).to.have.length(0);
+      expect(target.planItemDefinitions).not.to.include(taskDefinition);
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(target.planItemDefinitions).to.have.length(1);
+      expect(target.planItemDefinitions).to.include(taskDefinition);
+    }));
+  });
+
 });

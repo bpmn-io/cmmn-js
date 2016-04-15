@@ -522,4 +522,51 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
 
   });
 
+  describe('delete nested planning table', function() {
+
+    var diagramXML = require('./PlanItemDefinitionUpdater.nested-planning-table.cmmn');
+
+    var discretionaryItem, stage, planningTable;
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+      // given
+      var shape = elementRegistry.get('DIS_HumanTask_1');
+      discretionaryItem = shape.businessObject;
+
+      stage = elementRegistry.get('PI_Stage_1').businessObject.definitionRef;
+      planningTable = stage.planningTable;
+
+      // when
+      modeling.removeElements([ shape ]);
+    }));
+
+
+    it('should execute', function() {
+      // then
+      expect(stage.planningTable).not.to.exist;
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(stage.planningTable).to.exist;
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(stage.planningTable).not.to.exist;
+    }));
+
+  });
+
 });
