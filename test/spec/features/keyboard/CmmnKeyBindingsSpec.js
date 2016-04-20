@@ -7,7 +7,8 @@ var coreModule = require('../../../../lib/core'),
     keyboardModule = require('../../../../lib/features/keyboard'),
     spaceToolModule = require('diagram-js/lib/features/space-tool'),
     lassoToolModule = require('diagram-js/lib/features/lasso-tool'),
-    handToolModule = require('diagram-js/lib/features/hand-tool');
+    handToolModule = require('diagram-js/lib/features/hand-tool'),
+    directEditingModule = require('diagram-js-direct-editing');
 
 var createKeyEvent = require('diagram-js/test/util/KeyEvents').createKeyEvent;
 
@@ -23,7 +24,8 @@ describe('features - keyboard', function() {
     spaceToolModule,
     lassoToolModule,
     handToolModule,
-    keyboardModule
+    keyboardModule,
+    directEditingModule
   ];
 
   beforeEach(bootstrapViewer(diagramXML, { modules: testModules }));
@@ -79,6 +81,25 @@ describe('features - keyboard', function() {
 
       // then
       expect(handTool.activateHand.calledOnce).to.be.true;
+    }));
+
+
+    it('should trigger direct editing', inject(function(keyboard, selection, elementRegistry, directEditing) {
+
+      sinon.spy(directEditing, 'activate');
+
+      // given
+      var task = elementRegistry.get('PI_Task_1');
+
+      selection.select(task);
+
+      var e = createKeyEvent(container, 69, false);
+
+      // when
+      keyboard._keyHandler(e);
+
+      // then
+      expect(directEditing.activate.calledOnce).to.be.true;
     }));
 
   });
