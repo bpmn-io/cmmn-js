@@ -1473,7 +1473,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       target = targetShape.businessObject.definitionRef;
 
       // when
-      modeling.moveElements([ taskShape ], { x: -150, y: 0 }, targetShape, false, { primaryShape: taskShape });
+      modeling.moveShape(taskShape, { x: -150, y: 0 }, targetShape);
     }));
 
     it('should execute', function() {

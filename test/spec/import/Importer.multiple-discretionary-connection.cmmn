@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmmn:definitions id="Test"
+                  targetNamespace="http://bpmn.io/schema/cmmn"
+                  xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC"
+                  xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI"
+                  xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI"
+                  xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel name="A CasePlanModel" id="CasePlanModel_1">
+      <cmmn:planItem definitionRef="HumanTask_1" id="PI_HumanTask_1" />
+      <cmmn:planItem definitionRef="HumanTask_1" id="PI_HumanTask_2" />
+
+      <cmmn:humanTask name="Human Task" id="HumanTask_1">
+        <cmmn:planningTable>
+          <cmmn:discretionaryItem definitionRef="Task_1" id="DIS_Task_1" />
+        </cmmn:planningTable>
+      </cmmn:humanTask>
+
+      <cmmn:task id="Task_1" />
+
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:Size height="500" width="500"/>
+      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_1" id="DI_CasePlanModel_1">
+        <dc:Bounds height="300" width="400" x="25" y="25"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_HumanTask_1" id="DI_PI_HumanTask_1">
+        <dc:Bounds height="76.0" width="97.0" x="100" y="100"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="PI_HumanTask_2" id="DI_PI_HumanTask_2">
+        <dc:Bounds height="76.0" width="97.0" x="100" y="200"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape cmmnElementRef="DIS_Task_1" id="DI_DIS_Task_1">
+        <dc:Bounds height="76.0" width="97.0" x="300" y="150"/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge sourceCMMNElementRef="PI_HumanTask_1" targetCMMNElementRef="DIS_Task_1" id="DiscretionaryAssociation_1">
+          <di:waypoint x="200" y="138"/>
+          <di:waypoint x="300" y="188"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge sourceCMMNElementRef="PI_HumanTask_2" targetCMMNElementRef="DIS_Task_1" id="DiscretionaryAssociation_2">
+          <di:waypoint x="200" y="238"/>
+          <di:waypoint x="300" y="188"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

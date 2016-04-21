@@ -130,4 +130,20 @@ describe('Importer', function() {
 
   });
 
+
+  it('should import discretionary item referenced by multiple plan items', function(done) {
+
+    var xml = require('./Importer.multiple-discretionary-connection.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      var discretionaryItem = modeler.get('elementRegistry').get('DIS_Task_1');
+
+      expect(discretionaryItem).to.exist;
+
+      done(err);
+    });
+
+  });
+
 });

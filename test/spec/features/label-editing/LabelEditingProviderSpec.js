@@ -294,7 +294,8 @@ describe('features - label-editing', function() {
       }));
 
 
-      it('should update the name of the referenced task', inject(function(modeling, elementRegistry) {
+      it.skip('should update the name of the referenced task', inject(function(modeling, elementRegistry) {
+      // TODO (paddy): unskip, when it is possible to delete on plan connections (issue #37)
 
         // given
         var humanTask_1 = elementRegistry.get('PI_HumanTask_1'),
