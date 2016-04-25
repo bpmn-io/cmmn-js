@@ -1,9 +1,8 @@
 'use strict';
 
-var TestHelper = require('../../TestHelper');
 var coreModule = require('../../../lib/core');
 
-/* global bootstrapViewer, bootstrapModeler, inject */
+/* global bootstrapViewer */
 
 var testModules = [ coreModule ];
 
@@ -26,25 +25,25 @@ describe('draw - cmmn renderer', function() {
 
   describe('stage', function() {
 
-    it('should expanded render stage', function (done) {
+    it('should render expanded stage', function (done) {
       var xml = require('../../fixtures/cmmn/renderer/expanded-stage.cmmn');
       bootstrap(xml, done);
     });
 
 
-    it('should expanded render discretionary stage', function (done) {
+    it('should render expanded discretionary stage', function (done) {
       var xml = require('../../fixtures/cmmn/renderer/expanded-discretionary-stage.cmmn');
       bootstrap(xml, done);
     });
 
 
-    it('should collapsed render stage', function (done) {
+    it('should render collapsed stage', function (done) {
       var xml = require('../../fixtures/cmmn/renderer/collapsed-stage.cmmn');
       bootstrap(xml, done);
     });
 
 
-    it('should collapsed render discretionary stage', function (done) {
+    it('should render collapsed discretionary stage', function (done) {
       var xml = require('../../fixtures/cmmn/renderer/collapsed-discretionary-stage.cmmn');
       bootstrap(xml, done);
     });
@@ -53,13 +52,13 @@ describe('draw - cmmn renderer', function() {
 
   describe('plan fragment', function() {
 
-    it('should expanded render plan fragment', function (done) {
+    it('should render expanded plan fragment', function (done) {
       var xml = require('../../fixtures/cmmn/renderer/expanded-plan-fragment.cmmn');
       bootstrap(xml, done);
     });
 
 
-    it('should collapsed render plan fragment', function (done) {
+    it('should render collapsed plan fragment', function (done) {
       var xml = require('../../fixtures/cmmn/renderer/collapsed-plan-fragment.cmmn');
       bootstrap(xml, done);
     });

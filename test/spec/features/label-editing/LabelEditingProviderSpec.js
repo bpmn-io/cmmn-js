@@ -571,4 +571,53 @@ describe('features - label-editing', function() {
 
   });
 
+
+  describe('CasePlanModel label container size', function() {
+
+    it('should expand if label text is long', inject(function(elementRegistry) {
+      // given
+      var shape = elementRegistry.get('CasePlanModel');
+
+      // when
+      setText(shape, 'FOO BAR FOO BAR FOO BAR FOO BAR');
+
+      // then
+      var containerBBox = elementRegistry.getGraphics(shape).select('polygon').getBBox();
+
+      expect(containerBBox.width).to.be.above(240);
+
+    }));
+
+
+    it('should respect min width', inject(function(elementRegistry) {
+      // given
+      var shape = elementRegistry.get('CasePlanModel');
+
+      // when
+      setText(shape, '|');
+
+      // then
+      var containerBBox = elementRegistry.getGraphics(shape).select('polygon').getBBox();
+
+      expect(containerBBox.width).to.equal(100);
+
+    }));
+
+
+    it('should respect max width', inject(function(elementRegistry) {
+      // given
+      var shape = elementRegistry.get('CasePlanModel');
+
+      // when
+      setText(shape, 'FOO ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ BAR');
+
+      // then
+      var containerBBox = elementRegistry.getGraphics(shape).select('polygon').getBBox();
+
+      expect(containerBBox.width).to.be.above(370);
+
+    }));
+
+  });
+
 });
