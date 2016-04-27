@@ -620,4 +620,23 @@ describe('features - label-editing', function() {
 
   });
 
+
+  describe('CasePlanModel label tab', function() {
+
+    it('should listen to pointer events', inject(function(elementRegistry) {
+
+      var shape = elementRegistry.get('CasePlanModel');
+
+      var gfx = elementRegistry.getGraphics(shape);
+
+      var labelTab = gfx.node.querySelector('polygon');
+
+      // expect the label tab to have the class pointerEvents set to 'all'
+      // which allows click events.
+      expect(labelTab.style.pointerEvents).to.equal('all');
+
+    }));
+
+  });
+
 });
