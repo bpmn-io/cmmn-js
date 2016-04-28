@@ -5,6 +5,7 @@
 var modelingModule = require('../../../../lib/features/modeling'),
     coreModule = require('../../../../lib/core');
 
+var forEach = require('lodash/collection/forEach');
 
 describe('features/modeling CmmnFactory', function() {
 
@@ -133,6 +134,76 @@ describe('features/modeling CmmnFactory', function() {
 
       // then
       expect(edge.label).to.exist;
+
+    }));
+
+    it('should generate id', inject(function(cmmnFactory) {
+
+      var types = [
+        'cmmn:Case',
+        'cmmn:PlanFragment',
+        'cmmn:Stage',
+        'cmmn:Task',
+        'cmmn:HumanTask',
+        'cmmn:ProcessTask',
+        'cmmn:CaseTask',
+        'cmmn:DecisionTask',
+        'cmmn:Milestone',
+        'cmmn:EventListener',
+        'cmmn:UserEventListener',
+        'cmmn:TimerEventListener',
+        'cmmn:PlanningTable',
+        'cmmn:DiscretionaryItem',
+        'cmmn:PlanItem',
+        'cmmn:RepetitionRule',
+        'cmmn:RequiredRule',
+        'cmmn:ManualActivationRule',
+        'cmmn:Sentry',
+        'cmmn:EntryCriterion',
+        'cmmn:ExitCriterion',
+        'cmmn:PlanItemOnPart',
+        'cmmn:CaseFileItemOnPart',
+        'cmmn:CaseFileItem',
+        'cmmn:CaseFileItemDefinition',
+        'cmmn:Definitions',
+        'cmmn:Documentation',
+        'cmmndi:CMMNDiagram',
+        'cmmndi:CMMNShape',
+        'cmmndi:CMMNEdge',
+        'cmmndi:CMMNStyle'
+      ];
+
+      forEach(types, function(type) {
+
+        // when
+        var elem = cmmnFactory.create(type);
+
+        // then
+        expect(elem.id).to.exist;
+
+      });
+
+    }));
+
+
+    it('should NOT generate id', inject(function(cmmnFactory) {
+
+
+      var types = [
+        'dc:Bounds',
+        'dc:Point',
+        'cmmndi:CMMNLabel'
+      ];
+
+      forEach(types, function(type) {
+
+        // when
+        var elem = cmmnFactory.create(type);
+
+        // then
+        expect(elem.id).not.to.exist;
+
+      });
 
     }));
 
