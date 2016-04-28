@@ -63,3 +63,48 @@ function expectCanConnect(source, target, rules) {
 }
 
 module.exports.expectCanConnect = expectCanConnect;
+
+
+function expectCanMove(elements, target, rules) {
+
+  var results = {};
+
+  TestHelper.getCmmnJs().invoke(function(elementRegistry, cmmnRules) {
+
+    target = elementRegistry.get(target);
+
+    if ('attach' in rules) {
+      results.attach = cmmnRules.canAttach(elements, target);
+    }
+
+    if ('move' in rules) {
+      results.move = cmmnRules.canMove(elements, target);
+    }
+  });
+
+  expect(results).to.eql(rules);
+}
+
+module.exports.expectCanMove = expectCanMove;
+
+
+function expectCanReplace(elements, target, rules) {
+
+  var results;
+
+  TestHelper.getCmmnJs().invoke(function(elementRegistry, cmmnRules) {
+
+    target = elementRegistry.get(target);
+
+    results = cmmnRules.canReplace(elements, target);
+
+    if (results !== false) {
+      results = results.replacements[0];
+    }
+
+  });
+
+  expect(results).to.eql(rules);
+}
+
+module.exports.expectCanReplace = expectCanReplace;

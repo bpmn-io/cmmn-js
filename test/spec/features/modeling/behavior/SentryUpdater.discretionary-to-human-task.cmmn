@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1b95c6c">
+    <cmmn:casePlanModel id="CasePlanModel_0yjmjmw">
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
+      <cmmn:stage id="Stage_1">
+        <cmmn:planItem id="PI_Stage_2" definitionRef="Stage_2" />
+        <cmmn:stage id="Stage_2">
+          <cmmn:planItem id="PI_HumanTask_1" definitionRef="HumanTask_1" />
+        </cmmn:stage>
+        <cmmn:humanTask id="HumanTask_1">
+          <cmmn:planningTable>
+            <cmmn:discretionaryItem id="DIS_Task_1" definitionRef="Task_1" />
+          </cmmn:planningTable>
+        </cmmn:humanTask>
+        <cmmn:task id="Task_1" />
+      </cmmn:stage>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_0yjmjmw_di" cmmnElementRef="CasePlanModel_0yjmjmw">
+        <dc:Bounds x="273" y="105" width="510" height="354" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
+        <dc:Bounds x="307" y="131" width="434" height="285" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_2_di" cmmnElementRef="PI_Stage_2">
+        <dc:Bounds x="350" y="162" width="350" height="200" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Task_1_di" cmmnElementRef="DIS_Task_1">
+        <dc:Bounds x="557" y="221" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_HumanTask_1_di" cmmnElementRef="PI_HumanTask_1">
+        <dc:Bounds x="393" y="223" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge sourceCMMNElementRef="PI_HumanTask_1" targetCMMNElementRef="DIS_Task_1">
+        <di:waypoint xsi:type="dc:Point" x="493" y="263" />
+        <di:waypoint xsi:type="dc:Point" x="557" y="263" />
+      </cmmndi:CMMNEdge>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

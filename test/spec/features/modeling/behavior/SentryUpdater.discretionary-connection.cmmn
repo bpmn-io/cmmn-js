@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1for50p">
+    <cmmn:casePlanModel id="CasePlanModel_1">
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
+      <cmmn:stage id="Stage_1">
+        <cmmn:planItem id="PI_Stage_2" definitionRef="Stage_2" />
+        <cmmn:sentry id="Sentry_1" />
+        <cmmn:stage id="Stage_2">
+          <cmmn:planItem id="PI_HumanTask_1" definitionRef="HumanTask_1" />
+          <cmmn:planItem id="PI_HumanTask_2" definitionRef="HumanTask_2" />
+          <cmmn:planItem id="PI_HumanTask_3" definitionRef="HumanTask_3" />
+          <cmmn:sentry id="Sentry_2" />
+          <cmmn:sentry id="Sentry_3" />
+          <cmmn:sentry id="Sentry_4" />
+          <cmmn:planningTable id="PlanningTable_1si0nej">
+            <cmmn:discretionaryItem id="DIS_Task_2" definitionRef="Task_2">
+              <cmmn:entryCriterion id="EntryCriterion_2" sentryRef="Sentry_2" />
+            </cmmn:discretionaryItem>
+            <cmmn:discretionaryItem id="DIS_Task_3" definitionRef="Task_3">
+              <cmmn:entryCriterion id="EntryCriterion_3" sentryRef="Sentry_3" />
+            </cmmn:discretionaryItem>
+            <cmmn:discretionaryItem id="DIS_Task_4" definitionRef="Task_4">
+              <cmmn:entryCriterion id="EntryCriterion_4" sentryRef="Sentry_3" />
+            </cmmn:discretionaryItem>
+            <cmmn:discretionaryItem id="DIS_Task_5" definitionRef="Task_5">
+              <cmmn:entryCriterion id="EntryCriterion_5" sentryRef="Sentry_4" />
+            </cmmn:discretionaryItem>
+          </cmmn:planningTable>
+          <cmmn:task id="Task_2" />
+          <cmmn:task id="Task_3" />
+          <cmmn:task id="Task_4" />
+          <cmmn:task id="Task_5" />
+          <cmmn:humanTask id="HumanTask_3" />
+        </cmmn:stage>
+        <cmmn:task id="Task_1" />
+        <cmmn:humanTask id="HumanTask_1">
+          <cmmn:planningTable id="PlanningTable_1p5oa4n">
+            <cmmn:discretionaryItem id="DIS_Task_1" definitionRef="Task_1">
+              <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1" />
+            </cmmn:discretionaryItem>
+          </cmmn:planningTable>
+        </cmmn:humanTask>
+        <cmmn:humanTask id="HumanTask_2" />
+      </cmmn:stage>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_1_di" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="83" y="30" width="501" height="649" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
+        <dc:Bounds x="103" y="50" width="461" height="609" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_2_di" cmmnElementRef="PI_Stage_2">
+        <dc:Bounds x="123" y="72" width="418" height="550" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_HumanTask_1_di" cmmnElementRef="PI_HumanTask_1">
+        <dc:Bounds x="168" y="101" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Task_1_di" cmmnElementRef="DIS_Task_1">
+        <dc:Bounds x="350" y="101" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="DiscretionaryConnection_1" sourceCMMNElementRef="PI_HumanTask_1" targetCMMNElementRef="DIS_Task_1">
+        <di:waypoint xsi:type="dc:Point" x="268" y="141" />
+        <di:waypoint xsi:type="dc:Point" x="350" y="141" />
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNShape id="DIS_Task_2_di" cmmnElementRef="DIS_Task_2">
+        <dc:Bounds x="347" y="203" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Task_3_di" cmmnElementRef="DIS_Task_3">
+        <dc:Bounds x="346" y="401" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Task_4_di" cmmnElementRef="DIS_Task_4">
+        <dc:Bounds x="346" y="505" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_HumanTask_2_di" cmmnElementRef="PI_HumanTask_2">
+        <dc:Bounds x="168" y="204" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_HumanTask_3_di" cmmnElementRef="PI_HumanTask_3">
+        <dc:Bounds x="168" y="307" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_1_di" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="440" y="130" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_2_di" cmmnElementRef="EntryCriterion_2">
+        <dc:Bounds x="438" y="227" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_3_di" cmmnElementRef="EntryCriterion_3">
+        <dc:Bounds x="436" y="423" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_4_di" cmmnElementRef="EntryCriterion_4">
+        <dc:Bounds x="437" y="532" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Task_5_di" cmmnElementRef="DIS_Task_5">
+        <dc:Bounds x="348" y="303" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_5_di" cmmnElementRef="EntryCriterion_5">
+        <dc:Bounds x="441" y="327" width="20" height="28" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

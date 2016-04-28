@@ -60,6 +60,53 @@ describe('features/modeling CmmnFactory', function() {
       expect(casePlanModel.$parent.casePlanModel).to.equal(casePlanModel);
     }));
 
+
+    it('should create entry criterion', inject(function(cmmnFactory) {
+
+      // when
+      var entryCriterion = cmmnFactory.createCriterion('cmmn:EntryCriterion');
+
+      // then
+      expect(entryCriterion).to.exist;
+      expect(entryCriterion.$type).to.equal('cmmn:EntryCriterion');
+
+      expect(entryCriterion.sentryRef).to.exist;
+      expect(entryCriterion.sentryRef.$type).to.equal('cmmn:Sentry');
+    }));
+
+
+    it('should create exit criterion', inject(function(cmmnFactory) {
+
+      // when
+      var exitCriterion = cmmnFactory.createCriterion('cmmn:ExitCriterion');
+
+      // then
+      expect(exitCriterion).to.exist;
+      expect(exitCriterion.$type).to.equal('cmmn:ExitCriterion');
+
+      expect(exitCriterion.sentryRef).to.exist;
+      expect(exitCriterion.sentryRef.$type).to.equal('cmmn:Sentry');
+    }));
+
+
+    it('should set sentryRef to given sentry', inject(function(cmmnFactory) {
+
+      // given
+      var sentry = cmmnFactory.createSentry();
+
+      // when
+      var exitCriterion = cmmnFactory.createCriterion('cmmn:ExitCriterion', {
+        sentryRef: sentry
+      });
+
+      // then
+      expect(exitCriterion).to.exist;
+      expect(exitCriterion.$type).to.equal('cmmn:ExitCriterion');
+
+      expect(exitCriterion.sentryRef).to.exist;
+      expect(exitCriterion.sentryRef).to.equal(sentry);
+    }));
+
   });
 
 });

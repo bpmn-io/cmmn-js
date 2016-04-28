@@ -33,7 +33,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 400, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 400, y: 0 }, targetShape);
         }));
 
 
@@ -87,7 +87,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 400, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 400, y: 0 }, targetShape);
         }));
 
 
@@ -145,7 +145,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 0, y: 250 }, targetShape);
+          modeling.moveElements([ shape ], { x: 0, y: 250 }, targetShape);
         }));
 
 
@@ -199,7 +199,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 0, y: 150 }, targetShape);
+          modeling.moveElements([ shape ], { x: 0, y: 150 }, targetShape);
         }));
 
 
@@ -257,7 +257,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 0, y: 450 }, targetShape);
+          modeling.moveElements([ shape ], { x: 0, y: 450 }, targetShape);
         }));
 
 
@@ -311,7 +311,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 0, y: 350 }, targetShape);
+          modeling.moveElements([ shape ], { x: 0, y: 350 }, targetShape);
         }));
 
 
@@ -369,7 +369,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 600, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 600, y: 0 }, targetShape);
         }));
 
 
@@ -423,7 +423,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 600, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 600, y: 0 }, targetShape);
         }));
 
 
@@ -479,7 +479,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 20, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 20, y: 0 }, targetShape);
         }));
 
 
@@ -528,7 +528,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 20, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 20, y: 0 }, targetShape);
         }));
 
 
@@ -582,7 +582,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 225, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 225, y: 0 }, targetShape);
         }));
 
 
@@ -636,7 +636,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 225, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 225, y: 0 }, targetShape);
         }));
 
 
@@ -702,7 +702,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 400, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 400, y: 0 }, targetShape);
         }));
 
 
@@ -756,7 +756,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 400, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 400, y: 0 }, targetShape);
         }));
 
 
@@ -814,7 +814,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 0, y: 250 }, targetShape);
+          modeling.moveElements([ shape ], { x: 0, y: 250 }, targetShape);
         }));
 
 
@@ -868,7 +868,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 0, y: 150 }, targetShape);
+          modeling.moveElements([ shape ], { x: 0, y: 150 }, targetShape);
         }));
 
 
@@ -926,7 +926,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 0, y: 450 }, targetShape);
+          modeling.moveElements([ shape ], { x: 0, y: 450 }, targetShape);
         }));
 
 
@@ -980,7 +980,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 0, y: 350 }, targetShape);
+          modeling.moveElements([ shape ], { x: 0, y: 350 }, targetShape);
         }));
 
 
@@ -1039,7 +1039,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 600, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 600, y: 0 }, targetShape);
         }));
 
 
@@ -1106,7 +1106,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 600, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 600, y: 0 }, targetShape);
         }));
 
 
@@ -1174,7 +1174,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 20, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 20, y: 0 }, targetShape);
         }));
 
 
@@ -1223,7 +1223,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 20, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 20, y: 0 }, targetShape);
         }));
 
 
@@ -1279,7 +1279,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           casePlanModel = elementRegistry.get('CasePlanModel_1').businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 225, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 225, y: 0 }, targetShape);
         }));
 
 
@@ -1338,7 +1338,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
           casePlanModel = elementRegistry.get('CasePlanModel_1').businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 225, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 225, y: 0 }, targetShape);
         }));
 
 
@@ -1473,13 +1473,13 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       target = targetShape.businessObject.definitionRef;
 
       // when
-      modeling.moveShape(taskShape, { x: -150, y: 0 }, targetShape);
+      modeling.moveElements([ taskShape ], { x: -150, y: 0 }, targetShape);
     }));
 
     it('should execute', function() {
       // then
       expect(target.planItemDefinitions).to.include(planItemTaskDefinition);
-      expect(target.planItemDefinitions).to.include(discretionaryItemTaskDefinition);
+      expect(source.planItemDefinitions).to.include(discretionaryItemTaskDefinition);
     });
 
 
@@ -1500,7 +1500,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
 
       // then
       expect(target.planItemDefinitions).to.include(planItemTaskDefinition);
-      expect(target.planItemDefinitions).to.include(discretionaryItemTaskDefinition);
+      expect(source.planItemDefinitions).to.include(discretionaryItemTaskDefinition);
     }));
 
   });
@@ -1556,6 +1556,84 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       expect(target.planItemDefinitions).to.have.length(1);
       expect(target.planItemDefinitions).to.include(taskDefinition);
     }));
+
+  });
+
+  describe('should duplicate shared plan item defintion', function() {
+
+    var diagramXML = require('./PlanItemDefinitionUpdater.move-shared-definition-duplicate.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var source, target, oldTaskDefinition, discretionaryItem, planItem;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+      // given
+      var taskShape = elementRegistry.get('PI_Task_1');
+      planItem = taskShape.businessObject;
+
+      var disTaskShape = elementRegistry.get('DIS_Task_2');
+      discretionaryItem = disTaskShape.businessObject;
+
+      oldTaskDefinition = taskShape.businessObject.definitionRef;
+
+      source = elementRegistry.get('PI_Stage_1').businessObject.definitionRef;
+
+      var targetShape = elementRegistry.get('CasePlanModel_2');
+      target = targetShape.businessObject;
+
+      // when
+      modeling.moveElements( [ disTaskShape, taskShape ], { x: 600, y: 0 }, targetShape, false, { primaryShape: taskShape });
+    }));
+
+
+    it('should execute', function() {
+      // then
+      expect(discretionaryItem.definitionRef).not.to.equal(oldTaskDefinition);
+      expect(planItem.definitionRef).not.to.equal(oldTaskDefinition);
+
+      expect(discretionaryItem.definitionRef).to.equal(planItem.definitionRef);
+
+      expect(source.planItemDefinitions).to.have.length(2);
+      expect(source.planItemDefinitions).to.include(oldTaskDefinition);
+
+      expect(target.planItemDefinitions).to.have.length(1);
+      expect(target.planItemDefinitions).to.include(discretionaryItem.definitionRef);
+      expect(target.planItemDefinitions).to.include(planItem.definitionRef);
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(target.planItemDefinitions).to.have.length(0);
+
+      expect(discretionaryItem.definitionRef).to.equal(oldTaskDefinition);
+      expect(planItem.definitionRef).to.equal(oldTaskDefinition);
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(discretionaryItem.definitionRef).not.to.equal(oldTaskDefinition);
+      expect(planItem.definitionRef).not.to.equal(oldTaskDefinition);
+
+      expect(discretionaryItem.definitionRef).to.equal(planItem.definitionRef);
+
+      expect(source.planItemDefinitions).to.have.length(2);
+      expect(source.planItemDefinitions).to.include(oldTaskDefinition);
+
+      expect(target.planItemDefinitions).to.have.length(1);
+      expect(target.planItemDefinitions).to.include(discretionaryItem.definitionRef);
+      expect(target.planItemDefinitions).to.include(planItem.definitionRef);
+    }));
+
   });
 
 });

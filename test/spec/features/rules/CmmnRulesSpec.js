@@ -5,8 +5,10 @@ var Helper = require('./Helper');
 var expectCanDrop = Helper.expectCanDrop;
 var expectCanResize = Helper.expectCanResize;
 var expectCanConnect = Helper.expectCanConnect;
+var expectCanMove = Helper.expectCanMove;
+var expectCanReplace = Helper.expectCanReplace;
 
-/* global bootstrapModeler */
+/* global bootstrapModeler, inject */
 
 var modelingModule = require('../../../../lib/features/modeling'),
     coreModule = require('../../../../lib/core');
@@ -481,6 +483,372 @@ describe('features/modeling/rules - CmmnRules', function() {
       expectCanConnect('IT_File_1', 'DIS_Task_2', {
         discretionaryConnection: false
       });
+
+    });
+
+  });
+
+  describe('criterion', function() {
+
+    var testXML = require('./CmmnRules.criterion.cmmn');
+
+    beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+    describe('move', function() {
+
+      it('attach/move Entry Criterion -> Case Plan Model', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'CasePlanModel_1', {
+          attach: 'attach'
+        });
+
+      }));
+
+
+      it('attach/move Exit Criterion -> Case Plan Model', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'CasePlanModel_1', {
+          attach: 'attach',
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Entry Criterion -> Stage', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'PI_Stage_1', {
+          attach: 'attach',
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Exit Criterion -> Stage', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'PI_Stage_1', {
+          attach: 'attach',
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Entry Criterion -> Task', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'PI_Task_1', {
+          attach: 'attach',
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Exit Criterion -> Task', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'PI_Task_1', {
+          attach: 'attach',
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Entry Criterion -> EventListener', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'PI_EventListener_1', {
+          attach: false,
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Exit Criterion -> EventListener', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'PI_EventListener_1', {
+          attach: false,
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Entry Criterion -> Milestone', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'PI_Milestone_1', {
+          attach: 'attach',
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Exit Criterion -> Milestone', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'PI_Milestone_1', {
+          attach: 'attach',
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Entry Criterion -> PlanFragment', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'DIS_PlanFragment_1', {
+          attach: false,
+          move: false
+        });
+
+      }));
+
+
+      it('attach/move Exit Criterion -> PlanFragment', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanMove(elements, 'DIS_PlanFragment_1', {
+          attach: false,
+          move: false
+        });
+
+      }));
+
+    });
+
+    describe('replace', function() {
+
+      it('attach ExitCriterion -> CasePlanModel', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'CasePlanModel_1', false);
+
+      }));
+
+
+      it('attach EntryCriterion -> CasePlanModel', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'CasePlanModel_1', {
+          oldElementId: criterion.id,
+          newElementType: 'cmmn:ExitCriterion'
+        });
+
+      }));
+
+      it('attach Entry Criterion -> Stage', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'PI_Stage_1', false);
+
+      }));
+
+
+      it('attach Exit Criterion -> Stage', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'PI_Stage_1', false);
+
+      }));
+
+
+      it('attach Entry Criterion -> Task', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'PI_Task_1', false);
+
+      }));
+
+
+      it('attach Exit Criterion -> Task', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'PI_Task_1', false);
+
+      }));
+
+
+      it('attach Entry Criterion -> EventListener', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'PI_EventListener_1', false);
+
+      }));
+
+
+      it('attach Exit Criterion -> EventListener', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'PI_EventListener_1', false);
+
+      }));
+
+
+      it('attach Entry Criterion -> Milestone', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'PI_Milestone_1', false);
+
+      }));
+
+
+      it('attach Exit Criterion -> Milestone', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'PI_Milestone_1', {
+          oldElementId: criterion.id,
+          newElementType: 'cmmn:EntryCriterion'
+        });
+
+      }));
+
+
+      it('attach Entry Criterion -> PlanFragment', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('EntryCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'DIS_PlanFragment_1', false);
+
+      }));
+
+
+      it('attach Exit Criterion -> PlanFragment', inject(function(elementRegistry) {
+
+        // when
+        var criterion = elementRegistry.get('ExitCriterion_1');
+
+        var elements = [ criterion ];
+
+        // then
+        expectCanReplace(elements, 'DIS_PlanFragment_1', false);
+
+      }));
 
     });
 

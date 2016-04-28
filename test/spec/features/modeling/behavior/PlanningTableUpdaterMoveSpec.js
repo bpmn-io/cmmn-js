@@ -38,7 +38,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 640, y: 280 }, targetShape);
+          modeling.moveElements([ shape ], { x: 640, y: 280 }, targetShape);
 
         }));
 
@@ -131,7 +131,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 200, y: 50 }, targetShape);
+          modeling.moveElements([ shape ], { x: 200, y: 50 }, targetShape);
 
         }));
 
@@ -222,7 +222,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = elementRegistry.get('PI_Stage_3').businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 600, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 600, y: 0 }, targetShape);
 
         }));
 
@@ -313,7 +313,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = elementRegistry.get('PI_Stage_2').businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 370, y: 275 }, targetShape);
+          modeling.moveElements([ shape ], { x: 370, y: 275 }, targetShape);
 
         }));
 
@@ -406,7 +406,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 950, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 950, y: 0 }, targetShape);
 
         }));
 
@@ -512,7 +512,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: -200, y: 125 }, targetShape);
+          modeling.moveElements([ shape ], { x: -200, y: 125 }, targetShape);
 
         }));
 
@@ -530,7 +530,6 @@ describe('features/modeling - #PlanningTableUpdater', function() {
 
           it('should undo', inject(function(commandStack) {
             // when
-            var planningTable = target.planningTable;
             commandStack.undo();
 
             // then
@@ -605,7 +604,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = targetShape.businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 430, y: 280 }, targetShape);
+          modeling.moveElements([ shape ], { x: 430, y: 280 }, targetShape);
 
         }));
 
@@ -698,7 +697,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = elementRegistry.get('PI_Stage_3').businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 400, y: 30 }, targetShape);
+          modeling.moveElements([ shape ], { x: 400, y: 30 }, targetShape);
 
         }));
 
@@ -789,7 +788,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = elementRegistry.get('PI_Stage_2').businessObject.definitionRef;
 
           // when
-          modeling.moveShape(shape, { x: 165, y: 300 }, targetShape);
+          modeling.moveElements([ shape ], { x: 165, y: 300 }, targetShape);
 
         }));
 
@@ -882,7 +881,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
           target = targetShape.businessObject;
 
           // when
-          modeling.moveShape(shape, { x: 750, y: 0 }, targetShape);
+          modeling.moveElements([ shape ], { x: 750, y: 0 }, targetShape);
 
         }));
 
@@ -983,7 +982,7 @@ describe('features/modeling - #PlanningTableUpdater', function() {
         target = targetShape.businessObject.definitionRef;
 
         // when
-        modeling.moveShape(shape, { x: 0, y: 70 }, targetShape);
+        modeling.moveElements([ shape ], { x: 0, y: 70 }, targetShape);
       }));
 
       it('should execute', function() {
