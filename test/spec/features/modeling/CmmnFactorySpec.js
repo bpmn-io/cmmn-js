@@ -107,6 +107,35 @@ describe('features/modeling CmmnFactory', function() {
       expect(exitCriterion.sentryRef).to.equal(sentry);
     }));
 
+
+    it('should set label when creating shape', inject(function(cmmnFactory) {
+
+      // when
+      var shape = cmmnFactory.createDiShape(shape, {
+        x: 100,
+        y: 100,
+        width: 100,
+        height: 80
+      });
+
+      // then
+      expect(shape.label).to.exist;
+    }));
+
+
+    it('should set label when creating edge', inject(function(cmmnFactory) {
+
+      // when
+      var edge = cmmnFactory.createDiEdge(null, [
+        { x: 100, y: 100 },
+        { x: 110, y: 110 }
+      ]);
+
+      // then
+      expect(edge.label).to.exist;
+
+    }));
+
   });
 
 });
