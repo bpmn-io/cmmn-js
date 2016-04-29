@@ -837,6 +837,206 @@ describe('features/modeling CmmnUpdater', function() {
 
     });
 
+    describe('for text annotation', function() {
+
+      var textAnnotation, rootElement, definitions;
+
+      beforeEach(inject(function(elementFactory) {
+        textAnnotation = elementFactory.create('shape', { type: 'cmmn:TextAnnotation' });
+      }));
+
+      describe('drop on root element', function() {
+
+        beforeEach(inject(function(modeling, canvas, elementRegistry) {
+
+          // given
+          rootElement = canvas.getRootElement();
+          definitions = elementRegistry.get('CasePlan_1').businessObject.$parent.$parent;
+
+          // when
+          modeling.createShape(textAnnotation, { x: 750, y: 200 }, rootElement);
+
+        }));
+
+        it('should execute', function() {
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.equal(rootElement);
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).not.to.exist;
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).not.to.exist;
+
+          // check parent containment
+          expect(definitions.get('artifacts')).not.to.include(textAnnotation.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.equal(rootElement);
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        }));
+
+      });
+
+
+      describe('drop on stage', function() {
+
+        var stage;
+
+        beforeEach(inject(function(modeling, canvas, elementRegistry) {
+
+          // given
+          rootElement = canvas.getRootElement();
+          stage = elementRegistry.get('PI_Stage_3');
+          definitions = elementRegistry.get('CasePlan_1').businessObject.$parent.$parent;
+
+          // when
+          modeling.createShape(textAnnotation, { x: 200, y: 200 }, stage);
+
+        }));
+
+        it('should execute', function() {
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.equal(stage);
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).not.to.exist;
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).not.to.exist;
+
+          // check parent containment
+          expect(definitions.get('artifacts')).not.to.include(textAnnotation.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.equal(stage);
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        }));
+
+      });
+
+
+      describe('delete', function() {
+
+        beforeEach(inject(function(modeling, canvas, elementRegistry) {
+
+          // given
+          textAnnotation = elementRegistry.get('TextAnnotation_1');
+          rootElement = canvas.getRootElement();
+          definitions = elementRegistry.get('Diagram_1').businessObject.$parent.$parent;
+
+          // when
+          modeling.removeShape(textAnnotation);
+
+        }));
+
+        it('should execute', function() {
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).not.to.exist;
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).not.to.exist;
+          expect(textAnnotation.businessObject.$parent).not.to.exist;
+
+          // check parent containment
+          expect(definitions.artifacts).not.to.include(textAnnotation.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).not.to.exist;
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).not.to.exist;
+          expect(textAnnotation.businessObject.$parent).not.to.exist;
+
+          // check parent containment
+          expect(definitions.artifacts).not.to.include(textAnnotation.businessObject);
+        }));
+
+      });
+
+    });
+
   });
 
   describe('update discretionary connection', function () {
@@ -1071,6 +1271,254 @@ describe('features/modeling CmmnUpdater', function() {
         expect(connectionBO.sourceCMMNElementRef).to.equal(source);
         expect(connectionBO.targetCMMNElementRef).to.equal(newTarget);
         expect(rootElement.businessObject.diagramElements).to.include(connectionBO);
+      }));
+
+    });
+
+  });
+
+  describe('update association', function () {
+
+    var testXML = require('./CmmnUpdater.association.cmmn');
+
+    beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+    var rootElement, connection, connectionBO, definitions, source, target;
+
+    beforeEach(inject(function(canvas){
+      rootElement = canvas.getRootElement();
+      definitions = rootElement.businessObject.$parent.$parent;
+    }));
+
+
+    describe('delete', function() {
+
+      beforeEach(inject(function(elementRegistry) {
+        // given
+        connection = elementRegistry.get('Association_1');
+        connectionBO = connection.businessObject;
+
+        source = connectionBO.sourceRef;
+        target = connectionBO.targetRef;
+
+      }));
+
+      beforeEach(inject(function(modeling) {
+        // when
+        modeling.removeConnection(connection);
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(definitions.artifacts).not.to.include(connectionBO);
+
+        expect(connectionBO.sourceRef).not.to.exist;
+        expect(connectionBO.targetRef).not.to.exist;
+
+        expect(connectionBO.$parent).not.to.exist;
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(definitions.artifacts).to.include(connectionBO);
+
+        expect(connectionBO.sourceRef).to.equal(source);
+        expect(connectionBO.targetRef).to.equal(target);
+
+        expect(connectionBO.$parent).to.equal(definitions);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(definitions.artifacts).not.to.include(connectionBO);
+
+        expect(connectionBO.sourceRef).not.to.exist;
+        expect(connectionBO.targetRef).not.to.exist;
+
+        expect(connectionBO.$parent).not.to.exist;
+      }));
+
+    });
+
+
+    describe('create', function() {
+
+      var source, target;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        var sourceShape = elementRegistry.get('PI_Task_2');
+        source = sourceShape.businessObject;
+
+        var targetShape = elementRegistry.get('TextAnnotation_2');
+        target = targetShape.businessObject;
+
+        // when
+        connection = modeling.connect(sourceShape, targetShape, { type: 'cmmn:Association' });
+        connectionBO = connection.businessObject;
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(definitions.artifacts).to.include(connectionBO);
+
+        expect(connectionBO.sourceRef).to.equal(source);
+        expect(connectionBO.targetRef).to.equal(target);
+
+        expect(connectionBO.$parent).to.equal(definitions);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(definitions.artifacts).not.to.include(connectionBO);
+
+        expect(connectionBO.sourceRef).not.to.exist;
+        expect(connectionBO.targetRef).not.to.exist;
+
+        expect(connectionBO.$parent).not.to.exist;
+      }));
+
+
+      it('should execute', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(definitions.artifacts).to.include(connectionBO);
+
+        expect(connectionBO.sourceRef).to.equal(source);
+        expect(connectionBO.targetRef).to.equal(target);
+
+        expect(connectionBO.$parent).to.equal(definitions);
+      }));
+
+    });
+
+
+    describe('reconnectStart', function() {
+
+      var newSource;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        connection = elementRegistry.get('Association_1');
+        connectionBO = connection.businessObject;
+
+        source = connection.source.businessObject;
+        target = connection.target.businessObject;
+
+        var sourceShape = elementRegistry.get('PI_Task_2');
+        newSource = sourceShape.businessObject;
+
+        var newWaypoints = [{
+          x: sourceShape.x + 100,
+          y: sourceShape.y + 40
+        }, connection.waypoints[1]];
+
+        // when
+        modeling.reconnectStart(connection, sourceShape, newWaypoints);
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(connectionBO.sourceRef).to.equal(newSource);
+        expect(connectionBO.targetRef).to.equal(target);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(connectionBO.sourceRef).to.equal(source);
+        expect(connectionBO.targetRef).to.equal(target);
+      }));
+
+
+      it('should execute', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(connectionBO.sourceRef).to.equal(newSource);
+        expect(connectionBO.targetRef).to.equal(target);
+      }));
+
+    });
+
+
+    describe('reconnectEnd', function() {
+
+      var newTarget;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        connection = elementRegistry.get('Association_1');
+        connectionBO = connection.businessObject;
+
+        source = connection.source.businessObject;
+        target = connection.target.businessObject;
+
+        var targetShape = elementRegistry.get('TextAnnotation_2');
+        newTarget = targetShape.businessObject;
+
+        var newWaypoints = [
+          connection.waypoints[0],
+          {
+            x: targetShape.x,
+            y: targetShape.y + 40
+          }
+        ];
+
+        // when
+        modeling.reconnectEnd(connection, targetShape, newWaypoints);
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(connectionBO.sourceRef).to.equal(source);
+        expect(connectionBO.targetRef).to.equal(newTarget);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(connectionBO.sourceRef).to.equal(source);
+        expect(connectionBO.targetRef).to.equal(target);
+      }));
+
+
+      it('should execute', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(connectionBO.sourceRef).to.equal(source);
+        expect(connectionBO.targetRef).to.equal(newTarget);
       }));
 
     });

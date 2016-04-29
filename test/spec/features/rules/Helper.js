@@ -57,6 +57,10 @@ function expectCanConnect(source, target, rules) {
       results.discretionaryConnection = cmmnRules.canConnectDiscretionaryConnection(source, target);
     }
 
+    if ('association' in rules) {
+      results.association = cmmnRules.canConnectAssociation(source, target);
+    }
+
   });
 
   expect(results).to.eql(rules);

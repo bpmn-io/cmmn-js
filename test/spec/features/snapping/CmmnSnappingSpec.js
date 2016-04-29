@@ -23,7 +23,6 @@ describe('features/snapping - CmmnSnapping', function() {
     snappingModule
   ];
 
-
   describe('on CasePlanModel resize', function () {
 
     describe('snap min bounds', function() {
@@ -253,4 +252,25 @@ describe('features/snapping - CmmnSnapping', function() {
     });
 
   });
+
+  describe('on TextAnnotation resize', function() {
+
+    var diagramXML = require('./CmmnSnapping.text-annotation.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    it('should snap to minimum bounds', inject(function(elementRegistry, resize, dragging) {
+
+      var textAnnotation = elementRegistry.get('TextAnnotation_1');
+
+      resize.activate(canvasEvent({ x: 0, y: 0 }), textAnnotation, 'se');
+      dragging.move(canvasEvent({ x: -400, y: -400 }));
+      dragging.end();
+
+      expect(textAnnotation.width).to.equal(50);
+      expect(textAnnotation.height).to.equal(30);
+    }));
+
+  });
+
 });

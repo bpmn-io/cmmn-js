@@ -200,6 +200,20 @@ describe('features - label-editing', function() {
     }));
 
 
+    it('should edit text annotation', inject(function(elementRegistry) {
+
+      // given
+      var shape = elementRegistry.get('TextAnnotation_1');
+
+      // when
+      setText(shape, 'BAR');
+
+      // then
+      expect(LabelUtil.getLabel(shape)).to.equal('BAR');
+      expect(shape.businessObject.text).to.equal('BAR');
+
+    }));
+
     it('should not activate directEditing - Root', inject(function(canvas, eventBus, directEditing) {
 
       // given
@@ -251,6 +265,18 @@ describe('features - label-editing', function() {
       expect(directEditing.isActive()).to.be.false;
     }));
 
+
+    it('should not activate directEditing - Association', inject(function(eventBus, elementRegistry, directEditing) {
+
+      // given
+      var shape = elementRegistry.get('Association_1');
+
+      // when
+      eventBus.fire('element.dblclick', { element: shape });
+
+      // then
+      expect(directEditing.isActive()).to.be.false;
+    }));
 
     // for tasks, plan fragments and files see below...
   });

@@ -359,7 +359,63 @@ describe('features/modeling/rules - CmmnRules', function() {
 
     });
 
+    describe('text annotation', function() {
+
+      describe('drop', function() {
+
+        it('should be allowed on root', function() {
+          expectCanDrop('TextAnnotation_1', 'Diagram_1', true);
+        });
+
+
+        it('should be allowed on case plan', function() {
+          expectCanDrop('TextAnnotation_1', 'CasePlan_1', true);
+        });
+
+
+        it('should be allowed on stage', function() {
+          expectCanDrop('TextAnnotation_1', 'PI_Stage_1', true);
+        });
+
+
+        it('should not be allowed on task', function() {
+          expectCanDrop('TextAnnotation_1', 'PI_Task_1', false);
+        });
+
+
+        it('should not be allowed on milestone', function() {
+          expectCanDrop('TextAnnotation_1', 'PI_Milestone_1', false);
+        });
+
+
+        it('should not be allowed on entry criterion', function() {
+          expectCanDrop('TextAnnotation_1', 'Entry_1', false);
+        });
+
+
+        it('should not be allowed on entry criterion', function() {
+          expectCanDrop('TextAnnotation_1', 'Exit_1', false);
+        });
+
+
+        it('should not be allowed on user event listener', function() {
+          expectCanDrop('TextAnnotation_1', 'PI_Listener_1', false);
+        });
+
+      });
+
+      describe('resize', function() {
+
+        it('should be allowed to resize', function() {
+          expectCanResize('TextAnnotation_1', null, true);
+        });
+
+      });
+
+    });
+
   });
+
 
   describe('connection', function() {
 
@@ -450,14 +506,11 @@ describe('features/modeling/rules - CmmnRules', function() {
 
     it('connect HumanTask -> Discretionary Item (is discretionary to another human task)', function() {
 
-
-
       expectCanConnect('PI_HumanTask_1', 'DIS_Task_3', {
         discretionaryConnection: false
       });
 
     });
-
 
 
     it('connect EntryCriterion -> Discretionary Item', function() {
@@ -482,6 +535,59 @@ describe('features/modeling/rules - CmmnRules', function() {
 
       expectCanConnect('IT_File_1', 'DIS_Task_2', {
         discretionaryConnection: false
+      });
+
+    });
+
+    it('connect Task -> Text Annotation', function() {
+
+      expectCanConnect('PI_HumanTask_1', 'TextAnnotation_1', {
+        association: true
+      });
+
+    });
+
+
+    it('connect Milestone -> Text Annotation', function() {
+
+      expectCanConnect('PI_Milestone_1', 'TextAnnotation_1', {
+        association: true
+      });
+
+    });
+
+
+    it('connect EventListener -> Text Annotation', function() {
+
+      expectCanConnect('PI_EventListener_1', 'TextAnnotation_1', {
+        association: true
+      });
+
+    });
+
+
+    it('connect Criterion -> Text Annotation', function() {
+
+      expectCanConnect('EntryCriterion_1', 'TextAnnotation_1', {
+        association: true
+      });
+
+    });
+
+
+    it('connect CaseFileItem -> Text Annotation', function() {
+
+      expectCanConnect('EntryCriterion_1', 'TextAnnotation_1', {
+        association: true
+      });
+
+    });
+
+
+    it('connect Stage -> Text Annotation', function() {
+
+      expectCanConnect('PI_Stage_1', 'TextAnnotation_1', {
+        association: true
       });
 
     });

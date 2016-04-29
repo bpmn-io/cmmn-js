@@ -146,4 +146,61 @@ describe('Importer', function() {
 
   });
 
+  it('should import text annotations', function(done) {
+
+    var xml = require('./Importer.text-annotation.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      var elementRegistry = modeler.get('elementRegistry');
+      var rootElement = modeler.get('canvas').getRootElement();
+
+      var textAnnotation1 = elementRegistry.get('TextAnnotation_1');
+      var textAnnotation2 = elementRegistry.get('TextAnnotation_2');
+      var textAnnotation3 = elementRegistry.get('TextAnnotation_3');
+      var textAnnotation4 = elementRegistry.get('TextAnnotation_4');
+      var textAnnotation5 = elementRegistry.get('TextAnnotation_5');
+      var textAnnotation6 = elementRegistry.get('TextAnnotation_6');
+
+      expect(textAnnotation1).to.exist;
+      expect(textAnnotation1.parent).to.equal(elementRegistry.get('PI_Stage_4'));
+
+      expect(textAnnotation2).to.exist;
+      expect(textAnnotation2.parent).to.equal(elementRegistry.get('PI_Stage_1'));
+
+      expect(textAnnotation3).to.exist;
+      expect(textAnnotation3.parent).to.equal(elementRegistry.get('PI_Stage_2'));
+
+      expect(textAnnotation4).to.exist;
+      expect(textAnnotation4.parent).to.equal(elementRegistry.get('PI_Stage_3'));
+
+      expect(textAnnotation5).to.exist;
+      expect(textAnnotation5.parent).to.equal(rootElement);
+
+      expect(textAnnotation6).to.exist;
+      expect(textAnnotation6.parent).to.equal(elementRegistry.get('CasePlanModel_1'));
+
+      done(err);
+    });
+
+  });
+
+
+  it('should import associations', function(done) {
+
+    var xml = require('./Importer.association.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      var elementRegistry = modeler.get('elementRegistry');
+
+      expect(elementRegistry.get('Association_1')).to.exist;
+      expect(elementRegistry.get('Association_2')).to.exist;
+      expect(elementRegistry.get('Association_3')).to.exist;
+
+      done(err);
+    });
+
+  });
+
 });

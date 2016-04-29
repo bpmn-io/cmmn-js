@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1wan2sn">
+    <cmmn:casePlanModel id="CasePlanModel_0154h0z">
+      <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_2" definitionRef="Task_2" />
+      <cmmn:planItem id="PI_Task_3" definitionRef="Task_3" />
+      <cmmn:task id="Task_1" />
+      <cmmn:task id="Task_2" />
+      <cmmn:task id="Task_3" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmn:textAnnotation id="TextAnnotation_1">
+    <cmmn:text>A</cmmn:text>
+  </cmmn:textAnnotation>
+  <cmmn:textAnnotation id="TextAnnotation_2">
+    <cmmn:text>B</cmmn:text>
+  </cmmn:textAnnotation>
+  <cmmn:textAnnotation id="TextAnnotation_3">
+    <cmmn:text>C</cmmn:text>
+  </cmmn:textAnnotation>
+  <cmmn:association id="Association_1" sourceRef="PI_Task_1" targetRef="TextAnnotation_1" />
+  <cmmn:association id="Association_2" sourceRef="PI_Task_2" targetRef="TextAnnotation_2" associationDirection="One" />
+  <cmmn:association id="Association_3" sourceRef="PI_Task_3" targetRef="TextAnnotation_3" associationDirection="Both" />
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_0154h0z_di" cmmnElementRef="CasePlanModel_0154h0z">
+        <dc:Bounds x="211" y="118" width="406" height="330" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_1_di" cmmnElementRef="PI_Task_1">
+        <dc:Bounds x="256" y="138" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_2_di" cmmnElementRef="PI_Task_2">
+        <dc:Bounds x="252" y="241" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_3_di" cmmnElementRef="PI_Task_3">
+        <dc:Bounds x="251" y="349" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="TextAnnotation_1_di" cmmnElementRef="TextAnnotation_1">
+        <dc:Bounds x="470" y="135" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge cmmnElementRef="Association_1" id="Association_1_di">
+          <di:waypoint x="356" y="178"/>
+          <di:waypoint x="470" y="178"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNShape id="TextAnnotation_2_di" cmmnElementRef="TextAnnotation_2">
+        <dc:Bounds x="465" y="237" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge cmmnElementRef="Association_2" id="Association_2_di">
+          <di:waypoint x="352" y="281"/>
+          <di:waypoint x="465" y="281"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNShape id="TextAnnotation_3_di" cmmnElementRef="TextAnnotation_3">
+        <dc:Bounds x="465" y="342" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge cmmnElementRef="Association_3" id="Association_3_di">
+          <di:waypoint x="351" y="389"/>
+          <di:waypoint x="465" y="389"/>
+          <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
