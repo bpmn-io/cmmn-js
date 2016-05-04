@@ -168,7 +168,7 @@
       <cmmndi:CMMNShape id="DIS_Task_10_di" cmmnElementRef="DIS_Task_10">
         <dc:Bounds x="1056" y="243" width="100" height="80" />
       </cmmndi:CMMNShape>
-      <cmmndi:CMMNShape id="PI_Human_diTask_7" cmmnElementRef="Human">
+      <cmmndi:CMMNShape id="PI_HumanTask_7_di" cmmnElementRef="PI_HumanTask_7">
         <dc:Bounds x="889" y="243" width="100" height="80" />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>

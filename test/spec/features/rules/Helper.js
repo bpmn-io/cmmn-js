@@ -61,6 +61,14 @@ function expectCanConnect(source, target, rules) {
       results.association = cmmnRules.canConnectAssociation(source, target);
     }
 
+    if ('caseFileItemOnPart' in rules) {
+      results.caseFileItemOnPart = cmmnRules.canConnectCaseFileItemOnPartConnection(source, target);
+    }
+
+    if ('planItemOnPart' in rules) {
+      results.planItemOnPart = cmmnRules.canConnectPlanItemOnPartConnection(source, target);
+    }
+
   });
 
   expect(results).to.eql(rules);

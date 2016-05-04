@@ -176,7 +176,7 @@ describe('features - label-editing', function() {
     it('should get label text without event for OnPart', inject(function(elementRegistry, eventBus, directEditing) {
 
       // given
-      var shape = elementRegistry.get('PlanItemOnPart');
+      var shape = elementRegistry.get('PlanItemOnPart_di');
 
       // when
       eventBus.fire('element.dblclick', { element: shape });
@@ -189,14 +189,14 @@ describe('features - label-editing', function() {
     it('should edit OnPart', inject(function(elementRegistry) {
 
       // given
-      var shape = elementRegistry.get('PlanItemOnPart');
+      var shape = elementRegistry.get('PlanItemOnPart_di');
 
       // when
       setText(shape, 'FOO');
 
       // then
       expect(LabelUtil.getLabel(shape)).to.equal('FOO');
-      expect(shape.businessObject.name).to.equal('FOO');
+      expect(shape.businessObject.cmmnElementRef.name).to.equal('FOO');
     }));
 
 
@@ -269,7 +269,7 @@ describe('features - label-editing', function() {
     it('should not activate directEditing - Association', inject(function(eventBus, elementRegistry, directEditing) {
 
       // given
-      var shape = elementRegistry.get('Association_1');
+      var shape = elementRegistry.get('Association_1_di');
 
       // when
       eventBus.fire('element.dblclick', { element: shape });
@@ -320,8 +320,7 @@ describe('features - label-editing', function() {
       }));
 
 
-      it.skip('should update the name of the referenced task', inject(function(modeling, elementRegistry) {
-      // TODO (paddy): unskip, when it is possible to delete on plan connections (issue #37)
+      it('should update the name of the referenced task', inject(function(modeling, elementRegistry) {
 
         // given
         var humanTask_1 = elementRegistry.get('PI_HumanTask_1'),
@@ -535,7 +534,7 @@ describe('features - label-editing', function() {
     it('OnPart', inject(function(elementRegistry, eventBus, directEditing) {
 
       // given
-      var shape = elementRegistry.get('PlanItemOnPart');
+      var shape = elementRegistry.get('PlanItemOnPart_di');
 
       // when
       eventBus.fire('element.dblclick', { element: shape });

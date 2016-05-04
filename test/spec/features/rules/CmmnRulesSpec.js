@@ -592,6 +592,45 @@ describe('features/modeling/rules - CmmnRules', function() {
 
     });
 
+
+    it('connect ExitCriterion -> EntryCriterion', function() {
+
+      expectCanConnect('ExitCriterion_1', 'EntryCriterion_1', {
+        planItemOnPart: true,
+        caseFileItemOnPart: false
+      });
+
+    });
+
+
+    it('connect CaseFileItem -> Criterion', function() {
+
+      expectCanConnect('IT_File_1', 'ExitCriterion_1', {
+        planItemOnPart: false,
+        caseFileItemOnPart: true
+      });
+
+    });
+
+
+    it('connect PlanItem -> Criterion ', function() {
+
+      expectCanConnect('PI_HumanTask_1', 'ExitCriterion_1', {
+        planItemOnPart: true,
+        caseFileItemOnPart: false
+      });
+
+    });
+
+    it('connect DiscretionaryItem -> Criterion ', function() {
+
+      expectCanConnect('DIS_HumanTask_3', 'ExitCriterion_1', {
+        planItemOnPart: false,
+        caseFileItemOnPart: false
+      });
+
+    });
+
   });
 
   describe('criterion', function() {

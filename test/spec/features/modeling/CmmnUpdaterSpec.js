@@ -1295,8 +1295,8 @@ describe('features/modeling CmmnUpdater', function() {
 
       beforeEach(inject(function(elementRegistry) {
         // given
-        connection = elementRegistry.get('Association_1');
-        connectionBO = connection.businessObject;
+        connection = elementRegistry.get('Association_1_di');
+        connectionBO = connection.businessObject.cmmnElementRef;
 
         source = connectionBO.sourceRef;
         target = connectionBO.targetRef;
@@ -1365,7 +1365,7 @@ describe('features/modeling CmmnUpdater', function() {
 
         // when
         connection = modeling.connect(sourceShape, targetShape, { type: 'cmmn:Association' });
-        connectionBO = connection.businessObject;
+        connectionBO = connection.businessObject.cmmnElementRef;
       }));
 
 
@@ -1417,8 +1417,8 @@ describe('features/modeling CmmnUpdater', function() {
 
       beforeEach(inject(function(elementRegistry, modeling) {
         // given
-        connection = elementRegistry.get('Association_1');
-        connectionBO = connection.businessObject;
+        connection = elementRegistry.get('Association_1_di');
+        connectionBO = connection.businessObject.cmmnElementRef;
 
         source = connection.source.businessObject;
         target = connection.target.businessObject;
@@ -1472,8 +1472,8 @@ describe('features/modeling CmmnUpdater', function() {
 
       beforeEach(inject(function(elementRegistry, modeling) {
         // given
-        connection = elementRegistry.get('Association_1');
-        connectionBO = connection.businessObject;
+        connection = elementRegistry.get('Association_1_di');
+        connectionBO = connection.businessObject.cmmnElementRef;
 
         source = connection.source.businessObject;
         target = connection.target.businessObject;
@@ -1519,6 +1519,714 @@ describe('features/modeling CmmnUpdater', function() {
         // then
         expect(connectionBO.sourceRef).to.equal(source);
         expect(connectionBO.targetRef).to.equal(newTarget);
+      }));
+
+    });
+
+  });
+
+
+  describe('update plan item file item on part', function() {
+
+    var testXML = require('./CmmnUpdater.plan-item-on-part.cmmn');
+
+    beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+    var rootElement;
+
+    beforeEach(inject(function(canvas){
+      rootElement = canvas.getRootElement();
+    }));
+
+    var connection, onPart, source, target;
+
+    describe('delete', function() {
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var connectionShape = elementRegistry.get('PlanItemOnPart_1_di');
+
+        source = connectionShape.source.businessObject;
+        target = connectionShape.target.businessObject;
+
+        connection = connectionShape.businessObject;
+
+        onPart = connection.cmmnElementRef;
+
+        // when
+        modeling.removeConnection(connectionShape);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).not.to.exist;
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).not.to.exist;
+
+        expect(connection.$parent).not.to.exist;
+        expect(rootElement.businessObject.diagramElements).not.to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).not.to.exist;
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).not.to.exist;
+
+        expect(connection.$parent).not.to.exist;
+        expect(rootElement.businessObject.diagramElements).not.to.include(connection);
+      }));
+
+    });
+
+
+    describe('create', function() {
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var sourceShape = elementRegistry.get('PI_Task_3');
+        var targetShape = elementRegistry.get('ExitCriterion_2');
+
+        source = sourceShape.businessObject;
+        target = targetShape.businessObject;
+
+        // when
+        var connectionShape = modeling.connect(sourceShape, targetShape, { type: 'cmmn:PlanItemOnPart' });
+
+        connection = connectionShape.businessObject;
+        onPart = connection.cmmnElementRef;
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).not.to.exist;
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).not.to.exist;
+
+        expect(connection.$parent).not.to.exist;
+        expect(rootElement.businessObject.diagramElements).not.to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+    });
+
+
+    describe('create set exit criterion as source', function() {
+
+      var host;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var sourceShape = elementRegistry.get('ExitCriterion_6');
+        var targetShape = elementRegistry.get('ExitCriterion_2');
+
+        source = sourceShape.businessObject;
+        target = targetShape.businessObject;
+
+        host = sourceShape.host.businessObject;
+
+        // when
+        var connectionShape = modeling.connect(sourceShape, targetShape, { type: 'cmmn:PlanItemOnPart' });
+
+        connection = connectionShape.businessObject;
+        onPart = connection.cmmnElementRef;
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(host);
+        expect(onPart.exitCriterionRef).to.equal(source);
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).not.to.exist;
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).not.to.exist;
+
+        expect(connection.$parent).not.to.exist;
+        expect(rootElement.businessObject.diagramElements).not.to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(host);
+        expect(onPart.exitCriterionRef).to.equal(source);
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+    });
+
+
+    describe('reconnectStart', function() {
+
+      var newSource;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var connectionShape = elementRegistry.get('PlanItemOnPart_1_di');
+        var sourceShape = elementRegistry.get('PI_Task_3');
+
+        source = connectionShape.source.businessObject;
+        target = connectionShape.target.businessObject;
+
+        newSource = sourceShape.businessObject;
+
+        connection = connectionShape.businessObject;
+        onPart = connection.cmmnElementRef;
+
+        var newWaypoints = [{
+          x: sourceShape.x + 100,
+          y: sourceShape.y + 40
+        }, connectionShape.waypoints[1]];
+
+        // when
+        modeling.reconnectStart(connectionShape, sourceShape, newWaypoints);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(newSource);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(newSource);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+    });
+
+
+    describe('reconnectStart set exit criterion as source', function() {
+
+      var host, newSource;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var connectionShape = elementRegistry.get('PlanItemOnPart_1_di');
+        var sourceShape = elementRegistry.get('ExitCriterion_6');
+
+        source = connectionShape.source.businessObject;
+        target = connectionShape.target.businessObject;
+
+        newSource = sourceShape.businessObject;
+        host = sourceShape.host.businessObject;
+
+        connection = connectionShape.businessObject;
+        onPart = connection.cmmnElementRef;
+
+        var newWaypoints = [{
+          x: sourceShape.x + 100,
+          y: sourceShape.y + 40
+        }, connectionShape.waypoints[1]];
+
+        // when
+        modeling.reconnectStart(connectionShape, sourceShape, newWaypoints);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(host);
+        expect(onPart.exitCriterionRef).to.equal(newSource);
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(host);
+        expect(onPart.exitCriterionRef).to.equal(newSource);
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+    });
+
+
+    describe('reconnectEnd', function() {
+
+      var newTarget;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var connectionShape = elementRegistry.get('PlanItemOnPart_1_di');
+        var targetShape = elementRegistry.get('ExitCriterion_2');
+
+        source = connectionShape.source.businessObject;
+        target = connectionShape.target.businessObject;
+
+        newTarget = targetShape.businessObject;
+
+        connection = connectionShape.businessObject;
+        onPart = connection.cmmnElementRef;
+
+        var newWaypoints = [
+          connectionShape.waypoints[0],
+          {
+            x: targetShape.x,
+            y: targetShape.y + 14
+          }
+        ];
+
+        // when
+        modeling.reconnectEnd(connectionShape, targetShape, newWaypoints);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(newTarget);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(newTarget);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+    });
+
+  });
+
+
+  describe('update case file item file item on part', function() {
+
+    var testXML = require('./CmmnUpdater.case-file-item-on-part.cmmn');
+
+    beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+    var rootElement;
+
+    beforeEach(inject(function(canvas){
+      rootElement = canvas.getRootElement();
+    }));
+
+    var connection, onPart, source, target;
+
+    describe('delete', function() {
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var connectionShape = elementRegistry.get('CaseFileItemOnPart_1_di');
+
+        source = connectionShape.source.businessObject;
+        target = connectionShape.target.businessObject;
+
+        connection = connectionShape.businessObject;
+
+        onPart = connection.cmmnElementRef;
+
+        // when
+        modeling.removeConnection(connectionShape);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).not.to.exist;
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).not.to.exist;
+
+        expect(connection.$parent).not.to.exist;
+        expect(rootElement.businessObject.diagramElements).not.to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).not.to.exist;
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).not.to.exist;
+
+        expect(connection.$parent).not.to.exist;
+        expect(rootElement.businessObject.diagramElements).not.to.include(connection);
+      }));
+
+    });
+
+
+    describe('create', function() {
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var sourceShape = elementRegistry.get('CaseFileItem_2');
+        var targetShape = elementRegistry.get('ExitCriterion_2');
+
+        source = sourceShape.businessObject;
+        target = targetShape.businessObject;
+
+        // when
+        var connectionShape = modeling.connect(sourceShape, targetShape, { type: 'cmmn:CaseFileItemOnPart' });
+
+        connection = connectionShape.businessObject;
+        onPart = connection.cmmnElementRef;
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).not.to.exist;
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).not.to.exist;
+
+        expect(connection.$parent).not.to.exist;
+        expect(rootElement.businessObject.diagramElements).not.to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+    });
+
+
+    describe('reconnectStart', function() {
+
+      var newSource;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var connectionShape = elementRegistry.get('CaseFileItemOnPart_1_di');
+        var sourceShape = elementRegistry.get('CaseFileItem_2');
+
+        source = connectionShape.source.businessObject;
+        target = connectionShape.target.businessObject;
+
+        newSource = sourceShape.businessObject;
+
+        connection = connectionShape.businessObject;
+        onPart = connection.cmmnElementRef;
+
+        var newWaypoints = [{
+          x: sourceShape.x + 100,
+          y: sourceShape.y + 40
+        }, connectionShape.waypoints[1]];
+
+        // when
+        modeling.reconnectStart(connectionShape, sourceShape, newWaypoints);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(newSource);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(newSource);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+    });
+
+
+    describe('reconnectEnd', function() {
+
+      var newTarget;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var connectionShape = elementRegistry.get('CaseFileItemOnPart_1_di');
+        var targetShape = elementRegistry.get('ExitCriterion_2');
+
+        source = connectionShape.source.businessObject;
+        target = connectionShape.target.businessObject;
+
+        newTarget = targetShape.businessObject;
+
+        connection = connectionShape.businessObject;
+        onPart = connection.cmmnElementRef;
+
+        var newWaypoints = [
+          connectionShape.waypoints[0],
+          {
+            x: targetShape.x,
+            y: targetShape.y + 14
+          }
+        ];
+
+        // when
+        modeling.reconnectEnd(connectionShape, targetShape, newWaypoints);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(newTarget);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(target);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(source);
+        expect(onPart.exitCriterionRef).not.to.exist;
+        expect(connection.targetCMMNElementRef).to.equal(newTarget);
+
+        expect(connection.$parent).to.equal(rootElement.businessObject);
+        expect(rootElement.businessObject.diagramElements).to.include(connection);
       }));
 
     });

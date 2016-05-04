@@ -194,9 +194,9 @@ describe('Importer', function() {
 
       var elementRegistry = modeler.get('elementRegistry');
 
-      expect(elementRegistry.get('Association_1')).to.exist;
-      expect(elementRegistry.get('Association_2')).to.exist;
-      expect(elementRegistry.get('Association_3')).to.exist;
+      expect(elementRegistry.get('Association_1_di')).to.exist;
+      expect(elementRegistry.get('Association_2_di')).to.exist;
+      expect(elementRegistry.get('Association_3_di')).to.exist;
 
       done(err);
     });

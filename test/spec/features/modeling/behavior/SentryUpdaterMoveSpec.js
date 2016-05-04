@@ -618,4 +618,243 @@ describe('features/modeling - #SentryUpdater - move', function() {
 
   });
 
+  describe('should duplicate case file item on parts when moving host', function() {
+
+    var diagramXML = require('./SentryUpdater.move-shared-case-item-on-parts.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var oldOnPart, newOnPart, newSentry, connection;
+
+    beforeEach(inject(function(modeling, elementRegistry) {
+
+      // given
+      var shape = elementRegistry.get('PI_Task_2');
+      var target = elementRegistry.get('PI_Stage_1');
+
+      connection = elementRegistry.get('CaseFileItemOnPart_2_2_di').businessObject;
+
+      sentry = elementRegistry.get('ExitCriterion_2').businessObject.sentryRef;
+      oldOnPart = sentry.onParts[0];
+
+      // when
+      modeling.moveElements([ shape ], { x: 0, y: 150 }, target);
+
+      newSentry = elementRegistry.get('ExitCriterion_2').businessObject.sentryRef;
+      newOnPart = newSentry.onParts[0];
+
+    }));
+
+    it ('should execute', function() {
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(newOnPart);
+      expect(newSentry.onParts).to.include(newOnPart);
+    });
+
+
+    it ('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(oldOnPart);
+      expect(newSentry.onParts).not.to.include(newOnPart);
+    }));
+
+
+    it ('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(newOnPart);
+      expect(newSentry.onParts).to.include(newOnPart);
+    }));
+
+  });
+
+
+  describe('should duplicate case file item on parts when reattaching criterion', function() {
+
+    var diagramXML = require('./SentryUpdater.move-shared-case-item-on-parts.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var oldOnPart, newOnPart, newSentry, connection;
+
+    beforeEach(inject(function(modeling, elementRegistry) {
+
+      // given
+      var criterion = elementRegistry.get('ExitCriterion_2');
+      var target = elementRegistry.get('PI_Task_4');
+
+      sentry = criterion.businessObject.sentryRef;
+      oldOnPart = sentry.onParts[0];
+      connection = elementRegistry.get('CaseFileItemOnPart_2_2_di').businessObject;
+
+      // when
+      modeling.moveElements([ criterion ], { x: -50, y: 135 }, target, true);
+
+      newSentry = criterion.businessObject.sentryRef;
+      newOnPart = newSentry.onParts[0];
+
+    }));
+
+
+    it ('should execute', function() {
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(newOnPart);
+      expect(newSentry.onParts).to.include(newOnPart);
+    });
+
+
+    it ('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(oldOnPart);
+      expect(newSentry.onParts).not.to.include(newOnPart);
+    }));
+
+
+    it ('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(newOnPart);
+      expect(newSentry.onParts).to.include(newOnPart);
+    }));
+
+  });
+
+
+  describe('should duplicate plan item on parts when moving host', function() {
+
+    var diagramXML = require('./SentryUpdater.move-shared-plan-item-on-parts.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var oldOnPart, newOnPart, newSentry, connection;
+
+    beforeEach(inject(function(modeling, elementRegistry) {
+
+      // given
+      var shape = elementRegistry.get('PI_Task_2');
+      var target = elementRegistry.get('PI_Stage_1');
+
+      connection = elementRegistry.get('PlanItemOnPart_2_2_di').businessObject;
+
+      sentry = elementRegistry.get('ExitCriterion_2').businessObject.sentryRef;
+      oldOnPart = sentry.onParts[0];
+
+      // when
+      modeling.moveElements([ shape ], { x: 0, y: 150 }, target);
+
+      newSentry = elementRegistry.get('ExitCriterion_2').businessObject.sentryRef;
+      newOnPart = newSentry.onParts[0];
+
+    }));
+
+    it ('should execute', function() {
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(newOnPart);
+      expect(newSentry.onParts).to.include(newOnPart);
+    });
+
+
+    it ('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(oldOnPart);
+      expect(newSentry.onParts).not.to.include(newOnPart);
+    }));
+
+
+    it ('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(newOnPart);
+      expect(newSentry.onParts).to.include(newOnPart);
+    }));
+
+  });
+
+
+  describe('should duplicate plan item on parts when reattaching criterion', function() {
+
+    var diagramXML = require('./SentryUpdater.move-shared-plan-item-on-parts.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var oldOnPart, newOnPart, newSentry, connection;
+
+    beforeEach(inject(function(modeling, elementRegistry) {
+
+      // given
+      var criterion = elementRegistry.get('ExitCriterion_2');
+      var target = elementRegistry.get('PI_Task_4');
+
+      sentry = criterion.businessObject.sentryRef;
+      oldOnPart = sentry.onParts[0];
+      connection = elementRegistry.get('PlanItemOnPart_2_2_di').businessObject;
+
+      // when
+      modeling.moveElements([ criterion ], { x: -50, y: 135 }, target, true);
+
+      newSentry = criterion.businessObject.sentryRef;
+      newOnPart = newSentry.onParts[0];
+
+    }));
+
+
+    it ('should execute', function() {
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(newOnPart);
+      expect(newSentry.onParts).to.include(newOnPart);
+    });
+
+
+    it ('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(oldOnPart);
+      expect(newSentry.onParts).not.to.include(newOnPart);
+    }));
+
+
+    it ('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(oldOnPart).not.to.equal(newOnPart);
+      expect(connection.cmmnElementRef).to.equal(newOnPart);
+      expect(newSentry.onParts).to.include(newOnPart);
+    }));
+
+  });
+
 });

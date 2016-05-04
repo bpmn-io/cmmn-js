@@ -29,7 +29,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
         source = connection.source.businessObject;
         target = connection.target.businessObject;
 
-        oldPlanningTable = target.$parent
+        oldPlanningTable = target.$parent;
 
         casePlanModel = elementRegistry.get('CasePlanModel_1').businessObject;
 
@@ -128,7 +128,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
         source = connection.source.businessObject;
         target = connection.target.businessObject;
 
-        oldPlanningTable = target.$parent
+        oldPlanningTable = target.$parent;
 
         stage = elementRegistry.get('PI_Stage_1').businessObject.definitionRef;
 
@@ -263,7 +263,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
     });
 
-  })
+  });
 
 
   describe('create', function() {
@@ -357,7 +357,6 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
       it('should undo', inject(function(commandStack) {
         // when
-        var planningTable = target.$parent;
         commandStack.undo();
 
         // then
@@ -463,7 +462,6 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
       it('should undo', inject(function(commandStack) {
         // when
-        var planningTable = target.$parent;
         commandStack.undo();
 
         // then
@@ -527,7 +525,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
         expect(newSourceDefinition.planningTable.get('tableItems')).to.include(target);
 
         expect(target.$parent).to.equal(newSourceDefinition.planningTable);
-        
+
         expect(oldSourceDefinition.planningTable).not.to.exists;
       });
 
@@ -543,7 +541,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
         expect(oldSourceDefinition.planningTable).to.exist;
         expect(oldSourceDefinition.planningTable.get('tableItems')).to.include(target);
-        
+
         expect(target.$parent).to.equal(oldSourceDefinition.planningTable);
       }));
 
@@ -556,9 +554,9 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
         // then
         expect(newSourceDefinition.planningTable).to.exist;
         expect(newSourceDefinition.planningTable.get('tableItems')).to.include(target);
-        
+
         expect(target.$parent).to.equal(newSourceDefinition.planningTable);
-        
+
         expect(oldSourceDefinition.planningTable).not.to.exists;
       }));
 
@@ -595,7 +593,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
         expect(newSourceDefinition.planningTable.get('tableItems')).to.have.length(3);
 
         expect(target.$parent).to.equal(newSourceDefinition.planningTable);
-        
+
         expect(oldSourceDefinition.planningTable).not.to.exists;
       });
 
@@ -611,7 +609,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
         expect(oldSourceDefinition.planningTable).to.exist;
         expect(oldSourceDefinition.planningTable.get('tableItems')).to.include(target);
-        
+
         expect(target.$parent).to.equal(oldSourceDefinition.planningTable);
       }));
 
@@ -625,9 +623,9 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
         expect(newSourceDefinition.planningTable).to.exist;
         expect(newSourceDefinition.planningTable.get('tableItems')).to.include(target);
         expect(newSourceDefinition.planningTable.get('tableItems')).to.have.length(3);
-        
+
         expect(target.$parent).to.equal(newSourceDefinition.planningTable);
-        
+
         expect(oldSourceDefinition.planningTable).not.to.exists;
       }));
 
@@ -685,7 +683,6 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
       it('should undo', inject(function(commandStack) {
         // when
-        var planningTable = newTargetDefinition.planningTable;
         commandStack.undo();
 
         // then
@@ -712,75 +709,6 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
     });
 
-    describe('should add to stage planning table inside plan fragment', function() {
-
-      var stage;
-
-      beforeEach(inject(function(elementRegistry, modeling) {
-        // given
-        var connection = elementRegistry.get('DiscretionaryConnection_7');
-        oldTarget = connection.target.businessObject;
-        oldTargetDefinition = oldTarget.definitionRef;
-
-        var newTargetShape = elementRegistry.get('DIS_Task_10');
-        newTarget = newTargetShape.businessObject;
-        newTargetDefinition = newTarget.definitionRef;
-
-        source = connection.source.businessObject.definitionRef;
-
-        stage = elementRegistry.get('PI_Stage_2').businessObject.definitionRef;
-
-        var newWaypoints = [
-          connection.waypoints[0],
-          {
-            x: newTargetShape.x,
-            y: newTargetShape.y + 40
-          }
-        ];
-
-        // when
-        modeling.reconnectEnd(connection, newTargetShape, newWaypoints);
-      }));
-
-
-      it('should execute', function() {
-        // when
-        expect(source.planningTable.get('tableItems')).to.include(newTarget);
-        expect(source.planningTable.get('tableItems')).not.to.include(oldTarget);
-
-        expect(stage.planningTable.get('tableItems')).to.include(oldTarget);
-        expect(stage.planningTable.get('tableItems')).not.to.include(newTarget);
-      });
-
-
-      it('should undo', inject(function(commandStack) {
-        // when
-        commandStack.undo();
-
-        // then
-        expect(source.planningTable.get('tableItems')).not.to.include(newTarget);
-        expect(source.planningTable.get('tableItems')).to.include(oldTarget);
-
-        expect(stage.planningTable.get('tableItems')).not.to.include(oldTarget);
-        expect(stage.planningTable.get('tableItems')).to.include(newTarget);
-      }));
-
-
-      it('should redo', inject(function(commandStack) {
-        // when
-        commandStack.undo();
-        commandStack.redo();
-
-        // then
-        expect(source.planningTable.get('tableItems')).to.include(newTarget);
-        expect(source.planningTable.get('tableItems')).not.to.include(oldTarget);
-
-        expect(stage.planningTable.get('tableItems')).to.include(oldTarget);
-        expect(stage.planningTable.get('tableItems')).not.to.include(newTarget);
-      }));
-
-    });
-
   });
 
   describe('delete human task plan item with discretionary items', function () {
@@ -800,7 +728,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
       var casePlanModelShape = elementRegistry.get('CasePlanModel_1');
       casePlanModel = casePlanModelShape.businessObject;
 
-      var shape = elementRegistry.get('PI_Task_1')
+      var shape = elementRegistry.get('PI_Task_1');
 
       // when
       modeling.removeShape(shape);

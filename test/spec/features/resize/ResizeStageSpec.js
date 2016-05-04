@@ -160,10 +160,10 @@ describe('features - resize', function() {
 
           beforeEach(inject(function(elementRegistry) {
             // given
-            onPart5 = elementRegistry.get('OnPart_5');
-            onPart6 = elementRegistry.get('OnPart_6');
-            onPart7 = elementRegistry.get('OnPart_7');
-            onPart8 = elementRegistry.get('OnPart_8');
+            onPart5 = elementRegistry.get('OnPart_5_di');
+            onPart6 = elementRegistry.get('OnPart_6_di');
+            onPart7 = elementRegistry.get('OnPart_7_di');
+            onPart8 = elementRegistry.get('OnPart_8_di');
           }));
 
           it('should execute', function() {
@@ -334,10 +334,10 @@ describe('features - resize', function() {
 
           beforeEach(inject(function(elementRegistry) {
             // given
-            onPart5 = elementRegistry.get('OnPart_5');
-            onPart6 = elementRegistry.get('OnPart_6');
-            onPart7 = elementRegistry.get('OnPart_7');
-            onPart8 = elementRegistry.get('OnPart_8');
+            onPart5 = elementRegistry.get('OnPart_5_di');
+            onPart6 = elementRegistry.get('OnPart_6_di');
+            onPart7 = elementRegistry.get('OnPart_7_di');
+            onPart8 = elementRegistry.get('OnPart_8_di');
           }));
 
           it('should execute', function() {
@@ -525,10 +525,10 @@ describe('features - resize', function() {
 
           beforeEach(inject(function(elementRegistry) {
             // given
-            onPart5 = elementRegistry.get('OnPart_5');
-            onPart6 = elementRegistry.get('OnPart_6');
-            onPart7 = elementRegistry.get('OnPart_7');
-            onPart8 = elementRegistry.get('OnPart_8');
+            onPart5 = elementRegistry.get('OnPart_5_di');
+            onPart6 = elementRegistry.get('OnPart_6_di');
+            onPart7 = elementRegistry.get('OnPart_7_di');
+            onPart8 = elementRegistry.get('OnPart_8_di');
           }));
 
           it('should execute', function() {
@@ -708,10 +708,10 @@ describe('features - resize', function() {
 
           beforeEach(inject(function(elementRegistry) {
             // given
-            onPart5 = elementRegistry.get('OnPart_5');
-            onPart6 = elementRegistry.get('OnPart_6');
-            onPart7 = elementRegistry.get('OnPart_7');
-            onPart8 = elementRegistry.get('OnPart_8');
+            onPart5 = elementRegistry.get('OnPart_5_di');
+            onPart6 = elementRegistry.get('OnPart_6_di');
+            onPart7 = elementRegistry.get('OnPart_7_di');
+            onPart8 = elementRegistry.get('OnPart_8_di');
           }));
 
           it('should execute', function() {
@@ -904,10 +904,10 @@ describe('features - resize', function() {
 
           beforeEach(inject(function(elementRegistry) {
             // given
-            onPart1 = elementRegistry.get('OnPart_1');
-            onPart2 = elementRegistry.get('OnPart_2');
-            onPart3 = elementRegistry.get('OnPart_3');
-            onPart4 = elementRegistry.get('OnPart_4');
+            onPart1 = elementRegistry.get('OnPart_1_di');
+            onPart2 = elementRegistry.get('OnPart_2_di');
+            onPart3 = elementRegistry.get('OnPart_3_di');
+            onPart4 = elementRegistry.get('OnPart_4_di');
           }));
 
           it('should execute', function() {
@@ -1077,10 +1077,10 @@ describe('features - resize', function() {
 
           beforeEach(inject(function(elementRegistry) {
             // given
-            onPart1 = elementRegistry.get('OnPart_1');
-            onPart2 = elementRegistry.get('OnPart_2');
-            onPart3 = elementRegistry.get('OnPart_3');
-            onPart4 = elementRegistry.get('OnPart_4');
+            onPart1 = elementRegistry.get('OnPart_1_di');
+            onPart2 = elementRegistry.get('OnPart_2_di');
+            onPart3 = elementRegistry.get('OnPart_3_di');
+            onPart4 = elementRegistry.get('OnPart_4_di');
           }));
 
           it('should execute', function() {
@@ -1268,10 +1268,10 @@ describe('features - resize', function() {
 
           beforeEach(inject(function(elementRegistry) {
             // given
-            onPart1 = elementRegistry.get('OnPart_1');
-            onPart2 = elementRegistry.get('OnPart_2');
-            onPart3 = elementRegistry.get('OnPart_3');
-            onPart4 = elementRegistry.get('OnPart_4');
+            onPart1 = elementRegistry.get('OnPart_1_di');
+            onPart2 = elementRegistry.get('OnPart_2_di');
+            onPart3 = elementRegistry.get('OnPart_3_di');
+            onPart4 = elementRegistry.get('OnPart_4_di');
           }));
 
           it('should execute', function() {
@@ -1451,10 +1451,10 @@ describe('features - resize', function() {
 
           beforeEach(inject(function(elementRegistry) {
             // given
-            onPart1 = elementRegistry.get('OnPart_1');
-            onPart2 = elementRegistry.get('OnPart_2');
-            onPart3 = elementRegistry.get('OnPart_3');
-            onPart4 = elementRegistry.get('OnPart_4');
+            onPart1 = elementRegistry.get('OnPart_1_di');
+            onPart2 = elementRegistry.get('OnPart_2_di');
+            onPart3 = elementRegistry.get('OnPart_3_di');
+            onPart4 = elementRegistry.get('OnPart_4_di');
           }));
 
           it('should execute', function() {
