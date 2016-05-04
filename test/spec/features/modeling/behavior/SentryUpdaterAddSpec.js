@@ -31,7 +31,7 @@ describe('features/modeling - #SentryUpdater - add', function() {
       host = hostShape.businessObject;
 
       // when
-      modeling.createShape(criterionShape, { x: 117, y: 170 }, hostShape, null, true);
+      modeling.createShape(criterionShape, { x: 117, y: 170 }, hostShape, true);
     }));
 
     it('should execute', function() {
@@ -83,7 +83,7 @@ describe('features/modeling - #SentryUpdater - add', function() {
       host = hostShape.businessObject;
 
       // when
-      modeling.createShape(criterionShape, { x: 146, y: 170 }, hostShape, null, true);
+      modeling.createShape(criterionShape, { x: 146, y: 170 }, hostShape, true);
     }));
 
     it('should execute', function() {

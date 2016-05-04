@@ -39,7 +39,7 @@ describe('features/modeling - update attachment', function() {
         host = hostShape.businessObject;
 
         // when
-        modeling.createShape(criterionShape, { x: 296, y: 210 }, hostShape, null, true);
+        modeling.createShape(criterionShape, { x: 296, y: 210 }, hostShape, true);
       }));
 
       it('should execute', function() {
@@ -88,7 +88,7 @@ describe('features/modeling - update attachment', function() {
         host = hostShape.businessObject;
 
         // when
-        modeling.createShape(criterionShape, { x: 296, y: 210 }, hostShape, null, true);
+        modeling.createShape(criterionShape, { x: 296, y: 210 }, hostShape, true);
       }));
 
       it('should execute', function() {
