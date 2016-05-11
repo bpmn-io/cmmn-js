@@ -423,6 +423,46 @@ describe('features/popup-menu - replace menu provider', function() {
 
     });
 
+
+    describe('entry criterion', function() {
+
+      it('should contain all except the current one',
+        inject(function(popupMenu, elementRegistry) {
+
+        // given
+        var eventListener = elementRegistry.get('EntryCriterion_1');
+
+        // when
+        openPopup(eventListener);
+
+        // then
+        expect(queryEntry(popupMenu, 'replace-with-entry-criterion')).not.to.exist;
+        expect(getEntries(popupMenu)).to.have.length(1);
+
+      }));
+
+    });
+
+
+    describe('exit criterion', function() {
+
+      it('should contain all except the current one',
+        inject(function(popupMenu, elementRegistry) {
+
+        // given
+        var eventListener = elementRegistry.get('ExitCriterion_1');
+
+        // when
+        openPopup(eventListener);
+
+        // then
+        expect(queryEntry(popupMenu, 'replace-with-exit-criterion')).not.to.exist;
+        expect(getEntries(popupMenu)).to.have.length(1);
+
+      }));
+
+    });
+
   });
 
 });

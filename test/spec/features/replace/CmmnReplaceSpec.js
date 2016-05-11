@@ -377,6 +377,110 @@ describe('features/replace - cmmn replace', function() {
 
     });
 
+
+    describe('entry criterion -> exit criterion', function() {
+
+      beforeEach(inject(function(elementRegistry, cmmnReplace) {
+
+        // given
+        oldElement = elementRegistry.get('EntryCriterion_1');
+
+        var newElementData = {
+          type: 'cmmn:ExitCriterion'
+        };
+
+        // when
+        newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:ExitCriterion')).to.be.true;
+
+      });
+
+
+      it('should undo', inject(function(commandStack, elementRegistry) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(elementRegistry.get(oldElement.id)).to.exist;
+        expect(elementRegistry.get(newElement.id)).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:ExitCriterion')).to.be.true;
+      }));
+
+    });
+
+
+    describe('exit criterion -> entry criterion', function() {
+
+      beforeEach(inject(function(elementRegistry, cmmnReplace) {
+
+        // given
+        oldElement = elementRegistry.get('ExitCriterion_1');
+
+        var newElementData = {
+          type: 'cmmn:EntryCriterion'
+        };
+
+        // when
+        newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:EntryCriterion')).to.be.true;
+
+      });
+
+
+      it('should undo', inject(function(commandStack, elementRegistry) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(elementRegistry.get(oldElement.id)).to.exist;
+        expect(elementRegistry.get(newElement.id)).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:EntryCriterion')).to.be.true;
+      }));
+
+    });
+
   });
 
 

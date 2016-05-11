@@ -191,6 +191,48 @@ describe('features - context-pad', function() {
       expect(replaceMenuRect.top).to.be.at.most(padMenuRect.bottom + padding);
     }));
 
+
+    it('should not include control if replacement is disallowed',
+      inject(function(elementRegistry, contextPad, customRules) {
+
+      // given
+      var element = elementRegistry.get('EntryCriterion_1');
+
+      // disallow replacement
+      customRules.addRule('shape.replace', function(context) {
+        return !is(context.element, 'cmmn:EntryCriterion');
+      });
+
+      // when
+      contextPad.open(element);
+
+      var padNode = contextPad.getPad(element).html;
+
+      // then
+      expect(padEntry(padNode, 'replace')).not.to.exist;
+    }));
+
+
+    it('should include control if replacement is allowed',
+      inject(function(elementRegistry, contextPad, customRules) {
+
+      // given
+      var element = elementRegistry.get('ExitCriterion_4');
+
+      // disallow replacement
+      customRules.addRule('shape.replace', 1500, function(context) {
+        return !is(context.element, 'cmmn:EntryCriterion');
+      });
+
+      // when
+      contextPad.open(element);
+
+      var padNode = contextPad.getPad(element).html;
+
+      // then
+      expect(padEntry(padNode, 'replace')).to.exist;
+    }));
+
   });
 
 
@@ -292,6 +334,78 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('CasePlanModel_1', [
         'replace'
+      ]);
+    }));
+
+
+    it('should provide ExitCriterion attached to CasePlanModel entries', inject(function() {
+
+      expectContextPadEntries('ExitCriterion_4', [
+        '!replace'
+      ]);
+    }));
+
+
+    it('should provide ExitCriterion attached to Stage entries', inject(function() {
+
+      expectContextPadEntries('ExitCriterion_1', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide EntryCriterion attached to Stage entries', inject(function() {
+
+      expectContextPadEntries('EntryCriterion_1', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide ExitCriterion attached to blocking Task (plan item) entries', inject(function() {
+
+      expectContextPadEntries('ExitCriterion_2', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide EntryCriterion attached to blocking Task (plan item) entries', inject(function() {
+
+      expectContextPadEntries('EntryCriterion_2', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide ExitCriterion attached to blocking Task (discretionary item) entries', inject(function() {
+
+      expectContextPadEntries('ExitCriterion_3', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide EntryCriterion attached to blocking Task (discretionary item) entries', inject(function() {
+
+      expectContextPadEntries('EntryCriterion_5', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide EntryCriterion attached to non-blocking Task (plan item) entries', inject(function() {
+
+      expectContextPadEntries('EntryCriterion_3', [
+        '!replace'
+      ]);
+    }));
+
+
+    it('should provide EntryCriterion attached to non-blocking Task (discretionary item) entries', inject(function() {
+
+      expectContextPadEntries('EntryCriterion_6', [
+        '!replace'
       ]);
     }));
 
