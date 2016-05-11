@@ -80,6 +80,64 @@ describe('features/replace - cmmn replace', function() {
     });
 
 
+    describe('event listener -> user event listener', function() {
+
+      beforeEach(inject(function(elementRegistry, cmmnReplace) {
+
+        // given
+        oldElement = elementRegistry.get('PI_EventListener_1');
+
+        var newElementData = {
+          type: 'cmmn:PlanItem',
+          definitionType: 'cmmn:UserEventListener'
+        };
+
+        // when
+        newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:PlanItem')).to.be.true;
+
+        var definition = bo.definitionRef;
+        expect(is(definition, 'cmmn:UserEventListener')).to.be.true;
+      });
+
+
+      it('should undo', inject(function(commandStack, elementRegistry) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(elementRegistry.get(oldElement.id)).to.exist;
+        expect(elementRegistry.get(newElement.id)).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:PlanItem')).to.be.true;
+
+        var definition = bo.definitionRef;
+        expect(is(definition, 'cmmn:UserEventListener')).to.be.true;
+      }));
+
+    });
+
+
     describe('plan item -> discretionary item', function() {
 
       beforeEach(inject(function(elementRegistry, cmmnReplace) {
@@ -408,6 +466,26 @@ describe('features/replace - cmmn replace', function() {
       expect(newElement.y).to.equal(task.y);
     }));
 
+    it('should keep label position', inject(function (elementRegistry, cmmnReplace, modeling) {
+
+      // given
+      var listener = elementRegistry.get('PI_EventListener_1');
+      var label = elementRegistry.get('PI_EventListener_1_label');
+
+      var newElementData = {
+        type: 'cmmn:PlanItem',
+        definitionType: 'cmmn:TimerEventListener'
+      };
+
+      // when
+      var newElement = cmmnReplace.replaceElement(listener, newElementData);
+
+      // then
+      expect(newElement.label.x).to.equal(label.x);
+      expect(newElement.label.y).to.equal(label.y);
+
+    }));
+
   });
 
 
@@ -651,6 +729,27 @@ describe('features/replace - cmmn replace', function() {
 
       // then
       expect(newElement.businessObject.definitionRef.name).to.equal('FOO');
+    }));
+
+
+    it('should keep exterior labels',
+      inject(function(elementRegistry, cmmnReplace) {
+
+      // given
+      var startEvent = elementRegistry.get('PI_EventListener_1');
+
+      var newElementData = {
+        type: 'cmmn:PlanItem',
+        definitionType: 'cmmn:TimerEventListener'
+      };
+
+      // when
+      var newElement = cmmnReplace.replaceElement(startEvent, newElementData);
+
+      // then
+      expect(newElement.label.hidden).to.equal(false);
+      expect(newElement.label.labelTarget).to.equal(newElement);
+      expect(newElement.businessObject.definitionRef.name).to.equal('Keep label');
     }));
 
   });

@@ -272,6 +272,14 @@ describe('features - context-pad', function() {
     }));
 
 
+    it('should provide Event Listener entries', inject(function() {
+
+      expectContextPadEntries('PI_EventListener_1', [
+        'replace'
+      ]);
+    }));
+
+
     it('should provide Milestone entries', inject(function() {
 
       expectContextPadEntries('PI_Milestone_1', [

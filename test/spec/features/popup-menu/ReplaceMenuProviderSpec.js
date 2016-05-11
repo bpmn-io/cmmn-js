@@ -266,6 +266,26 @@ describe('features/popup-menu - replace menu provider', function() {
     beforeEach(bootstrapModeler(diagramXMLReplaceMenu, { modules: testModules }));
 
 
+    describe('event listener', function() {
+
+      it('should contain all except the current one',
+        inject(function(popupMenu, elementRegistry) {
+
+        // given
+        var eventListener = elementRegistry.get('PI_EventListener_1');
+
+        // when
+        openPopup(eventListener);
+
+        // then
+        expect(queryEntry(popupMenu, 'replace-with-event-listener-plan-item')).to.be.null;
+        expect(getEntries(popupMenu)).to.have.length(2);
+
+      }));
+
+    });
+
+
     describe('task', function() {
 
       it('should contain all except the current one (blocking plan item)',
