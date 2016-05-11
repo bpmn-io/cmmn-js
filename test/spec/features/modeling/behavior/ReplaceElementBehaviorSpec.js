@@ -99,4 +99,22 @@ describe('features/modeling/behavior - replace element', function() {
 
   }));
 
+
+  it('should NOT execute on simple host movement', inject(function(elementRegistry, modeling) {
+
+    // given
+    var task = elementRegistry.get('PI_Task_1'),
+        entryCriterion = elementRegistry.get('EntryCriterion_1');
+
+    // when
+    modeling.moveElements([ task, entryCriterion ], { x: 10, y: 30 }, task.parent);
+
+
+    // then
+    expect(elementRegistry.get('EntryCriterion_1')).to.exist;
+
+    expect(task.attachers).to.have.length(1);
+    expect(task.attachers).to.include(entryCriterion);
+  }));
+
 });
