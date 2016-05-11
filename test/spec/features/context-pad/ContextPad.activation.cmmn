@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1tsop4c">
+    <cmmn:casePlanModel id="CasePlanModel_1">
+
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1">
+        <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1geqba4" />
+        <cmmn:exitCriterion id="ExitCriterion_1" sentryRef="Sentry_1or9vhl" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Blocking_Task_1" definitionRef="Blocking_Task_1">
+        <cmmn:entryCriterion id="EntryCriterion_2" sentryRef="Sentry_02qxgx1" />
+        <cmmn:exitCriterion id="ExitCriterion_2" sentryRef="Sentry_068hny8" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Non_Blocking_Task_1" definitionRef="Non_Blocking_Task_1">
+        <cmmn:entryCriterion id="EntryCriterion_3" sentryRef="Sentry_0xr40rl" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" />
+      <cmmn:planItem id="PI_Milestone_1" definitionRef="Milestone_1">
+        <cmmn:entryCriterion id="EntryCriterion_4" sentryRef="Sentry_0nsbbnz" />
+      </cmmn:planItem>
+
+      <cmmn:sentry id="Sentry_1gtat6o" />
+      <cmmn:sentry id="Sentry_1geqba4" />
+      <cmmn:sentry id="Sentry_1or9vhl" />
+      <cmmn:sentry id="Sentry_02qxgx1" />
+      <cmmn:sentry id="Sentry_0nsbbnz" />
+      <cmmn:sentry id="Sentry_0xr40rl" />
+      <cmmn:sentry id="Sentry_1i31wc9" />
+      <cmmn:sentry id="Sentry_1iz9nhq" />
+      <cmmn:sentry id="Sentry_068hny8" />
+      <cmmn:sentry id="Sentry_04aawpy" />
+
+      <cmmn:planningTable id="PlanningTable_1ne4am1">
+        <cmmn:discretionaryItem id="DIS_PlanFragment_1" definitionRef="PlanFragment_1" />
+        <cmmn:discretionaryItem id="DIS_Blocking_Task_2" definitionRef="Blocking_Task_2">
+          <cmmn:entryCriterion id="EntryCriterion_5" sentryRef="Sentry_1i31wc9" />
+          <cmmn:exitCriterion id="ExitCriterion_3" sentryRef="Sentry_04aawpy" />
+        </cmmn:discretionaryItem>
+        <cmmn:discretionaryItem id="DIS_Non_Blocking_Task_2" definitionRef="Non_Blocking_Task_2">
+          <cmmn:entryCriterion id="EntryCriterion_6" sentryRef="Sentry_1iz9nhq" />
+        </cmmn:discretionaryItem>
+      </cmmn:planningTable>
+
+      <cmmn:stage id="Stage_1" />
+      <cmmn:planFragment id="PlanFragment_1" />
+      <cmmn:task id="Blocking_Task_1" name="Blocking" />
+      <cmmn:task id="Blocking_Task_2" name="Blocking" />
+      <cmmn:task id="Non_Blocking_Task_1" name="Non-Blocking" isBlocking="false" />
+      <cmmn:task id="Non_Blocking_Task_2" name="Non-Blocking" isBlocking="false" />
+      <cmmn:eventListener id="EventListener_1" />
+      <cmmn:milestone id="Milestone_1" />
+      <cmmn:exitCriterion id="ExitCriterion_4" sentryRef="Sentry_1gtat6o" />
+
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_1_di" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="83" y="38" width="624" height="383" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_4_di" cmmnElementRef="ExitCriterion_4">
+        <dc:Bounds x="69" y="209" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
+        <dc:Bounds x="122" y="64" width="270" height="158" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_PlanFragment_1_di" cmmnElementRef="DIS_PlanFragment_1">
+        <dc:Bounds x="122" y="237" width="269" height="164" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Blocking_Task_1_di" cmmnElementRef="PI_Blocking_Task_1">
+        <dc:Bounds x="451" y="65" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Blocking_Task_2_di" cmmnElementRef="DIS_Blocking_Task_2">
+        <dc:Bounds x="450" y="172" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Non_Blocking_Task_1_di" cmmnElementRef="PI_Non_Blocking_Task_1">
+        <dc:Bounds x="587" y="65" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Non_Blocking_Task_2_di" cmmnElementRef="DIS_Non_Blocking_Task_2">
+        <dc:Bounds x="586" y="173" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_EventListener_1_di" cmmnElementRef="PI_EventListener_1">
+        <dc:Bounds x="484" y="303" width="36" height="36" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="457" y="339" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Milestone_1_di" cmmnElementRef="PI_Milestone_1">
+        <dc:Bounds x="584" y="298" width="100" height="40" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_1_di" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="111" y="133" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_1_di" cmmnElementRef="ExitCriterion_1">
+        <dc:Bounds x="382" y="125" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_2_di" cmmnElementRef="EntryCriterion_2">
+        <dc:Bounds x="440" y="90" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_4_di" cmmnElementRef="EntryCriterion_4">
+        <dc:Bounds x="573" y="305" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_3_di" cmmnElementRef="EntryCriterion_3">
+        <dc:Bounds x="577" y="90" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_5_di" cmmnElementRef="EntryCriterion_5">
+        <dc:Bounds x="439" y="199" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_6_di" cmmnElementRef="EntryCriterion_6">
+        <dc:Bounds x="574" y="196" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_2_di" cmmnElementRef="ExitCriterion_2">
+        <dc:Bounds x="542" y="87" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_3_di" cmmnElementRef="ExitCriterion_3">
+        <dc:Bounds x="541" y="198" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

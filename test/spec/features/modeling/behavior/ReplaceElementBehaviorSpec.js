@@ -1,9 +1,6 @@
 'use strict';
 
-var TestHelper = require('../../../../TestHelper');
-
 /* global bootstrapModeler, inject */
-
 
 var modelingModule = require('../../../../../lib/features/modeling'),
     coreModule = require('../../../../../lib/core');
@@ -113,8 +110,66 @@ describe('features/modeling/behavior - replace element', function() {
     // then
     expect(elementRegistry.get('EntryCriterion_1')).to.exist;
 
-    expect(task.attachers).to.have.length(1);
+    expect(task.attachers).to.have.length(2);
     expect(task.attachers).to.include(entryCriterion);
   }));
+
+
+  describe('replace exit criterion when setting task non-blocking', function() {
+
+    var element, newCriterion, oldCriterion;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+
+      // given
+      element = elementRegistry.get('PI_Task_1');
+      oldCriterion = elementRegistry.get('ExitCriterion_2');
+
+      // when
+      modeling.updateControls(element, { isBlocking: false });
+
+      var sentry = oldCriterion.businessObject.sentryRef;
+      newCriterion = elementRegistry.filter(function(element) {
+        if(element.businessObject && element.businessObject.sentryRef === sentry) {
+          return true;
+        }
+      })[0];
+
+    }));
+
+
+    it('should execute', function() {
+      // then
+      expect(newCriterion.type).to.equal('cmmn:EntryCriterion');
+      expect(newCriterion.host).to.equal(element);
+
+      expect(oldCriterion.host).not.to.exist;
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(newCriterion.host).not.to.exist;
+
+      expect(oldCriterion.host).to.equal(element);
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(newCriterion.type).to.equal('cmmn:EntryCriterion');
+      expect(newCriterion.host).to.equal(element);
+
+      expect(oldCriterion.host).not.to.exist;
+    }));
+
+  });
 
 });

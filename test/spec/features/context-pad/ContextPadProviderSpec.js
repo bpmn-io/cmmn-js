@@ -151,6 +151,144 @@ describe('features - context-pad', function() {
 
   });
 
+
+  describe('replace', function() {
+
+    var diagramXML = require('./ContextPad.activation.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var container;
+
+    beforeEach(function() {
+      container = TestContainer.get(this);
+    });
+
+
+    it('should show popup menu in the correct position', inject(function(elementRegistry, contextPad) {
+
+      // given
+      var element = elementRegistry.get('PI_Blocking_Task_1'),
+          padding = 5,
+          replaceMenuRect,
+          padMenuRect;
+
+      contextPad.open(element);
+      padMenuRect = contextPad.getPad(element).html.getBoundingClientRect();
+
+      // mock event
+      var event = {
+        target: padEntry(container, 'replace'),
+        preventDefault: function(){}
+      };
+
+      // when
+      contextPad.trigger('click', event);
+      replaceMenuRect = domQuery('.cmmn-replace', container).getBoundingClientRect();
+
+      // then
+      expect(replaceMenuRect.left).to.be.at.most(padMenuRect.left);
+      expect(replaceMenuRect.top).to.be.at.most(padMenuRect.bottom + padding);
+    }));
+
+  });
+
+
+  describe('available entries', function() {
+
+    var diagramXML = require('./ContextPad.activation.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    function expectContextPadEntries(elementOrId, expectedEntries) {
+
+      TestHelper.getCmmnJs().invoke(function(elementRegistry, contextPad) {
+
+        var element = typeof elementOrId === 'string' ? elementRegistry.get(elementOrId) : elementOrId;
+
+        contextPad.open(element, true);
+
+        var entries = contextPad._current.entries;
+
+        expectedEntries.forEach(function(name) {
+
+          if (name.charAt(0) === '!') {
+            name = name.substring(1);
+
+            expect(entries).not.to.have.property(name);
+          } else {
+            expect(entries).to.have.property(name);
+          }
+        });
+      });
+    }
+
+
+    it('should provide Stage entries', inject(function() {
+
+      expectContextPadEntries('PI_Stage_1', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide Plan Fragment entries', inject(function() {
+
+      expectContextPadEntries('DIS_PlanFragment_1', [
+        '!replace'
+      ]);
+    }));
+
+
+    it('should provide blocking Task (plan item) entries', inject(function() {
+
+      expectContextPadEntries('PI_Blocking_Task_1', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide non-blocking Task (plan item) entries', inject(function() {
+
+      expectContextPadEntries('PI_Non_Blocking_Task_1', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide blocking Task (discretionary item) entries', inject(function() {
+
+      expectContextPadEntries('DIS_Blocking_Task_2', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide non-blocking Task (discretionary item) entries', inject(function() {
+
+      expectContextPadEntries('DIS_Non_Blocking_Task_2', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide Milestone entries', inject(function() {
+
+      expectContextPadEntries('PI_Milestone_1', [
+        'replace'
+      ]);
+    }));
+
+
+    it('should provide CasePlanModel entries', inject(function() {
+
+      expectContextPadEntries('CasePlanModel_1', [
+        'replace'
+      ]);
+    }));
+
+  });
+
 });
 
 

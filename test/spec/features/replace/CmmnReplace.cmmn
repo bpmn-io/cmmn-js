@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_0qdoc06">
+    <cmmn:casePlanModel id="CasePlanModel_0bkik4g">
+      <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" />
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1">
+        <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1oo2dqz" />
+        <cmmn:exitCriterion id="ExitCriterion_1" sentryRef="Sentry_0t3a5sn" />
+      </cmmn:planItem>
+      <cmmn:sentry id="Sentry_1oo2dqz" />
+      <cmmn:sentry id="Sentry_0t3a5sn" />
+      <cmmn:planningTable id="PlanningTable_0m5780x">
+        <cmmn:discretionaryItem id="DIS_Task_2" definitionRef="Task_2" />
+      </cmmn:planningTable>
+      <cmmn:task id="Task_1" name="FOO" />
+      <cmmn:task id="Task_2" />
+      <cmmn:eventListener id="EventListener_1" name="Keep label" />
+      <cmmn:stage id="Stage_1" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_0bkik4g_di" cmmnElementRef="CasePlanModel_0bkik4g">
+        <dc:Bounds x="87" y="38" width="401" height="362" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_1_di" cmmnElementRef="PI_Task_1">
+        <dc:Bounds x="118" y="61" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Task_2_di" cmmnElementRef="DIS_Task_2">
+        <dc:Bounds x="255" y="60" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_EventListener_1_di" cmmnElementRef="PI_EventListener_1">
+        <dc:Bounds x="405" y="82" width="36" height="36" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
+        <dc:Bounds x="109" y="169" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_1_di" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="98" y="246" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_1_di" cmmnElementRef="ExitCriterion_1">
+        <dc:Bounds x="450" y="245" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

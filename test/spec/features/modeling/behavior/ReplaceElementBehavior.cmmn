@@ -4,10 +4,12 @@
     <cmmn:casePlanModel id="CasePlanModel_1">
       <cmmn:planItem id="PI_Task_1" definitionRef="Task_1">
         <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_0tvucmk" />
+        <cmmn:exitCriterion id="ExitCriterion_2" sentryRef="Sentry_0m2ta73" />
       </cmmn:planItem>
       <cmmn:planItem id="PI_Milestone_1" definitionRef="Milestone_1" />
       <cmmn:sentry id="Sentry_0tvucmk" />
       <cmmn:sentry id="Sentry_092l2dd" />
+      <cmmn:sentry id="Sentry_0m2ta73" />
       <cmmn:task id="Task_1" />
       <cmmn:milestone id="Milestone_1" />
       <cmmn:exitCriterion id="ExitCriterion_1" sentryRef="Sentry_092l2dd" />
@@ -30,6 +32,10 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="PI_Milestone_1_di" cmmnElementRef="PI_Milestone_1">
         <dc:Bounds x="234" y="223" width="100" height="40" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_2_di" cmmnElementRef="ExitCriterion_2">
+        <dc:Bounds x="229" y="132" width="20" height="28" />
+        <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>
   </cmmndi:CMMNDI>

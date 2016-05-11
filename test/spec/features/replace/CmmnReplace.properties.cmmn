@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1xjcgwc">
+    <cmmn:casePlanModel id="CasePlanModel_0r5twd7">
+      
+      <cmmn:planItem id="PI_HumanTask_1" definitionRef="HumanTask_1" />
+      <cmmn:planItem id="PI_HumanTask_2" definitionRef="HumanTask_2" />
+      
+      <cmmn:planningTable id="PlanningTable_10lqnkk">
+        <cmmn:discretionaryItem id="DIS_PlanFragment_1" definitionRef="PlanFragment_1" />
+      </cmmn:planningTable>
+      
+      <cmmn:planFragment id="PlanFragment_1" />
+      <cmmn:humanTask id="HumanTask_1" isBlocking="false" />
+      <cmmn:humanTask id="HumanTask_2">
+        <cmmn:planningTable />
+      </cmmn:humanTask>
+
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_0r5twd7_di" cmmnElementRef="CasePlanModel_0r5twd7">
+        <dc:Bounds x="94" y="23" width="457" height="384" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_HumanTask_1_di" cmmnElementRef="PI_HumanTask_1">
+        <dc:Bounds x="125" y="53" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_PlanFragment_1_di" cmmnElementRef="DIS_PlanFragment_1" isCollapsed="true">
+        <dc:Bounds x="149" y="175" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_HumanTask_2_di" cmmnElementRef="PI_HumanTask_2" isPlanningTableCollapsed="true">
+        <dc:Bounds x="274" y="52" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

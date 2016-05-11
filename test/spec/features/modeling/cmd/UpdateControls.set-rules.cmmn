@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_0dhk2wq">
+    <cmmn:casePlanModel id="CasePlanModel_10163yu">
+      <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_2" definitionRef="Task_2" />
+      <cmmn:planItem id="PI_Task_3" definitionRef="Task_3">
+        <cmmn:itemControl id="PlanItemControl_0ingj40">
+          <cmmn:repetitionRule id="RepetitionRule_14mcfan" />
+          <cmmn:requiredRule id="RequiredRule_1wgn8x8" />
+          <cmmn:manualActivationRule id="ManualActivationRule_1bnb2k9" />
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:task id="Task_1" />
+      <cmmn:task id="Task_2">
+        <cmmn:defaultControl id="PlanItemControl_0zu9xil">
+          <cmmn:repetitionRule id="RepetitionRule_08nhwjk" />
+          <cmmn:requiredRule id="RequiredRule_0c0c1m5" />
+          <cmmn:manualActivationRule id="ManualActivationRule_0hetx40" />
+        </cmmn:defaultControl>
+      </cmmn:task>
+      <cmmn:task id="Task_3">
+        <cmmn:defaultControl id="PlanItemControl_0zu9xil1">
+          <cmmn:repetitionRule id="RepetitionRule_08nhwjk1" />
+          <cmmn:requiredRule id="RequiredRule_0c0c1m51" />
+          <cmmn:manualActivationRule id="ManualActivationRule_0hetx401" />
+        </cmmn:defaultControl>
+      </cmmn:task>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_10163yu_di" cmmnElementRef="CasePlanModel_10163yu">
+        <dc:Bounds x="83" y="33" width="400" height="250" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_1_di" cmmnElementRef="PI_Task_1">
+        <dc:Bounds x="106" y="55" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_2_di" cmmnElementRef="PI_Task_2">
+        <dc:Bounds x="237" y="53" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_3_di" cmmnElementRef="PI_Task_3">
+        <dc:Bounds x="363" y="53" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

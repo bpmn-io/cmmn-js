@@ -333,4 +333,113 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
 
   });
 
+
+  describe('replace', function() {
+
+    describe('should update sourceRef of planItemOnpart', function() {
+
+      var diagramXML = require('./ReplaceConnectionBehavior.replace.cmmn');
+
+      beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+      var oldElement, newElement, onPart;
+
+      beforeEach(inject(function(elementRegistry, modeling, cmmnReplace) {
+
+        // given
+        oldElement = elementRegistry.get('PI_Task_1');
+        onPart = elementRegistry.get('PlanItemOnPart_1_di').businessObject.cmmnElementRef;
+
+        var newElementData = {
+          type: 'cmmn:PlanItem',
+          definitionType: 'cmmn:HumanTask'
+        };
+
+        // when
+        newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+      }));
+
+      it('should execute', function() {
+        // then
+        expect(onPart.sourceRef).to.equal(newElement.businessObject);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(oldElement.businessObject);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.sourceRef).to.equal(newElement.businessObject);
+      }));
+
+    });
+
+
+    describe('should remove planItemOnPart', function() {
+
+      var diagramXML = require('./ReplaceConnectionBehavior.replace.cmmn');
+
+      beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+      var oldElement, newElement, exitCriterion;
+
+      beforeEach(inject(function(elementRegistry, modeling, cmmnReplace) {
+
+        // given
+        oldElement = elementRegistry.get('PI_Task_1');
+        exitCriterion = elementRegistry.get('ExitCriterion_1');
+
+        var newElementData = {
+          type: 'cmmn:DiscretionaryItem',
+          definitionType: 'cmmn:HumanTask'
+        };
+
+        // when
+        newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+      }));
+
+      it('should execute', inject(function(elementRegistry) {
+        // then
+        expect(elementRegistry.get('PlanItemOnPart_1_di')).not.to.exist;
+        expect(exitCriterion.outgoing).to.be.empty;
+      }));
+
+
+      it('should undo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(elementRegistry.get('PlanItemOnPart_1_di')).to.exist;
+        expect(exitCriterion.outgoing).to.have.length(1);
+      }));
+
+
+      it('should redo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(elementRegistry.get('PlanItemOnPart_1_di')).not.to.exist;
+        expect(exitCriterion.outgoing).to.be.empty;
+      }));
+
+    });
+
+  });
+
 });
