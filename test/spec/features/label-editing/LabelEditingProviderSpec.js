@@ -439,8 +439,7 @@ describe('features - label-editing', function() {
       }));
 
 
-      it.skip('should update the name of the referenced file', inject(function(modeling, elementRegistry) {
-        // TODO (paddy): unskip, when it is possible to delete case file items
+      it('should update the name of the referenced file', inject(function(modeling, elementRegistry) {
 
         // given
         var caseFileItem_1 = elementRegistry.get('IT_File_1'),

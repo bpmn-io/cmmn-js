@@ -203,4 +203,44 @@ describe('Importer', function() {
 
   });
 
+
+  it('should import case file items', function(done) {
+
+    var xml = require('./Importer.case-file-item.cmmn');
+
+    modeler.importXML(xml, function(err, warnings) {
+
+      var elementRegistry = modeler.get('elementRegistry');
+      var rootElement = modeler.get('canvas').getRootElement();
+
+      var caseFileItem1 = elementRegistry.get('CaseFileItem_1');
+      var caseFileItem2 = elementRegistry.get('CaseFileItem_2');
+      var caseFileItem3 = elementRegistry.get('CaseFileItem_3');
+      var caseFileItem4 = elementRegistry.get('CaseFileItem_4');
+      var caseFileItem5 = elementRegistry.get('CaseFileItem_5');
+      var caseFileItem6 = elementRegistry.get('CaseFileItem_6');
+
+      expect(caseFileItem1).to.exist;
+      expect(caseFileItem1.parent).to.equal(elementRegistry.get('PI_Stage_1'));
+
+      expect(caseFileItem2).to.exist;
+      expect(caseFileItem2.parent).to.equal(elementRegistry.get('PI_Stage_4'));
+
+      expect(caseFileItem3).to.exist;
+      expect(caseFileItem3.parent).to.equal(elementRegistry.get('PI_Stage_3'));
+
+      expect(caseFileItem4).to.exist;
+      expect(caseFileItem4.parent).to.equal(elementRegistry.get('PI_Stage_2'));
+
+      expect(caseFileItem5).to.exist;
+      expect(caseFileItem5.parent).to.equal(rootElement);
+
+      expect(caseFileItem6).to.exist;
+      expect(caseFileItem6.parent).to.equal(elementRegistry.get('CasePlanModel_1'));
+
+      done(err);
+    });
+
+  });
+
 });

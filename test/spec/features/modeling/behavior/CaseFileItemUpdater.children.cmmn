@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:caseFileItemDefinition id="CaseFileItemDefinition_1" />
+  <cmmn:caseFileItemDefinition id="CaseFileItemDefinition_2" />
+  <cmmn:case id="Case_1">
+    <cmmn:caseFileModel id="CaseFileModel_1">
+      <cmmn:caseFileItem id="CaseFileItem_1" definitionRef="CaseFileItemDefinition_1">
+        <cmmn:children>
+          <cmmn:caseFileItem id="CaseFileItem_2" definitionRef="CaseFileItemDefinition_2" />
+        </cmmn:children>
+      </cmmn:caseFileItem>
+    </cmmn:caseFileModel>
+    <cmmn:casePlanModel id="CasePlanModel_1">
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
+      <cmmn:stage id="Stage_1" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmn:case id="Case_2">
+    <cmmn:casePlanModel id="CasePlanModel_2" />
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_1_di" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="93" y="53" width="400" height="250" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CasePlanModel_2_di" cmmnElementRef="CasePlanModel_2">
+        <dc:Bounds x="543" y="51" width="400" height="250" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
+        <dc:Bounds x="133" y="135" width="322" height="154" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CaseFileItem_1_di" cmmnElementRef="CaseFileItem_1">
+        <dc:Bounds x="215" y="67" width="36" height="50" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="188" y="117" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CaseFileItem_2_di" cmmnElementRef="CaseFileItem_2">
+        <dc:Bounds x="304" y="67" width="36" height="50" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="277" y="117" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
