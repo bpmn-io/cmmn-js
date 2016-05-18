@@ -1,6 +1,8 @@
 'use strict';
 
-var Modeler = require('../../lib/Modeler');
+var Modeler = require('../../lib/Modeler'),
+    NavigatedViewer = require('../../lib/NavigatedViewer'),
+    Viewer = require('../../lib/Viewer');
 
 var TestContainer = require('mocha-test-container-support');
 
@@ -25,6 +27,12 @@ describe('Modeler', function() {
   it('should import simple process', function(done) {
     var xml = require('../fixtures/cmmn/complex.cmmn');
     createModeler(xml, done);
+  });
+
+
+  it('should expose Viewer, NavigatedViewer', function() {
+    expect(Modeler.Viewer).to.eql(Viewer);
+    expect(Modeler.NavigatedViewer).to.eql(NavigatedViewer);
   });
 
 });
