@@ -2,6 +2,8 @@
 
 var TestContainer = require('mocha-test-container-support');
 
+var Diagram = require('diagram-js/lib/Diagram');
+
 var Viewer = require('../../lib/Viewer');
 
 
@@ -29,13 +31,52 @@ describe('Viewer', function() {
   });
 
 
+  it('should re-import simple case', function(done) {
+
+    var xml = require('../fixtures/cmmn/simple.cmmn');
+
+    // given
+    createViewer(xml, function(err, warnings, viewer) {
+
+      if (err) {
+        return done(err);
+      }
+
+      // when
+      // mimic re-import of same diagram
+      viewer.importXML(xml, function(err, warnings) {
+
+        if (err) {
+          return done(err);
+        }
+
+        // then
+        expect(warnings.length).to.equal(0);
+
+        done();
+      });
+
+    });
+  });
+
+
+  it('should be instance of Diagram', function() {
+
+    // when
+    var viewer = new Viewer({ container: container });
+
+    // then
+    expect(viewer).to.be.instanceof(Diagram);
+  });
+
+
   describe('defaults', function() {
 
     it('should use <body> as default parent', function(done) {
 
       var xml = require('../fixtures/cmmn/simple.cmmn');
 
-      var viewer = new Viewer();
+      var viewer = new Viewer({});
 
       viewer.importXML(xml, function(err, warnings) {
 
@@ -145,6 +186,48 @@ describe('Viewer', function() {
       });
     });
 
+
+    it('should allow Diagram#get before import', function() {
+
+      // when
+      var viewer = new Viewer({ container: container });
+
+      // then
+      var eventBus = viewer.get('eventBus');
+
+      expect(eventBus).to.exist;
+    });
+
+
+    it('should keep references to services across re-import', function(done) {
+
+      // given
+      var someXML = require('../fixtures/cmmn/simple.cmmn'),
+          otherXML = require('../fixtures/cmmn/empty-definitions.cmmn');
+
+      var viewer = new Viewer({ container: container });
+
+      var eventBus = viewer.get('eventBus'),
+          canvas = viewer.get('canvas');
+
+      // when
+      viewer.importXML(someXML, function() {
+
+        // then
+        expect(viewer.get('canvas')).to.equal(canvas);
+        expect(viewer.get('eventBus')).to.equal(eventBus);
+
+        viewer.importXML(otherXML, function() {
+
+          // then
+          expect(viewer.get('canvas')).to.equal(canvas);
+          expect(viewer.get('eventBus')).to.equal(eventBus);
+
+          done();
+        });
+      });
+
+    });
   });
 
 
@@ -352,6 +435,162 @@ describe('Viewer', function() {
   });
 
 
+
+  describe('#importXML', function() {
+
+    it('should emit <import.*> events', function(done) {
+
+      // given
+      var viewer = new Viewer({ container: container });
+
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      var events = [];
+
+      viewer.on([
+        'import.parse.start',
+        'import.parse.complete',
+        'import.render.start',
+        'import.render.complete',
+        'import.done'
+      ], function(e) {
+        // log event type + event arguments
+        events.push([
+          e.type,
+          Object.keys(e).filter(function(key) {
+            return key !== 'type';
+          })
+        ]);
+      });
+
+      // when
+      viewer.importXML(xml, function(err) {
+
+        // then
+        expect(events).to.eql([
+          [ 'import.parse.start', [ 'xml' ] ],
+          [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
+          [ 'import.render.start', [ 'definitions' ] ],
+          [ 'import.render.complete', [ 'error', 'warnings' ] ],
+          [ 'import.done', [ 'error', 'warnings' ] ]
+        ]);
+
+        done(err);
+      });
+    });
+
+
+    it('should work without callback', function(done) {
+
+      // given
+      var viewer = new Viewer({ container: container });
+
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      // when
+      viewer.importXML(xml);
+
+      // then
+      viewer.on('import.done', function(event) {
+        done();
+      });
+    });
+
+  });
+
+
+  describe('#on', function() {
+
+    it('should fire with given three', function(done) {
+
+      // given
+      var viewer = new Viewer({ container: container });
+
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      // when
+      viewer.on('foo', 1000, function() {
+        return 'bar';
+      }, viewer);
+
+      // then
+      viewer.importXML(xml, function(err) {
+        var eventBus = viewer.get('eventBus');
+
+        var result = eventBus.fire('foo');
+
+        expect(result).to.equal('bar');
+
+        done();
+      });
+
+    });
+
+  });
+
+
+  describe('#off', function() {
+
+    var xml = require('../fixtures/cmmn/simple.cmmn');
+
+    it('should remove listener permanently', function(done) {
+
+      // given
+      var viewer = new Viewer({ container: container });
+
+      var handler = function() {
+        return 'bar';
+      };
+
+      viewer.on('foo', 1000, handler);
+
+      // when
+      viewer.off('foo');
+
+      // then
+      viewer.importXML(xml, function(err) {
+        var eventBus = viewer.get('eventBus');
+
+        var result = eventBus.fire('foo');
+
+        expect(result).not.to.exist;
+
+        done();
+      });
+
+    });
+
+
+    it('should remove listener on existing diagram instance', function(done) {
+
+      // given
+      var viewer = new Viewer({ container: container });
+
+      var handler = function() {
+        return 'bar';
+      };
+
+      viewer.on('foo', 1000, handler);
+
+      // when
+      viewer.importXML(xml, function(err) {
+        var eventBus = viewer.get('eventBus');
+
+        // when
+        viewer.off('foo', handler);
+
+        var result = eventBus.fire('foo');
+
+        expect(result).not.to.exist;
+
+        done();
+      });
+
+    });
+
+  });
+
+
   describe('#destroy', function() {
 
     it('should remove traces in document tree', function() {
@@ -365,7 +604,7 @@ describe('Viewer', function() {
       viewer.destroy();
 
       // then
-      expect(viewer.container.parentNode).to.not.be.ok;
+      expect(viewer.container.parentNode).not.to.exist;
     });
 
   });
