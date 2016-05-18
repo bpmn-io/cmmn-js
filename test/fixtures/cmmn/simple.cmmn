@@ -1,32 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cmmn:definitions id="Test"
-                  targetNamespace="http://bpmn.io/schema/cmmn"
-                  xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC"
-                  xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI"
-                  xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI"
-                  xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
-
-    <cmmn:casePlanModel name="A CasePlanModel" id="CasePlanModel_1">
-
-      <cmmn:planItem definitionRef="Task_1" id="PI_Task_1" />
-
-      <cmmn:humanTask name="Human Task" id="Task_1" />
-
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Task_1" definitionRef="Task_1">
+        <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1" />
+      </cmmn:planItem>
+      <cmmn:sentry id="Sentry_1" />
+      <cmmn:humanTask id="Task_1" name="Human Task" />
     </cmmn:casePlanModel>
-
   </cmmn:case>
-
   <cmmndi:CMMNDI>
     <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2">
-      <cmmndi:Size height="500" width="500"/>
-      <cmmndi:CMMNShape cmmnElementRef="CasePlanModel_1" id="DI_CasePlanModel_1">
-        <dc:Bounds height="250" width="400" x="25" y="25"/>
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="25" y="25" width="400" height="250" />
       </cmmndi:CMMNShape>
-      <cmmndi:CMMNShape cmmnElementRef="PI_Task_1" id="DI_PI_Task_1">
-        <dc:Bounds height="76.0" width="97.0" x="100" y="100"/>
+      <cmmndi:CMMNShape id="DI_PI_Task_1" cmmnElementRef="PI_Task_1">
+        <dc:Bounds x="100" y="100" width="97" height="76" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_1_di" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="88" y="125" width="20" height="28" />
+        <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>
   </cmmndi:CMMNDI>

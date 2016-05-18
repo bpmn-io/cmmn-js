@@ -3,8 +3,10 @@
 /* global bootstrapModeler, inject */
 
 var modelingModule = require('../../../../../lib/features/modeling'),
-    coreModule = require('../../../../../lib/core');
+    coreModule = require('../../../../../lib/core'),
+    getParents = require('../../../../../lib/features/modeling/util/ModelingUtil').getParents;
 
+var intersection = require('lodash/array/intersection');
 
 describe('features/modeling - #PlanningTableUpdater', function() {
 
@@ -1016,6 +1018,296 @@ describe('features/modeling - #PlanningTableUpdater', function() {
 
     });
 
+  });
+
+  describe('move planning table', function() {
+
+    var diagramXML = require('./PlanningTableUpdater.move-to-case-plan.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    describe('should be kept by old definition', function() {
+
+      var oldDefinition, newDefinition, planningTable;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        var shape = elementRegistry.get('PI_HumanTask_1_2');
+        var targetShape = elementRegistry.get('CasePlanModel_2');
+
+        oldDefinition = shape.businessObject.definitionRef;
+        planningTable = oldDefinition.planningTable;
+
+        // when
+        modeling.moveElements([ shape ], { x: 450, y: 0 }, targetShape);
+
+        newDefinition = shape.businessObject.definitionRef;
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(oldDefinition.planningTable).to.exist;
+        expect(oldDefinition.planningTable).to.equal(planningTable);
+
+        expect(newDefinition.planningTable).not.to.exist;
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(oldDefinition.planningTable).to.exist;
+        expect(oldDefinition.planningTable).to.equal(planningTable);
+
+        expect(newDefinition.planningTable).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(oldDefinition.planningTable).to.exist;
+        expect(oldDefinition.planningTable).to.equal(planningTable);
+
+        expect(newDefinition.planningTable).not.to.exist;
+      }));
+
+    });
+
+
+    describe('should be kept by new definition', function() {
+
+      var oldDefinition, newDefinition, planningTable;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        var shape1 = elementRegistry.get('PI_HumanTask_1_2');
+        var shape2 = elementRegistry.get('DIS_Task_1');
+        var shape3 = elementRegistry.get('DIS_Task_2');
+
+        var targetShape = elementRegistry.get('CasePlanModel_2');
+
+        oldDefinition = shape1.businessObject.definitionRef;
+
+        // when
+        modeling.moveElements([ shape1, shape2, shape3 ], { x: 450, y: 0 }, targetShape);
+
+        newDefinition = shape1.businessObject.definitionRef;
+        planningTable = newDefinition.planningTable;
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(newDefinition.planningTable).to.exist;
+        expect(newDefinition.planningTable).to.equal(planningTable);
+        expect(planningTable.$parent).to.equal(newDefinition);
+
+        expect(oldDefinition.planningTable).not.to.exist;
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(oldDefinition.planningTable).to.exist;
+        expect(oldDefinition.planningTable).to.equal(planningTable);
+        expect(planningTable.$parent).to.equal(oldDefinition);
+
+        expect(newDefinition.planningTable).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(newDefinition.planningTable).to.exist;
+        expect(newDefinition.planningTable).to.equal(planningTable);
+        expect(planningTable.$parent).to.equal(newDefinition);
+
+        expect(oldDefinition.planningTable).not.to.exist;
+      }));
+
+    });
+
+
+    describe('should create new planning table', function() {
+
+      var oldDefinition, newDefinition, oldPlanningTable, newPlanningTable, disTask2, disTask3;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        var shape1 = elementRegistry.get('PI_HumanTask_1_2');
+        var shape2 = elementRegistry.get('DIS_Task_2');
+
+        var targetShape = elementRegistry.get('CasePlanModel_2');
+
+        oldDefinition = shape1.businessObject.definitionRef;
+        oldPlanningTable = oldDefinition.planningTable;
+
+        disTask2 = shape2.businessObject;
+        disTask3 = elementRegistry.get('DIS_Task_1').businessObject;
+
+        // when
+        modeling.moveElements([ shape1, shape2 ], { x: 450, y: 0 }, targetShape);
+
+        newDefinition = shape1.businessObject.definitionRef;
+        newPlanningTable = newDefinition.planningTable;
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(newDefinition.planningTable).to.exist;
+        expect(newDefinition.planningTable).to.equal(newPlanningTable);
+        expect(newPlanningTable.$parent).to.equal(newDefinition);
+
+        expect(newPlanningTable.get('tableItems')).to.include(disTask2);
+        expect(newPlanningTable.get('tableItems')).not.to.include(disTask3);
+
+        expect(oldDefinition.planningTable).to.exist;
+        expect(oldDefinition.planningTable).to.equal(oldPlanningTable);
+        expect(oldPlanningTable.$parent).to.equal(oldDefinition);
+
+        expect(oldPlanningTable.get('tableItems')).not.to.include(disTask2);
+        expect(oldPlanningTable.get('tableItems')).to.include(disTask3);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(oldDefinition.planningTable).to.exist;
+        expect(oldDefinition.planningTable).to.equal(oldPlanningTable);
+        expect(oldPlanningTable.$parent).to.equal(oldDefinition);
+
+        expect(oldPlanningTable.get('tableItems')).to.include(disTask2);
+        expect(oldPlanningTable.get('tableItems')).to.include(disTask3);
+
+        expect(newDefinition.planningTable).not.to.exist;
+        expect(newPlanningTable.$parent).not.to.exist;
+
+        expect(newPlanningTable.get('tableItems')).not.to.include(disTask2);
+        expect(newPlanningTable.get('tableItems')).not.to.include(disTask3);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(newDefinition.planningTable).to.exist;
+        expect(newDefinition.planningTable).to.equal(newPlanningTable);
+        expect(newPlanningTable.$parent).to.equal(newDefinition);
+
+        expect(newPlanningTable.get('tableItems')).to.include(disTask2);
+        expect(newPlanningTable.get('tableItems')).not.to.include(disTask3);
+
+        expect(oldDefinition.planningTable).to.exist;
+        expect(oldDefinition.planningTable).to.equal(oldPlanningTable);
+        expect(oldPlanningTable.$parent).to.equal(oldDefinition);
+
+        expect(oldPlanningTable.get('tableItems')).not.to.include(disTask2);
+        expect(oldPlanningTable.get('tableItems')).to.include(disTask3);
+      }));
+
+    });
+
+
+    describe('should duplicate planning table structure', function() {
+
+      var oldDefinition, newDefinition, oldPlanningTable, newPlanningTable, disTask3, disTask4;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        var shape = elementRegistry.get('PI_HumanTask_2_1');
+        var shape3 = elementRegistry.get('DIS_Task_3');
+        var shape4 = elementRegistry.get('DIS_Task_4');
+
+        var targetShape = elementRegistry.get('CasePlanModel_2');
+
+        oldDefinition = shape.businessObject.definitionRef;
+        oldPlanningTable = oldDefinition.planningTable;
+
+        disTask3 = shape3.businessObject;
+        disTask4 = shape4.businessObject;
+
+        // when
+        modeling.moveElements([ shape, shape3, shape4 ], { x: 450, y: 0 }, targetShape);
+
+        newDefinition = shape.businessObject.definitionRef;
+        newPlanningTable = newDefinition.planningTable;
+      }));
+
+
+      it('should execute', function() {
+        // then
+        var disTask3Parents = getParents(disTask3, 'cmmn:PlanningTable');
+        var disTask4Parents = getParents(disTask4, 'cmmn:PlanningTable');
+
+        expect(disTask3Parents).to.have.length(6);
+        expect(disTask3Parents[5]).to.equals(newPlanningTable);
+
+        expect(disTask4Parents).to.have.length(7);
+        expect(disTask4Parents[6]).to.equals(newPlanningTable);
+
+        expect(intersection(disTask3Parents, disTask4Parents)).to.have.length(5);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        var disTask3Parents = getParents(disTask3, 'cmmn:PlanningTable');
+        var disTask4Parents = getParents(disTask4, 'cmmn:PlanningTable');
+
+        expect(disTask3Parents).to.have.length(6);
+        expect(disTask3Parents[5]).to.equals(oldPlanningTable);
+
+        expect(disTask4Parents).to.have.length(7);
+        expect(disTask4Parents[6]).to.equals(oldPlanningTable);
+
+        expect(intersection(disTask3Parents, disTask4Parents)).to.have.length(5);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        var disTask3Parents = getParents(disTask3, 'cmmn:PlanningTable');
+        var disTask4Parents = getParents(disTask4, 'cmmn:PlanningTable');
+
+        expect(disTask3Parents).to.have.length(6);
+        expect(disTask3Parents[5]).to.equals(newPlanningTable);
+
+        expect(disTask4Parents).to.have.length(7);
+        expect(disTask4Parents[6]).to.equals(newPlanningTable);
+
+        expect(intersection(disTask3Parents, disTask4Parents)).to.have.length(5);
+      }));
+
+    });
   });
 
 });

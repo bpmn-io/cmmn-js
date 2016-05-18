@@ -3,8 +3,7 @@
 /* global bootstrapModeler, inject */
 
 var modelingModule = require('../../../../lib/features/modeling'),
-    coreModule = require('../../../../lib/core'),
-    is = require('../../../../lib/util/ModelUtil').is;
+    coreModule = require('../../../../lib/core');
 
 
 describe('features/modeling CmmnUpdater', function() {
@@ -600,7 +599,7 @@ describe('features/modeling CmmnUpdater', function() {
 
       });
 
-    })
+    });
 
 
     describe('for milestone', function() {
@@ -1136,7 +1135,7 @@ describe('features/modeling CmmnUpdater', function() {
 
         // then
         expect(connectionBO.sourceCMMNElementRef).not.to.exist;
-        expect(connectionBO.targetCMMNElementRef).not.to.exist
+        expect(connectionBO.targetCMMNElementRef).not.to.exist;
         expect(rootElement.businessObject.diagramElements).not.to.include(connectionBO);
         expect(connectionBO.$parent).not.to.exist;
       }));
@@ -1159,7 +1158,7 @@ describe('features/modeling CmmnUpdater', function() {
 
     describe('reconnectStart', function() {
 
-      var newSource, oldSource, target
+      var newSource, oldSource, target;
 
       beforeEach(inject(function(elementRegistry, modeling) {
         // given
@@ -2227,6 +2226,121 @@ describe('features/modeling CmmnUpdater', function() {
 
         expect(connection.$parent).to.equal(rootElement.businessObject);
         expect(rootElement.businessObject.diagramElements).to.include(connection);
+      }));
+
+    });
+
+  });
+
+
+  describe('update itemRegistry', function() {
+
+    var testXML = require('./CmmnUpdater.cmmn');
+
+    beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+    describe('should add to itemRegistry', function() {
+
+      var bo;
+
+      beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+        // given
+        var task = elementFactory.createPlanItemShape('cmmn:Task'),
+            casePlanModel = elementRegistry.get('CasePlan_1');
+
+        bo = task.businessObject;
+
+        // when
+        modeling.createShape(task, { x: 150, y: 490 }, casePlanModel);
+
+      }));
+
+
+      it('should execute', inject(function(itemRegistry) {
+        // then
+        expect(itemRegistry.get(bo.id)).to.exist;
+        expect(itemRegistry.get(bo.id)).to.equal(bo);
+
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.have.length(1);
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.include(bo);
+      }));
+
+
+      it('should undo', inject(function(itemRegistry, commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(itemRegistry.get(bo.id)).not.to.exist;
+
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.be.empty;
+      }));
+
+
+      it('should redo', inject(function(itemRegistry, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(itemRegistry.get(bo.id)).to.exist;
+        expect(itemRegistry.get(bo.id)).to.equal(bo);
+
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.have.length(1);
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.include(bo);
+      }));
+
+    });
+
+
+    describe('should remove from itemRegistry', function() {
+
+      var bo;
+
+      beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+        // given
+        var stage = elementRegistry.get('PI_Stage_3');
+
+        bo = stage.businessObject;
+
+        // when
+        modeling.removeElements([ stage ]);
+
+      }));
+
+
+      it('should execute', inject(function(itemRegistry) {
+        // then
+        expect(itemRegistry.get(bo.id)).not.to.exist;
+
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.be.empty;
+      }));
+
+
+      it('should undo', inject(function(itemRegistry, commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(itemRegistry.get(bo.id)).to.exist;
+        expect(itemRegistry.get(bo.id)).to.equal(bo);
+
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.have.length(1);
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.include(bo);
+      }));
+
+
+      it('should redo', inject(function(itemRegistry, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(itemRegistry.get(bo.id)).not.to.exist;
+
+        expect(itemRegistry.getReferences(bo.definitionRef)).to.be.empty;
       }));
 
     });

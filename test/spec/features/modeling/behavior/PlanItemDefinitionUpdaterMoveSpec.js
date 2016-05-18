@@ -6,7 +6,7 @@ var modelingModule = require('../../../../../lib/features/modeling'),
     coreModule = require('../../../../../lib/core');
 
 
-describe('features/modeling - #PlanItemDefinitionUpdater', function() {
+describe('features/modeling - #PlanItemDefinitionUpdater abcd', function() {
 
   var testModules = [ coreModule, modelingModule ];
 
@@ -1632,6 +1632,61 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       expect(target.planItemDefinitions).to.have.length(1);
       expect(target.planItemDefinitions).to.include(discretionaryItem.definitionRef);
       expect(target.planItemDefinitions).to.include(planItem.definitionRef);
+    }));
+
+  });
+
+  describe('should move plan item definition of discretionary item another case plan model', function() {
+
+    var diagramXML = require('./PlanItemDefinitionUpdater.move-plan-fragment.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var oldCasePlanModel, newCasePlanModel, task;
+
+    beforeEach(inject(function(elementRegistry, modeling, elementFactory) {
+      // given
+      var taskShape = elementFactory.createDiscretionaryItemShape('cmmn:Task');
+
+      var planFragmentShape = elementRegistry.get('DIS_PlanFragment_1');
+      modeling.createShape(taskShape, { x: 250, y: 150 }, planFragmentShape);
+
+      var target = elementRegistry.get('CasePlanModel_2');
+
+      oldCasePlanModel = elementRegistry.get('CasePlanModel_1').businessObject;
+      newCasePlanModel = elementRegistry.get('CasePlanModel_2').businessObject;
+      task = taskShape.businessObject;
+
+      // when
+      modeling.moveElements( [ planFragmentShape ], { x: 425, y: 0 }, target);
+    }));
+
+
+    it('should execute', function() {
+      // then
+      expect(newCasePlanModel.planItemDefinitions).to.include(task.definitionRef);
+      expect(oldCasePlanModel.planItemDefinitions).not.to.include(task.definitionRef);
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(newCasePlanModel.planItemDefinitions).not.to.include(task.definitionRef);
+      expect(oldCasePlanModel.planItemDefinitions).to.include(task.definitionRef);
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(newCasePlanModel.planItemDefinitions).to.include(task.definitionRef);
+      expect(oldCasePlanModel.planItemDefinitions).not.to.include(task.definitionRef);
     }));
 
   });

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1t58ntu">
+    <cmmn:casePlanModel id="CasePlanModel_1">
+      <cmmn:planningTable id="PlanningTable_05ujpxr">
+        <cmmn:discretionaryItem id="DIS_PlanFragment_1" definitionRef="PlanFragment_1" />
+      </cmmn:planningTable>
+      <cmmn:planFragment id="PlanFragment_1" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmn:case id="Case_0bix3rv">
+    <cmmn:casePlanModel id="CasePlanModel_2" />
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_1_di" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="78" y="30" width="400" height="250" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_PlanFragment_1_di" cmmnElementRef="DIS_PlanFragment_1">
+        <dc:Bounds x="102" y="52" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CasePlanModel_2_di" cmmnElementRef="CasePlanModel_2">
+        <dc:Bounds x="503" y="32" width="400" height="250" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
