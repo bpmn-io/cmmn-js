@@ -74,6 +74,11 @@ module.exports = function(grunt) {
         name: 'cmmn-navigated-viewer',
         src: '<%= config.sources %>/NavigatedViewer.js',
         dest: '<%= config.dist %>'
+      },
+      modeler: {
+        name: 'cmmn-modeler',
+        src: '<%= config.sources %>/Modeler.js',
+        dest: '<%= config.dist %>'
       }
     },
 
