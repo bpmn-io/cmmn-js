@@ -1,6 +1,6 @@
 {
   "name": "cmmn-js",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A cmmn 1.1 toolkit",
   "scripts": {
     "test": "grunt test"
