@@ -74,9 +74,14 @@ describe('features/replace-preview', function() {
     // then
     var dragGroup = dragging.context().data.context.dragGroup;
 
-    dragGroup[0].attr('display', 'inline');
+    expect(dragGroup[0]).to.exist;
+    expect(dragGroup[1]).not.to.exist;
 
-    expect(dragGroup[0].getBBox()).to.eql(dragGroup[1].getBBox());
+    var criterionInnerGfx = getGfx({
+      type: 'cmmn:EntryCriterion'
+    });
+
+    expect(dragGroup[0].select('.djs-visual').innerHTML).to.equal(criterionInnerGfx.select('.djs-visual').innerHTML);
 
   }));
 
@@ -115,7 +120,7 @@ describe('features/replace-preview', function() {
   }));
 
 
-  it('should hide the replaced visual', inject(function(dragging) {
+  it('should not hide the replaced visual', inject(function(dragging) {
 
     // when
     moveShape(exitCriterion, milestone, { x: 244, y: 273 });
@@ -123,7 +128,7 @@ describe('features/replace-preview', function() {
     // then
     var dragGroup = dragging.context().data.context.dragGroup;
 
-    expect(dragGroup[0].attr('display')).to.equal('none');
+    expect(dragGroup[0].attr('display')).not.to.equal('none');
 
   }));
 
