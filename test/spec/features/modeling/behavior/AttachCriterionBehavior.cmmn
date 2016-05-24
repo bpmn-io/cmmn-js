@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
+      <cmmn:sentry id="Sentry_1" />
+      <cmmn:task id="Task_1" />
+      <cmmn:stage id="Stage_1">
+        <cmmn:planItem id="PlanItem_1" definitionRef="Task_1">
+          <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_2" />
+          <cmmn:exitCriterion id="ExitCriterion_2" sentryRef="Sentry_3" />
+        </cmmn:planItem>
+        <cmmn:sentry id="Sentry_2" />
+        <cmmn:sentry id="Sentry_3" />
+      </cmmn:stage>
+      <cmmn:exitCriterion id="ExitCriterion_1" sentryRef="Sentry_1" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram di:id="CMMNDiagram_1">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape di:id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="87" y="34" width="441" height="348" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape di:id="PlanItem_1_di" cmmnElementRef="PlanItem_1">
+        <dc:Bounds x="254" y="154" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape di:id="ExitCriterion_1_di" cmmnElementRef="ExitCriterion_1">
+        <dc:Bounds x="75" y="181" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape di:id="EntryCriterion_1_di" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="243" y="177" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape di:id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
+        <dc:Bounds x="129" y="95" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape di:id="ExitCriterion_2_di" cmmnElementRef="ExitCriterion_2">
+        <dc:Bounds x="344" y="178" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
