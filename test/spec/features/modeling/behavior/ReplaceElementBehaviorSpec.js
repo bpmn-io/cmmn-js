@@ -1039,6 +1039,138 @@ describe('features/modeling/behavior - replace element', function() {
 
     });
 
+
+    describe('replace', function() {
+
+      describe('should replace nested discretionary item to plan item', function() {
+
+        var newNestedItem, oldNestedItem, planFragment;
+
+        beforeEach(inject(function(elementRegistry, cmmnReplace) {
+
+          // given
+          var oldElement = elementRegistry.get('PI_Stage_2');
+
+          oldNestedItem = oldElement.children[0];
+
+          var newElementData = {
+            type: 'cmmn:DiscretionaryItem',
+            definitionType: 'cmmn:PlanFragment'
+          };
+
+          // when
+          var newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+          planFragment = newElement.businessObject.definitionRef;
+          newNestedItem = newElement.children[0];
+        }));
+
+
+        it('should execute', inject(function(elementRegistry, itemRegistry) {
+          // then
+          expect(elementRegistry.get(oldNestedItem.id)).not.to.exist;
+          expect(itemRegistry.get(oldNestedItem.id)).not.to.exist;
+
+          expect(newNestedItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newNestedItem.businessObject);
+        }));
+
+
+        it('should undo', inject(function(commandStack, elementRegistry, itemRegistry) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(oldNestedItem.id)).to.exist;
+          expect(itemRegistry.get(oldNestedItem.id)).to.exist;
+
+          expect(newNestedItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).not.to.include(newNestedItem.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack, elementRegistry, itemRegistry) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(elementRegistry.get(oldNestedItem.id)).not.to.exist;
+          expect(itemRegistry.get(oldNestedItem.id)).not.to.exist;
+
+          expect(newNestedItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newNestedItem.businessObject);
+        }));
+
+      });
+
+      describe('should replace nested discretionary plan fragment to stage', function() {
+
+        var newNestedItem, oldNestedItem, planFragment;
+
+        beforeEach(inject(function(elementRegistry, cmmnReplace) {
+
+          // given
+          var oldElement = elementRegistry.get('PI_Stage_3');
+
+          oldNestedItem = oldElement.children[0];
+
+          var newElementData = {
+            type: 'cmmn:DiscretionaryItem',
+            definitionType: 'cmmn:PlanFragment'
+          };
+
+          // when
+          var newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+          planFragment = newElement.businessObject.definitionRef;
+          newNestedItem = newElement.children[0];
+        }));
+
+
+        it('should execute', inject(function(elementRegistry, itemRegistry) {
+          // then
+          expect(elementRegistry.get(oldNestedItem.id)).not.to.exist;
+          expect(itemRegistry.get(oldNestedItem.id)).not.to.exist;
+
+          expect(newNestedItem.type).to.equal('cmmn:PlanItem');
+          expect(newNestedItem.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
+          expect(planFragment.get('planItems')).to.include(newNestedItem.businessObject);
+        }));
+
+
+        it('should undo', inject(function(commandStack, elementRegistry, itemRegistry) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(oldNestedItem.id)).to.exist;
+          expect(itemRegistry.get(oldNestedItem.id)).to.exist;
+
+          expect(newNestedItem.type).to.equal('cmmn:PlanItem');
+          expect(newNestedItem.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
+          expect(planFragment.get('planItems')).not.to.include(newNestedItem.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack, elementRegistry, itemRegistry) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(elementRegistry.get(oldNestedItem.id)).not.to.exist;
+          expect(itemRegistry.get(oldNestedItem.id)).not.to.exist;
+
+          expect(newNestedItem.type).to.equal('cmmn:PlanItem');
+          expect(newNestedItem.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
+          expect(planFragment.get('planItems')).to.include(newNestedItem.businessObject);
+        }));
+
+      });
+
+    });
+
   });
 
 });

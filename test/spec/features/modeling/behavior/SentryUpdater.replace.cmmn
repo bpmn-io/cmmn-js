@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_2" definitionRef="Task_2">
+        <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1" />
+      </cmmn:planItem>
+      <cmmn:sentry id="Sentry_1">
+        <cmmn:planItemOnPart id="PlanItemOnPart_1" sourceRef="PI_Task_1">
+          <cmmn:standardEvent>complete</cmmn:standardEvent>
+          </cmmn:planItemOnPart>
+      </cmmn:sentry>
+      <cmmn:planningTable id="PlanningTable_1kv8w4o">
+        <cmmn:discretionaryItem id="DIS_PlanFragment_1" definitionRef="PlanFragment_1" />
+        <cmmn:discretionaryItem id="DIS_Task_3" definitionRef="Task_3">
+          <cmmn:entryCriterion id="EntryCriterion_2" sentryRef="Sentry_1" />
+        </cmmn:discretionaryItem>
+      </cmmn:planningTable>
+      <cmmn:task id="Task_1" />
+      <cmmn:task id="Task_2" />
+      <cmmn:task id="Task_3" />
+      <cmmn:planFragment id="PlanFragment_1" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_1">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="114" y="57" width="485" height="470" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_1_di" cmmnElementRef="PI_Task_1">
+        <dc:Bounds x="190" y="145" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_2_di" cmmnElementRef="PI_Task_2">
+        <dc:Bounds x="371" y="76" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_2_di" cmmnElementRef="EntryCriterion_2">
+        <dc:Bounds x="361" y="222" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_1_di" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="359" y="100" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_1_di" cmmnElementRef="PlanItemOnPart_1" targetCMMNElementRef="EntryCriterion_1" isStandardEventVisible="true">
+        <di:waypoint xsi:type="dc:Point" x="290" y="185" />
+        <di:waypoint xsi:type="dc:Point" x="325" y="185" />
+        <di:waypoint xsi:type="dc:Point" x="325" y="114" />
+        <di:waypoint xsi:type="dc:Point" x="359" y="114" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="280" y="139.5" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_1csfq6f_di" cmmnElementRef="PlanItemOnPart_1" targetCMMNElementRef="EntryCriterion_2" isStandardEventVisible="true">
+        <di:waypoint xsi:type="dc:Point" x="290" y="185" />
+        <di:waypoint xsi:type="dc:Point" x="326" y="185" />
+        <di:waypoint xsi:type="dc:Point" x="326" y="236" />
+        <di:waypoint xsi:type="dc:Point" x="361" y="236" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="281" y="200.5" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNShape id="DIS_PlanFragment_1_di" cmmnElementRef="DIS_PlanFragment_1">
+        <dc:Bounds x="163" y="302" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Task_3_di" cmmnElementRef="DIS_Task_3">
+        <dc:Bounds x="373" y="197" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

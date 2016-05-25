@@ -857,4 +857,61 @@ describe('features/modeling - #SentryUpdater - move', function() {
 
   });
 
+
+  describe('should not duplicate sentry when host is replaced', function() {
+
+    var diagramXML = require('./SentryUpdater.replace.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var planFragment, sentry;
+
+    beforeEach(inject(function(modeling, elementRegistry) {
+
+      // given
+      var shapes = [
+        elementRegistry.get('PI_Task_1'),
+        elementRegistry.get('PI_Task_2'),
+        elementRegistry.get('DIS_Task_3')
+      ];
+
+      var target = elementRegistry.get('DIS_PlanFragment_1')
+      planFragment = target.businessObject.definitionRef;
+
+      sentry = elementRegistry.get('EntryCriterion_1').businessObject.sentryRef;
+
+      // when
+      modeling.moveElements(shapes, { x: 0, y: 225 }, target);
+
+    }));
+
+
+    it ('should execute', function() {
+      // then
+      expect(planFragment.get('sentries')).to.have.length(1);
+      expect(planFragment.get('sentries')).to.include(sentry);
+    });
+
+
+    it ('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expect(planFragment.get('sentries')).to.be.empty;
+    }));
+
+
+    it ('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(planFragment.get('sentries')).to.have.length(1);
+      expect(planFragment.get('sentries')).to.include(sentry);
+    }));
+
+  });
+
 });

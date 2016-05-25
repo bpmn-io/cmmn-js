@@ -299,7 +299,7 @@ describe('features/popup-menu - replace menu provider', function() {
 
         // then
         expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(9);
+        expect(getEntries(popupMenu)).to.have.length(15);
 
       }));
 
@@ -315,7 +315,7 @@ describe('features/popup-menu - replace menu provider', function() {
 
         // then
         expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(9);
+        expect(getEntries(popupMenu)).to.have.length(15);
 
       }));
 
@@ -347,7 +347,7 @@ describe('features/popup-menu - replace menu provider', function() {
 
         // then
         expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(9);
+        expect(getEntries(popupMenu)).to.have.length(15);
 
       }));
 
@@ -363,7 +363,7 @@ describe('features/popup-menu - replace menu provider', function() {
 
         // then
         expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(9);
+        expect(getEntries(popupMenu)).to.have.length(15);
 
       }));
 
@@ -407,7 +407,7 @@ describe('features/popup-menu - replace menu provider', function() {
 
     describe('stage', function() {
 
-      it('should be empty',
+      it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
 
         // given
@@ -417,7 +417,7 @@ describe('features/popup-menu - replace menu provider', function() {
         openPopup(eventListener);
 
         // then
-        expect(getEntries(popupMenu)).to.be.empty;
+        expect(getEntries(popupMenu)).to.have.length(2);
 
       }));
 

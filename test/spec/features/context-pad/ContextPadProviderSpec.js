@@ -277,7 +277,7 @@ describe('features - context-pad', function() {
     it('should provide Plan Fragment entries', inject(function() {
 
       expectContextPadEntries('DIS_PlanFragment_1', [
-        '!replace'
+        'replace'
       ]);
     }));
 
