@@ -109,6 +109,39 @@ describe('features/modeling CmmnFactory', function() {
     }));
 
 
+    it('should create case file item', inject(function(cmmnFactory) {
+
+      // when
+      var caseFileItem = cmmnFactory.createCaseFileItem();
+
+      // then
+      expect(caseFileItem).to.exist;
+      expect(caseFileItem.$type).to.equal('cmmn:CaseFileItem');
+
+      expect(caseFileItem.definitionRef).to.exist;
+      expect(caseFileItem.definitionRef.$type).to.equal('cmmn:CaseFileItemDefinition');
+    }));
+
+
+    it('should set definition to given case file item definition', inject(function(cmmnFactory) {
+
+      // given
+      var definition = cmmnFactory.create('cmmn:CaseFileItemDefinition');
+
+      // when
+      var caseFileItem = cmmnFactory.createCaseFileItem({
+        definitionRef: definition
+      });
+
+      // then
+      expect(caseFileItem).to.exist;
+      expect(caseFileItem.$type).to.equal('cmmn:CaseFileItem');
+
+      expect(caseFileItem.definitionRef).to.exist;
+      expect(caseFileItem.definitionRef).to.equal(definition);
+    }));
+
+
     it('should set label when creating shape', inject(function(cmmnFactory) {
 
       // when

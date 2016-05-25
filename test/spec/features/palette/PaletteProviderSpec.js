@@ -17,14 +17,14 @@ describe('features/palette', function() {
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
 
-  it('should provide BPMN modeling palette', inject(function(canvas, palette) {
+  it('should provide CMMN modeling palette', inject(function(canvas, palette) {
 
     // when
     var paletteElement = domQuery('.djs-palette', canvas._container);
     var entries = domQuery.all('.entry', paletteElement);
 
     // then
-    expect(entries.length).to.equal(9);
+    expect(entries.length).to.equal(10);
   }));
 
 });
