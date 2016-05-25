@@ -118,6 +118,24 @@ describe('features - keyboard', function() {
       expect(searchPad.toggle).calledOnce;
     }));
 
+    it('should select all elements', inject(function(canvas, keyboard, selection, elementRegistry) {
+
+      // given
+      var e = createKeyEvent(container, 65, true);
+
+      var allElements = elementRegistry.getAll(),
+          rootElement = canvas.getRootElement();
+
+      // when
+      keyboard._keyHandler(e);
+
+      // then
+      var selectedElements = selection.get();
+
+      expect(selectedElements).to.have.length.of(allElements.length - 1);
+      expect(selectedElements).not.to.contain(rootElement);
+    }));
+
   });
 
 });
