@@ -353,4 +353,692 @@ describe('features/modeling/behavior - replace element', function() {
 
   });
 
+  describe('discretionary item', function() {
+
+    var diagramXML = require('./ReplaceElementBehavior.discretionary-item.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules.concat(modelingModule) }));
+
+
+    describe('create', function() {
+
+      var item, planFragment;
+
+      describe('task', function() {
+
+        beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+          // given
+          var shape = elementFactory.createDiscretionaryItemShape('cmmn:Task');
+
+          var target = elementRegistry.get('DIS_PlanFragment_1');
+          planFragment = target.businessObject.definitionRef;
+
+          // when
+          item = modeling.createShape(shape, { x: 200, y: 300 }, target);
+
+        }));
+
+
+        it('should execute', function() {
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(item.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(item.businessObject);
+        }));
+
+      });
+
+
+      describe('stage', function() {
+
+        beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+          // given
+          var shape = elementFactory.createDiscretionaryItemShape('cmmn:Stage');
+
+          var target = elementRegistry.get('DIS_PlanFragment_1');
+          planFragment = target.businessObject.definitionRef;
+
+          // when
+          item = modeling.createShape(shape, { x: 300, y: 400 }, target);
+
+        }));
+
+
+        it('should execute', function() {
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(item.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(item.businessObject);
+        }));
+
+      });
+
+
+      describe('plan fragment', function() {
+
+        beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+          // given
+          var shape = elementFactory.createDiscretionaryItemShape('cmmn:PlanFragment');
+
+          var target = elementRegistry.get('DIS_PlanFragment_1');
+          planFragment = target.businessObject.definitionRef;
+
+          // when
+          item = modeling.createShape(shape, { x: 300, y: 400 }, target);
+
+        }));
+
+
+        it('should execute', function() {
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(item.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
+          expect(planFragment.get('planItems')).to.include(item.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(item.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
+          expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(item.type).to.equal('cmmn:PlanItem');
+          expect(item.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
+          expect(planFragment.get('planItems')).to.include(item.businessObject);
+        }));
+
+      });
+
+    });
+
+
+    describe('move', function() {
+
+      var item, newItem, planFragment;
+
+      var findItem;
+
+      beforeEach(inject(function(elementRegistry) {
+
+        findItem = function(definition) {
+          return elementRegistry.filter(function(element) {
+            if(element.businessObject && element.businessObject.definitionRef === definition) {
+              return true;
+            }
+          })[0];
+        }
+
+      }));
+
+      describe('task', function() {
+
+        beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+          // given
+          item = elementRegistry.get('DIS_Task_1');
+
+          var target = elementRegistry.get('DIS_PlanFragment_1');
+          planFragment = target.businessObject.definitionRef;
+
+          // when
+          modeling.moveElements([ item ], { x: 0, y: 150 }, target);
+
+          newItem = findItem(item.businessObject.definitionRef);
+
+        }));
+
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+
+        it('should undo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(item.id)).to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+      });
+
+
+      describe('stage', function() {
+
+        beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+          // given
+          item = elementRegistry.get('DIS_Stage_1');
+
+          var target = elementRegistry.get('DIS_PlanFragment_1');
+          planFragment = target.businessObject.definitionRef;
+
+          // when
+          modeling.moveElements([ item ], { x: 0, y: 200 }, target);
+
+          newItem = findItem(item.businessObject.definitionRef);
+
+        }));
+
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+
+        it('should undo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(item.id)).to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+      });
+
+
+      describe('plan fragment', function() {
+
+        beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+          // given
+          item = elementRegistry.get('DIS_PlanFragment_2');
+
+          var target = elementRegistry.get('DIS_PlanFragment_1');
+          planFragment = target.businessObject.definitionRef;
+
+          // when
+          modeling.moveElements([ item ], { x: 0, y: 200 }, target);
+
+          newItem = elementRegistry.get(planFragment.get('planItems')[1].id);
+
+        }));
+
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+
+        it('should undo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(item.id)).to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(newItem.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
+          expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+      });
+
+
+      describe('discretionary to human task', function() {
+
+        var item, planFragment;
+
+        describe('should NOT replace', function() {
+
+          beforeEach(inject(function(elementRegistry, modeling) {
+
+            // given
+            item = elementRegistry.get('DIS_Task_4');
+
+            var humanTask = elementRegistry.get('PI_HumanTask_2');
+
+            var target = elementRegistry.get('DIS_PlanFragment_1');
+            planFragment = target.businessObject.definitionRef;
+
+            // when
+            modeling.moveElements([ item, humanTask ], { x: 0, y: 200 }, target);
+
+          }));
+
+          it('should execute', inject(function(elementRegistry) {
+            // then
+            expect(elementRegistry.get(item.id)).to.exist;
+
+            expect(item.type).to.equal('cmmn:DiscretionaryItem');
+            expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+          }));
+
+
+          it('should undo', inject(function(commandStack, elementRegistry) {
+            // when
+            commandStack.undo();
+
+            // then
+            expect(elementRegistry.get(item.id)).to.exist;
+
+            expect(item.type).to.equal('cmmn:DiscretionaryItem');
+            expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+          }));
+
+
+          it('should redo', inject(function(commandStack, elementRegistry) {
+            // when
+            commandStack.undo();
+            commandStack.redo();
+
+            // then
+            expect(elementRegistry.get(item.id)).to.exist;
+
+            expect(item.type).to.equal('cmmn:DiscretionaryItem');
+            expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+          }));
+
+        });
+
+
+        describe('should NOT replace', function() {
+
+          beforeEach(inject(function(elementRegistry, modeling) {
+
+            // given
+            item = elementRegistry.get('DIS_Task_5');
+
+            var humanTask = elementRegistry.get('DIS_HumanTask_3');
+
+            var target = elementRegistry.get('DIS_PlanFragment_1');
+            planFragment = target.businessObject.definitionRef;
+
+            // when
+            modeling.moveElements([ item, humanTask ], { x: 0, y: 200 }, target);
+
+          }));
+
+          it('should execute', inject(function(elementRegistry) {
+            // then
+            expect(elementRegistry.get(item.id)).to.exist;
+
+            expect(item.type).to.equal('cmmn:DiscretionaryItem');
+            expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+          }));
+
+
+          it('should undo', inject(function(commandStack, elementRegistry) {
+            // when
+            commandStack.undo();
+
+            // then
+            expect(elementRegistry.get(item.id)).to.exist;
+
+            expect(item.type).to.equal('cmmn:DiscretionaryItem');
+            expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+          }));
+
+
+          it('should redo', inject(function(commandStack, elementRegistry) {
+            // when
+            commandStack.undo();
+            commandStack.redo();
+
+            // then
+            expect(elementRegistry.get(item.id)).to.exist;
+
+            expect(item.type).to.equal('cmmn:DiscretionaryItem');
+            expect(planFragment.get('planItems')).not.to.include(item.businessObject);
+          }));
+
+        });
+
+        describe('should replace', function() {
+
+          var newItem;
+
+          beforeEach(inject(function(elementRegistry, modeling) {
+
+            // given
+            item = elementRegistry.get('DIS_Task_4');
+
+            var target = elementRegistry.get('DIS_PlanFragment_1');
+            planFragment = target.businessObject.definitionRef;
+
+            // when
+            modeling.moveElements([ item ], { x: 0, y: 200 }, target);
+
+            newItem = findItem(item.businessObject.definitionRef);
+
+          }));
+
+          it('should execute', inject(function(elementRegistry) {
+            // then
+            expect(elementRegistry.get(item.id)).not.to.exist;
+
+            expect(newItem.type).to.equal('cmmn:PlanItem');
+            expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+          }));
+
+
+          it('should undo', inject(function(commandStack, elementRegistry) {
+            // when
+            commandStack.undo();
+
+            // then
+            expect(elementRegistry.get(item.id)).to.exist;
+
+            expect(newItem.type).to.equal('cmmn:PlanItem');
+            expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
+          }));
+
+
+          it('should redo', inject(function(commandStack, elementRegistry) {
+            // when
+            commandStack.undo();
+            commandStack.redo();
+
+            // then
+            expect(elementRegistry.get(item.id)).not.to.exist;
+
+            expect(newItem.type).to.equal('cmmn:PlanItem');
+            expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+          }));
+
+        });
+
+        describe('should replace', function() {
+
+          var newItem;
+
+          beforeEach(inject(function(elementRegistry, modeling) {
+
+            // given
+            item = elementRegistry.get('DIS_HumanTask_3');
+            var anotherItem = elementRegistry.get('DIS_Task_5');
+
+            var target = elementRegistry.get('DIS_PlanFragment_1');
+            planFragment = target.businessObject.definitionRef;
+
+            // when
+            modeling.moveElements([ item, anotherItem ], { x: 0, y: 200 }, target);
+
+            newItem = findItem(item.businessObject.definitionRef);
+
+          }));
+
+          it('should execute', inject(function(elementRegistry) {
+            // then
+            expect(elementRegistry.get(item.id)).not.to.exist;
+
+            expect(newItem.type).to.equal('cmmn:PlanItem');
+            expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+          }));
+
+
+          it('should undo', inject(function(commandStack, elementRegistry) {
+            // when
+            commandStack.undo();
+
+            // then
+            expect(elementRegistry.get(item.id)).to.exist;
+
+            expect(newItem.type).to.equal('cmmn:PlanItem');
+            expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
+          }));
+
+
+          it('should redo', inject(function(commandStack, elementRegistry) {
+            // when
+            commandStack.undo();
+            commandStack.redo();
+
+            // then
+            expect(elementRegistry.get(item.id)).not.to.exist;
+
+            expect(newItem.type).to.equal('cmmn:PlanItem');
+            expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+          }));
+
+        });
+
+      });
+
+    });
+
+    describe('delete', function() {
+
+      var findItem;
+
+      beforeEach(inject(function(elementRegistry) {
+
+        findItem = function(definition) {
+          return elementRegistry.filter(function(element) {
+            if(element.businessObject && element.businessObject.definitionRef === definition) {
+              return true;
+            }
+          })[0];
+        }
+
+      }));
+
+      describe('discretionary connection', function() {
+
+        var item, newItem, planFragment;
+
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          var connection = elementRegistry.get('DiscretionaryConnection_1');
+
+          item = elementRegistry.get('DIS_Task_2');
+          planFragment = elementRegistry.get('DIS_PlanFragment_1').businessObject.definitionRef;
+
+          // when
+          modeling.removeElements([ connection ]);
+
+          newItem = findItem(item.businessObject.definitionRef);
+
+        }));
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+
+        it('should undo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(item.id)).to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+      });
+
+
+      describe('discretionary connection source', function() {
+
+        var item, newItem, planFragment;
+
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          item = elementRegistry.get('DIS_Task_2');
+          planFragment = elementRegistry.get('DIS_PlanFragment_1').businessObject.definitionRef;
+
+          var shape = elementRegistry.get('PI_HumanTask_1');
+
+          // when
+          modeling.removeElements([ shape ]);
+
+          newItem = findItem(item.businessObject.definitionRef);
+
+        }));
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+
+        it('should undo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(item.id)).to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack, elementRegistry) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(elementRegistry.get(item.id)).not.to.exist;
+
+          expect(newItem.type).to.equal('cmmn:PlanItem');
+          expect(planFragment.get('planItems')).to.include(newItem.businessObject);
+        }));
+
+      });
+
+    });
+
+  });
+
 });

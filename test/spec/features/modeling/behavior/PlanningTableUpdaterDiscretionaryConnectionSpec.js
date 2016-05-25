@@ -215,54 +215,6 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
     });
 
-
-    describe('should add to stage planning table inside plan fragment', function() {
-
-      var stage;
-
-      beforeEach(inject(function(elementRegistry, modeling) {
-        // given
-        var connection = elementRegistry.get('DiscretionaryConnection_7');
-
-        source = connection.source.businessObject;
-        target = connection.target.businessObject;
-
-        stage = elementRegistry.get('PI_Stage_2').businessObject.definitionRef;
-
-        // when
-        modeling.removeConnection(connection);
-      }));
-
-
-      it('should execute', function() {
-        expect(source.definitionRef.planningTable).not.to.exist;
-        expect(stage.planningTable.get('tableItems')).to.include(target);
-      });
-
-
-      it('should undo', inject(function(commandStack) {
-        // when
-        commandStack.undo();
-
-        // then
-        expect(source.definitionRef.planningTable).to.exist;
-        expect(source.definitionRef.planningTable.get('tableItems')).to.include(target);
-        expect(stage.planningTable.get('tableItems')).not.to.include(target);
-      }));
-
-
-      it('should redo', inject(function(commandStack) {
-        // when
-        commandStack.undo();
-        commandStack.redo();
-
-        // then
-        expect(source.definitionRef.planningTable).not.to.exist;
-        expect(stage.planningTable.get('tableItems')).to.include(target);
-      }));
-
-    });
-
   });
 
 

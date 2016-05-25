@@ -21,6 +21,7 @@ describe('features/replace-preview', function() {
       milestone;
 
   var getGfx,
+      getInnerHTML,
       moveShape;
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
@@ -50,6 +51,12 @@ describe('features/replace-preview', function() {
 
       return gfx;
     };
+
+
+    getInnerHTML = function(element) {
+      return element.select('.djs-visual').innerHTML;
+    };
+
 
     moveShape = function(shape, target, position) {
       var startPosition = { x: shape.x + 10 + (shape.width / 2), y: shape.y + 30 + (shape.height / 2) };
@@ -81,7 +88,7 @@ describe('features/replace-preview', function() {
       type: 'cmmn:EntryCriterion'
     });
 
-    expect(dragGroup[0].select('.djs-visual').innerHTML).to.equal(criterionInnerGfx.select('.djs-visual').innerHTML);
+    expect(getInnerHTML(dragGroup[0])).to.equal(getInnerHTML(criterionInnerGfx));
 
   }));
 
@@ -166,6 +173,75 @@ describe('features/replace-preview', function() {
     var criterionInnerGfx = getGfx({ type: 'cmmn:ExitCriterion' });
 
     expect(context.dragGroup[0].innerSVG()).to.equal(criterionInnerGfx.innerSVG());
+
+  }));
+
+
+  it('should replace discretionary task while hover over plan fragment', 
+    inject(function(dragging, canvas, elementRegistry) {
+
+    // given
+    var item = elementRegistry.get('DIS_Task_2');
+    var target = elementRegistry.get('DIS_PlanFragment_1');
+
+    // when
+    moveShape(item, target, { x: 510, y: 400 });
+
+    var dragGroup = dragging.context().data.context.dragGroup;
+
+    // then
+    var gfx = getGfx({
+      type: 'cmmn:PlanItem',
+      definitionType: 'cmmn:Task'
+    });
+
+    expect(getInnerHTML(dragGroup[0])).to.equal(getInnerHTML(gfx));
+
+  }));
+
+
+  it('should replace discretionary plan fragment while hover over plan fragment', 
+    inject(function(dragging, canvas, elementRegistry) {
+
+    // given
+    var item = elementRegistry.get('DIS_PlanFragment_2');
+    var target = elementRegistry.get('DIS_PlanFragment_1');
+
+    // when
+    moveShape(item, target, { x: 510, y: 400 });
+
+    var dragGroup = dragging.context().data.context.dragGroup;
+
+    // then
+    var gfx = getGfx({
+      type: 'cmmn:PlanItem',
+      definitionType: 'cmmn:Stage'
+    });
+
+    expect(getInnerHTML(dragGroup[0])).to.equal(getInnerHTML(gfx));
+
+  }));
+
+
+  it('should replace discretionary stage while hover over plan fragment', 
+    inject(function(dragging, canvas, elementRegistry) {
+
+    // given
+    var item = elementRegistry.get('DIS_Stage_1');
+    var target = elementRegistry.get('DIS_PlanFragment_1');
+
+    // when
+    moveShape(item, target, { x: 510, y: 400 });
+
+    var dragGroup = dragging.context().data.context.dragGroup;
+
+    // then
+    var gfx = getGfx({
+      type: 'cmmn:PlanItem',
+      definitionType: 'cmmn:Stage'
+    });
+
+    expect(getInnerHTML(dragGroup[0])).to.equal(getInnerHTML(gfx));
 
   }));
 

@@ -6,7 +6,7 @@ var modelingModule = require('../../../../../lib/features/modeling'),
     coreModule = require('../../../../../lib/core');
 
 
-describe('features/modeling - #PlanItemDefinitionUpdater abcd', function() {
+describe('features/modeling - #PlanItemDefinitionUpdater', function() {
 
   var testModules = [ coreModule, modelingModule ];
 
@@ -1646,7 +1646,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater abcd', function() {
 
     beforeEach(inject(function(elementRegistry, modeling, elementFactory) {
       // given
-      var taskShape = elementFactory.createDiscretionaryItemShape('cmmn:Task');
+      var taskShape = elementFactory.createPlanItemShape('cmmn:Task');
 
       var planFragmentShape = elementRegistry.get('DIS_PlanFragment_1');
       modeling.createShape(taskShape, { x: 250, y: 150 }, planFragmentShape);
