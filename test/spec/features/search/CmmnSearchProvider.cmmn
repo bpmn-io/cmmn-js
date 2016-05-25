@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="some_PlanItemTask_123456_id" definitionRef="Task_1" />
+      <cmmn:planItem id="PlanItem_0xbw40z" definitionRef="Def_1" />
+      <cmmn:planItem id="PlanItem_0ukzxo5" definitionRef="Def_2" />
+      <cmmn:planItem id="PlanItem_1bhrsif" definitionRef="Task_1o6od5s" />
+      <cmmn:planItem id="PlanItem_1jdey7g" definitionRef="Task_0gqop8k" />
+      <cmmn:planItem id="PlanItem_19vz7wo" definitionRef="Task_0a25gj6" />
+      <cmmn:planItem id="PlanItem_1tqn6mz" definitionRef="Task_1y8iobq" />
+      <cmmn:task id="Task_1" name="has matched ID" />
+      <cmmn:task id="Def_1" name="Second 123456 task here" />
+      <cmmn:task id="Def_2" name="Third 123456" />
+      <cmmn:task id="Task_1o6od5s" name="all matched" />
+      <cmmn:task id="Task_0gqop8k" name="before 321" />
+      <cmmn:task id="Task_0a25gj6" name="123 middle 321" />
+      <cmmn:task id="Task_1y8iobq" name="123 after" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_1">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="114" y="63" width="556" height="389" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="some_PlanItemTask_123456_id_di" cmmnElementRef="some_PlanItemTask_123456_id">
+        <dc:Bounds x="162" y="106" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_0xbw40z_di" cmmnElementRef="PlanItem_0xbw40z">
+        <dc:Bounds x="294" y="106" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_0ukzxo5_di" cmmnElementRef="PlanItem_0ukzxo5">
+        <dc:Bounds x="429" y="106" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_1bhrsif_di" cmmnElementRef="PlanItem_1bhrsif">
+        <dc:Bounds x="160" y="229" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_1jdey7g_di" cmmnElementRef="PlanItem_1jdey7g">
+        <dc:Bounds x="298" y="229" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_19vz7wo_di" cmmnElementRef="PlanItem_19vz7wo">
+        <dc:Bounds x="431" y="228" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_1tqn6mz_di" cmmnElementRef="PlanItem_1tqn6mz">
+        <dc:Bounds x="550" y="225" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

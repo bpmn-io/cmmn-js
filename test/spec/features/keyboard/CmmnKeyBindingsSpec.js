@@ -5,6 +5,7 @@ var TestContainer = require('mocha-test-container-support');
 var coreModule = require('../../../../lib/core'),
     modelingModule = require('../../../../lib/features/modeling'),
     keyboardModule = require('../../../../lib/features/keyboard'),
+    cmmnSearchModule = require('../../../../lib/features/search'),
     spaceToolModule = require('diagram-js/lib/features/space-tool'),
     lassoToolModule = require('diagram-js/lib/features/lasso-tool'),
     handToolModule = require('diagram-js/lib/features/hand-tool'),
@@ -20,6 +21,7 @@ describe('features - keyboard', function() {
 
   var testModules = [
     coreModule,
+    cmmnSearchModule,
     modelingModule,
     spaceToolModule,
     lassoToolModule,
@@ -100,6 +102,20 @@ describe('features - keyboard', function() {
 
       // then
       expect(directEditing.activate.calledOnce).to.be.true;
+    }));
+
+    it('should trigger search for labels', inject(function(canvas, keyboard, searchPad, elementRegistry) {
+
+      sinon.spy(searchPad, 'toggle');
+
+      // given
+      var e = createKeyEvent(container, 70, true);
+
+      // when
+      keyboard._keyHandler(e);
+
+      // then
+      expect(searchPad.toggle).calledOnce;
     }));
 
   });
