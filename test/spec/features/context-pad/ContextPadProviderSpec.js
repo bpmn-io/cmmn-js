@@ -269,7 +269,8 @@ describe('features - context-pad', function() {
     it('should provide Stage entries', inject(function() {
 
       expectContextPadEntries('PI_Stage_1', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -277,7 +278,8 @@ describe('features - context-pad', function() {
     it('should provide Plan Fragment entries', inject(function() {
 
       expectContextPadEntries('DIS_PlanFragment_1', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -285,7 +287,8 @@ describe('features - context-pad', function() {
     it('should provide blocking Task (plan item) entries', inject(function() {
 
       expectContextPadEntries('PI_Blocking_Task_1', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -293,7 +296,8 @@ describe('features - context-pad', function() {
     it('should provide non-blocking Task (plan item) entries', inject(function() {
 
       expectContextPadEntries('PI_Non_Blocking_Task_1', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -301,7 +305,8 @@ describe('features - context-pad', function() {
     it('should provide blocking Task (discretionary item) entries', inject(function() {
 
       expectContextPadEntries('DIS_Blocking_Task_2', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -309,7 +314,8 @@ describe('features - context-pad', function() {
     it('should provide non-blocking Task (discretionary item) entries', inject(function() {
 
       expectContextPadEntries('DIS_Non_Blocking_Task_2', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -317,7 +323,8 @@ describe('features - context-pad', function() {
     it('should provide Event Listener entries', inject(function() {
 
       expectContextPadEntries('PI_EventListener_1', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -325,7 +332,8 @@ describe('features - context-pad', function() {
     it('should provide Milestone entries', inject(function() {
 
       expectContextPadEntries('PI_Milestone_1', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -333,7 +341,8 @@ describe('features - context-pad', function() {
     it('should provide CasePlanModel entries', inject(function() {
 
       expectContextPadEntries('CasePlanModel_1', [
-        'replace'
+        'replace',
+        '!connect'
       ]);
     }));
 
@@ -341,7 +350,8 @@ describe('features - context-pad', function() {
     it('should provide ExitCriterion attached to CasePlanModel entries', inject(function() {
 
       expectContextPadEntries('ExitCriterion_4', [
-        '!replace'
+        '!replace',
+        'connect'
       ]);
     }));
 
@@ -349,7 +359,8 @@ describe('features - context-pad', function() {
     it('should provide ExitCriterion attached to Stage entries', inject(function() {
 
       expectContextPadEntries('ExitCriterion_1', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -357,7 +368,8 @@ describe('features - context-pad', function() {
     it('should provide EntryCriterion attached to Stage entries', inject(function() {
 
       expectContextPadEntries('EntryCriterion_1', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -365,7 +377,8 @@ describe('features - context-pad', function() {
     it('should provide ExitCriterion attached to blocking Task (plan item) entries', inject(function() {
 
       expectContextPadEntries('ExitCriterion_2', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -373,7 +386,8 @@ describe('features - context-pad', function() {
     it('should provide EntryCriterion attached to blocking Task (plan item) entries', inject(function() {
 
       expectContextPadEntries('EntryCriterion_2', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -381,7 +395,8 @@ describe('features - context-pad', function() {
     it('should provide ExitCriterion attached to blocking Task (discretionary item) entries', inject(function() {
 
       expectContextPadEntries('ExitCriterion_3', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -389,7 +404,8 @@ describe('features - context-pad', function() {
     it('should provide EntryCriterion attached to blocking Task (discretionary item) entries', inject(function() {
 
       expectContextPadEntries('EntryCriterion_5', [
-        'replace'
+        'replace',
+        'connect'
       ]);
     }));
 
@@ -397,7 +413,8 @@ describe('features - context-pad', function() {
     it('should provide EntryCriterion attached to non-blocking Task (plan item) entries', inject(function() {
 
       expectContextPadEntries('EntryCriterion_3', [
-        '!replace'
+        '!replace',
+        'connect'
       ]);
     }));
 
@@ -405,7 +422,8 @@ describe('features - context-pad', function() {
     it('should provide EntryCriterion attached to non-blocking Task (discretionary item) entries', inject(function() {
 
       expectContextPadEntries('EntryCriterion_6', [
-        '!replace'
+        '!replace',
+        'connect'
       ]);
     }));
 

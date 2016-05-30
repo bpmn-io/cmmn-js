@@ -442,4 +442,112 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
 
   });
 
+
+  describe('update properties', function() {
+
+    describe('should remove discretionary connection when setting human task to non-blocking', function() {
+
+      var diagramXML = require('./ReplaceConnectionBehavior.connection.cmmn');
+
+      beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var task = elementRegistry.get('PI_HumanTask_1');
+
+        // when
+        modeling.updateControls(task, {
+          isBlocking: false
+        });
+
+      }));
+
+      it('should execute', inject(function(elementRegistry) {
+        // then
+        expect(elementRegistry.get('DiscretionaryConnection_1')).not.to.exist;
+      }));
+
+
+      it('should undo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(elementRegistry.get('DiscretionaryConnection_1')).to.exist;
+      }));
+
+
+      it('should redo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(elementRegistry.get('DiscretionaryConnection_1')).not.to.exist;
+      }));
+
+    });
+
+  });
+
+  describe('selection', function() {
+
+    describe('should select replaced connection on reconnect', function() {
+
+      var source;
+
+      var diagramXML = require('./ReplaceConnectionBehavior.connection.cmmn');
+
+      beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+
+        // given
+        var connection = elementRegistry.get('PlanItemOnPart_1_di');
+        var targetShape = elementRegistry.get('DIS_Task_5');
+
+        source = connection.source;
+
+        var newWaypoints = [
+          connection.waypoints[0],
+          {
+            x: targetShape.x,
+            y: targetShape.y + 40
+          }
+        ];
+
+        // when
+        modeling.reconnectEnd(connection, targetShape, newWaypoints);
+
+      }));
+
+      it('should execute', inject(function(selection) {
+        // then
+        expect(selection.get()).to.include(source.outgoing[0]);
+      }));
+
+
+      it('should undo', inject(function(selection, commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(selection.get()).to.be.empty;
+      }));
+
+
+      it('should redo', inject(function(selection, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(selection.get()).to.be.empty;
+      }));
+
+    });
+
+  });
+
 });

@@ -7,6 +7,7 @@ var expectCanResize = Helper.expectCanResize;
 var expectCanConnect = Helper.expectCanConnect;
 var expectCanMove = Helper.expectCanMove;
 var expectCanReplace = Helper.expectCanReplace;
+var expectCanReplaceConnectionEnd = Helper.expectCanReplaceConnectionEnd;
 
 /* global bootstrapModeler, inject */
 
@@ -627,6 +628,44 @@ describe('features/modeling/rules - CmmnRules', function() {
       expectCanConnect('DIS_HumanTask_3', 'ExitCriterion_1', {
         planItemOnPart: false,
         caseFileItemOnPart: false
+      });
+
+    });
+
+    describe('replace connection ending', function() {
+
+      it('discretionary item > plan item', function() {
+        expectCanReplaceConnectionEnd('DIS_Task_2', 'EntryCriterion_1', 'source', {
+          type: 'cmmn:PlanItemOnPart',
+          isStandardEventVisible: true,
+          replacements: [{
+            oldElementId: 'DIS_Task_2',
+            newElementType: 'cmmn:PlanItem'
+          }]
+        });
+      });
+
+
+      it('entry criterion > exit item', function() {
+        expectCanReplaceConnectionEnd('EntryCriterion_1', 'EntryCriterion_2', 'source', {
+          type: 'cmmn:PlanItemOnPart',
+          isStandardEventVisible: true,
+          replacements: [{
+            oldElementId: 'EntryCriterion_1',
+            newElementType: 'cmmn:ExitCriterion'
+          }]
+        });
+      });
+
+
+      it('plan item > discretionary item', function() {
+        expectCanReplaceConnectionEnd('PI_HumanTask_1', 'PI_Task_1', 'target', {
+          type: 'cmmndi:CMMNEdge',
+          replacements: [{
+            oldElementId: 'PI_Task_1',
+            newElementType: 'cmmn:DiscretionaryItem'
+          }]
+        });
       });
 
     });

@@ -14,7 +14,10 @@
       <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" />
       <cmmn:planItem id="PI_Milestone_1" definitionRef="Milestone_1" />
       <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
-      <cmmn:planItem id="PI_HumanTask_3" definitionRef="HumanTask_3" />
+      <cmmn:planItem id="PI_HumanTask_3" definitionRef="HumanTask_3">
+        <cmmn:entryCriterion id="EntryCriterion_2" sentryRef="Sentry_1c0rp4g" />
+      </cmmn:planItem>
+      <cmmn:sentry id="Sentry_1c0rp4g" />
       <cmmn:planningTable>
         <cmmn:discretionaryItem id="DIS_Task_2" definitionRef="Task_2" />
         <cmmn:discretionaryItem id="DIS_HumanTask_3" definitionRef="HumanTask_1" />
@@ -89,6 +92,10 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="TextAnnotation_1_di" cmmnElementRef="TextAnnotation_1">
         <dc:Bounds x="609" y="360" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_2_di" cmmnElementRef="EntryCriterion_2">
+        <dc:Bounds x="387" y="229" width="20" height="28" />
+        <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>
   </cmmndi:CMMNDI>

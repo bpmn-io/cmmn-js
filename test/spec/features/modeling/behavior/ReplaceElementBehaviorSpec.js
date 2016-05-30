@@ -1173,4 +1173,381 @@ describe('features/modeling/behavior - replace element', function() {
 
   });
 
+
+  describe('replace connection source/target', function() {
+
+    var diagramXML = require('./ReplaceElementBehavior.replace-connection-end.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules.concat(modelingModule) }));
+
+    var connection, target, replacedBy;
+
+    describe('plan item > discretionary item', function() {
+
+      describe('create', function() {
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          var source = elementRegistry.get('PI_HumanTask_1');
+          target = elementRegistry.get('PI_Task_1');
+
+          // when
+          connection = modeling.connect(source, target, {
+            type: 'cmmndi:CMMNEdge',
+            replacements: [{
+              oldElementId: target.id,
+              newElementType: 'cmmn:DiscretionaryItem'
+            }]
+          });
+
+          replacedBy = connection.target;
+
+        }));
+
+        it('should execute', function() {
+          // then
+          expect(connection.target).to.equal(replacedBy);
+          expect(replacedBy).not.to.equal(target);
+          expect(replacedBy.type).to.equal('cmmn:DiscretionaryItem');
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection.target).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection.target).to.equal(replacedBy);
+          expect(replacedBy).not.to.equal(target);
+          expect(replacedBy.type).to.equal('cmmn:DiscretionaryItem');
+        }));
+
+      });
+
+
+      describe('reconnect end', function() {
+
+        var oldTarget;
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          connection = elementRegistry.get('CMMNEdge_1_di');
+          target = elementRegistry.get('PI_Task_8');
+
+          oldTarget = connection.target;
+
+          var newWaypoints = [
+            connection.waypoints[0],
+            {
+              x: target.x,
+              y: target.y + 40
+            }
+          ];
+
+          // when
+          modeling.reconnectEnd(connection, target, newWaypoints);
+
+          replacedBy = connection.target;
+
+        }));
+
+        it('should execute', function() {
+          // then
+          expect(connection.target).not.to.equal(target);
+          expect(connection.target).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(target);
+          expect(replacedBy.type).to.equal('cmmn:DiscretionaryItem');
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection.target).not.to.equal(target);
+          expect(connection.target).not.to.equal(replacedBy);
+          expect(connection.target).to.equal(oldTarget);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection.target).not.to.equal(target);
+          expect(connection.target).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(target);
+          expect(replacedBy.type).to.equal('cmmn:DiscretionaryItem');
+        }));
+
+      });
+
+    });
+
+
+    describe('discretionary item > plan item', function() {
+
+      describe('create', function() {
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          var source = elementRegistry.get('EntryCriterion_1');
+          target = elementRegistry.get('DIS_Task_3');
+
+          // when
+          connection = modeling.connect(source, target, {
+            type: 'cmmn:PlanItemOnPart',
+            reverse: true,
+            replacements: [{
+              oldElementId: target.id,
+              newElementType: 'cmmn:PlanItem'
+            }]
+          });
+
+          replacedBy = connection.source;
+
+        }));
+
+        it('should execute', function() {
+          // then
+          expect(connection.source).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(target);
+          expect(replacedBy.type).to.equal('cmmn:PlanItem');
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection.source).not.to.exist;
+          expect(connection.target).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection.source).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(target);
+          expect(replacedBy.type).to.equal('cmmn:PlanItem');
+        }));
+
+      });
+
+
+      describe('reconnect start', function() {
+
+        var source, oldSource;
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          connection = elementRegistry.get('PlanItemOnPart_1_di');
+          source = elementRegistry.get('DIS_Task_6');
+
+          oldSource = connection.source;
+
+          var newWaypoints = [
+            {
+              x: source.x,
+              y: source.y + 40
+            },
+            connection.waypoints[connection.waypoints.length-1]
+          ];
+
+          // when
+          modeling.reconnectStart(connection, source, newWaypoints);
+
+          replacedBy = connection.source;
+
+        }));
+
+        it('should execute', function() {
+          // then
+          expect(connection.source).not.to.equal(source);
+          expect(connection.source).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(source);
+          expect(replacedBy.type).to.equal('cmmn:PlanItem');
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection.source).not.to.equal(source);
+          expect(connection.source).not.to.equal(replacedBy);
+          expect(connection.source).to.equal(oldSource);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection.source).not.to.equal(source);
+          expect(connection.source).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(source);
+          expect(replacedBy.type).to.equal('cmmn:PlanItem');
+        }));
+
+      });
+
+    });
+
+    describe('entry criterion > exit criterion', function() {
+
+      describe('create', function() {
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          var source = elementRegistry.get('EntryCriterion_2');
+          target = elementRegistry.get('EntryCriterion_3');
+
+          // when
+          connection = modeling.connect(source, target, {
+            type: 'cmmn:PlanItemOnPart',
+            reverse: true,
+            replacements: [{
+              oldElementId: target.id,
+              newElementType: 'cmmn:ExitCriterion'
+            }]
+          });
+
+          replacedBy = connection.source;
+
+        }));
+
+        it('should execute', function() {
+          // then
+          expect(connection.source).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(target);
+          expect(replacedBy.type).to.equal('cmmn:ExitCriterion');
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection.source).not.to.exist;
+          expect(connection.target).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection.source).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(target);
+          expect(replacedBy.type).to.equal('cmmn:ExitCriterion');
+        }));
+
+      });
+
+
+      describe('reconnect start', function() {
+
+        var source, oldSource;
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          connection = elementRegistry.get('PlanItemOnPart_1_di');
+          source = elementRegistry.get('EntryCriterion_5');
+
+          oldSource = connection.source;
+
+          var newWaypoints = [
+            {
+              x: source.x,
+              y: source.y + 14
+            },
+            connection.waypoints[connection.waypoints.length-1]
+          ];
+
+          // when
+          modeling.reconnectStart(connection, source, newWaypoints);
+
+          replacedBy = connection.source;
+
+        }));
+
+        it('should execute', function() {
+          // then
+          expect(connection.source).not.to.equal(source);
+          expect(connection.source).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(source);
+          expect(replacedBy.type).to.equal('cmmn:ExitCriterion');
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection.source).not.to.equal(source);
+          expect(connection.source).not.to.equal(replacedBy);
+          expect(connection.source).to.equal(oldSource);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection.source).not.to.equal(source);
+          expect(connection.source).to.equal(replacedBy);
+
+          expect(replacedBy).not.to.equal(source);
+          expect(replacedBy.type).to.equal('cmmn:ExitCriterion');
+        }));
+
+      });
+
+    });
+
+  });
+
 });

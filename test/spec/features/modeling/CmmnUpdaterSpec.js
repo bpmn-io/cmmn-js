@@ -2347,4 +2347,47 @@ describe('features/modeling CmmnUpdater', function() {
 
   });
 
+
+  describe('connection cropping', function() {
+
+    var testXML = require('./CmmnUpdater.discretionary-connection.cmmn');
+
+    beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+    var connection;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+
+      // given
+      var source = elementRegistry.get('PI_Task_4'),
+          target = elementRegistry.get('DIS_Task_3');
+
+      // when
+      connection = modeling.createConnection(source, target, {
+        type: 'cmmndi:CMMNEdge',
+      }, source.parent);
+
+    }));
+
+
+    it('should execute', inject(function(cmmnFactory) {
+
+      // expect cropped connection
+      expect(connection.waypoints).eql([
+        { original: { x: 150, y: 240 }, x: 200, y: 240},
+        { original: { x: 350, y: 240 }, x: 300, y: 240}
+      ]);
+
+      var diWaypoints = cmmnFactory.createDiWaypoints([
+        { x: 200, y: 240 },
+        { x: 300, y: 240 }
+      ]);
+
+      // expect cropped waypoints in di
+      expect(connection.businessObject.waypoint).eql(diWaypoints);
+
+    }));
+
+  });
+
 });

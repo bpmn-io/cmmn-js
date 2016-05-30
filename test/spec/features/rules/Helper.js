@@ -120,3 +120,22 @@ function expectCanReplace(elements, target, rules) {
 }
 
 module.exports.expectCanReplace = expectCanReplace;
+
+
+function expectCanReplaceConnectionEnd(source, target, end, rules) {
+
+  var results;
+
+  TestHelper.getCmmnJs().invoke(function(elementRegistry, cmmnRules) {
+
+    source = elementRegistry.get(source);
+    target = elementRegistry.get(target);
+
+    results = cmmnRules.canReplaceConnectionEnd(source, target, end);
+
+  });
+
+  expect(results).to.eql(rules);
+}
+
+module.exports.expectCanReplaceConnectionEnd = expectCanReplaceConnectionEnd;
