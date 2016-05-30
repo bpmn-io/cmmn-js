@@ -56,6 +56,21 @@ describe('features - keyboard', function() {
     }));
 
 
+    it('should trigger global connect', inject(function(keyboard, globalConnect) {
+
+      sinon.spy(globalConnect, 'toggle');
+
+      // given
+      var e = createKeyEvent(container, 67, false);
+
+      // when
+      keyboard._keyHandler(e);
+
+      // then
+      expect(globalConnect.toggle.calledOnce).to.be.true;
+    }));
+
+
     it('should trigger space tool', inject(function(keyboard, spaceTool) {
 
       sinon.spy(spaceTool, 'activateSelection');
