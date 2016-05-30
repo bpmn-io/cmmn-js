@@ -211,6 +211,69 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
   });
 
 
+  describe('plan item on part <> association', function() {
+
+    var diagramXML = require('./ReplaceConnectionBehavior.connection.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var newTarget, source, target, connection;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+
+      // given
+      connection = elementRegistry.get('PlanItemOnPart_1_di');
+      var newTargetShape = elementRegistry.get('TextAnnotation_1');
+
+      newTarget = newTargetShape;
+      source = connection.source;
+      target = connection.target;
+
+      var newWaypoints = [
+        connection.waypoints[0],
+        {
+          x: newTargetShape.x,
+          y: newTargetShape.y + 15
+        }
+      ];
+
+      // when
+      modeling.reconnectEnd(connection, newTargetShape, newWaypoints);
+
+    }));
+
+    it('should execute', function() {
+      // then
+      expectConnected(source, newTarget, 'cmmn:Association');
+      expectNotConnected(source, target, 'cmmn:PlanItemOnPart');
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expectNotConnected(source, newTarget, 'cmmn:Association');
+      expectConnected(source, target, connection);
+
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expectConnected(source, newTarget, 'cmmn:Association');
+      expectNotConnected(source, target, 'cmmn:PlanItemOnPart');
+
+    }));
+
+  });
+
+
   describe('case file item on part <> plan item on part', function() {
 
     var diagramXML = require('./ReplaceConnectionBehavior.connection.cmmn');
@@ -264,6 +327,66 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
 
       // then
       expectConnected(newSource, target, 'cmmn:PlanItemOnPart');
+      expectNotConnected(source, target, 'cmmn:CaseFileItemOnPart');
+
+    }));
+
+  });
+
+
+  describe('case file item on part <> association', function() {
+
+    var diagramXML = require('./ReplaceConnectionBehavior.connection.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var newSource, source, target, connection;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+
+      // given
+      connection = elementRegistry.get('CaseFileItemOnPart_1_di');
+      var newSourceShape = elementRegistry.get('TextAnnotation_1');
+
+      newSource = newSourceShape;
+      source = connection.source;
+      target = connection.target;
+
+      var newWaypoints = [{
+        x: newSourceShape.x + 100,
+        y: newSourceShape.y + 40
+      }, connection.waypoints[1]];
+
+      // when
+      modeling.reconnectStart(connection, newSourceShape, newWaypoints);
+
+    }));
+
+    it('should execute', function() {
+      // then
+      expectConnected(newSource, target, 'cmmn:Association');
+      expectNotConnected(source, target, 'cmmn:CaseFileItemOnPart');
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expectNotConnected(newSource, target, 'cmmn:Association');
+      expectConnected(source, target, connection);
+
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expectConnected(newSource, target, 'cmmn:Association');
       expectNotConnected(source, target, 'cmmn:CaseFileItemOnPart');
 
     }));
@@ -327,6 +450,69 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
 
       // then
       expectConnected(source, newTarget, 'cmmn:PlanItemOnPart');
+      expectNotConnected(source, target, 'cmmndi:CMMNEdge');
+
+    }));
+
+  });
+
+
+  describe('discretionary connection <> association', function() {
+
+    var diagramXML = require('./ReplaceConnectionBehavior.connection.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var newTarget, source, target, connection;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+
+      // given
+      connection = elementRegistry.get('DiscretionaryConnection_1');
+      var newTargetShape = elementRegistry.get('TextAnnotation_1');
+
+      newTarget = newTargetShape;
+      source = connection.source;
+      target = connection.target;
+
+      var newWaypoints = [
+        connection.waypoints[0],
+        {
+          x: newTargetShape.x,
+          y: newTargetShape.y + 14
+        }
+      ];
+
+      // when
+      modeling.reconnectEnd(connection, newTargetShape, newWaypoints);
+
+    }));
+
+    it('should execute', function() {
+      // then
+      expectConnected(source, newTarget, 'cmmn:Association');
+      expectNotConnected(source, target, 'cmmndi:CMMNEdge');
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      // then
+      expectNotConnected(source, newTarget, 'cmmn:Association');
+      expectConnected(source, target, connection);
+
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expectConnected(source, newTarget, 'cmmn:Association');
       expectNotConnected(source, target, 'cmmndi:CMMNEdge');
 
     }));

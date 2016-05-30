@@ -973,6 +973,141 @@ describe('features/modeling CmmnUpdater', function() {
       });
 
 
+      describe('move to root element', function() {
+
+        beforeEach(inject(function(modeling, canvas, elementRegistry) {
+
+          // given
+          rootElement = canvas.getRootElement();
+          definitions = elementRegistry.get('CasePlan_1').businessObject.$parent.$parent;
+
+          textAnnotation = elementRegistry.get('TextAnnotation_1');
+
+          // when
+          modeling.moveElements([ textAnnotation ], { x: 350, y: 0 }, rootElement);
+
+        }));
+
+        it('should execute', function() {
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.equal(rootElement);
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.exist;
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.equal(rootElement);
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        }));
+
+      });
+
+
+      describe('move to stage', function() {
+
+        var stage;
+
+        beforeEach(inject(function(modeling, canvas, elementRegistry) {
+
+          // given
+          rootElement = canvas.getRootElement();
+          stage = elementRegistry.get('PI_Stage_3');
+          definitions = elementRegistry.get('CasePlan_1').businessObject.$parent.$parent;
+
+          textAnnotation = elementRegistry.get('TextAnnotation_1');
+
+          // when
+          modeling.moveElements([ textAnnotation ], { x: 0, y: -100 }, stage);
+
+        }));
+
+        it('should execute', function() {
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.equal(stage);
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.exist;
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          // check parent PI
+          expect(textAnnotation.parent).to.equal(stage);
+
+          // check semantic parent
+          expect(textAnnotation.businessObject.$parent).to.exist;
+          expect(textAnnotation.businessObject.$parent).to.equal(definitions);
+
+          // check parent containment
+          expect(definitions.artifacts).to.include(textAnnotation.businessObject);
+        }));
+
+      });
+
+
       describe('delete', function() {
 
         beforeEach(inject(function(modeling, canvas, elementRegistry) {

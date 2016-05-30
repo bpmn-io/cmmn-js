@@ -270,7 +270,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('PI_Stage_1', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -279,7 +280,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('DIS_PlanFragment_1', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -288,7 +290,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('PI_Blocking_Task_1', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -297,7 +300,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('PI_Non_Blocking_Task_1', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -306,7 +310,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('DIS_Blocking_Task_2', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -315,7 +320,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('DIS_Non_Blocking_Task_2', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -324,7 +330,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('PI_EventListener_1', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -333,7 +340,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('PI_Milestone_1', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -342,7 +350,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('CasePlanModel_1', [
         'replace',
-        '!connect'
+        '!connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -351,7 +360,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('ExitCriterion_4', [
         '!replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -360,7 +370,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('ExitCriterion_1', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -369,7 +380,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('EntryCriterion_1', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -378,7 +390,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('ExitCriterion_2', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -387,7 +400,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('EntryCriterion_2', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -396,7 +410,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('ExitCriterion_3', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -405,7 +420,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('EntryCriterion_5', [
         'replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -414,7 +430,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('EntryCriterion_3', [
         '!replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
@@ -423,7 +440,8 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('EntryCriterion_6', [
         '!replace',
-        'connect'
+        'connect',
+        'append.text-annotation'
       ]);
     }));
 
