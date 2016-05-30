@@ -97,8 +97,7 @@ describe('features/replace-preview', function() {
 
     // when
     moveShape(exitCriterion, milestone, { x: 244, y: 273 });
-    moveShape(exitCriterion, milestone, { x: 248, y: 273 });
-    moveShape(exitCriterion, milestone, { x: 252, y: 273 });
+    moveShape(exitCriterion, milestone, { x: 245, y: 273 });
 
     // then
     var visualReplacements = dragging.context().data.context.visualReplacements;
@@ -116,7 +115,6 @@ describe('features/replace-preview', function() {
 
     // when
     moveShape(exitCriterion, milestone, { x: 244, y: 273 });
-    moveShape(exitCriterion, milestone, { x: 248, y: 273 });
     moveShape(exitCriterion, subProcess_2, { x: 170, y: 273 });
 
     // then
