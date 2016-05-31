@@ -7,11 +7,16 @@
         <cmmn:exitCriterion id="ExitCriterion_2" sentryRef="Sentry_0m2ta73" />
       </cmmn:planItem>
       <cmmn:planItem id="PI_Milestone_1" definitionRef="Milestone_1" />
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
       <cmmn:sentry id="Sentry_0tvucmk" />
       <cmmn:sentry id="Sentry_092l2dd" />
       <cmmn:sentry id="Sentry_0m2ta73" />
       <cmmn:task id="Task_1" />
       <cmmn:milestone id="Milestone_1" />
+      <cmmn:stage id="Stage_1">
+        <cmmn:planItem id="PI_Task_2" definitionRef="Task_2" />
+        <cmmn:task id="Task_2" />
+      </cmmn:stage>
       <cmmn:exitCriterion id="ExitCriterion_1" sentryRef="Sentry_092l2dd" />
     </cmmn:casePlanModel>
   </cmmn:case>
@@ -19,7 +24,7 @@
     <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
       <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
       <cmmndi:CMMNShape id="CasePlanModel_1_di" cmmnElementRef="CasePlanModel_1">
-        <dc:Bounds x="107" y="43" width="400" height="250" />
+        <dc:Bounds x="107" y="43" width="400" height="475" />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="PI_Task_1_di" cmmnElementRef="PI_Task_1">
         <dc:Bounds x="239" y="109" width="100" height="80" />
@@ -35,6 +40,14 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="ExitCriterion_2_di" cmmnElementRef="ExitCriterion_2">
         <dc:Bounds x="229" y="132" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
+        <dc:Bounds x="136" y="298" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_2_di" cmmnElementRef="PI_Task_2">
+        <dc:Bounds x="254" y="354" width="100" height="80" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>

@@ -11,12 +11,12 @@ var modelingModule = require('../../../../lib/features/modeling'),
 
 describe('features/modeling - append shape', function() {
 
-  var diagramXML = require('../../../fixtures/cmmn/simple.cmmn');
-
-  var testModules = [ coreModule, modelingModule ];
-  beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
-
   describe('text annotation', function() {
+
+    var diagramXML = require('../../../fixtures/cmmn/simple.cmmn');
+
+    var testModules = [ coreModule, modelingModule ];
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
     var source, textAnnotationShape, textAnnotation, definitions;
 
@@ -175,6 +175,344 @@ describe('features/modeling - append shape', function() {
         expect(connection.$type).to.equal('cmmn:Association');
         expect(connection.$parent).to.equal(definitions);
       }));
+
+    });
+
+  });
+
+
+  describe('criterion', function() {
+
+    var diagramXML = require('./AppendShape.criterion.cmmn');
+
+    var testModules = [ coreModule, modelingModule ];
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var source, target, criterionShape, criterion, sentry;
+
+    describe('from task to task', function() {
+
+      beforeEach(inject(function(elementRegistry, cmmnFactory, modeling) {
+
+        // given
+        source = elementRegistry.get('PI_Task_1');
+        target = elementRegistry.get('PI_Task_2');
+
+        sentry = cmmnFactory.createSentry();
+
+        // when
+        criterionShape = modeling.appendShape(source, {
+          type: 'cmmn:EntryCriterion',
+          sentryRef: sentry
+        }, { x: 355, y: 165 }, target);
+        criterion = criterionShape.businessObject;
+
+      }));
+
+
+      describe('should create shape', function() {
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(criterionShape).to.exist;
+          expect(elementRegistry.get(criterionShape.id)).to.exist;
+
+          expect(criterion).to.exist;
+          expect(criterion.$type).to.equal('cmmn:EntryCriterion');
+        }));
+
+
+        it('should undo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(criterionShape.id)).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(criterionShape).to.exist;
+          expect(elementRegistry.get(criterionShape.id)).to.exist;
+
+          expect(criterion).to.exist;
+          expect(criterion.$type).to.equal('cmmn:EntryCriterion');
+        }));
+
+      });
+
+
+      describe('should add to host', function() {
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(criterion.$parent).to.equal(target.businessObject);
+          expect(target.businessObject.get('entryCriteria')).to.include(criterion);
+        }));
+
+
+        it('should undo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(criterion.$parent).not.to.exist;
+          expect(target.businessObject.get('entryCriteria')).not.to.include(criterion);
+        }));
+
+
+        it('should redo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(criterion.$parent).to.equal(target.businessObject);
+          expect(target.businessObject.get('entryCriteria')).to.include(criterion);
+        }));
+
+      });
+
+
+      describe('should create DI', function() {
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(criterion.di).to.exist;
+          expect(criterion.di.$parent).to.equal(source.businessObject.di.$parent);
+        }));
+
+
+        it('should undo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(criterion.di).to.exist;
+          expect(criterion.di.$parent).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(criterion.di).to.exist;
+          expect(criterion.di.$parent).to.eql(source.businessObject.di.$parent);
+        }));
+
+      });
+
+
+      describe('should add plan item on part', function() {
+
+        var connection;
+
+        beforeEach(function() {
+          connection = sentry.get('onParts')[0];
+        });
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(connection).to.exist;
+          expect(connection.$type).to.equal('cmmn:PlanItemOnPart');
+          expect(connection.$parent).to.equal(sentry);
+        }));
+
+
+        it('should undo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection).to.exist;
+          expect(connection.$type).to.equal('cmmn:PlanItemOnPart');
+          expect(connection.$parent).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection).to.exist;
+          expect(connection.$type).to.equal('cmmn:PlanItemOnPart');
+          expect(connection.$parent).to.equal(sentry);
+        }));
+
+      });
+
+    });
+
+    describe('from case file item to task', function() {
+
+      beforeEach(inject(function(elementRegistry, cmmnFactory, modeling) {
+
+        // given
+        source = elementRegistry.get('CaseFileItem_1');
+        target = elementRegistry.get('PI_Task_2');
+
+        sentry = cmmnFactory.createSentry();
+
+        // when
+        criterionShape = modeling.appendShape(source, {
+          type: 'cmmn:EntryCriterion',
+          sentryRef: sentry
+        }, { x: 355, y: 165 }, target);
+        criterion = criterionShape.businessObject;
+
+      }));
+
+
+      describe('should create shape', function() {
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(criterionShape).to.exist;
+          expect(elementRegistry.get(criterionShape.id)).to.exist;
+
+          expect(criterion).to.exist;
+          expect(criterion.$type).to.equal('cmmn:EntryCriterion');
+        }));
+
+
+        it('should undo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(elementRegistry.get(criterionShape.id)).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(criterionShape).to.exist;
+          expect(elementRegistry.get(criterionShape.id)).to.exist;
+
+          expect(criterion).to.exist;
+          expect(criterion.$type).to.equal('cmmn:EntryCriterion');
+        }));
+
+      });
+
+
+      describe('should add to host', function() {
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(criterion.$parent).to.equal(target.businessObject);
+          expect(target.businessObject.get('entryCriteria')).to.include(criterion);
+        }));
+
+
+        it('should undo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(criterion.$parent).not.to.exist;
+          expect(target.businessObject.get('entryCriteria')).not.to.include(criterion);
+        }));
+
+
+        it('should redo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(criterion.$parent).to.equal(target.businessObject);
+          expect(target.businessObject.get('entryCriteria')).to.include(criterion);
+        }));
+
+      });
+
+
+      describe('should create DI', function() {
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(criterion.di).to.exist;
+          expect(criterion.di.$parent).to.equal(source.businessObject.di.$parent);
+        }));
+
+
+        it('should undo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(criterion.di).to.exist;
+          expect(criterion.di.$parent).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(criterion.di).to.exist;
+          expect(criterion.di.$parent).to.eql(source.businessObject.di.$parent);
+        }));
+
+      });
+
+
+      describe('should add plan item on part', function() {
+
+        var connection;
+
+        beforeEach(function() {
+          connection = sentry.get('onParts')[0];
+        });
+
+        it('should execute', inject(function(elementRegistry) {
+          // then
+          expect(connection).to.exist;
+          expect(connection.$type).to.equal('cmmn:CaseFileItemOnPart');
+          expect(connection.$parent).to.equal(sentry);
+        }));
+
+
+        it('should undo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection).to.exist;
+          expect(connection.$type).to.equal('cmmn:CaseFileItemOnPart');
+          expect(connection.$parent).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(elementRegistry, commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection).to.exist;
+          expect(connection.$type).to.equal('cmmn:CaseFileItemOnPart');
+          expect(connection.$parent).to.equal(sentry);
+        }));
+
+      });
 
     });
 

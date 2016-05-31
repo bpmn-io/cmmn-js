@@ -594,9 +594,19 @@ describe('features/modeling/rules - CmmnRules', function() {
     });
 
 
-    it('connect ExitCriterion -> EntryCriterion', function() {
+    it('connect ExitCriterion -> EntryCriterion (same host)', function() {
 
       expectCanConnect('ExitCriterion_1', 'EntryCriterion_1', {
+        planItemOnPart: false,
+        caseFileItemOnPart: false
+      });
+
+    });
+
+
+    it('connect ExitCriterion -> EntryCriterion (different host)', function() {
+
+      expectCanConnect('ExitCriterion_1', 'EntryCriterion_2', {
         planItemOnPart: true,
         caseFileItemOnPart: false
       });
@@ -632,6 +642,42 @@ describe('features/modeling/rules - CmmnRules', function() {
 
     });
 
+    it('connect inner PlanItem -> EntryCriterion attached to outer stage', function() {
+
+      expectCanConnect('PI_HumanTask_2', 'EntryCriterion_4', {
+        planItemOnPart: false,
+        caseFileItemOnPart: false
+      });
+
+    });
+
+    it('connect inner PlanItem -> ExitCriterion attached to outer stage', function() {
+
+      expectCanConnect('PI_HumanTask_2', 'ExitCriterion_4', {
+        planItemOnPart: true,
+        caseFileItemOnPart: false
+      });
+
+    });
+
+    it('EntryCriterion attached to outer stage -> PlanItem nested in stage', function() {
+
+      expectCanConnect('EntryCriterion_3', 'PI_HumanTask_2', {
+        planItemOnPart: false,
+        caseFileItemOnPart: false
+      });
+
+    });
+
+    it('ExitCriterion attached to outer stage -> PlanItem nested in stage', function() {
+
+      expectCanConnect('ExitCriterion_3', 'PI_HumanTask_2', {
+        planItemOnPart: false,
+        caseFileItemOnPart: false
+      });
+
+    });
+
     describe('replace connection ending', function() {
 
       it('discretionary item > plan item', function() {
@@ -646,7 +692,7 @@ describe('features/modeling/rules - CmmnRules', function() {
       });
 
 
-      it('entry criterion > exit item', function() {
+      it('entry criterion > exit criterion', function() {
         expectCanReplaceConnectionEnd('EntryCriterion_1', 'EntryCriterion_2', 'source', {
           type: 'cmmn:PlanItemOnPart',
           isStandardEventVisible: true,
@@ -668,9 +714,65 @@ describe('features/modeling/rules - CmmnRules', function() {
         });
       });
 
+
+      it('entry criterion > discretionary item', function() {
+        expectCanReplaceConnectionEnd('EntryCriterion_6', 'DIS_Stage_2', 'source', false);
+      });
+
+
+      it('exit criterion > discretionary item', function() {
+        expectCanReplaceConnectionEnd('DIS_Stage_2', 'ExitCriterion_6', 'source', {
+          type: 'cmmn:PlanItemOnPart',
+          isStandardEventVisible: true,
+          replacements: [{
+            oldElementId: 'DIS_Stage_2',
+            newElementType: 'cmmn:PlanItem'
+          }]
+        });
+      });
+
+
+      it('entry criterion > entry criterion (parent-child-relation)', function() {
+        expectCanReplaceConnectionEnd('EntryCriterion_6', 'EntryCriterion_5', 'source', false);
+      });
+
+
+      it('entry criterion > entry criterion (child-parent-relation)', function() {
+        expectCanReplaceConnectionEnd('EntryCriterion_5', 'EntryCriterion_6', 'source', false);
+      });
+
+
+      it('entry criterion > entry criterion (with incoming onPart)', function() {
+        expectCanReplaceConnectionEnd('EntryCriterion_7', 'EntryCriterion_5', 'source', false);
+      });
+
+      it('plan item > entry criterion', function() {
+        expectCanReplaceConnectionEnd('PI_Task_4', 'EntryCriterion_6', 'target', {
+          type: 'cmmn:PlanItemOnPart',
+          isStandardEventVisible: true,
+          replacements: [{
+            oldElementId: 'EntryCriterion_6',
+            newElementType: 'cmmn:ExitCriterion'
+          }]
+        });
+      });
+
+
+      it('exit criterion > entry criterion', function() {
+        expectCanReplaceConnectionEnd('ExitCriterion_5', 'EntryCriterion_6', 'target', {
+          type: 'cmmn:PlanItemOnPart',
+          isStandardEventVisible: true,
+          replacements: [{
+            oldElementId: 'EntryCriterion_6',
+            newElementType: 'cmmn:ExitCriterion'
+          }]
+        });
+      });
+
     });
 
   });
+
 
   describe('criterion', function() {
 

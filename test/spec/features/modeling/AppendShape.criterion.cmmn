@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:caseFileItemDefinition id="CaseFileItemDefinition_0d6wban" />
+  <cmmn:case id="Case_1">
+    <cmmn:caseFileModel id="CaseFileModel_1t4nyvg">
+      <cmmn:caseFileItem id="CaseFileItem_1" definitionRef="CaseFileItemDefinition_0d6wban" />
+    </cmmn:caseFileModel>
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_2" definitionRef="Task_2" />
+      <cmmn:task id="Task_1" />
+      <cmmn:task id="Task_2" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_1">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="114" y="63" width="405" height="270" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_1_di" cmmnElementRef="PI_Task_1">
+        <dc:Bounds x="171" y="123" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_2_di" cmmnElementRef="PI_Task_2">
+        <dc:Bounds x="354" y="123" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CaseFileItem_1_di" cmmnElementRef="CaseFileItem_1">
+        <dc:Bounds x="202" y="241" width="36" height="50" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="175" y="291" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

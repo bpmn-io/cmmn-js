@@ -13,11 +13,22 @@
       <cmmn:planItem id="PI_HumanTask_1" definitionRef="HumanTask_1" />
       <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" />
       <cmmn:planItem id="PI_Milestone_1" definitionRef="Milestone_1" />
-      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1">
+        <cmmn:entryCriterion id="EntryCriterion_4" sentryRef="Sentry_03wp9wt" />
+        <cmmn:exitCriterion id="ExitCriterion_4" sentryRef="Sentry_0eip5s9" />
+      </cmmn:planItem>
       <cmmn:planItem id="PI_HumanTask_3" definitionRef="HumanTask_3">
         <cmmn:entryCriterion id="EntryCriterion_2" sentryRef="Sentry_1c0rp4g" />
       </cmmn:planItem>
+      <cmmn:planItem id="PI_Stage_3" definitionRef="Stage_3">
+        <cmmn:entryCriterion id="EntryCriterion_6" sentryRef="Sentry_1ski6pw" />
+        <cmmn:exitCriterion id="ExitCriterion_6" sentryRef="Sentry_0p1j7tk" />
+      </cmmn:planItem>
       <cmmn:sentry id="Sentry_1c0rp4g" />
+      <cmmn:sentry id="Sentry_03wp9wt" />
+      <cmmn:sentry id="Sentry_0eip5s9" />
+      <cmmn:sentry id="Sentry_1ski6pw" />
+      <cmmn:sentry id="Sentry_0p1j7tk" />
       <cmmn:planningTable>
         <cmmn:discretionaryItem id="DIS_Task_2" definitionRef="Task_2" />
         <cmmn:discretionaryItem id="DIS_HumanTask_3" definitionRef="HumanTask_1" />
@@ -29,7 +40,12 @@
       <cmmn:eventListener id="EventListener_1" />
       <cmmn:milestone id="Milestone_1" />
       <cmmn:stage id="Stage_1">
-        <cmmn:planItem id="PI_HumanTask_2" definitionRef="HumanTask_2" />
+        <cmmn:planItem id="PI_HumanTask_2" definitionRef="HumanTask_2">
+          <cmmn:entryCriterion id="EntryCriterion_3" sentryRef="Sentry_1xulc49" />
+          <cmmn:exitCriterion id="ExitCriterion_3" sentryRef="Sentry_0m9rm6h" />
+        </cmmn:planItem>
+        <cmmn:sentry id="Sentry_0m9rm6h" />
+        <cmmn:sentry id="Sentry_1xulc49" />
         <cmmn:humanTask id="HumanTask_2" />
       </cmmn:stage>
       <cmmn:humanTask id="HumanTask_3">
@@ -37,6 +53,29 @@
           <cmmn:discretionaryItem id="DIS_Task_3" definitionRef="Task_3" />
         </cmmn:planningTable>
       </cmmn:humanTask>
+      <cmmn:stage id="Stage_3">
+        <cmmn:planningTable id="PlanningTable_1gntpz5">
+          <cmmn:discretionaryItem id="DIS_Stage_2" definitionRef="Stage_2" />
+        </cmmn:planningTable>
+        <cmmn:stage id="Stage_2">
+          <cmmn:planItem id="PI_Task_4" definitionRef="Task_4">
+            <cmmn:entryCriterion id="EntryCriterion_5" sentryRef="Sentry_0m98y9f" />
+            <cmmn:exitCriterion id="ExitCriterion_5" sentryRef="Sentry_0e4kalx" />
+          </cmmn:planItem>
+          <cmmn:planItem id="PI_Task_5" definitionRef="Task_5">
+            <cmmn:entryCriterion id="EntryCriterion_7" sentryRef="Sentry_15l8c3p" />
+          </cmmn:planItem>
+          <cmmn:sentry id="Sentry_0m98y9f" />
+          <cmmn:sentry id="Sentry_0e4kalx" />
+          <cmmn:sentry id="Sentry_15l8c3p">
+            <cmmn:planItemOnPart id="PlanItemOnPart_01dp9jg" sourceRef="PI_Task_4">
+              <cmmn:standardEvent>complete</cmmn:standardEvent>
+            </cmmn:planItemOnPart>
+          </cmmn:sentry>
+          <cmmn:task id="Task_4" />
+          <cmmn:task id="Task_5" />
+        </cmmn:stage>
+      </cmmn:stage>
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmn:textAnnotation id="TextAnnotation_1" />
@@ -44,7 +83,7 @@
     <cmmndi:CMMNDiagram id="Diagram_1">
       <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
       <cmmndi:CMMNShape id="DI_CasePlan_1" cmmnElementRef="CasePlan_1">
-        <dc:Bounds x="25" y="25" width="800" height="500" />
+        <dc:Bounds x="25" y="25" width="800" height="783" />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="DI_PI_Task_1" cmmnElementRef="PI_Task_1">
         <dc:Bounds x="50" y="50" width="100" height="80" />
@@ -97,6 +136,67 @@
         <dc:Bounds x="387" y="229" width="20" height="28" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_3_di" cmmnElementRef="EntryCriterion_3">
+        <dc:Bounds x="88" y="423" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_3_di" cmmnElementRef="ExitCriterion_3">
+        <dc:Bounds x="191" y="424" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_4_di" cmmnElementRef="EntryCriterion_4">
+        <dc:Bounds x="148" y="347" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_4_di" cmmnElementRef="ExitCriterion_4">
+        <dc:Bounds x="114" y="494" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_3_di" cmmnElementRef="PI_Stage_3">
+        <dc:Bounds x="295" y="498" width="454" height="268" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_4_di" cmmnElementRef="PI_Task_4">
+        <dc:Bounds x="395" y="591" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_6_di" cmmnElementRef="EntryCriterion_6">
+        <dc:Bounds x="284" y="557" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_5_di" cmmnElementRef="EntryCriterion_5">
+        <dc:Bounds x="459" y="576" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_5_di" cmmnElementRef="ExitCriterion_5">
+        <dc:Bounds x="413" y="572" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="ExitCriterion_6_di" cmmnElementRef="ExitCriterion_6">
+        <dc:Bounds x="285" y="610" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Stage_2_di" cmmnElementRef="DIS_Stage_2">
+        <dc:Bounds x="355" y="532" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Task_5_di" cmmnElementRef="PI_Task_5">
+        <dc:Bounds x="590" y="580" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_7_di" cmmnElementRef="EntryCriterion_7">
+        <dc:Bounds x="579" y="602" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="PlanItemOnPart_01dp9jg_di" cmmnElementRef="PlanItemOnPart_01dp9jg" targetCMMNElementRef="EntryCriterion_7" isStandardEventVisible="true">
+        <di:waypoint xsi:type="dc:Point" x="495" y="631" />
+        <di:waypoint xsi:type="dc:Point" x="537" y="631" />
+        <di:waypoint xsi:type="dc:Point" x="537" y="616" />
+        <di:waypoint xsi:type="dc:Point" x="579" y="616" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="493" y="635.5" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
     </cmmndi:CMMNDiagram>
   </cmmndi:CMMNDI>
 </cmmn:definitions>

@@ -173,8 +173,105 @@ describe('features/modeling/behavior - replace element', function() {
       }));
 
     });
-  });
 
+
+    describe('append', function() {
+
+      var criterion, host;
+
+      describe('to case plan model', function() {
+
+        beforeEach(inject(function(elementRegistry, cmmnFactory, modeling) {
+
+          // given
+          var source = elementRegistry.get('PI_Task_1');
+          host = elementRegistry.get('CasePlanModel_1');
+
+          var sentry = cmmnFactory.createSentry();
+
+          // when
+          criterion = modeling.appendShape(source, {
+            type: 'cmmn:EntryCriterion',
+            sentryRef: sentry
+          }, { x: 505, y: 165 }, host);
+
+        }));
+
+        it('should execute', function() {
+          expect(criterion.type).to.equal('cmmn:ExitCriterion');
+          expect(criterion.host).to.equal(host);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(criterion.host).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(criterion.type).to.equal('cmmn:ExitCriterion');
+          expect(criterion.host).to.equal(host);
+        }));
+
+      });
+
+      describe('to surrounding stage', function() {
+
+        beforeEach(inject(function(elementRegistry, cmmnFactory, modeling) {
+
+          // given
+          var source = elementRegistry.get('PI_Task_2');
+          host = elementRegistry.get('PI_Stage_1');
+
+          var sentry = cmmnFactory.createSentry();
+
+          // when
+          criterion = modeling.appendShape(source, {
+            type: 'cmmn:EntryCriterion',
+            sentryRef: sentry
+          }, { x: 485, y: 400 }, host);
+
+        }));
+
+        it('should execute', function() {
+          expect(criterion.type).to.equal('cmmn:ExitCriterion');
+          expect(criterion.host).to.equal(host);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(criterion.host).not.to.exist;
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(criterion.type).to.equal('cmmn:ExitCriterion');
+          expect(criterion.host).to.equal(host);
+        }));
+
+      });
+
+    });
+
+  });
 
 
   describe('on part connection', function() {
