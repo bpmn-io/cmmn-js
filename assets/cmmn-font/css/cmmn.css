@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'cmmn';
-  src: url('../font/cmmn.eot?43357868');
-  src: url('../font/cmmn.eot?43357868#iefix') format('embedded-opentype'),
-       url('../font/cmmn.woff2?43357868') format('woff2'),
-       url('../font/cmmn.woff?43357868') format('woff'),
-       url('../font/cmmn.ttf?43357868') format('truetype'),
-       url('../font/cmmn.svg?43357868#cmmn') format('svg');
+  src: url('../font/cmmn.eot?90105622');
+  src: url('../font/cmmn.eot?90105622#iefix') format('embedded-opentype'),
+       url('../font/cmmn.woff2?90105622') format('woff2'),
+       url('../font/cmmn.woff?90105622') format('woff'),
+       url('../font/cmmn.ttf?90105622') format('truetype'),
+       url('../font/cmmn.svg?90105622#cmmn') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'cmmn';
-    src: url('../font/cmmn.svg?43357868#cmmn') format('svg');
+    src: url('../font/cmmn.svg?90105622#cmmn') format('svg');
   }
 }
 */
@@ -62,7 +62,7 @@
 .cmmn-icon-space-tool:before { content: '\e804'; } /* '' */
 .cmmn-icon-hand-tool:before { content: '\e805'; } /* '' */
 .cmmn-icon-case-plan-model:before { content: '\e806'; } /* '' */
-.cmmn-icon-stage:before { content: '\e807'; } /* '' */
+.cmmn-icon-stage-expanded:before { content: '\e807'; } /* '' */
 .cmmn-icon-milestone:before { content: '\e808'; } /* '' */
 .cmmn-icon-text-annotation:before { content: '\e809'; } /* '' */
 .cmmn-icon-task:before { content: '\e80a'; } /* '' */
@@ -90,3 +90,8 @@
 .cmmn-icon-repetition-marker:before { content: '\e820'; } /* '' */
 .cmmn-icon-blocking:before { content: '\e821'; } /* '' */
 .cmmn-icon-required-marker:before { content: '\e822'; } /* '' */
+.cmmn-icon-plan-fragment-collapsed-discretionary:before { content: '\e823'; } /* '' */
+.cmmn-icon-plan-fragment-expanded-discretionary:before { content: '\e824'; } /* '' */
+.cmmn-icon-stage-collapsed:before { content: '\e825'; } /* '' */
+.cmmn-icon-stage-collapsed-discretionary:before { content: '\e826'; } /* '' */
+.cmmn-icon-stage-expanded-discretionary:before { content: '\e827'; } /* '' */
