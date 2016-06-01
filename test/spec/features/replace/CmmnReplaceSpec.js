@@ -906,6 +906,139 @@ describe('features/replace - cmmn replace', function() {
     });
 
 
+    describe('stage (collapsed) -> stage (expanded)', function() {
+
+      beforeEach(inject(function(elementRegistry, cmmnReplace) {
+
+        // given
+        oldElement = elementRegistry.get('PI_Stage_2');
+
+        var newElementData = {
+          type: 'cmmn:PlanItem',
+          definitionType: 'cmmn:Stage',
+          isCollapsed: false
+        };
+
+        // when
+        newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:PlanItem')).to.be.true;
+
+        var definition = bo.definitionRef;
+        expect(is(definition, 'cmmn:Stage')).to.be.true;
+
+        expect(oldElement.businessObject.definitionRef).to.equal(definition);
+
+        expect(bo.di.isCollapsed).not.to.exist;
+      });
+
+
+      it('should undo', inject(function(commandStack, elementRegistry) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(elementRegistry.get(oldElement.id)).to.exist;
+        expect(elementRegistry.get(newElement.id)).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:PlanItem')).to.be.true;
+
+        var definition = bo.definitionRef;
+        expect(is(definition, 'cmmn:Stage')).to.be.true;
+
+        expect(oldElement.businessObject.definitionRef).to.equal(definition);
+
+        expect(bo.di.isCollapsed).not.to.exist;
+      }));
+
+    });
+
+
+    describe('plan fragment (collapsed) -> plan fragment (expanded)', function() {
+
+      beforeEach(inject(function(elementRegistry, cmmnReplace) {
+
+        // given
+        oldElement = elementRegistry.get('DIS_PlanFragment_1');
+
+        var newElementData = {
+          type: 'cmmn:DiscretionaryItem',
+          definitionType: 'cmmn:PlanFragment',
+          isCollapsed: false
+        };
+
+        // when
+        newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+
+      }));
+
+
+      it('should execute', function() {
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:DiscretionaryItem')).to.be.true;
+
+        var definition = bo.definitionRef;
+        expect(is(definition, 'cmmn:PlanFragment')).to.be.true;
+
+        expect(oldElement.businessObject.definitionRef).to.equal(definition);
+
+        expect(bo.di.isCollapsed).not.to.exist;
+      });
+
+
+      it('should undo', inject(function(commandStack, elementRegistry) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(elementRegistry.get(oldElement.id)).to.exist;
+        expect(elementRegistry.get(newElement.id)).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(newElement).to.exist;
+
+        var bo = newElement.businessObject;
+        expect(is(bo, 'cmmn:DiscretionaryItem')).to.be.true;
+
+        var definition = bo.definitionRef;
+        expect(is(definition, 'cmmn:PlanFragment')).to.be.true;
+
+        expect(oldElement.businessObject.definitionRef).to.equal(definition);
+
+        expect(bo.di.isCollapsed).not.to.exist;
+      }));
+
+    });
+
     describe('entry criterion -> exit criterion', function() {
 
       beforeEach(inject(function(elementRegistry, cmmnReplace) {
