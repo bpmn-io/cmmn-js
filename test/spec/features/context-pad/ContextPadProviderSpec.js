@@ -409,6 +409,14 @@ describe('features - context-pad', function() {
       ]);
     }));
 
+
+    it('should provide EntryCriterion attached to milestone entries', inject(function() {
+
+      expectContextPadEntries('EntryCriterion_4', [
+        '!replace'
+      ]);
+    }));
+
   });
 
 });
