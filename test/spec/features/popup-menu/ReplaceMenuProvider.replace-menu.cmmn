@@ -2,7 +2,6 @@
 <cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_185yx09">
     <cmmn:casePlanModel id="CasePlanModel_0ywnlwq">
-
       <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
       <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" />
       <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1">
@@ -11,15 +10,15 @@
       </cmmn:planItem>
       <cmmn:planItem id="PI_Milestone_1" definitionRef="Milestone_1" />
       <cmmn:planItem id="PI_Task_3" definitionRef="Task_3" />
-
+      <cmmn:planItem id="PI_Stage_2" definitionRef="Stage_2" />
       <cmmn:sentry id="Sentry_1xo0r07" />
       <cmmn:sentry id="Sentry_1vizsvh" />
-
       <cmmn:planningTable id="PlanningTable_115x7qu">
         <cmmn:discretionaryItem id="DIS_Task_2" definitionRef="Task_2" />
         <cmmn:discretionaryItem id="DIS_Task_4" definitionRef="Task_4" />
+        <cmmn:discretionaryItem id="DIS_Stage_3" definitionRef="Stage_3" />
+        <cmmn:discretionaryItem id="DIS_PlanFragment_1" definitionRef="PlanFragment_1" />
       </cmmn:planningTable>
-
       <cmmn:eventListener id="EventListener_1" />
       <cmmn:milestone id="Milestone_1" />
       <cmmn:stage id="Stage_1" />
@@ -27,14 +26,16 @@
       <cmmn:task id="Task_2" name="Blocking" />
       <cmmn:task id="Task_3" name="Non-Blocking" isBlocking="false" />
       <cmmn:task id="Task_4" name="Non-Blocking" isBlocking="false" />
-
+      <cmmn:stage id="Stage_2" />
+      <cmmn:stage id="Stage_3" />
+      <cmmn:planFragment id="PlanFragment_1" />
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmndi:CMMNDI>
     <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
       <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
       <cmmndi:CMMNShape id="CasePlanModel_0ywnlwq_di" cmmnElementRef="CasePlanModel_0ywnlwq">
-        <dc:Bounds x="81" y="27" width="512" height="302" />
+        <dc:Bounds x="81" y="27" width="519" height="421" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="PI_Task_1_di" cmmnElementRef="PI_Task_1">
@@ -73,6 +74,18 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="DIS_Task_4_di" cmmnElementRef="DIS_Task_4">
         <dc:Bounds x="480" y="47" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Stage_2_di" cmmnElementRef="PI_Stage_2" isCollapsed="true">
+        <dc:Bounds x="98" y="338" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Stage_3_di" cmmnElementRef="DIS_Stage_3" isCollapsed="true">
+        <dc:Bounds x="228" y="339" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_PlanFragment_1_di" cmmnElementRef="DIS_PlanFragment_1" isCollapsed="true">
+        <dc:Bounds x="360" y="341" width="100" height="80" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>

@@ -1018,7 +1018,7 @@ describe('features/replace - cmmn replace', function() {
 
     beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-    it('should retain isBlocking', inject(function(elementRegistry, cmmnReplace) {
+    it('should retain isBlocking (=false)', inject(function(elementRegistry, cmmnReplace) {
 
       // given
       var task = elementRegistry.get('PI_HumanTask_1');
@@ -1032,6 +1032,42 @@ describe('features/replace - cmmn replace', function() {
 
       // then
       expect(newElement.businessObject.definitionRef.isBlocking).to.be.false;
+
+    }));
+
+
+    it('should retain isBlocking (=true)', inject(function(elementRegistry, cmmnReplace) {
+
+      // given
+      var task = elementRegistry.get('PI_HumanTask_2');
+      var newElementData = {
+        type: 'cmmn:PlanItem',
+        definitionType: 'cmmn:CaseTask'
+      };
+
+      // when
+      var newElement = cmmnReplace.replaceElement(task, newElementData);
+
+      // then
+      expect(newElement.businessObject.definitionRef.isBlocking).to.be.true;
+
+    }));
+
+
+    it('should set isBlocking to true', inject(function(elementRegistry, cmmnReplace) {
+
+      // given
+      var task = elementRegistry.get('DIS_PlanFragment_1');
+      var newElementData = {
+        type: 'cmmn:PlanItem',
+        definitionType: 'cmmn:HumanTask'
+      };
+
+      // when
+      var newElement = cmmnReplace.replaceElement(task, newElementData);
+
+      // then
+      expect(newElement.businessObject.definitionRef.isBlocking).to.be.true;
 
     }));
 

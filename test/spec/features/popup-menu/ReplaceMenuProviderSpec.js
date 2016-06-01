@@ -405,7 +405,7 @@ describe('features/popup-menu - replace menu provider', function() {
     });
 
 
-    describe('stage', function() {
+    describe('stage (expanded)', function() {
 
       it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
@@ -418,6 +418,63 @@ describe('features/popup-menu - replace menu provider', function() {
 
         // then
         expect(getEntries(popupMenu)).to.have.length(2);
+
+      }));
+
+    });
+
+
+    describe('stage (collapsed)', function() {
+
+      it('should contain all except the current one',
+        inject(function(popupMenu, elementRegistry) {
+
+        // given
+        var eventListener = elementRegistry.get('PI_Stage_2');
+
+        // when
+        openPopup(eventListener);
+
+        // then
+        expect(getEntries(popupMenu)).to.have.length(15);
+
+      }));
+
+    });
+
+
+    describe('discretionary stage (collapsed)', function() {
+
+      it('should contain all except the current one',
+        inject(function(popupMenu, elementRegistry) {
+
+        // given
+        var eventListener = elementRegistry.get('DIS_Stage_3');
+
+        // when
+        openPopup(eventListener);
+
+        // then
+        expect(getEntries(popupMenu)).to.have.length(15);
+
+      }));
+
+    });
+
+
+    describe('plan fragment (collapsed)', function() {
+
+      it('should contain all except the current one',
+        inject(function(popupMenu, elementRegistry) {
+
+        // given
+        var eventListener = elementRegistry.get('DIS_PlanFragment_1');
+
+        // when
+        openPopup(eventListener);
+
+        // then
+        expect(getEntries(popupMenu)).to.have.length(15);
 
       }));
 
