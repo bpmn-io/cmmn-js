@@ -1140,4 +1140,29 @@ describe('features/modeling/rules - CmmnRules', function() {
 
   });
 
+  describe('artifact move', function() {
+
+    var testXML = require('./CmmnRules.artifact.cmmn');
+
+    beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+
+    it('mode selection including artifacts', inject(function(elementRegistry) {
+
+      // when
+      var elements = [
+        elementRegistry.get('CasePlanModel_1'),
+        elementRegistry.get('TextAnnotation_1'),
+        elementRegistry.get('Association_1_di')
+      ];
+
+      // then
+      expectCanMove(elements, 'CMMNDiagram_1', {
+        attach: false,
+        move: true
+      });
+    }));
+
+  });
+
 });

@@ -59,7 +59,7 @@
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="DI_Exit_1" cmmnElementRef="Exit_1">
-        <dc:Bounds x="415" y="125" width="20" height="28" />
+        <dc:Bounds x="241" y="124" width="20" height="28" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="DI_CollapsedStage_1" cmmnElementRef="PI_CollapsedStage_1" isCollapsed="true">

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PlanItem_1" definitionRef="Task_1" />
+      <cmmn:task id="Task_1" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmn:textAnnotation id="TextAnnotation_1" />
+  <cmmn:association id="Association_1" sourceRef="PlanItem_1" targetRef="TextAnnotation_1" />
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_1">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="114" y="63" width="391" height="266" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_1_di" cmmnElementRef="PlanItem_1">
+        <dc:Bounds x="188" y="168" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="TextAnnotation_1_di" cmmnElementRef="TextAnnotation_1">
+        <dc:Bounds x="385" y="201" width="100" height="30" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="Association_1_di" cmmnElementRef="Association_1">
+        <di:waypoint xsi:type="dc:Point" x="288" y="208" />
+        <di:waypoint xsi:type="dc:Point" x="337" y="208" />
+        <di:waypoint xsi:type="dc:Point" x="337" y="216" />
+        <di:waypoint xsi:type="dc:Point" x="385" y="216" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNEdge>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
