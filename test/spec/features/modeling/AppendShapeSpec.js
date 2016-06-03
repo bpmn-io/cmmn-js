@@ -518,4 +518,183 @@ describe('features/modeling - append shape', function() {
 
   });
 
+
+  describe('discretionary item', function() {
+
+    var diagramXML = require('../../../fixtures/cmmn/simple.cmmn');
+
+    var testModules = [ coreModule, modelingModule ];
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var source, discretionaryItemShape, discretionaryItem;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+
+      // given
+      source = elementRegistry.get('PI_Task_1');
+
+      // when
+      discretionaryItemShape = modeling.appendShape(source, {
+        type: 'cmmn:DiscretionaryItem',
+        definitionType: 'cmmn:Task'
+      }, { x: 300, y: 150 });
+
+      discretionaryItem = discretionaryItemShape.businessObject;
+
+    }));
+
+
+    describe('should create shape', function() {
+
+      it('should execute', inject(function(elementRegistry) {
+        // then
+        expect(discretionaryItemShape).to.exist;
+        expect(elementRegistry.get(discretionaryItemShape.id)).to.exist;
+
+        expect(discretionaryItem).to.exist;
+        expect(discretionaryItem.$type).to.equal('cmmn:DiscretionaryItem');
+      }));
+
+
+      it('should undo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(elementRegistry.get(discretionaryItemShape.id)).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(discretionaryItemShape).to.exist;
+        expect(elementRegistry.get(discretionaryItemShape.id)).to.exist;
+
+        expect(discretionaryItem).to.exist;
+        expect(discretionaryItem.$type).to.equal('cmmn:DiscretionaryItem');
+      }));
+
+    });
+
+
+    describe('should add to parent (human task)', function() {
+
+      it('should execute', inject(function(elementRegistry) {
+        // then
+        var humanTask = source.businessObject.definitionRef;
+        expect(discretionaryItem.$parent).to.equal(humanTask.planningTable);
+        expect(humanTask.planningTable.get('tableItems')).to.include(discretionaryItem);
+      }));
+
+
+      it('should undo', inject(function(elementRegistry, commandStack) {
+        // given
+        var humanTask = source.businessObject.definitionRef;
+        var planningTable = humanTask.planningTable;
+
+        // when
+        commandStack.undo();
+
+        // then
+        expect(discretionaryItem.$parent).not.to.exist;
+        expect(humanTask.planningTable).not.to.exist;
+        expect(planningTable.get('tableItems')).not.to.include(discretionaryItem);
+      }));
+
+
+      it('should redo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        var humanTask = source.businessObject.definitionRef;
+        expect(discretionaryItem.$parent).to.equal(humanTask.planningTable);
+        expect(humanTask.planningTable.get('tableItems')).to.include(discretionaryItem);
+      }));
+
+    });
+
+
+    describe('should create DI', function() {
+
+      it('should execute', inject(function(elementRegistry) {
+        // then
+        expect(discretionaryItem.di).to.exist;
+        expect(discretionaryItem.di.$parent).to.equal(source.businessObject.di.$parent);
+      }));
+
+
+      it('should undo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(discretionaryItem.di).to.exist;
+        expect(discretionaryItem.di.$parent).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(discretionaryItem.di).to.exist;
+        expect(discretionaryItem.di.$parent).to.eql(source.businessObject.di.$parent);
+      }));
+
+    });
+
+
+    describe('should add connection', function() {
+
+      var connection;
+
+      beforeEach(function() {
+        connection = source.outgoing[0].businessObject;
+      });
+
+      it('should execute', inject(function(elementRegistry) {
+        // then
+        expect(connection).to.exist;
+        expect(connection.$type).to.equal('cmmndi:CMMNEdge');
+        expect(connection.cmmnElemenRef).not.to.exist;
+        expect(connection.$parent).to.equal(source.businessObject.di.$parent);
+      }));
+
+
+      it('should undo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(connection).to.exist;
+        expect(connection.$type).to.equal('cmmndi:CMMNEdge');
+        expect(connection.cmmnElemenRef).not.to.exist;
+        expect(connection.$parent).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(elementRegistry, commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(connection).to.exist;
+        expect(connection.$type).to.equal('cmmndi:CMMNEdge');
+        expect(connection.cmmnElemenRef).not.to.exist;
+        expect(connection.$parent).to.equal(source.businessObject.di.$parent);
+      }));
+
+    });
+
+  });
+
 });

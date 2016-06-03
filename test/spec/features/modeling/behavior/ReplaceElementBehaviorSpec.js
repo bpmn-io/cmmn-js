@@ -604,6 +604,51 @@ describe('features/modeling/behavior - replace element', function() {
     });
 
 
+    describe('append', function() {
+
+      var item;
+
+      beforeEach(inject(function(elementFactory, elementRegistry, modeling) {
+
+        // given
+        var source = elementRegistry.get('PI_HumanTask_2');
+        var target = elementRegistry.get('DIS_PlanFragment_1');
+
+        // when
+        item = modeling.appendShape(source, {
+          type: 'cmmn:DiscretionaryItem',
+          definitionType: 'cmmn:Task'
+        }, { x: 750, y: 300 }, target);
+
+      }));
+
+      it('should execute', function() {
+        // then
+        expect(item.type).to.equal('cmmn:PlanItem');
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(item.type).to.equal('cmmn:PlanItem');
+        expect(item.parent).not.to.exist;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(item.type).to.equal('cmmn:PlanItem');
+      }));
+
+    });
+
     describe('move', function() {
 
       var item, newItem, planFragment;

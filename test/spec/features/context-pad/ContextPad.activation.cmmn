@@ -2,7 +2,6 @@
 <cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1tsop4c">
     <cmmn:casePlanModel id="CasePlanModel_1">
-
       <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1">
         <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1geqba4" />
         <cmmn:exitCriterion id="ExitCriterion_1" sentryRef="Sentry_1or9vhl" />
@@ -18,7 +17,8 @@
       <cmmn:planItem id="PI_Milestone_1" definitionRef="Milestone_1">
         <cmmn:entryCriterion id="EntryCriterion_4" sentryRef="Sentry_0nsbbnz" />
       </cmmn:planItem>
-
+      <cmmn:planItem id="PI_Blocking_HumanTask_1" definitionRef="Blocking_HumanTask_1" />
+      <cmmn:planItem id="PI_Non_Blocking_HumanTask_1" definitionRef="Non_Blocking_HumanTask_1" />
       <cmmn:sentry id="Sentry_1gtat6o" />
       <cmmn:sentry id="Sentry_1geqba4" />
       <cmmn:sentry id="Sentry_1or9vhl" />
@@ -29,7 +29,6 @@
       <cmmn:sentry id="Sentry_1iz9nhq" />
       <cmmn:sentry id="Sentry_068hny8" />
       <cmmn:sentry id="Sentry_04aawpy" />
-
       <cmmn:planningTable id="PlanningTable_1ne4am1">
         <cmmn:discretionaryItem id="DIS_PlanFragment_1" definitionRef="PlanFragment_1" />
         <cmmn:discretionaryItem id="DIS_Blocking_Task_2" definitionRef="Blocking_Task_2">
@@ -39,8 +38,9 @@
         <cmmn:discretionaryItem id="DIS_Non_Blocking_Task_2" definitionRef="Non_Blocking_Task_2">
           <cmmn:entryCriterion id="EntryCriterion_6" sentryRef="Sentry_1iz9nhq" />
         </cmmn:discretionaryItem>
+        <cmmn:discretionaryItem id="DIS_Blocking_HumanTask_2" definitionRef="Blocking_HumanTask_2" />
+        <cmmn:discretionaryItem id="DIS_Non_Blocking_HumanTask_2" definitionRef="Non_Blocking_HumanTask_2" />
       </cmmn:planningTable>
-
       <cmmn:stage id="Stage_1" />
       <cmmn:planFragment id="PlanFragment_1" />
       <cmmn:task id="Blocking_Task_1" name="Blocking" />
@@ -49,19 +49,22 @@
       <cmmn:task id="Non_Blocking_Task_2" name="Non-Blocking" isBlocking="false" />
       <cmmn:eventListener id="EventListener_1" />
       <cmmn:milestone id="Milestone_1" />
+      <cmmn:humanTask id="Blocking_HumanTask_1" />
+      <cmmn:humanTask id="Non_Blocking_HumanTask_1" isBlocking="false" />
+      <cmmn:humanTask id="Blocking_HumanTask_2" />
+      <cmmn:humanTask id="Non_Blocking_HumanTask_2" isBlocking="false" />
       <cmmn:exitCriterion id="ExitCriterion_4" sentryRef="Sentry_1gtat6o" />
-
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmndi:CMMNDI>
     <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
       <cmmndi:Size xsi:type="dc:Dimension" width="1313.31396484375" height="1009" />
       <cmmndi:CMMNShape id="CasePlanModel_1_di" cmmnElementRef="CasePlanModel_1">
-        <dc:Bounds x="83" y="38" width="624" height="383" />
+        <dc:Bounds x="83" y="38" width="624" height="497" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="ExitCriterion_4_di" cmmnElementRef="ExitCriterion_4">
-        <dc:Bounds x="69" y="209" width="20" height="28" />
+        <dc:Bounds x="69" y="263" width="20" height="28" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
@@ -132,6 +135,22 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="ExitCriterion_3_di" cmmnElementRef="ExitCriterion_3">
         <dc:Bounds x="541" y="198" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Blocking_HumanTask_1_di" cmmnElementRef="PI_Blocking_HumanTask_1">
+        <dc:Bounds x="127" y="429" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PI_Non_Blocking_HumanTask_1_di" cmmnElementRef="PI_Non_Blocking_HumanTask_1">
+        <dc:Bounds x="264" y="429" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Blocking_HumanTask_2_di" cmmnElementRef="DIS_Blocking_HumanTask_2">
+        <dc:Bounds x="399" y="429" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DIS_Non_Blocking_HumanTask_2_di" cmmnElementRef="DIS_Non_Blocking_HumanTask_2">
+        <dc:Bounds x="534" y="429" width="100" height="80" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>

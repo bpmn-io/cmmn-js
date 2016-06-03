@@ -271,6 +271,7 @@ describe('features - context-pad', function() {
       expectContextPadEntries('PI_Stage_1', [
         'replace',
         'connect',
+        'append.entryCriterion',
         'append.text-annotation'
       ]);
     }));
@@ -291,6 +292,7 @@ describe('features - context-pad', function() {
       expectContextPadEntries('PI_Blocking_Task_1', [
         'replace',
         'connect',
+        'append.entryCriterion',
         'append.text-annotation'
       ]);
     }));
@@ -301,6 +303,7 @@ describe('features - context-pad', function() {
       expectContextPadEntries('PI_Non_Blocking_Task_1', [
         'replace',
         'connect',
+        'append.entryCriterion',
         'append.text-annotation'
       ]);
     }));
@@ -321,6 +324,54 @@ describe('features - context-pad', function() {
       expectContextPadEntries('DIS_Non_Blocking_Task_2', [
         'replace',
         'connect',
+        'append.text-annotation'
+      ]);
+    }));
+
+
+    it('should provide blocking HumanTask (plan item) entries', inject(function() {
+
+      expectContextPadEntries('PI_Blocking_HumanTask_1', [
+        'replace',
+        'connect',
+        'append.entryCriterion',
+        'append.discretionaryItem',
+        'append.text-annotation'
+      ]);
+    }));
+
+
+    it('should provide non-blocking HumanTask (plan item) entries', inject(function() {
+
+      expectContextPadEntries('PI_Non_Blocking_HumanTask_1', [
+        'replace',
+        'connect',
+        'append.entryCriterion',
+        '!append.discretionaryItem',
+        'append.text-annotation'
+      ]);
+    }));
+
+
+    it('should provide blocking HumanTask (discretionary item) entries', inject(function() {
+
+      expectContextPadEntries('DIS_Blocking_HumanTask_2', [
+        'replace',
+        'connect',
+        '!append.entryCriterion',
+        'append.discretionaryItem',
+        'append.text-annotation'
+      ]);
+    }));
+
+
+    it('should provide non-blocking HumanTask (discretionary item) entries', inject(function() {
+
+      expectContextPadEntries('DIS_Non_Blocking_HumanTask_2', [
+        'replace',
+        'connect',
+        '!append.entryCriterion',
+        '!append.discretionaryItem',
         'append.text-annotation'
       ]);
     }));
