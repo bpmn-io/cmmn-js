@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_18u418t">
+    <cmmn:casePlanModel id="CasePlanModel_1">
+      <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
+      <cmmn:stage id="Stage_1">
+        <cmmn:planItem id="PI_Task_1" definitionRef="Task_1">
+          <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1" />
+        </cmmn:planItem>
+        <cmmn:sentry id="Sentry_1" />
+        <cmmn:task id="Task_1" />
+      </cmmn:stage>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram di:id="CMMNDiagram_1">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape di:id="CasePlanModel_1_di" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="65" y="35" width="400" height="250" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape di:id="PI_Stage_1_di" cmmnElementRef="PI_Stage_1">
+        <dc:Bounds x="77" y="55" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape di:id="PI_Task_1_di" cmmnElementRef="PI_Task_1">
+        <dc:Bounds x="190" y="100" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape di:id="EntryCriterion_1_di" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="181" y="131" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
