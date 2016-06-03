@@ -712,4 +712,74 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
   });
 
+
+  describe('switch source/target', function() {
+
+    var diagramXML = require('./PlanningTableUpdater.switch-source-target.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var oldSource, oldTarget, newTarget, casePlanModel;
+
+    beforeEach(inject(function(elementRegistry, modeling) {
+
+      // given
+      var connection = elementRegistry.get('DiscretionaryConnection_1');
+
+      oldSource = connection.source;
+      oldTarget = connection.target;
+      casePlanModel = elementRegistry.get('CasePlanModel_1').businessObject;
+
+      newTarget = elementRegistry.get('DIS_Task_3');
+
+      var newWaypoints = [{
+        x: newTarget.x + 50,
+        y: newTarget.y + 40
+      }, connection.waypoints[1]];
+
+      // when
+      modeling.reconnectStart(connection, newTarget, newWaypoints);
+
+      newTarget = connection.target;
+
+    }));
+
+    it('should execute', function() {
+      var tableItems = oldTarget.businessObject.definitionRef.planningTable.get('tableItems');
+      
+      // then
+      expect(tableItems).to.include(newTarget.businessObject);
+      expect(casePlanModel.planningTable.get('tableItems')).to.include(oldTarget.businessObject);
+      expect(oldSource.planningTable).not.to.exist;
+    });
+
+
+    it('should undo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+
+      var tableItems = oldSource.businessObject.definitionRef.planningTable.get('tableItems');
+      
+      // then
+      expect(tableItems).to.include(oldTarget.businessObject);
+      expect(casePlanModel.planningTable.get('tableItems')).to.include(newTarget.businessObject);
+      expect(oldTarget.planningTable).not.to.exist;
+    }));
+
+
+    it('should redo', inject(function(commandStack) {
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      var tableItems = oldTarget.businessObject.definitionRef.planningTable.get('tableItems');
+      
+      // then
+      expect(tableItems).to.include(newTarget.businessObject);
+      expect(casePlanModel.planningTable.get('tableItems')).to.include(oldTarget.businessObject);
+      expect(oldSource.planningTable).not.to.exist;
+    }));
+
+  });
+
 });

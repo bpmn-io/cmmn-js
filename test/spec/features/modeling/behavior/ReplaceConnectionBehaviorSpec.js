@@ -736,4 +736,153 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
 
   });
 
+
+  describe('switch source/target', function() {
+
+    var diagramXML = require('./ReplaceConnectionBehavior.connection.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    describe('reconnectEnd', function() {
+
+      var connection, oldSource, newSource, oldTarget;
+
+      describe('plan item on part connection', function() {
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          connection = elementRegistry.get('PlanItemOnPart_2_di');
+
+          oldSource = connection.source;
+          oldTarget = connection.target;
+
+          newSource = elementRegistry.get('PI_Task_7');
+
+          var newWaypoints = [
+            connection.waypoints[0],
+            {
+              x: newSource.x,
+              y: newSource.y + 20
+            }
+          ];
+
+          // when
+          modeling.reconnectEnd(connection, newSource, newWaypoints);
+
+        }));
+
+
+        it('should execute', function() {
+          // then
+          expect(connection.source).to.equal(newSource);
+          expect(connection.target).to.equal(oldSource);
+
+          expect(connection.businessObject.cmmnElementRef.sourceRef).to.equal(newSource.businessObject);
+          expect(connection.businessObject.targetCMMNElementRef).to.equal(oldSource.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection.source).to.equal(oldSource);
+          expect(connection.target).to.equal(oldTarget);
+
+          expect(connection.businessObject.cmmnElementRef.sourceRef).to.equal(oldSource.host.businessObject);
+          expect(connection.businessObject.cmmnElementRef.exitCriterionRef).to.equal(oldSource.businessObject);
+          expect(connection.businessObject.targetCMMNElementRef).to.equal(oldTarget.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection.source).to.equal(newSource);
+          expect(connection.target).to.equal(oldSource);
+
+          expect(connection.businessObject.cmmnElementRef.sourceRef).to.equal(newSource.businessObject);
+          expect(connection.businessObject.targetCMMNElementRef).to.equal(oldSource.businessObject);
+
+        }));
+
+      });
+
+    });
+
+
+    describe('reconnectStart', function() {
+
+      var connection, oldSource, oldTarget, newTarget;
+
+      describe('discretionary connection', function() {
+
+        beforeEach(inject(function(elementRegistry, modeling) {
+
+          // given
+          connection = elementRegistry.get('DiscretionaryConnection_1');
+
+          oldSource = connection.source;
+          oldTarget = connection.target;
+
+          newTarget = elementRegistry.get('DIS_Task_8');
+
+          var newWaypoints = [{
+            x: newTarget.x + 50,
+            y: newTarget.y + 40
+          }, connection.waypoints[1]];
+
+          // when
+          modeling.reconnectStart(connection, newTarget, newWaypoints);
+
+        }));
+
+        it('should execute', function() {
+          // then
+          expect(connection.source).to.equal(oldTarget);
+          expect(connection.target).to.equal(newTarget);
+
+          expect(connection.businessObject.sourceCMMNElementRef).to.equal(oldTarget.businessObject);
+          expect(connection.businessObject.targetCMMNElementRef).to.equal(newTarget.businessObject);
+        });
+
+
+        it('should undo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+
+          // then
+          expect(connection.source).to.equal(oldSource);
+          expect(connection.target).to.equal(oldTarget);
+
+          expect(connection.businessObject.sourceCMMNElementRef).to.equal(oldSource.businessObject);
+          expect(connection.businessObject.targetCMMNElementRef).to.equal(oldTarget.businessObject);
+        }));
+
+
+        it('should redo', inject(function(commandStack) {
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          expect(connection.source).to.equal(oldTarget);
+          expect(connection.target).to.equal(newTarget);
+
+          expect(connection.businessObject.sourceCMMNElementRef).to.equal(oldTarget.businessObject);
+          expect(connection.businessObject.targetCMMNElementRef).to.equal(newTarget.businessObject);
+
+        }));
+
+      });
+
+    });
+
+  });
+
 });
