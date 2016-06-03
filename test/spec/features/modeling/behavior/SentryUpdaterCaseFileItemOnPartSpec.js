@@ -226,16 +226,21 @@ describe('features/modeling - #SentryUpdater - case file item on part', function
 
       it('should execute', function() {
         // then
-        expect(onPart.standardEvent).to.equal('create');
+        expect(criterion.sentryRef).to.exist;
+        expect(criterion.sentryRef.get('onParts')).to.include(onPart);
       });
 
 
       it('should undo', inject(function(commandStack) {
+        // given
+        var sentry = criterion.sentryRef;
+
         // when
         commandStack.undo();
 
         // then
-        expect(onPart.standardEvent).not.to.exist;
+        expect(criterion.sentryRef).not.to.exist;
+        expect(sentry.get('onParts')).not.to.include(onPart);
       }));
 
 
@@ -245,7 +250,8 @@ describe('features/modeling - #SentryUpdater - case file item on part', function
         commandStack.redo();
 
         // then
-        expect(onPart.standardEvent).to.equal('create');
+        expect(criterion.sentryRef).to.exist;
+        expect(criterion.sentryRef.get('onParts')).to.include(onPart);
       }));
 
     });
