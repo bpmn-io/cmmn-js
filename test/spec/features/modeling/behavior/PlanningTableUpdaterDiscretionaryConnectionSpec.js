@@ -592,7 +592,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
     beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-    var oldTarget, newTarget, source, oldTargetDefinition, newTargetDefinition, casePlanModel;
+    var oldTarget, newTarget, source, casePlanModel;
 
     describe('should remove/add to planning table', function() {
 
@@ -600,11 +600,9 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
         // given
         var connection = elementRegistry.get('DiscretionaryConnection_2');
         oldTarget = connection.target.businessObject;
-        oldTargetDefinition = oldTarget.definitionRef;
 
         var newTargetShape = elementRegistry.get('DIS_Task_1');
         newTarget = newTargetShape.businessObject;
-        newTargetDefinition = newTarget.definitionRef;
 
         source = connection.source.businessObject.definitionRef;
 
@@ -663,7 +661,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
   });
 
-  describe('delete human task plan item with discretionary items', function () {
+  describe('delete human task plan item with discretionary items', function() {
 
     var diagramXML = require('./PlanningTableUpdater.without-discretionary-connection.cmmn');
 

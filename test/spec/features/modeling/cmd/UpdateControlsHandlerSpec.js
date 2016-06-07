@@ -383,9 +383,6 @@ describe('features/modeling - update controls', function() {
 
 
           it('should undo', inject(function(commandStack) {
-            // given
-            var itemControl = task.businessObject.itemControl;
-
             // when
             commandStack.undo();
 

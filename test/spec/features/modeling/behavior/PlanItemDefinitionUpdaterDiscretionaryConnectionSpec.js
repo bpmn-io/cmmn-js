@@ -267,7 +267,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater - discretionary connect
       var connection = elementRegistry.get('DiscretionaryConnection_1');
 
       target1Definition = connection.target.businessObject.definitionRef;
-      target2Definition = elementRegistry.get('DIS_Task_1').businessObject.definitionRef
+      target2Definition = elementRegistry.get('DIS_Task_1').businessObject.definitionRef;
 
       var stage1 = elementRegistry.get('PI_Stage_1');
       stage1Definition = stage1.businessObject.definitionRef;

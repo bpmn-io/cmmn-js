@@ -1,7 +1,7 @@
 'use strict';
 
 
-var TestHelper = require('../../TestHelper');
+require('../../TestHelper');
 var coreModule = require('../../../lib/core');
 
 /* global bootstrapViewer, inject */
@@ -200,8 +200,6 @@ describe('ItemRegistry', function() {
       // given
       var oldId = 'PI_Task_1',
           newId = '56';
-
-      var item = itemRegistry.get(oldId);
 
       // when
       itemRegistry.updateId(oldId, newId);

@@ -526,17 +526,15 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
 
     var diagramXML = require('./PlanItemDefinitionUpdater.nested-planning-table.cmmn');
 
-    var discretionaryItem, stage, planningTable;
+    var stage;
 
     beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
     beforeEach(inject(function(elementRegistry, modeling) {
       // given
       var shape = elementRegistry.get('DIS_HumanTask_1');
-      discretionaryItem = shape.businessObject;
 
       stage = elementRegistry.get('PI_Stage_1').businessObject.definitionRef;
-      planningTable = stage.planningTable;
 
       // when
       modeling.removeElements([ shape ]);

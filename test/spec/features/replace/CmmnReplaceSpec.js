@@ -1,6 +1,6 @@
 'use strict';
 
-var TestHelper = require('../../../TestHelper');
+require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
@@ -1267,7 +1267,7 @@ describe('features/replace - cmmn replace', function() {
       expect(newElement.y).to.equal(task.y);
     }));
 
-    it('should keep label position', inject(function (elementRegistry, cmmnReplace, modeling) {
+    it('should keep label position', inject(function(elementRegistry, cmmnReplace, modeling) {
 
       // given
       var listener = elementRegistry.get('PI_EventListener_1');
@@ -1491,19 +1491,20 @@ describe('features/replace - cmmn replace', function() {
     it('should select after replace',
       inject(function(elementRegistry, selection, cmmnReplace) {
 
-      // given
-      var task = elementRegistry.get('PI_Task_1');
-      var newElementData = {
-        type: 'cmmn:PlanItem',
-        definitionType: 'cmmn:HumanTask'
-      };
+        // given
+        var task = elementRegistry.get('PI_Task_1');
+        var newElementData = {
+          type: 'cmmn:PlanItem',
+          definitionType: 'cmmn:HumanTask'
+        };
 
-      // when
-      var newElement = cmmnReplace.replaceElement(task, newElementData);
+        // when
+        var newElement = cmmnReplace.replaceElement(task, newElementData);
 
-      // then
-      expect(selection.get()).to.include(newElement);
-    }));
+        // then
+        expect(selection.get()).to.include(newElement);
+      })
+    );
 
   });
 
@@ -1517,41 +1518,43 @@ describe('features/replace - cmmn replace', function() {
     it('should keep interior labels',
       inject(function(elementRegistry, cmmnReplace) {
 
-      // given
-      var task = elementRegistry.get('PI_Task_1');
+        // given
+        var task = elementRegistry.get('PI_Task_1');
 
-      var newElementData =  {
-        type: 'cmmn:PlanItem',
-        definitionType: 'cmmn:HumanTask'
-      };
+        var newElementData =  {
+          type: 'cmmn:PlanItem',
+          definitionType: 'cmmn:HumanTask'
+        };
 
-      // when
-      var newElement = cmmnReplace.replaceElement(task, newElementData);
+        // when
+        var newElement = cmmnReplace.replaceElement(task, newElementData);
 
-      // then
-      expect(newElement.businessObject.definitionRef.name).to.equal('FOO');
-    }));
+        // then
+        expect(newElement.businessObject.definitionRef.name).to.equal('FOO');
+      })
+    );
 
 
     it('should keep exterior labels',
       inject(function(elementRegistry, cmmnReplace) {
 
-      // given
-      var startEvent = elementRegistry.get('PI_EventListener_1');
+        // given
+        var startEvent = elementRegistry.get('PI_EventListener_1');
 
-      var newElementData = {
-        type: 'cmmn:PlanItem',
-        definitionType: 'cmmn:TimerEventListener'
-      };
+        var newElementData = {
+          type: 'cmmn:PlanItem',
+          definitionType: 'cmmn:TimerEventListener'
+        };
 
-      // when
-      var newElement = cmmnReplace.replaceElement(startEvent, newElementData);
+        // when
+        var newElement = cmmnReplace.replaceElement(startEvent, newElementData);
 
-      // then
-      expect(newElement.label.hidden).to.equal(false);
-      expect(newElement.label.labelTarget).to.equal(newElement);
-      expect(newElement.businessObject.definitionRef.name).to.equal('Keep label');
-    }));
+        // then
+        expect(newElement.label.hidden).to.equal(false);
+        expect(newElement.label.labelTarget).to.equal(newElement);
+        expect(newElement.businessObject.definitionRef.name).to.equal('Keep label');
+      })
+    );
 
   });
 

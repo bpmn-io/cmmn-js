@@ -61,7 +61,7 @@ describe('features/modeling/behavior - replace element', function() {
 
 
       var replacement = elementRegistry.filter(function(element) {
-        if(element.businessObject && element.businessObject.sentryRef === sentry) {
+        if (element.businessObject && element.businessObject.sentryRef === sentry) {
           return true;
         }
       })[0];
@@ -86,7 +86,7 @@ describe('features/modeling/behavior - replace element', function() {
 
 
       var criterion = elementRegistry.filter(function(element) {
-        if(element.businessObject && element.businessObject.sentryRef === sentry) {
+        if (element.businessObject && element.businessObject.sentryRef === sentry) {
           return true;
         }
       })[0];
@@ -132,7 +132,7 @@ describe('features/modeling/behavior - replace element', function() {
 
         var sentry = oldCriterion.businessObject.sentryRef;
         newCriterion = elementRegistry.filter(function(element) {
-          if(element.businessObject && element.businessObject.sentryRef === sentry) {
+          if (element.businessObject && element.businessObject.sentryRef === sentry) {
             return true;
           }
         })[0];
@@ -659,11 +659,11 @@ describe('features/modeling/behavior - replace element', function() {
 
         findItem = function(definition) {
           return elementRegistry.filter(function(element) {
-            if(element.businessObject && element.businessObject.definitionRef === definition) {
+            if (element.businessObject && element.businessObject.definitionRef === definition) {
               return true;
             }
           })[0];
-        }
+        };
 
       }));
 
@@ -1060,11 +1060,11 @@ describe('features/modeling/behavior - replace element', function() {
 
         findItem = function(definition) {
           return elementRegistry.filter(function(element) {
-            if(element.businessObject && element.businessObject.definitionRef === definition) {
+            if (element.businessObject && element.businessObject.definitionRef === definition) {
               return true;
             }
           })[0];
-        }
+        };
 
       }));
 

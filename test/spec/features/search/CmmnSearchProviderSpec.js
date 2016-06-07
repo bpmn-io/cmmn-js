@@ -45,12 +45,12 @@ describe('features - CMMN search provider', function() {
 
     // then
     expect(elements[0].primaryTokens).to.eql([
-      { normal: 'has matched ID'}
+      { normal: 'has matched ID' }
     ]);
     expect(elements[0].secondaryTokens).to.eql([
-      { normal: 'some_'},
-      { matched: 'PlanItemTask'},
-      { normal: '_123456_id'},
+      { normal: 'some_' },
+      { matched: 'PlanItemTask' },
+      { normal: '_123456_id' }
     ]);
   }));
 
@@ -66,7 +66,7 @@ describe('features - CMMN search provider', function() {
 
       // then
       expect(elements[0].primaryTokens).to.eql([
-        { matched: 'all matched'}
+        { matched: 'all matched' }
       ]);
     }));
 
@@ -80,8 +80,8 @@ describe('features - CMMN search provider', function() {
 
       // then
       expect(elements[0].primaryTokens).to.eql([
-        { matched: 'before'},
-        { normal: ' 321'}
+        { matched: 'before' },
+        { normal: ' 321' }
       ]);
     }));
 
@@ -95,9 +95,9 @@ describe('features - CMMN search provider', function() {
 
       // then
       expect(elements[0].primaryTokens).to.eql([
-        { normal: '123 '},
-        { matched: 'middle'},
-        { normal: ' 321'}
+        { normal: '123 ' },
+        { matched: 'middle' },
+        { normal: ' 321' }
       ]);
     }));
 
@@ -111,8 +111,8 @@ describe('features - CMMN search provider', function() {
 
       // then
       expect(elements[0].primaryTokens).to.eql([
-        { normal: '123 '},
-        { matched: 'after'}
+        { normal: '123 ' },
+        { matched: 'after' }
       ]);
     }));
 

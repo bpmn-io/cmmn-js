@@ -17,7 +17,7 @@ describe('features/modeling - update attachment', function() {
 
   var rootElement;
 
-  beforeEach(inject(function(canvas){
+  beforeEach(inject(function(canvas) {
     rootElement = canvas.getRootElement();
   }));
 

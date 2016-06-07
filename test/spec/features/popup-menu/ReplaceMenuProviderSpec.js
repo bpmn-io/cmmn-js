@@ -48,7 +48,7 @@ describe('features/popup-menu - replace menu provider', function() {
   var openPopup = function(element, offset) {
     offset = offset || 100;
 
-    TestHelper.getCmmnJs().invoke(function(popupMenu){
+    TestHelper.getCmmnJs().invoke(function(popupMenu) {
 
       popupMenu.create('cmmn-replace', element);
 
@@ -271,17 +271,18 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var eventListener = elementRegistry.get('PI_EventListener_1');
+          // given
+          var eventListener = elementRegistry.get('PI_EventListener_1');
 
-        // when
-        openPopup(eventListener);
+          // when
+          openPopup(eventListener);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-event-listener-plan-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(2);
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-event-listener-plan-item')).to.be.null;
+          expect(getEntries(popupMenu)).to.have.length(2);
 
-      }));
+        })
+      );
 
     });
 
@@ -291,97 +292,103 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should contain all except the current one (blocking plan item)',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var task = elementRegistry.get('PI_Task_1');
+          // given
+          var task = elementRegistry.get('PI_Task_1');
 
-        // when
-        openPopup(task);
+          // when
+          openPopup(task);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(15);
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
+          expect(getEntries(popupMenu)).to.have.length(15);
 
-      }));
+        })
+      );
 
 
       it('should contain all except the current one (blocking discretionary item)',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var task = elementRegistry.get('DIS_Task_2');
+          // given
+          var task = elementRegistry.get('DIS_Task_2');
 
-        // when
-        openPopup(task);
+          // when
+          openPopup(task);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(15);
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
+          expect(getEntries(popupMenu)).to.have.length(15);
 
-      }));
+        })
+      );
 
 
       it('should contain blocking human task',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var task = elementRegistry.get('PI_Task_1');
+          // given
+          var task = elementRegistry.get('PI_Task_1');
 
-        // when
-        openPopup(task);
+          // when
+          openPopup(task);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-blocking-human-task-plan-item')).to.exist;
-        expect(queryEntry(popupMenu, 'replace-with-blocking-human-task-discretionary-item')).to.exist;
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-blocking-human-task-plan-item')).to.exist;
+          expect(queryEntry(popupMenu, 'replace-with-blocking-human-task-discretionary-item')).to.exist;
 
-      }));
+        })
+      );
 
 
       it('should contain all except the current one (non-blocking plan item)',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var task = elementRegistry.get('PI_Task_3');
+          // given
+          var task = elementRegistry.get('PI_Task_3');
 
-        // when
-        openPopup(task);
+          // when
+          openPopup(task);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(15);
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
+          expect(getEntries(popupMenu)).to.have.length(15);
 
-      }));
+        })
+      );
 
 
       it('should contain all except the current one (non-blocking discretionary item)',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var task = elementRegistry.get('DIS_Task_4');
+          // given
+          var task = elementRegistry.get('DIS_Task_4');
 
-        // when
-        openPopup(task);
+          // when
+          openPopup(task);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
-        expect(getEntries(popupMenu)).to.have.length(15);
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
+          expect(getEntries(popupMenu)).to.have.length(15);
 
-      }));
+        })
+      );
 
 
       it('should contain non-blocking human task',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var task = elementRegistry.get('PI_Task_3');
+          // given
+          var task = elementRegistry.get('PI_Task_3');
 
-        // when
-        openPopup(task);
+          // when
+          openPopup(task);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-non-blocking-human-task-plan-item')).to.exist;
-        expect(queryEntry(popupMenu, 'replace-with-non-blocking-human-task-discretionary-item')).to.exist;
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-non-blocking-human-task-plan-item')).to.exist;
+          expect(queryEntry(popupMenu, 'replace-with-non-blocking-human-task-discretionary-item')).to.exist;
 
-      }));
+        })
+      );
 
     });
 
@@ -391,16 +398,17 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should be empty',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var eventListener = elementRegistry.get('PI_Milestone_1');
+          // given
+          var eventListener = elementRegistry.get('PI_Milestone_1');
 
-        // when
-        openPopup(eventListener);
+          // when
+          openPopup(eventListener);
 
-        // then
-        expect(getEntries(popupMenu)).to.be.empty;
+          // then
+          expect(getEntries(popupMenu)).to.be.empty;
 
-      }));
+        })
+      );
 
     });
 
@@ -410,16 +418,17 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var eventListener = elementRegistry.get('PI_Stage_1');
+          // given
+          var eventListener = elementRegistry.get('PI_Stage_1');
 
-        // when
-        openPopup(eventListener);
+          // when
+          openPopup(eventListener);
 
-        // then
-        expect(getEntries(popupMenu)).to.have.length(2);
+          // then
+          expect(getEntries(popupMenu)).to.have.length(2);
 
-      }));
+        })
+      );
 
     });
 
@@ -429,16 +438,17 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var eventListener = elementRegistry.get('PI_Stage_2');
+          // given
+          var eventListener = elementRegistry.get('PI_Stage_2');
 
-        // when
-        openPopup(eventListener);
+          // when
+          openPopup(eventListener);
 
-        // then
-        expect(getEntries(popupMenu)).to.have.length(15);
+          // then
+          expect(getEntries(popupMenu)).to.have.length(15);
 
-      }));
+        })
+      );
 
     });
 
@@ -448,16 +458,17 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var eventListener = elementRegistry.get('DIS_Stage_3');
+          // given
+          var eventListener = elementRegistry.get('DIS_Stage_3');
 
-        // when
-        openPopup(eventListener);
+          // when
+          openPopup(eventListener);
 
-        // then
-        expect(getEntries(popupMenu)).to.have.length(15);
+          // then
+          expect(getEntries(popupMenu)).to.have.length(15);
 
-      }));
+        })
+      );
 
     });
 
@@ -467,16 +478,17 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var eventListener = elementRegistry.get('DIS_PlanFragment_1');
+          // given
+          var eventListener = elementRegistry.get('DIS_PlanFragment_1');
 
-        // when
-        openPopup(eventListener);
+          // when
+          openPopup(eventListener);
 
-        // then
-        expect(getEntries(popupMenu)).to.have.length(15);
+          // then
+          expect(getEntries(popupMenu)).to.have.length(15);
 
-      }));
+        })
+      );
 
     });
 
@@ -486,17 +498,18 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var eventListener = elementRegistry.get('EntryCriterion_1');
+          // given
+          var eventListener = elementRegistry.get('EntryCriterion_1');
 
-        // when
-        openPopup(eventListener);
+          // when
+          openPopup(eventListener);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-entry-criterion')).not.to.exist;
-        expect(getEntries(popupMenu)).to.have.length(1);
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-entry-criterion')).not.to.exist;
+          expect(getEntries(popupMenu)).to.have.length(1);
 
-      }));
+        })
+      );
 
     });
 
@@ -506,17 +519,18 @@ describe('features/popup-menu - replace menu provider', function() {
       it('should contain all except the current one',
         inject(function(popupMenu, elementRegistry) {
 
-        // given
-        var eventListener = elementRegistry.get('ExitCriterion_1');
+          // given
+          var eventListener = elementRegistry.get('ExitCriterion_1');
 
-        // when
-        openPopup(eventListener);
+          // when
+          openPopup(eventListener);
 
-        // then
-        expect(queryEntry(popupMenu, 'replace-with-exit-criterion')).not.to.exist;
-        expect(getEntries(popupMenu)).to.have.length(1);
+          // then
+          expect(queryEntry(popupMenu, 'replace-with-exit-criterion')).not.to.exist;
+          expect(getEntries(popupMenu)).to.have.length(1);
 
-      }));
+        })
+      );
 
     });
 

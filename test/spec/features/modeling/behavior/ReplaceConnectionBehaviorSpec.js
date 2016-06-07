@@ -30,7 +30,7 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
 
   describe('should remove discretionary item from human task', function() {
 
-    var source, target, discretionaryItem, planningTable;
+    var source, discretionaryItem, planningTable;
 
     var diagramXML = require('./ReplaceConnectionBehavior.move.cmmn');
 
@@ -46,7 +46,6 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
       discretionaryItem = discretionaryItemShape.businessObject;
 
       var targetShape = elementRegistry.get('CasePlanModel_1');
-      target = targetShape.businessObject;
 
       // when
       modeling.moveElements( [ shape ], { x: 0, y: 150 }, targetShape, false, { primaryShape: shape });
@@ -579,7 +578,7 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
 
       beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-      var oldElement, newElement, exitCriterion;
+      var oldElement, exitCriterion;
 
       beforeEach(inject(function(elementRegistry, modeling, cmmnReplace) {
 
@@ -593,7 +592,7 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
         };
 
         // when
-        newElement = cmmnReplace.replaceElement(oldElement, newElementData);
+        cmmnReplace.replaceElement(oldElement, newElementData);
 
       }));
 

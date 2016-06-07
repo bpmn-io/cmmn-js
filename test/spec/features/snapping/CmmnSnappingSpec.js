@@ -1,6 +1,6 @@
 'use strict';
 
-var TestHelper = require('../../../TestHelper');
+require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
@@ -23,7 +23,7 @@ describe('features/snapping - CmmnSnapping', function() {
     snappingModule
   ];
 
-  describe('on CasePlanModel resize', function () {
+  describe('on CasePlanModel resize', function() {
 
     describe('snap min bounds', function() {
 

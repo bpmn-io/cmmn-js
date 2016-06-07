@@ -18,7 +18,7 @@ describe('features/modeling CmmnUpdater', function() {
 
     var rootElement;
 
-    beforeEach(inject(function(canvas){
+    beforeEach(inject(function(canvas) {
       rootElement = canvas.getRootElement();
     }));
 
@@ -515,7 +515,7 @@ describe('features/modeling CmmnUpdater', function() {
         defintions = casePlan.businessObject.$parent.$parent;
       }));
 
-      beforeEach(inject(function(canvas){
+      beforeEach(inject(function(canvas) {
         rootElement = canvas.getRootElement();
       }));
 
@@ -1173,7 +1173,7 @@ describe('features/modeling CmmnUpdater', function() {
 
   });
 
-  describe('update discretionary connection', function () {
+  describe('update discretionary connection', function() {
 
     var testXML = require('./CmmnUpdater.discretionary-connection.cmmn');
 
@@ -1181,7 +1181,7 @@ describe('features/modeling CmmnUpdater', function() {
 
     var rootElement;
 
-    beforeEach(inject(function(canvas){
+    beforeEach(inject(function(canvas) {
       rootElement = canvas.getRootElement();
     }));
 
@@ -1411,7 +1411,7 @@ describe('features/modeling CmmnUpdater', function() {
 
   });
 
-  describe('update association', function () {
+  describe('update association', function() {
 
     var testXML = require('./CmmnUpdater.association.cmmn');
 
@@ -1419,7 +1419,7 @@ describe('features/modeling CmmnUpdater', function() {
 
     var rootElement, connection, connectionBO, definitions, source, target;
 
-    beforeEach(inject(function(canvas){
+    beforeEach(inject(function(canvas) {
       rootElement = canvas.getRootElement();
       definitions = rootElement.businessObject.$parent.$parent;
     }));
@@ -1668,7 +1668,7 @@ describe('features/modeling CmmnUpdater', function() {
 
     var rootElement;
 
-    beforeEach(inject(function(canvas){
+    beforeEach(inject(function(canvas) {
       rootElement = canvas.getRootElement();
     }));
 
@@ -2091,7 +2091,7 @@ describe('features/modeling CmmnUpdater', function() {
 
     var rootElement;
 
-    beforeEach(inject(function(canvas){
+    beforeEach(inject(function(canvas) {
       rootElement = canvas.getRootElement();
     }));
 
@@ -2499,7 +2499,7 @@ describe('features/modeling CmmnUpdater', function() {
 
       // when
       connection = modeling.createConnection(source, target, {
-        type: 'cmmndi:CMMNEdge',
+        type: 'cmmndi:CMMNEdge'
       }, source.parent);
 
     }));
@@ -2509,8 +2509,8 @@ describe('features/modeling CmmnUpdater', function() {
 
       // expect cropped connection
       expect(connection.waypoints).eql([
-        { original: { x: 150, y: 240 }, x: 200, y: 240},
-        { original: { x: 350, y: 240 }, x: 300, y: 240}
+        { original: { x: 150, y: 240 }, x: 200, y: 240 },
+        { original: { x: 350, y: 240 }, x: 300, y: 240 }
       ]);
 
       var diWaypoints = cmmnFactory.createDiWaypoints([

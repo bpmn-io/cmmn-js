@@ -476,7 +476,7 @@ describe('features - label-editing', function() {
 
       // then
       var textarea = directEditing._textbox.textarea,
-          bounds = { width: 200, height: 50};
+          bounds = { width: 200, height: 50 };
 
       expect(hasBounds(textarea, bounds)).to.be.true;
     }));
@@ -492,7 +492,7 @@ describe('features - label-editing', function() {
 
       // then
       var textarea = directEditing._textbox.textarea,
-          bounds = { width: shape.width, height: 50};
+          bounds = { width: shape.width, height: 50 };
 
       expect(hasBounds(textarea, bounds)).to.be.true;
     }));
@@ -508,7 +508,7 @@ describe('features - label-editing', function() {
 
       // then
       var textarea = directEditing._textbox.textarea,
-          bounds = { width: 150, height: 50};
+          bounds = { width: 150, height: 50 };
 
       expect(hasBounds(textarea, bounds)).to.be.true;
     }));
@@ -524,7 +524,7 @@ describe('features - label-editing', function() {
 
       // then
       var textarea = directEditing._textbox.textarea,
-          bounds = { width: 150, height: 50};
+          bounds = { width: 150, height: 50 };
 
       expect(hasBounds(textarea, bounds)).to.be.true;
     }));
@@ -540,7 +540,7 @@ describe('features - label-editing', function() {
 
       // then
       var textarea = directEditing._textbox.textarea,
-          bounds = { width: 150, height: 50};
+          bounds = { width: 150, height: 50 };
 
       expect(hasBounds(textarea, bounds)).to.be.true;
     }));
@@ -572,7 +572,7 @@ describe('features - label-editing', function() {
 
       // then
       var textarea = directEditing._textbox.textarea,
-          bounds = { width: shape.width, height: 50};
+          bounds = { width: shape.width, height: 50 };
 
       expect(hasBounds(textarea, bounds)).to.be.true;
     }));
@@ -588,7 +588,7 @@ describe('features - label-editing', function() {
 
       // then
       var textarea = directEditing._textbox.textarea,
-          bounds = { width: 150, height: 50};
+          bounds = { width: 150, height: 50 };
 
       expect(hasBounds(textarea, bounds)).to.be.true;
     }));

@@ -1511,7 +1511,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
 
     beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-    var source, target, taskDefinition;
+    var target, taskDefinition;
 
     beforeEach(inject(function(elementRegistry, modeling) {
       // given
@@ -1519,8 +1519,6 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       var disTaskShape = elementRegistry.get('DIS_Task_2');
 
       taskDefinition = taskShape.businessObject.definitionRef;
-
-      source = elementRegistry.get('PI_Stage_2').businessObject.definitionRef;
 
       var targetShape = elementRegistry.get('CasePlanModel_2');
       target = targetShape.businessObject;

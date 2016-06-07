@@ -875,7 +875,7 @@ describe('features/modeling - #SentryUpdater - move', function() {
         elementRegistry.get('DIS_Task_3')
       ];
 
-      var target = elementRegistry.get('DIS_PlanFragment_1')
+      var target = elementRegistry.get('DIS_PlanFragment_1');
       planFragment = target.businessObject.definitionRef;
 
       sentry = elementRegistry.get('EntryCriterion_1').businessObject.sentryRef;

@@ -28,7 +28,7 @@ describe('features - context-pad', function() {
   ];
 
 
-  describe('remove action rules', function () {
+  describe('remove action rules', function() {
 
     var diagramXML = require('../../../fixtures/cmmn/simple.cmmn');
 
@@ -37,7 +37,7 @@ describe('features - context-pad', function() {
 
     var deleteAction;
 
-    beforeEach(inject(function (contextPad) {
+    beforeEach(inject(function(contextPad) {
 
       deleteAction = function(element) {
         return padEntry(contextPad.getPad(element).html, 'delete');
@@ -45,7 +45,7 @@ describe('features - context-pad', function() {
     }));
 
 
-    it('should add delete action by default', inject(function (elementRegistry, contextPad) {
+    it('should add delete action by default', inject(function(elementRegistry, contextPad) {
 
       // given
       var element = elementRegistry.get('PI_Task_1');
@@ -59,39 +59,41 @@ describe('features - context-pad', function() {
 
 
     it('should include delete action when rule returns true',
-      inject(function (elementRegistry, contextPad, customRules) {
+      inject(function(elementRegistry, contextPad, customRules) {
 
-      // given
-      customRules.addRule('elements.delete', function() {
-        return true;
-      });
+        // given
+        customRules.addRule('elements.delete', function() {
+          return true;
+        });
 
-      var element = elementRegistry.get('PI_Task_1');
+        var element = elementRegistry.get('PI_Task_1');
 
-      // when
-      contextPad.open(element);
+        // when
+        contextPad.open(element);
 
-      // then
-      expect(deleteAction(element)).to.exist;
-    }));
+        // then
+        expect(deleteAction(element)).to.exist;
+      })
+    );
 
 
     it('should NOT include delete action when rule returns false',
       inject(function(elementRegistry, contextPad, customRules) {
 
-      // given
-      customRules.addRule('elements.delete', function() {
-        return false;
-      });
+        // given
+        customRules.addRule('elements.delete', function() {
+          return false;
+        });
 
-      var element = elementRegistry.get('PI_Task_1');
+        var element = elementRegistry.get('PI_Task_1');
 
-      // when
-      contextPad.open(element);
+        // when
+        contextPad.open(element);
 
-      // then
-      expect(deleteAction(element)).to.not.exist;
-    }));
+        // then
+        expect(deleteAction(element)).to.not.exist;
+      })
+    );
 
 
     it('should call rules with [ element ]', inject(function(elementRegistry, contextPad, customRules) {
@@ -111,43 +113,46 @@ describe('features - context-pad', function() {
       expect(function() {
         contextPad.open(element);
       }).not.to.throw;
+
     }));
 
 
     it('should include delete action when [ element ] is returned from rule',
       inject(function(elementRegistry, contextPad, customRules) {
 
-      // given
-      customRules.addRule('elements.delete', function(context) {
-        return context.elements;
-      });
+        // given
+        customRules.addRule('elements.delete', function(context) {
+          return context.elements;
+        });
 
-      var element = elementRegistry.get('PI_Task_1');
+        var element = elementRegistry.get('PI_Task_1');
 
-      // when
-      contextPad.open(element);
+        // when
+        contextPad.open(element);
 
-      // then
-      expect(deleteAction(element)).to.exist;
-    }));
+        // then
+        expect(deleteAction(element)).to.exist;
+      })
+    );
 
 
     it('should NOT include delete action when [ ] is returned from rule',
       inject(function(elementRegistry, contextPad, customRules) {
 
-      // given
-      customRules.addRule('elements.delete', function() {
-        return [];
-      });
+        // given
+        customRules.addRule('elements.delete', function() {
+          return [];
+        });
 
-      var element = elementRegistry.get('PI_Task_1');
+        var element = elementRegistry.get('PI_Task_1');
 
-      // when
-      contextPad.open(element);
+        // when
+        contextPad.open(element);
 
-      // then
-      expect(deleteAction(element)).to.not.exist;
-    }));
+        // then
+        expect(deleteAction(element)).to.not.exist;
+      })
+    );
 
   });
 
@@ -179,7 +184,7 @@ describe('features - context-pad', function() {
       // mock event
       var event = {
         target: padEntry(container, 'replace'),
-        preventDefault: function(){}
+        preventDefault: function() {}
       };
 
       // when
@@ -195,43 +200,45 @@ describe('features - context-pad', function() {
     it('should not include control if replacement is disallowed',
       inject(function(elementRegistry, contextPad, customRules) {
 
-      // given
-      var element = elementRegistry.get('EntryCriterion_1');
+        // given
+        var element = elementRegistry.get('EntryCriterion_1');
 
-      // disallow replacement
-      customRules.addRule('shape.replace', function(context) {
-        return !is(context.element, 'cmmn:EntryCriterion');
-      });
+        // disallow replacement
+        customRules.addRule('shape.replace', function(context) {
+          return !is(context.element, 'cmmn:EntryCriterion');
+        });
 
-      // when
-      contextPad.open(element);
+        // when
+        contextPad.open(element);
 
-      var padNode = contextPad.getPad(element).html;
+        var padNode = contextPad.getPad(element).html;
 
-      // then
-      expect(padEntry(padNode, 'replace')).not.to.exist;
-    }));
+        // then
+        expect(padEntry(padNode, 'replace')).not.to.exist;
+      })
+    );
 
 
     it('should include control if replacement is allowed',
       inject(function(elementRegistry, contextPad, customRules) {
 
-      // given
-      var element = elementRegistry.get('ExitCriterion_4');
+        // given
+        var element = elementRegistry.get('ExitCriterion_4');
 
-      // disallow replacement
-      customRules.addRule('shape.replace', 1500, function(context) {
-        return !is(context.element, 'cmmn:EntryCriterion');
-      });
+        // disallow replacement
+        customRules.addRule('shape.replace', 1500, function(context) {
+          return !is(context.element, 'cmmn:EntryCriterion');
+        });
 
-      // when
-      contextPad.open(element);
+        // when
+        contextPad.open(element);
 
-      var padNode = contextPad.getPad(element).html;
+        var padNode = contextPad.getPad(element).html;
 
-      // then
-      expect(padEntry(padNode, 'replace')).to.exist;
-    }));
+        // then
+        expect(padEntry(padNode, 'replace')).to.exist;
+      })
+    );
 
   });
 

@@ -1,8 +1,6 @@
 'use strict';
 
-var Modeler = require('../../lib/Modeler'),
-    NavigatedViewer = require('../../lib/NavigatedViewer'),
-    Viewer = require('../../lib/Viewer');
+var Modeler = require('../../lib/Modeler');
 
 var TestContainer = require('mocha-test-container-support');
 
@@ -159,7 +157,6 @@ describe('Modeler', function() {
       var modeler = new Modeler({ container: container });
 
       var moddle = modeler.get('moddle');
-      var elementRegistry = modeler.get('elementRegistry');
 
       // when
       modeler.importXML(someXML, function() {

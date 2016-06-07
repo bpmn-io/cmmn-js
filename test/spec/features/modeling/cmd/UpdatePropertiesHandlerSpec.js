@@ -333,14 +333,13 @@ describe('features/modeling - update properties', function() {
 
     describe('when setting definitionRef', function() {
 
-      var oldDefinition, newDefinition, task;
+      var newDefinition, task;
 
       beforeEach(inject(function(elementRegistry, modeling, cmmnFactory) {
 
         // given
         var taskShape = elementRegistry.get('PI_Task_1');
         task = taskShape.businessObject;
-        oldDefinition = task.definitionRef;
 
         newDefinition = cmmnFactory.create('cmmn:HumanTask', {
           id: 'FOO_BAR'
@@ -368,7 +367,7 @@ describe('features/modeling - update properties', function() {
         commandStack.undo();
 
         // then
-        expect(itemRegistry.getReferences('FOO_BAR')).to.be.empty
+        expect(itemRegistry.getReferences('FOO_BAR')).to.be.empty;
 
         expect(itemRegistry.getReferences('Task_1')).to.have.length(1);
         expect(itemRegistry.getReferences('Task_1')).to.include(task);
@@ -392,14 +391,13 @@ describe('features/modeling - update properties', function() {
 
     describe('when setting sentryRef', function() {
 
-      var oldSentry, newSentry, criterion;
+      var newSentry, criterion;
 
       beforeEach(inject(function(elementRegistry, modeling, cmmnFactory) {
 
         // given
         var criterionShape = elementRegistry.get('EntryCriterion_1');
         criterion = criterionShape.businessObject;
-        oldSentry = criterion.sentryRef;
 
         newSentry = cmmnFactory.create('cmmn:Sentry', {
           id: 'FOO_BAR'
