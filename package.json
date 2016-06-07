@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "cmmn-moddle": "^0.3.1",
-    "diagram-js": "^0.15.3",
+    "diagram-js": "^0.15.4",
     "diagram-js-direct-editing": "^0.15.1",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
