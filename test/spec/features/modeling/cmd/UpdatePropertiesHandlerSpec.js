@@ -170,6 +170,58 @@ describe('features/modeling - update properties', function() {
       expect(taskShape.id).to.equal('FOO_BAR');
     }));
 
+    describe('case plan model', function() {
+
+      var casePlanModel, casePlanModelBO;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        casePlanModel = elementRegistry.get('CasePlanModel_1');
+        casePlanModelBO = casePlanModel.businessObject;
+        ids = task.$model.ids;
+
+        // when
+        modeling.updateProperties(casePlanModel.businessObject, { id: 'BAR' }, casePlanModel);
+      }));
+
+      it('should execute', function() {
+        // then
+        expect(ids.assigned('BAR')).to.eql(casePlanModelBO);
+        expect(ids.assigned('CasePlanModel_1')).to.be.false;
+
+        expect(casePlanModelBO.id).to.equal('BAR');
+        expect(casePlanModel.id).to.equal('BAR');
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(ids.assigned('BAR')).to.be.false;
+        expect(ids.assigned('CasePlanModel_1')).to.eql(casePlanModelBO);
+
+        expect(casePlanModelBO.id).to.equal('CasePlanModel_1');
+        expect(casePlanModel.id).to.equal('CasePlanModel_1');
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(ids.assigned('BAR')).to.eql(casePlanModelBO);
+        expect(ids.assigned('CasePlanModel_1')).to.be.false;
+
+        expect(casePlanModelBO.id).to.equal('BAR');
+        expect(casePlanModel.id).to.equal('BAR');
+      }));
+
+    });
+
   });
 
 
