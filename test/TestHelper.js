@@ -9,3 +9,6 @@ TestHelper.insertCSS('cmmn-embedded.css', require('../assets/cmmn-font/css/cmmn-
 TestHelper.insertCSS('diagram-js-testing.css',
   '.test-container .result { height: 500px; }' + '.test-container > div'
 );
+
+global.chai.use(require('diagram-js/test/matchers/BoundsMatchers'));
+global.chai.use(require('diagram-js/test/matchers/ConnectionMatchers'));
