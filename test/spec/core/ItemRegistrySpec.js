@@ -323,8 +323,8 @@ describe('ItemRegistry', function() {
       var elements = itemRegistry.getAll();
 
       // then
-      // two items
-      expect(elements.length).to.equal(3);
+      // four items
+      expect(elements.length).to.equal(4);
     }));
 
   });
@@ -345,8 +345,8 @@ describe('ItemRegistry', function() {
       });
 
       // then
-      // three items
-      expect(elements.length).to.equal(3);
+      // four items
+      expect(elements.length).to.equal(4);
     }));
 
 
@@ -379,8 +379,8 @@ describe('ItemRegistry', function() {
       });
 
       // then
-      // three items
-      expect(elements.length).to.equal(3);
+      // four items
+      expect(elements.length).to.equal(4);
     }));
 
   });

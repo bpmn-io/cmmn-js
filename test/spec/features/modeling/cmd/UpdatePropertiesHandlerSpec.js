@@ -15,7 +15,6 @@ describe('features/modeling - update properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-
   var updatedElements;
 
   beforeEach(inject(function(eventBus) {
@@ -32,43 +31,93 @@ describe('features/modeling - update properties', function() {
 
   describe('setting name', function() {
 
-    var taskShape, task;
+    describe('internal label', function() {
 
-    beforeEach(inject(function(elementRegistry, modeling) {
-      // given
-      taskShape = elementRegistry.get('PI_Task_1');
-      task = taskShape.businessObject;
+      var taskShape, task;
 
-      // when
-      modeling.updateProperties(taskShape, { name: 'foo' });
-    }));
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        taskShape = elementRegistry.get('PI_Task_1');
+        task = taskShape.businessObject;
 
-    it('should execute', function() {
-      // then
-      expect(task.name).to.equal('foo');
-      expect(updatedElements).to.include(taskShape);
+        // when
+        modeling.updateProperties(taskShape, { name: 'foo' });
+      }));
+
+      it('should execute', function() {
+        // then
+        expect(task.name).to.equal('foo');
+        expect(updatedElements).to.include(taskShape);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(task.name).not.to.exist;
+        expect(updatedElements).to.include(taskShape);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(task.name).to.equal('foo');
+        expect(updatedElements).to.include(taskShape);
+      }));
+
     });
 
+    describe('external label', function() {
 
-    it('should undo', inject(function(commandStack) {
-      // when
-      commandStack.undo();
+      var eventListenerShape, eventListenerLabel, eventListener;
 
-      // then
-      expect(task.name).not.to.exist;
-      expect(updatedElements).to.include(taskShape);
-    }));
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        eventListenerShape = elementRegistry.get('PI_EventListener_1');
+        eventListenerLabel = elementRegistry.get('PI_EventListener_1_label');
+        eventListener = eventListenerShape.businessObject;
+
+        // when
+        modeling.updateProperties(eventListener, { name: 'BAR' }, eventListenerShape);
+      }));
+
+      it('should execute', function() {
+        // then
+        expect(eventListener.name).to.equal('BAR');
+        expect(updatedElements).to.include(eventListenerShape);
+        expect(updatedElements).to.include(eventListenerLabel);
+      });
 
 
-    it('should redo', inject(function(commandStack) {
-      // when
-      commandStack.undo();
-      commandStack.redo();
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
 
-      // then
-      expect(task.name).to.equal('foo');
-      expect(updatedElements).to.include(taskShape);
-    }));
+        // then
+        expect(eventListener.name).not.to.exist;
+        expect(updatedElements).to.include(eventListenerShape);
+        expect(updatedElements).to.include(eventListenerLabel);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(eventListener.name).to.equal('BAR');
+        expect(updatedElements).to.include(eventListenerShape);
+        expect(updatedElements).to.include(eventListenerLabel);
+      }));
+
+    });
 
   });
 
