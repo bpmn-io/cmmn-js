@@ -170,6 +170,29 @@ describe('features/modeling CmmnFactory', function() {
 
     }));
 
+
+    it('should set label when creating discretionary connection', inject(function(elementFactory) {
+
+      // when
+      var edge = elementFactory.createCmmnElement('connection', { type: 'cmmndi:CMMNEdge' });
+
+      // then
+      expect(edge.businessObject.label).to.exist;
+
+    }));
+
+
+    it('should set cmmndi:CMMNEdge as type on connection', inject(function(elementFactory) {
+
+      // when
+      var edge = elementFactory.createCmmnElement('connection', { type: 'cmmn:PlanItemOnPart' });
+
+      // then
+      expect(edge.type).to.equal('cmmndi:CMMNEdge');
+
+    }));
+
+
     it('should generate id', inject(function(cmmnFactory) {
 
       var types = [
