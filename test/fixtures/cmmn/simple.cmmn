@@ -6,7 +6,11 @@
         <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1" />
       </cmmn:planItem>
       <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" />
-      <cmmn:sentry id="Sentry_1" />
+      <cmmn:sentry id="Sentry_1">
+        <cmmn:planItemOnPart id="PlanItemOnPart_1" sourceRef="PI_EventListener_1">
+          <cmmn:standardEvent>occur</cmmn:standardEvent>
+        </cmmn:planItemOnPart>
+      </cmmn:sentry>
       <cmmn:humanTask id="Task_1" name="Human Task" />
       <cmmn:eventListener id="EventListener_1" name="FOO" />
     </cmmn:casePlanModel>
@@ -21,7 +25,7 @@
         <dc:Bounds x="100" y="100" width="97" height="76" />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape di:id="EntryCriterion_1_di" cmmnElementRef="EntryCriterion_1">
-        <dc:Bounds x="88" y="125" width="20" height="28" />
+        <dc:Bounds x="187" y="126" width="20" height="28" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape di:id="PI_EventListener_1_di" cmmnElementRef="PI_EventListener_1">
@@ -30,6 +34,13 @@
           <dc:Bounds x="240" y="157" width="90" height="20" />
         </cmmndi:CMMNLabel>
       </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge di:id="PlanItemOnPart_1_di" cmmnElementRef="PlanItemOnPart_1" targetCMMNElementRef="EntryCriterion_1" isStandardEventVisible="true">
+        <di:waypoint xsi:type="dc:Point" x="267" y="139" />
+        <di:waypoint xsi:type="dc:Point" x="207" y="140" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="192" y="129.5" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
     </cmmndi:CMMNDiagram>
   </cmmndi:CMMNDI>
 </cmmn:definitions>

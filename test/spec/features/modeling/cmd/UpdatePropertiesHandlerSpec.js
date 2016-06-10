@@ -122,6 +122,103 @@ describe('features/modeling - update properties', function() {
   });
 
 
+  describe('setting isStandardEventVisible', function() {
+
+    describe('simple api', function() {
+
+      var onPartConnection, onPartLabel, onPart;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        onPartConnection = elementRegistry.get('PlanItemOnPart_1_di');
+        onPartLabel = elementRegistry.get('PlanItemOnPart_1_di_label');
+        onPart = onPartConnection.businessObject;
+
+        // when
+        modeling.updateProperties(onPartConnection, { isStandardEventVisible: false });
+      }));
+
+      it('should execute', function() {
+        // then
+        expect(onPart.isStandardEventVisible).to.be.false;
+        expect(updatedElements).to.include(onPartConnection);
+        expect(updatedElements).to.include(onPartLabel);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.isStandardEventVisible).to.be.true;
+        expect(updatedElements).to.include(onPartConnection);
+        expect(updatedElements).to.include(onPartLabel);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.isStandardEventVisible).to.be.false;
+        expect(updatedElements).to.include(onPartConnection);
+        expect(updatedElements).to.include(onPartLabel);
+      }));
+
+    });
+
+    describe('extended api', function() {
+
+      var onPartConnection, onPartLabel, onPart;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        onPartConnection = elementRegistry.get('PlanItemOnPart_1_di');
+        onPartLabel = elementRegistry.get('PlanItemOnPart_1_di_label');
+        onPart = onPartConnection.businessObject;
+
+        // when
+        modeling.updateProperties(onPart, { isStandardEventVisible: false }, onPartConnection);
+      }));
+
+      it('should execute', function() {
+        // then
+        expect(onPart.isStandardEventVisible).to.be.false;
+        expect(updatedElements).to.include(onPartConnection);
+        expect(updatedElements).to.include(onPartLabel);
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(onPart.isStandardEventVisible).to.be.true;
+        expect(updatedElements).to.include(onPartConnection);
+        expect(updatedElements).to.include(onPartLabel);
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(onPart.isStandardEventVisible).to.be.false;
+        expect(updatedElements).to.include(onPartConnection);
+        expect(updatedElements).to.include(onPartLabel);
+      }));
+
+    });
+
+  });
+
+
   describe('setting definitionRef', function() {
 
     var taskShape, task, oldDefinition, newDefinition;
