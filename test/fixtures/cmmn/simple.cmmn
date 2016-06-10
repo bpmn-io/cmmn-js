@@ -5,7 +5,7 @@
       <cmmn:planItem id="PI_Task_1" definitionRef="Task_1">
         <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1" />
       </cmmn:planItem>
-      <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" />
+      <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" name="PLAN ITEM" />
       <cmmn:sentry id="Sentry_1">
         <cmmn:planItemOnPart id="PlanItemOnPart_1" sourceRef="PI_EventListener_1">
           <cmmn:standardEvent>occur</cmmn:standardEvent>

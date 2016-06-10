@@ -100,7 +100,7 @@ describe('features/modeling - update properties', function() {
         commandStack.undo();
 
         // then
-        expect(eventListener.name).not.to.exist;
+        expect(eventListener.name).to.equal('PLAN ITEM');
         expect(updatedElements).to.include(eventListenerShape);
         expect(updatedElements).to.include(eventListenerLabel);
       }));
@@ -115,6 +115,46 @@ describe('features/modeling - update properties', function() {
         expect(eventListener.name).to.equal('BAR');
         expect(updatedElements).to.include(eventListenerShape);
         expect(updatedElements).to.include(eventListenerLabel);
+      }));
+
+    });
+
+    describe('setting definition name', function() {
+
+      var eventListenerShape, eventListenerLabel, definition;
+
+      beforeEach(inject(function(elementRegistry, modeling) {
+        // given
+        eventListenerShape = elementRegistry.get('PI_EventListener_1');
+        eventListenerLabel = elementRegistry.get('PI_EventListener_1_label');
+        definition = eventListenerShape.businessObject.definitionRef;
+
+        // when
+        modeling.updateProperties(definition, { name: undefined }, eventListenerShape);
+      }));
+
+      it('should execute', function() {
+        // then
+        expect(eventListenerLabel.hidden).to.be.false;
+      });
+
+
+      it('should undo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+
+        // then
+        expect(eventListenerLabel.hidden).to.be.false;
+      }));
+
+
+      it('should redo', inject(function(commandStack) {
+        // when
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(eventListenerLabel.hidden).to.be.false;
       }));
 
     });
