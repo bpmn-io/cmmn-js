@@ -607,6 +607,60 @@ describe('Viewer', function() {
       expect(viewer.container.parentNode).not.to.exist;
     });
 
+
+    it('should clear item registry', function() {
+
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      // given
+      createViewer(xml, function(err, warnings, viewer) {
+
+        var itemRegistry = viewer.get('itemRegistry');
+
+        // assume
+        expect(itemRegistry.get('CasePlanModel_1')).to.exist;
+        expect(itemRegistry.getReferences('CasePlanModel_1')).to.have.length(1);
+
+        // when
+        viewer.destroy();
+
+        // then
+        expect(itemRegistry.get('CasePlanModel_1')).not.to.exist;
+        expect(itemRegistry.getReferences('CasePlanModel_1')).to.be.empty;
+
+      });
+
+    });
+
+  });
+
+
+  describe('#clear', function() {
+
+    it('should clear item registry', function() {
+
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      // given
+      createViewer(xml, function(err, warnings, viewer) {
+
+        var itemRegistry = viewer.get('itemRegistry');
+
+        // assume
+        expect(itemRegistry.get('CasePlanModel_1')).to.exist;
+        expect(itemRegistry.getReferences('CasePlanModel_1')).to.have.length(1);
+
+        // when
+        viewer.clear();
+
+        // then
+        expect(itemRegistry.get('CasePlanModel_1')).not.to.exist;
+        expect(itemRegistry.getReferences('CasePlanModel_1')).to.be.empty;
+
+      });
+
+    });
+
   });
 
 });
