@@ -463,4 +463,201 @@ describe('features/snapping - CmmnSnapping', function() {
 
   });
 
+
+  describe('Siblings', function() {
+
+    var diagramXML = require('./CmmnSnapping.siblings.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, {
+      modules: testModules
+    }));
+
+    beforeEach(inject(function(dragging) {
+      dragging.setOptions({ manual: true });
+    }));
+
+    afterEach(inject(function(dragging) {
+      dragging.setOptions({ manual: false });
+    }));
+
+
+    describe('task', function() {
+
+      var task_1,
+          casePlanModel,
+          casePlanModelGfx;
+
+      beforeEach(inject(function(elementRegistry) {
+        task_1 = elementRegistry.get('PI_Task_1');
+        casePlanModel = elementRegistry.get('CasePlanModel_1');
+        casePlanModelGfx = elementRegistry.getGraphics(casePlanModel);
+      }));
+
+      describe('to sibling', function() {
+
+        it('should snap horizontally on move', inject(function(move, dragging) {
+
+          // when
+          move.start(canvasEvent({ x: 0, y: 0 }), task_1);
+
+          dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+
+          dragging.move(canvasEvent({ x: 457, y: task_1.y }));
+          dragging.move(canvasEvent({ x: 458, y: task_1.y }));
+
+          dragging.end();
+
+          // then
+          expect(task_1.x).to.equal(593);
+
+        }));
+
+
+        it('should snap vertically on move', inject(function(move, dragging) {
+
+          // when
+          move.start(canvasEvent({ x: 0, y: 0 }), task_1);
+
+          dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+
+          dragging.move(canvasEvent({ x: task_1.x, y: 226 }));
+          dragging.move(canvasEvent({ x: task_1.x, y: 227 }));
+
+          dragging.end();
+
+          // then
+          expect(task_1.y).to.equal(311);
+
+        }));
+
+
+        it('should snap horizontally on create', inject(function(create, dragging, elementFactory) {
+
+          var newTask = elementFactory.createPlanItemShape('cmmn:Task');
+
+          // when
+          create.start(canvasEvent({ x: 0, y: 0 }), newTask);
+
+          dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+
+          dragging.move(canvasEvent({ x: 648, y: 148 }));
+          dragging.end();
+
+          // then
+          expect(newTask.x).to.equal(593);
+
+        }));
+
+
+        it('should snap vertically on create', inject(function(create, dragging, elementFactory) {
+
+          var newTask = elementFactory.createPlanItemShape('cmmn:Task');
+
+          // when
+          create.start(canvasEvent({ x: 0, y: 0 }), newTask);
+
+          dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+
+          dragging.move(canvasEvent({ x: 300, y: 348 }));
+          dragging.end();
+
+          // then
+          expect(newTask.x).to.equal(250);
+
+        }));
+
+      });
+
+
+      describe('to non sibling', function() {
+
+        it('should not snap horizontally on move', inject(function(move, dragging, elementRegistry) {
+
+          // given
+          var task_2 = elementRegistry.get('PI_Task_2');
+
+          // when
+          move.start(canvasEvent({ x: 0, y: 0 }), task_1);
+
+          dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+
+          dragging.move(canvasEvent({ x: 380, y: task_1.y }));
+          dragging.move(canvasEvent({ x: 382, y: task_1.y }));
+
+          dragging.end();
+
+          // then
+          expect(task_1.x).not.to.equal(task_2.x);
+
+        }));
+
+
+        it('should not snap vertically on move', inject(function(move, dragging, elementRegistry) {
+
+          // given
+          var task_2 = elementRegistry.get('PI_Task_2');
+
+          // when
+          move.start(canvasEvent({ x: 0, y: 0 }), task_1);
+
+          dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+
+          dragging.move(canvasEvent({ x: task_1.x, y: 274 }));
+          dragging.move(canvasEvent({ x: task_1.x, y: 275 }));
+
+          dragging.end();
+
+          // then
+          expect(task_1.y).not.to.equal(task_2.y);
+
+        }));
+
+
+        it('should not snap horizontally on create',
+          inject(function(create, dragging, elementFactory, elementRegistry) {
+
+            // given
+            var newTask = elementFactory.createPlanItemShape('cmmn:Task'),
+                task_2 = elementRegistry.get('PI_Task_2');
+
+            // when
+            create.start(canvasEvent({ x: 0, y: 0 }), newTask);
+
+            dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+
+            dragging.move(canvasEvent({ x: 550, y: 200 }));
+            dragging.end();
+
+            // then
+            expect(newTask.x).not.to.equal(task_2.x);
+          }
+        ));
+
+
+        it('should not snap vertically on create',
+          inject(function(canvas, create, dragging, elementFactory, elementRegistry) {
+
+            // given
+            var newTask = elementFactory.createPlanItemShape('cmmn:Task'),
+                task_2 = elementRegistry.get('PI_Task_2');
+
+            // when
+            create.start(canvasEvent({ x: 0, y: 0 }), newTask);
+
+            dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+
+            dragging.move(canvasEvent({ x: 400, y: 390 }));
+            dragging.end();
+
+            // then
+            expect(newTask.y).not.to.equal(task_2.y);
+          }
+        ));
+
+      });
+
+    });
+
+  });
+
 });
