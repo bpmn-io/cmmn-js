@@ -12,6 +12,8 @@ var autoResizeModule = require('../../../../lib/features/auto-resize'),
     createModule = require('diagram-js/lib/features/create'),
     coreModule = require('../../../../lib/core');
 
+var canvasEvent = require('../../../util/MockEvents').createCanvasEvent;
+
 function getBounds(shape) {
   return pick(shape, [ 'x', 'y', 'width', 'height' ]);
 }
@@ -81,5 +83,33 @@ describe('features/auto-resize', function() {
       expect(PlanFragmentDI).to.have.bounds(expectedBounds);
     })
   );
+
+
+  it('should not expand when creating criterions',
+    inject(function(elementRegistry, elementFactory, dragging, create) {
+
+      // given
+      dragging.setOptions({ manual: true });
+
+      var casePlanModel = elementRegistry.get('CasePlanModel_1'),
+          casePlanModelGfx = elementRegistry.getGraphics(casePlanModel),
+          originalBounds = getBounds(casePlanModel);
+
+      var entryCriterion = elementFactory.createCriterionShape('cmmn:EntryCriterion');
+
+      // when
+      create.start(canvasEvent({ x: 0, y: 0 }), entryCriterion);
+
+      dragging.hover({ element: casePlanModel, gfx: casePlanModelGfx });
+      dragging.move(canvasEvent({ x: 200, y: 434 }));
+      dragging.end();
+
+      dragging.setOptions({ manual: false });
+
+      // then
+      // expect the case plan model not to auto expand
+      expect(casePlanModel).to.have.bounds(originalBounds);
+    }
+  ));
 
 });
