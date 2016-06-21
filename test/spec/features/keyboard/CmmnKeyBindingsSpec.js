@@ -5,13 +5,10 @@ var TestContainer = require('mocha-test-container-support');
 var coreModule = require('../../../../lib/core'),
     modelingModule = require('../../../../lib/features/modeling'),
     keyboardModule = require('../../../../lib/features/keyboard'),
-    cmmnSearchModule = require('../../../../lib/features/search'),
-    spaceToolModule = require('diagram-js/lib/features/space-tool'),
-    lassoToolModule = require('diagram-js/lib/features/lasso-tool'),
-    handToolModule = require('diagram-js/lib/features/hand-tool'),
-    directEditingModule = require('diagram-js-direct-editing');
+    editorActionsModule = require('diagram-js/lib/features/editor-actions');
 
 var createKeyEvent = require('diagram-js/test/util/KeyEvents').createKeyEvent;
+
 
 /* global bootstrapViewer, inject, sinon */
 
@@ -21,13 +18,9 @@ describe('features - keyboard', function() {
 
   var testModules = [
     coreModule,
-    cmmnSearchModule,
-    modelingModule,
-    spaceToolModule,
-    lassoToolModule,
-    handToolModule,
+    editorActionsModule,
     keyboardModule,
-    directEditingModule
+    modelingModule
   ];
 
   beforeEach(bootstrapViewer(diagramXML, { modules: testModules }));
