@@ -94,6 +94,10 @@ function bootstrapCmmnJs(CmmnJs, diagram, options, locals) {
       _options.modules = undefined;
     }
 
+    if (CMMN_JS) {
+      CMMN_JS.destroy();
+    }
+
     CMMN_JS = new CmmnJs(_options);
 
     CMMN_JS.importXML(diagram, done);
