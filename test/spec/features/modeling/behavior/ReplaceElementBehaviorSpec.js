@@ -687,7 +687,7 @@ describe('features/modeling/behavior - replace element', function() {
 
         it('should execute', inject(function(elementRegistry) {
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -699,7 +699,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.undo();
 
           // then
-          expect(elementRegistry.get(item.id)).to.exist;
+          expect(item.parent).to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
@@ -712,7 +712,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.redo();
 
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -741,7 +741,7 @@ describe('features/modeling/behavior - replace element', function() {
 
         it('should execute', inject(function(elementRegistry) {
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -753,7 +753,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.undo();
 
           // then
-          expect(elementRegistry.get(item.id)).to.exist;
+          expect(item.parent).to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
@@ -766,7 +766,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.redo();
 
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -795,7 +795,7 @@ describe('features/modeling/behavior - replace element', function() {
 
         it('should execute', inject(function(elementRegistry) {
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -807,7 +807,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.undo();
 
           // then
-          expect(elementRegistry.get(item.id)).to.exist;
+          expect(item.parent).to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(newItem.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
@@ -821,7 +821,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.redo();
 
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -853,7 +853,7 @@ describe('features/modeling/behavior - replace element', function() {
 
           it('should execute', inject(function(elementRegistry) {
             // then
-            expect(elementRegistry.get(item.id)).to.exist;
+            expect(item.parent).to.exist;
 
             expect(item.type).to.equal('cmmn:DiscretionaryItem');
             expect(planFragment.get('planItems')).not.to.include(item.businessObject);
@@ -865,7 +865,7 @@ describe('features/modeling/behavior - replace element', function() {
             commandStack.undo();
 
             // then
-            expect(elementRegistry.get(item.id)).to.exist;
+            expect(item.parent).to.exist;
 
             expect(item.type).to.equal('cmmn:DiscretionaryItem');
             expect(planFragment.get('planItems')).not.to.include(item.businessObject);
@@ -878,7 +878,7 @@ describe('features/modeling/behavior - replace element', function() {
             commandStack.redo();
 
             // then
-            expect(elementRegistry.get(item.id)).to.exist;
+            expect(item.parent).to.exist;
 
             expect(item.type).to.equal('cmmn:DiscretionaryItem');
             expect(planFragment.get('planItems')).not.to.include(item.businessObject);
@@ -906,7 +906,7 @@ describe('features/modeling/behavior - replace element', function() {
 
           it('should execute', inject(function(elementRegistry) {
             // then
-            expect(elementRegistry.get(item.id)).to.exist;
+            expect(item.parent).to.exist;
 
             expect(item.type).to.equal('cmmn:DiscretionaryItem');
             expect(planFragment.get('planItems')).not.to.include(item.businessObject);
@@ -918,7 +918,7 @@ describe('features/modeling/behavior - replace element', function() {
             commandStack.undo();
 
             // then
-            expect(elementRegistry.get(item.id)).to.exist;
+            expect(item.parent).to.exist;
 
             expect(item.type).to.equal('cmmn:DiscretionaryItem');
             expect(planFragment.get('planItems')).not.to.include(item.businessObject);
@@ -931,7 +931,7 @@ describe('features/modeling/behavior - replace element', function() {
             commandStack.redo();
 
             // then
-            expect(elementRegistry.get(item.id)).to.exist;
+            expect(item.parent).to.exist;
 
             expect(item.type).to.equal('cmmn:DiscretionaryItem');
             expect(planFragment.get('planItems')).not.to.include(item.businessObject);
@@ -960,7 +960,7 @@ describe('features/modeling/behavior - replace element', function() {
 
           it('should execute', inject(function(elementRegistry) {
             // then
-            expect(elementRegistry.get(item.id)).not.to.exist;
+            expect(item.parent).not.to.exist;
 
             expect(newItem.type).to.equal('cmmn:PlanItem');
             expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -972,7 +972,7 @@ describe('features/modeling/behavior - replace element', function() {
             commandStack.undo();
 
             // then
-            expect(elementRegistry.get(item.id)).to.exist;
+            expect(item.parent).to.exist;
 
             expect(newItem.type).to.equal('cmmn:PlanItem');
             expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
@@ -985,7 +985,7 @@ describe('features/modeling/behavior - replace element', function() {
             commandStack.redo();
 
             // then
-            expect(elementRegistry.get(item.id)).not.to.exist;
+            expect(item.parent).not.to.exist;
 
             expect(newItem.type).to.equal('cmmn:PlanItem');
             expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -1015,7 +1015,7 @@ describe('features/modeling/behavior - replace element', function() {
 
           it('should execute', inject(function(elementRegistry) {
             // then
-            expect(elementRegistry.get(item.id)).not.to.exist;
+            expect(item.parent).not.to.exist;
 
             expect(newItem.type).to.equal('cmmn:PlanItem');
             expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -1027,7 +1027,7 @@ describe('features/modeling/behavior - replace element', function() {
             commandStack.undo();
 
             // then
-            expect(elementRegistry.get(item.id)).to.exist;
+            expect(item.parent).to.exist;
 
             expect(newItem.type).to.equal('cmmn:PlanItem');
             expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
@@ -1040,7 +1040,7 @@ describe('features/modeling/behavior - replace element', function() {
             commandStack.redo();
 
             // then
-            expect(elementRegistry.get(item.id)).not.to.exist;
+            expect(item.parent).not.to.exist;
 
             expect(newItem.type).to.equal('cmmn:PlanItem');
             expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -1090,7 +1090,7 @@ describe('features/modeling/behavior - replace element', function() {
 
         it('should execute', inject(function(elementRegistry) {
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -1102,7 +1102,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.undo();
 
           // then
-          expect(elementRegistry.get(item.id)).to.exist;
+          expect(item.parent).to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
@@ -1115,7 +1115,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.redo();
 
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -1146,7 +1146,7 @@ describe('features/modeling/behavior - replace element', function() {
 
         it('should execute', inject(function(elementRegistry) {
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -1158,7 +1158,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.undo();
 
           // then
-          expect(elementRegistry.get(item.id)).to.exist;
+          expect(item.parent).to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).not.to.include(newItem.businessObject);
@@ -1171,7 +1171,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.redo();
 
           // then
-          expect(elementRegistry.get(item.id)).not.to.exist;
+          expect(item.parent).not.to.exist;
 
           expect(newItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newItem.businessObject);
@@ -1210,8 +1210,7 @@ describe('features/modeling/behavior - replace element', function() {
 
         it('should execute', inject(function(elementRegistry, itemRegistry) {
           // then
-          expect(elementRegistry.get(oldNestedItem.id)).not.to.exist;
-          expect(itemRegistry.get(oldNestedItem.id)).not.to.exist;
+          expect(oldNestedItem.parent).not.to.exist;
 
           expect(newNestedItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newNestedItem.businessObject);
@@ -1237,8 +1236,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.redo();
 
           // then
-          expect(elementRegistry.get(oldNestedItem.id)).not.to.exist;
-          expect(itemRegistry.get(oldNestedItem.id)).not.to.exist;
+          expect(oldNestedItem.parent).not.to.exist;
 
           expect(newNestedItem.type).to.equal('cmmn:PlanItem');
           expect(planFragment.get('planItems')).to.include(newNestedItem.businessObject);
@@ -1272,8 +1270,7 @@ describe('features/modeling/behavior - replace element', function() {
 
         it('should execute', inject(function(elementRegistry, itemRegistry) {
           // then
-          expect(elementRegistry.get(oldNestedItem.id)).not.to.exist;
-          expect(itemRegistry.get(oldNestedItem.id)).not.to.exist;
+          expect(oldNestedItem.parent).not.to.exist;
 
           expect(newNestedItem.type).to.equal('cmmn:PlanItem');
           expect(newNestedItem.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
@@ -1286,8 +1283,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.undo();
 
           // then
-          expect(elementRegistry.get(oldNestedItem.id)).to.exist;
-          expect(itemRegistry.get(oldNestedItem.id)).to.exist;
+          expect(oldNestedItem.parent).to.exist;
 
           expect(newNestedItem.type).to.equal('cmmn:PlanItem');
           expect(newNestedItem.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
@@ -1301,8 +1297,7 @@ describe('features/modeling/behavior - replace element', function() {
           commandStack.redo();
 
           // then
-          expect(elementRegistry.get(oldNestedItem.id)).not.to.exist;
-          expect(itemRegistry.get(oldNestedItem.id)).not.to.exist;
+          expect(oldNestedItem.parent).not.to.exist;
 
           expect(newNestedItem.type).to.equal('cmmn:PlanItem');
           expect(newNestedItem.businessObject.definitionRef.$type).to.equal('cmmn:Stage');
