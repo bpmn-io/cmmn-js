@@ -112,4 +112,23 @@ describe('features/auto-resize', function() {
     }
   ));
 
+
+  it('should expand when moving task with attached criterion',
+    inject(function(elementRegistry, modeling, dragging, create) {
+
+      var stagePI = elementRegistry.get('PI_Stage_1'),
+          taskPI = elementRegistry.get('PI_Task_3');
+
+      var originalBounds = getBounds(stagePI);
+
+      // when
+      modeling.moveElements([ taskPI ], { x: 100, y: 80 }, stagePI);
+
+      // then
+      var expectedBounds = assign(originalBounds, { y: 113, height: 303 });
+
+      expect(stagePI).to.have.bounds(expectedBounds);
+    }
+  ));
+
 });

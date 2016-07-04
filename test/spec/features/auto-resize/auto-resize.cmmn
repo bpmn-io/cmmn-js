@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn" exporter="Camunda Modeler" exporterVersion="1.2.0-nightly">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="CasePlanModel_1" name="CasePlanModel_1">
       <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1" />
       <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_3" definitionRef="Task_3">
+        <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_1" />
+      </cmmn:planItem>
+      <cmmn:sentry id="Sentry_1" />
       <cmmn:planningTable id="PlanningTable_1k3nw2b">
         <cmmn:discretionaryItem id="DI_PlanFragment_1" definitionRef="PlanFragment_1" />
       </cmmn:planningTable>
@@ -13,6 +17,7 @@
       </cmmn:stage>
       <cmmn:task id="Task_1" name="Task_1" />
       <cmmn:planFragment id="PlanFragment_1" name="PlanFragment_1" />
+      <cmmn:task id="Task_3" name="Task_3" />
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmndi:CMMNDI>
@@ -36,6 +41,14 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="DI_PlanFragment_1_di" cmmnElementRef="DI_PlanFragment_1">
         <dc:Bounds x="662" y="216" width="350" height="200" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_0i8rx9m_di" cmmnElementRef="PI_Task_3">
+        <dc:Bounds x="297" y="93" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_1bxkhxv_di" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="287" y="120" width="20" height="28" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>
