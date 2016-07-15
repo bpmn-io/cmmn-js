@@ -289,7 +289,7 @@ describe('features/popup-menu - replace menu provider', function() {
 
     describe('task', function() {
 
-      it('should contain all except the current one (blocking plan item)',
+      it('should contain only specific entries (blocking plan item)',
         inject(function(popupMenu, elementRegistry) {
 
           // given
@@ -299,14 +299,19 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(task);
 
           // then
+          // expect the replace menu to contain
+          // - all non discretionary task items except the current one
+          // - a discretionary item from the same task type
+          // - expanded stage
+          // - collapsed stage
           expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(15);
+          expect(getEntries(popupMenu)).to.have.length(7);
 
         })
       );
 
 
-      it('should contain all except the current one (blocking discretionary item)',
+      it('should contain only specific entries (blocking discretionary item)',
         inject(function(popupMenu, elementRegistry) {
 
           // given
@@ -316,8 +321,13 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(task);
 
           // then
+          // expect the replace menu to contain
+          // - all discretionary task items except the current one
+          // - a non discretionary item from the same task type
+          // - discretionary expanded stage
+          // - discretionary collapsed stage
           expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(15);
+          expect(getEntries(popupMenu)).to.have.length(7);
 
         })
       );
@@ -334,13 +344,12 @@ describe('features/popup-menu - replace menu provider', function() {
 
           // then
           expect(queryEntry(popupMenu, 'replace-with-blocking-human-task-plan-item')).to.exist;
-          expect(queryEntry(popupMenu, 'replace-with-blocking-human-task-discretionary-item')).to.exist;
 
         })
       );
 
 
-      it('should contain all except the current one (non-blocking plan item)',
+      it('should contain only specific entries (non-blocking plan item)',
         inject(function(popupMenu, elementRegistry) {
 
           // given
@@ -350,14 +359,19 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(task);
 
           // then
+          // expect the replace menu to contain
+          // - all non discretionary task items except the current one
+          // - a discretionary item from the same task type
+          // - expanded stage
+          // - collapsed stage
           expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(15);
+          expect(getEntries(popupMenu)).to.have.length(7);
 
         })
       );
 
 
-      it('should contain all except the current one (non-blocking discretionary item)',
+      it('should contain only specific entries (non-blocking discretionary item)',
         inject(function(popupMenu, elementRegistry) {
 
           // given
@@ -367,8 +381,13 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(task);
 
           // then
+          // expect the replace menu to contain
+          // - all discretionary task items except the current one
+          // - a non discretionary item from the same task type
+          // - discretionary expanded stage
+          // - discretionary collapsed stage
           expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(15);
+          expect(getEntries(popupMenu)).to.have.length(7);
 
         })
       );
@@ -385,7 +404,6 @@ describe('features/popup-menu - replace menu provider', function() {
 
           // then
           expect(queryEntry(popupMenu, 'replace-with-non-blocking-human-task-plan-item')).to.exist;
-          expect(queryEntry(popupMenu, 'replace-with-non-blocking-human-task-discretionary-item')).to.exist;
 
         })
       );
@@ -435,7 +453,7 @@ describe('features/popup-menu - replace menu provider', function() {
 
     describe('stage (collapsed)', function() {
 
-      it('should contain all except the current one',
+      it('should contain only specific entries',
         inject(function(popupMenu, elementRegistry) {
 
           // given
@@ -445,7 +463,12 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(eventListener);
 
           // then
-          expect(getEntries(popupMenu)).to.have.length(15);
+          // expect the replace menu to contain
+          // - all non discretionary tasks
+          // - expanded stage
+          // - discretionary collapsed stage
+          // - discretionary expanded stage
+          expect(getEntries(popupMenu)).to.have.length(8);
 
         })
       );
@@ -465,7 +488,12 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(eventListener);
 
           // then
-          expect(getEntries(popupMenu)).to.have.length(15);
+          // expect the replace menu to contain
+          // - all discretionary tasks
+          // - expanded stage
+          // - collapsed stage
+          // - discretionary expanded stage
+          expect(getEntries(popupMenu)).to.have.length(8);
 
         })
       );
@@ -485,7 +513,11 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(eventListener);
 
           // then
-          expect(getEntries(popupMenu)).to.have.length(15);
+          // expect the replace menu to contain
+          // - all discretionary tasks
+          // - discretionary collapsed stage
+          // - discretionary expanded stage
+          expect(getEntries(popupMenu)).to.have.length(7);
 
         })
       );
