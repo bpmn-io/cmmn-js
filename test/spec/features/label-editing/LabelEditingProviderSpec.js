@@ -12,6 +12,8 @@ var labelEditingModule = require('../../../../lib/features/label-editing'),
 
 var LabelUtil = require('../../../../lib/features/label-editing/LabelUtil');
 
+var domQuery = require('min-dom/lib/query');
+
 
 function triggerKeyEvent(element, event, code) {
   var e = document.createEvent('Events');
@@ -26,9 +28,9 @@ function triggerKeyEvent(element, event, code) {
   return element.dispatchEvent(e);
 }
 
-function hasBounds(textarea, bounds) {
+function hasBounds(content, bounds) {
 
-  var clientRect = textarea.getBoundingClientRect();
+  var clientRect = content.getBoundingClientRect();
 
   return bounds.width === clientRect.width && bounds.height === clientRect.height;
 }
@@ -48,7 +50,7 @@ describe('features - label-editing', function() {
     setText = function(shape, value) {
       eventBus.fire('element.dblclick', { element: shape });
 
-      directEditing._textbox.textarea.value = value;
+      directEditing._textbox.content.innerText = value;
       directEditing.complete();
     };
 
@@ -81,12 +83,12 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // a <textarea /> element
-      var textarea = directEditing._textbox.textarea;
+      var content = directEditing._textbox.content;
 
       // when
       // change + ESC is pressed
-      textarea.value = 'new value';
-      triggerKeyEvent(textarea, 'keydown', 27);
+      content.innerText = 'new value';
+      triggerKeyEvent(content, 'keydown', 27);
 
       // then
       expect(directEditing.isActive()).to.be.false;
@@ -102,7 +104,7 @@ describe('features - label-editing', function() {
 
       directEditing.activate(shape);
 
-      directEditing._textbox.textarea.value = 'FOO BAR';
+      directEditing._textbox.content.innerText = 'FOO BAR';
 
       // when
       dragging.init(null, { x: 0, y: 0 }, 'foo');
@@ -182,7 +184,7 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      expect(directEditing._textbox.textarea.value).to.equal('PlanItemOnPart');
+      expect(directEditing._textbox.content.innerText).to.equal('PlanItemOnPart');
     }));
 
 
@@ -475,10 +477,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var textarea = directEditing._textbox.textarea,
-          bounds = { width: 200, height: 50 };
+      var content = directEditing._textbox.content,
+          bounds = { width: 206, height: 56 };
 
-      expect(hasBounds(textarea, bounds)).to.be.true;
+      expect(hasBounds(content, bounds)).to.be.true;
     }));
 
 
@@ -491,10 +493,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var textarea = directEditing._textbox.textarea,
-          bounds = { width: shape.width, height: 50 };
+      var content = directEditing._textbox.content,
+          bounds = { width: shape.width + 6, height: 56 };
 
-      expect(hasBounds(textarea, bounds)).to.be.true;
+      expect(hasBounds(content, bounds)).to.be.true;
     }));
 
 
@@ -507,10 +509,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var textarea = directEditing._textbox.textarea,
-          bounds = { width: 150, height: 50 };
+      var content = directEditing._textbox.content,
+          bounds = { width: 156, height: 56 };
 
-      expect(hasBounds(textarea, bounds)).to.be.true;
+      expect(hasBounds(content, bounds)).to.be.true;
     }));
 
 
@@ -523,10 +525,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var textarea = directEditing._textbox.textarea,
-          bounds = { width: 150, height: 50 };
+      var content = directEditing._textbox.content,
+          bounds = { width: 156, height: 56 };
 
-      expect(hasBounds(textarea, bounds)).to.be.true;
+      expect(hasBounds(content, bounds)).to.be.true;
     }));
 
 
@@ -539,10 +541,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var textarea = directEditing._textbox.textarea,
-          bounds = { width: 150, height: 50 };
+      var content = directEditing._textbox.content,
+          bounds = { width: 156, height: 56 };
 
-      expect(hasBounds(textarea, bounds)).to.be.true;
+      expect(hasBounds(content, bounds)).to.be.true;
     }));
 
 
@@ -555,10 +557,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var textarea = directEditing._textbox.textarea,
-          bounds = { width: shape.width, height: 80 };
+      var content = directEditing._textbox.content,
+          bounds = { width: shape.width + 6, height: 86 };
 
-      expect(hasBounds(textarea, bounds)).to.be.true;
+      expect(hasBounds(content, bounds)).to.be.true;
     }));
 
 
@@ -571,10 +573,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var textarea = directEditing._textbox.textarea,
-          bounds = { width: shape.width, height: 50 };
+      var content = directEditing._textbox.content,
+          bounds = { width: shape.width + 6, height: 56 };
 
-      expect(hasBounds(textarea, bounds)).to.be.true;
+      expect(hasBounds(content, bounds)).to.be.true;
     }));
 
 
@@ -587,10 +589,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var textarea = directEditing._textbox.textarea,
-          bounds = { width: 150, height: 50 };
+      var content = directEditing._textbox.content,
+          bounds = { width: 156, height: 56 };
 
-      expect(hasBounds(textarea, bounds)).to.be.true;
+      expect(hasBounds(content, bounds)).to.be.true;
     }));
 
   });
@@ -606,7 +608,8 @@ describe('features - label-editing', function() {
       setText(shape, 'FOO BAR FOO BAR FOO BAR FOO BAR');
 
       // then
-      var containerBBox = elementRegistry.getGraphics(shape).select('polygon').getBBox();
+      var container = domQuery('polygon', elementRegistry.getGraphics(shape));
+      var containerBBox = container.getBBox();
 
       expect(containerBBox.width).to.be.above(240);
 
@@ -621,7 +624,8 @@ describe('features - label-editing', function() {
       setText(shape, '|');
 
       // then
-      var containerBBox = elementRegistry.getGraphics(shape).select('polygon').getBBox();
+      var container = domQuery('polygon', elementRegistry.getGraphics(shape));
+      var containerBBox = container.getBBox();
 
       expect(containerBBox.width).to.equal(100);
 
@@ -636,7 +640,8 @@ describe('features - label-editing', function() {
       setText(shape, 'FOO ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ BAR');
 
       // then
-      var containerBBox = elementRegistry.getGraphics(shape).select('polygon').getBBox();
+      var container = domQuery('polygon', elementRegistry.getGraphics(shape));
+      var containerBBox = container.getBBox();
 
       expect(containerBBox.width).to.be.above(370);
 
@@ -653,7 +658,7 @@ describe('features - label-editing', function() {
 
       var gfx = elementRegistry.getGraphics(shape);
 
-      var labelTab = gfx.node.querySelector('polygon');
+      var labelTab = gfx.querySelector('polygon');
 
       // expect the label tab to have the class pointerEvents set to 'all'
       // which allows click events.

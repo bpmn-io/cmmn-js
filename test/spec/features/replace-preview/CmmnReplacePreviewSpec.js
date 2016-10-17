@@ -10,6 +10,12 @@ var canvasEvent = require('../../../util/MockEvents').createCanvasEvent;
 
 var assign = require('lodash/object/assign');
 
+var domQuery = require('min-dom/lib/query');
+
+var innerSVG = require('tiny-svg/lib/innerSVG'),
+    svgAttr = require('tiny-svg/lib/attr'),
+    svgClone = require('tiny-svg/lib/clone');
+
 
 describe('features/replace-preview', function() {
 
@@ -45,7 +51,7 @@ describe('features/replace-preview', function() {
 
       canvas.addShape(tempShape, milestone);
 
-      var gfx = elementRegistry.getGraphics(tempShape).clone();
+      var gfx = svgClone(elementRegistry.getGraphics(tempShape));
 
       canvas.removeShape(tempShape);
 
@@ -54,7 +60,7 @@ describe('features/replace-preview', function() {
 
 
     getInnerHTML = function(element) {
-      return element.select('.djs-visual').innerHTML;
+      return domQuery('.djs-visual', element).innerHTML;
     };
 
 
@@ -81,14 +87,14 @@ describe('features/replace-preview', function() {
     // then
     var dragGroup = dragging.context().data.context.dragGroup;
 
-    expect(dragGroup[0]).to.exist;
-    expect(dragGroup[1]).not.to.exist;
+    expect(dragGroup.childNodes[0]).to.exist;
+    expect(dragGroup.childNodes[1]).not.to.exist;
 
     var criterionInnerGfx = getGfx({
       type: 'cmmn:EntryCriterion'
     });
 
-    expect(getInnerHTML(dragGroup[0])).to.equal(getInnerHTML(criterionInnerGfx));
+    expect(getInnerHTML(dragGroup.childNodes[0])).to.equal(getInnerHTML(criterionInnerGfx));
 
   }));
 
@@ -133,7 +139,7 @@ describe('features/replace-preview', function() {
     // then
     var dragGroup = dragging.context().data.context.dragGroup;
 
-    expect(dragGroup[0].attr('display')).not.to.equal('none');
+    expect(svgAttr(dragGroup.childNodes[0], 'display')).not.to.equal('none');
 
   }));
 
@@ -154,7 +160,7 @@ describe('features/replace-preview', function() {
         type: 'cmmn:ExitCriterion'
       });
 
-      expect(context.dragGroup[0].innerSVG()).to.equal(criterionInnerGfx.innerSVG());
+      expect(innerSVG(context.dragGroup.childNodes[0])).to.equal(innerSVG(criterionInnerGfx));
 
     })
   );
@@ -171,13 +177,13 @@ describe('features/replace-preview', function() {
       // then
       var criterionInnerGfx = getGfx({ type: 'cmmn:ExitCriterion' });
 
-      expect(context.dragGroup[0].innerSVG()).to.equal(criterionInnerGfx.innerSVG());
+      expect(innerSVG(context.dragGroup.childNodes[0])).to.equal(innerSVG(criterionInnerGfx));
 
     })
   );
 
 
-  it('should replace discretionary task while hover over plan fragment', 
+  it('should replace discretionary task while hover over plan fragment',
     inject(function(dragging, canvas, elementRegistry) {
 
       // given
@@ -195,13 +201,13 @@ describe('features/replace-preview', function() {
         definitionType: 'cmmn:Task'
       });
 
-      expect(getInnerHTML(dragGroup[0])).to.equal(getInnerHTML(gfx));
+      expect(getInnerHTML(dragGroup.childNodes[0])).to.equal(getInnerHTML(gfx));
 
     })
   );
 
 
-  it('should replace discretionary plan fragment while hover over plan fragment', 
+  it('should replace discretionary plan fragment while hover over plan fragment',
     inject(function(dragging, canvas, elementRegistry) {
 
       // given
@@ -219,13 +225,13 @@ describe('features/replace-preview', function() {
         definitionType: 'cmmn:Stage'
       });
 
-      expect(getInnerHTML(dragGroup[0])).to.equal(getInnerHTML(gfx));
+      expect(getInnerHTML(dragGroup.childNodes[0])).to.equal(getInnerHTML(gfx));
 
     })
   );
 
 
-  it('should replace discretionary stage while hover over plan fragment', 
+  it('should replace discretionary stage while hover over plan fragment',
     inject(function(dragging, canvas, elementRegistry) {
 
       // given
@@ -243,7 +249,7 @@ describe('features/replace-preview', function() {
         definitionType: 'cmmn:Stage'
       });
 
-      expect(getInnerHTML(dragGroup[0])).to.equal(getInnerHTML(gfx));
+      expect(getInnerHTML(dragGroup.childNodes[0])).to.equal(getInnerHTML(gfx));
 
     })
   );

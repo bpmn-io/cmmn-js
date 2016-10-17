@@ -6,6 +6,8 @@ var coreModule = require('../../../../lib/core'),
     selectionModule = require('diagram-js/lib/features/selection'),
     outlineModule = require('../../../../lib/features/outline');
 
+var domQuery = require('min-dom/lib/query');
+
 /* global bootstrapModeler, inject */
 
 
@@ -29,7 +31,7 @@ describe('features - outline', function() {
     // then
     var gfx = elementRegistry.getGraphics(casePlanModel);
 
-    var outlineBBox = gfx.node.querySelector('.djs-outline').getBBox();
+    var outlineBBox = domQuery('.djs-outline', gfx).getBBox();
 
     expect(outlineBBox.y).to.equal(-24);
     expect(outlineBBox.height).to.equal(280);
