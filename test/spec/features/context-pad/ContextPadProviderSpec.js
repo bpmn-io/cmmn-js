@@ -81,7 +81,7 @@ describe('features - context-pad', function() {
       inject(function(elementRegistry, contextPad, customRules) {
 
         // given
-        customRules.addRule('elements.delete', function() {
+        customRules.addRule('elements.delete', 1500, function() {
           return false;
         });
 
@@ -140,7 +140,7 @@ describe('features - context-pad', function() {
       inject(function(elementRegistry, contextPad, customRules) {
 
         // given
-        customRules.addRule('elements.delete', function() {
+        customRules.addRule('elements.delete', 1500, function() {
           return [];
         });
 

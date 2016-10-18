@@ -139,3 +139,21 @@ function expectCanReplaceConnectionEnd(source, target, end, rules) {
 }
 
 module.exports.expectCanReplaceConnectionEnd = expectCanReplaceConnectionEnd;
+
+
+function expectCanRemove(elements, expectedElements) {
+
+  var elementsToRemove = [];
+
+  TestHelper.getCmmnJs().invoke(function(elementRegistry, cmmnRules) {
+
+    if (expectedElements) {
+      elementsToRemove = cmmnRules.canRemove(elements);
+    }
+
+  });
+
+  expect(elementsToRemove).to.eql(expectedElements);
+}
+
+module.exports.expectCanRemove = expectCanRemove;

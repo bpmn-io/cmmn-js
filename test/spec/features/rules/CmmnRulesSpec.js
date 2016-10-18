@@ -8,6 +8,7 @@ var expectCanConnect = Helper.expectCanConnect;
 var expectCanMove = Helper.expectCanMove;
 var expectCanReplace = Helper.expectCanReplace;
 var expectCanReplaceConnectionEnd = Helper.expectCanReplaceConnectionEnd;
+var expectCanRemove = Helper.expectCanRemove;
 
 /* global bootstrapModeler, inject */
 
@@ -1140,6 +1141,7 @@ describe('features/modeling/rules - CmmnRules', function() {
 
   });
 
+
   describe('artifact move', function() {
 
     var testXML = require('./CmmnRules.artifact.cmmn');
@@ -1161,6 +1163,25 @@ describe('features/modeling/rules - CmmnRules', function() {
         attach: false,
         move: true
       });
+    }));
+
+  });
+
+
+  describe('external label remove', function() {
+
+    var testXML = require('./CmmnRules.external-label.cmmn');
+
+    beforeEach(bootstrapModeler(testXML, { modules: testModules }));
+
+
+    it('should not be allowed', inject(function(elementRegistry) {
+
+      // when
+      var element = elementRegistry.get('CaseFileItem_label');
+
+      // then
+      expectCanRemove([element], []);
     }));
 
   });

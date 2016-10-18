@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn" exporter="Camunda Modeler" exporterVersion="1.4.0-dev">
+  <cmmn:caseFileItemDefinition id="CaseFileItemDefinition_0f8vob5" name="External Label" />
+  <cmmn:case id="Case_1">
+    <cmmn:caseFileModel id="CaseFileModel_0k7kmul">
+      <cmmn:caseFileItem id="CaseFileItem" definitionRef="CaseFileItemDefinition_0f8vob5" />
+    </cmmn:caseFileModel>
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel" />
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="170" y="27" width="534" height="389" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CaseFileItem_1s02gv7_di" cmmnElementRef="CaseFileItem">
+        <dc:Bounds x="224" y="60" width="36" height="50" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="197" y="110" width="90" height="20" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
