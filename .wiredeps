@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "dependencies": {
     "diagram-js": {
-      "version": "bpmn-io/diagram-js",
+      "version": "^0.16.0",
       "dependencies": {
         "eve": {
           "version": "^0.4.2"
@@ -48,7 +48,7 @@
       }
     },
     "diagram-js-direct-editing": {
-      "version": "bpmn-io/diagram-js-direct-editing"
+      "version": "^0.15.0"
     },
     "ids": {
       "version": "0.2.0",
