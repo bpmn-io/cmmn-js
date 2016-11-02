@@ -204,7 +204,7 @@ describe('label bounds', function() {
 
   describe('on export', function() {
 
-    it.skip('should create DI when label has changed', function(done) {
+    it('should create DI when label has changed', function(done) {
 
       var xml = require('./LabelBoundsSpec.cmmn');
 
@@ -248,7 +248,7 @@ describe('label bounds', function() {
     });
 
 
-    it.skip('should update existing DI when label has changed', function(done) {
+    it('should update existing DI when label has changed', function(done) {
 
       var xml = require('./LabelBoundsSpec.cmmn');
 
