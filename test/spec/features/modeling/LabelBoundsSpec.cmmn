@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn" exporter="Camunda Modeler" exporterVersion="1.4.0">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PlanItem_1" definitionRef="EventListener_1" />
+      <cmmn:planItem id="PlanItem_2" definitionRef="EventListener_2" />
+      <cmmn:planItem id="PlanItem_3" definitionRef="EventListener_3" />
+      <cmmn:eventListener id="EventListener_1" name="foo" />
+      <cmmn:eventListener id="EventListener_2" name="bar" />
+      <cmmn:eventListener id="EventListener_3" name="foo&#10;bar&#10;baz" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="114" y="63" width="534" height="389" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_1_di" cmmnElementRef="PlanItem_1">
+        <dc:Bounds x="192" y="126" width="36" height="36" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_2_di" cmmnElementRef="PlanItem_2">
+        <dc:Bounds x="331" y="126" width="36" height="36" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="349" y="162" width="0" height="0" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_3_di" cmmnElementRef="PlanItem_3">
+        <dc:Bounds x="469" y="126" width="36" height="36" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="487" y="162" width="0" height="0" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
