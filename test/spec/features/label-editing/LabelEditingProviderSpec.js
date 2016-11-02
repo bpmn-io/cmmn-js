@@ -1,9 +1,13 @@
 'use strict';
 
-require('../../../TestHelper');
+var TestHelper = require('../../../TestHelper');
 
 /* global bootstrapViewer, inject */
 
+TestHelper.insertCSS('diagram-js-label-editing.css',
+  'div { box-sizing: border-box; }' +
+  'div[contenteditable=true] { line-height: 14px; font-family: Arial; font-size: 12px }'
+);
 
 var labelEditingModule = require('../../../../lib/features/label-editing'),
     modelingModule = require('../../../../lib/features/modeling'),
@@ -28,12 +32,11 @@ function triggerKeyEvent(element, event, code) {
   return element.dispatchEvent(e);
 }
 
-function hasBounds(content, bounds) {
 
-  var clientRect = content.getBoundingClientRect();
-
-  return bounds.width === clientRect.width && bounds.height === clientRect.height;
+function getBBox(textbox) {
+  return textbox.content.getBoundingClientRect();
 }
+
 
 describe('features - label-editing', function() {
 
@@ -477,10 +480,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var content = directEditing._textbox.content,
-          bounds = { width: 206, height: 56 };
+      var bbox = getBBox(directEditing._textbox);
 
-      expect(hasBounds(content, bounds)).to.be.true;
+      expect(bbox.width).to.equal(200);
+      expect(bbox.height).to.equal(50);
     }));
 
 
@@ -493,10 +496,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var content = directEditing._textbox.content,
-          bounds = { width: shape.width + 6, height: 56 };
+      var bbox = getBBox(directEditing._textbox);
 
-      expect(hasBounds(content, bounds)).to.be.true;
+      expect(bbox.width).to.equal(shape.width);
+      expect(bbox.height).to.equal(20);
     }));
 
 
@@ -509,10 +512,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var content = directEditing._textbox.content,
-          bounds = { width: 156, height: 56 };
+      var bbox = getBBox(directEditing._textbox);
 
-      expect(hasBounds(content, bounds)).to.be.true;
+      expect(bbox.width).to.equal(shape.width);
+      expect(bbox.height).to.equal(shape.height);
     }));
 
 
@@ -525,10 +528,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var content = directEditing._textbox.content,
-          bounds = { width: 156, height: 56 };
+      var bbox = getBBox(directEditing._textbox);
 
-      expect(hasBounds(content, bounds)).to.be.true;
+      expect(bbox.width).to.equal(150);
+      expect(bbox.height).to.equal(20);
     }));
 
 
@@ -541,10 +544,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var content = directEditing._textbox.content,
-          bounds = { width: 156, height: 56 };
+      var bbox = getBBox(directEditing._textbox);
 
-      expect(hasBounds(content, bounds)).to.be.true;
+      expect(bbox.width).to.equal(150);
+      expect(bbox.height).to.equal(20);
     }));
 
 
@@ -557,10 +560,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var content = directEditing._textbox.content,
-          bounds = { width: shape.width + 6, height: 86 };
+      var bbox = getBBox(directEditing._textbox);
 
-      expect(hasBounds(content, bounds)).to.be.true;
+      expect(bbox.width).to.equal(shape.width);
+      expect(bbox.height).to.equal(shape.height);
     }));
 
 
@@ -573,10 +576,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var content = directEditing._textbox.content,
-          bounds = { width: shape.width + 6, height: 56 };
+      var bbox = getBBox(directEditing._textbox);
 
-      expect(hasBounds(content, bounds)).to.be.true;
+      expect(bbox.width).to.equal(shape.width);
+      expect(bbox.height).to.equal(20);
     }));
 
 
@@ -589,10 +592,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var content = directEditing._textbox.content,
-          bounds = { width: 156, height: 56 };
+      var bbox = getBBox(directEditing._textbox);
 
-      expect(hasBounds(content, bounds)).to.be.true;
+      expect(bbox.width).to.equal(150);
+      expect(bbox.height).to.equal(20);
     }));
 
   });

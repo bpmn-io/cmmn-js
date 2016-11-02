@@ -65,13 +65,13 @@
   },
   "dependencies": {
     "cmmn-moddle": "^0.3.4",
-    "diagram-js": "^0.16.3",
-    "diagram-js-direct-editing": "^0.15.1",
+    "diagram-js": "^0.17.0",
+    "diagram-js-direct-editing": "^0.17.0",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
     "min-dom": "^0.2.0",
     "object-refs": "^0.1.1",
-    "tiny-svg": "git://github.com/bpmn-io/tiny-svg.git#master"
+    "tiny-svg": "^0.1.0"
   }
 }
