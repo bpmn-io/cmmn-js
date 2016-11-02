@@ -3,16 +3,13 @@
   "version": "0.2.0",
   "dependencies": {
     "diagram-js": {
-      "version": "^0.16.0",
+      "version": "bpmn-io/diagram-js",
       "dependencies": {
         "eve": {
           "version": "^0.4.2"
         },
         "hammerjs": {
           "version": "^2.0.1"
-        },
-        "snapsvg": {
-          "version": "https://github.com/Nikku/Snap.svg/archive/v0.3.0-browserify.tar.gz"
         },
         "didi": {
           "version": "0.1.0"
@@ -48,7 +45,7 @@
       }
     },
     "diagram-js-direct-editing": {
-      "version": "^0.15.0"
+      "version": "bpmn-io/diagram-js-direct-editing"
     },
     "ids": {
       "version": "0.2.0",
@@ -84,6 +81,9 @@
           "version": "1.3.1"
         }
       }
+    },
+    "tiny-svg": {
+      "version": "^0.1.0"
     }
   }
 }
