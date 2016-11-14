@@ -1,6 +1,6 @@
 {
   "name": "cmmn-js",
-  "version": "0.7.0",
+  "version": "0.7.2",
   "description": "A cmmn 1.1 toolkit",
   "scripts": {
     "all": "grunt",
@@ -65,8 +65,8 @@
   },
   "dependencies": {
     "cmmn-moddle": "^0.3.4",
-    "diagram-js": "^0.17.0",
-    "diagram-js-direct-editing": "^0.17.0",
+    "diagram-js": "^0.18.0",
+    "diagram-js-direct-editing": "^0.17.1",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
