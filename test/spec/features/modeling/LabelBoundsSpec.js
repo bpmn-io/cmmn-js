@@ -235,7 +235,6 @@ describe('label bounds', function() {
           result = result.replace(/>\s+/g,'>');
 
           // get label width and height from XML
-          console.log(result);
           var matches = result.match(/PlanItem_1_di.*?CMMNLabel.*?width="(\d*).*?height="(\d*)/);
 
           var width = parseInt(matches[1]),
@@ -279,7 +278,6 @@ describe('label bounds', function() {
           result = result.replace(/>\s+/g,'>');
 
           // get label width and height from XML
-          console.log(result);
           var matches = result.match(/PlanItem_3_di.*?CMMNLabel.*?width="(\d*).*?height="(\d*)/);
 
           var width = parseInt(matches[1]),
