@@ -33,8 +33,10 @@ function triggerKeyEvent(element, event, code) {
 }
 
 
-function getBBox(textbox) {
-  return textbox.content.getBoundingClientRect();
+function getBBox(directEditing) {
+  var el = directEditing._textbox.parent;
+
+  return el.getBoundingClientRect();
 }
 
 
@@ -480,7 +482,7 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var bbox = getBBox(directEditing._textbox);
+      var bbox = getBBox(directEditing);
 
       expect(bbox.width).to.equal(200);
       expect(bbox.height).to.equal(50);
@@ -496,10 +498,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var bbox = getBBox(directEditing._textbox);
+      var bbox = getBBox(directEditing);
 
       expect(bbox.width).to.equal(shape.width);
-      expect(bbox.height).to.equal(20);
+      expect(bbox.height).to.equal(16);
     }));
 
 
@@ -512,7 +514,7 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var bbox = getBBox(directEditing._textbox);
+      var bbox = getBBox(directEditing);
 
       expect(bbox.width).to.equal(shape.width);
       expect(bbox.height).to.equal(shape.height);
@@ -528,7 +530,7 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var bbox = getBBox(directEditing._textbox);
+      var bbox = getBBox(directEditing);
 
       expect(bbox.width).to.equal(150);
       expect(bbox.height).to.equal(20);
@@ -544,7 +546,7 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var bbox = getBBox(directEditing._textbox);
+      var bbox = getBBox(directEditing);
 
       expect(bbox.width).to.equal(150);
       expect(bbox.height).to.equal(20);
@@ -560,7 +562,7 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var bbox = getBBox(directEditing._textbox);
+      var bbox = getBBox(directEditing);
 
       expect(bbox.width).to.equal(shape.width);
       expect(bbox.height).to.equal(shape.height);
@@ -576,10 +578,10 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var bbox = getBBox(directEditing._textbox);
+      var bbox = getBBox(directEditing);
 
       expect(bbox.width).to.equal(shape.width);
-      expect(bbox.height).to.equal(20);
+      expect(bbox.height).to.equal(16);
     }));
 
 
@@ -592,7 +594,7 @@ describe('features - label-editing', function() {
       eventBus.fire('element.dblclick', { element: shape });
 
       // then
-      var bbox = getBBox(directEditing._textbox);
+      var bbox = getBBox(directEditing);
 
       expect(bbox.width).to.equal(150);
       expect(bbox.height).to.equal(20);
