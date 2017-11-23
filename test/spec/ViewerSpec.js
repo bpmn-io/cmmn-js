@@ -86,7 +86,7 @@ describe('Viewer', function() {
 
   describe('defaults', function() {
 
-    it('should use <body> as default parent', function(done) {
+    it('should not attach per default', function(done) {
 
       var xml = require('../fixtures/cmmn/simple.cmmn');
 
@@ -94,7 +94,7 @@ describe('Viewer', function() {
 
       viewer.importXML(xml, function(err, warnings) {
 
-        expect(viewer._container.parentNode).to.equal(document.body);
+        expect(viewer._container.parentNode).not.to.exist;
 
         done(err, warnings);
       });
@@ -679,6 +679,58 @@ describe('Viewer', function() {
 
       });
 
+    });
+
+  });
+
+
+  describe('#attachTo', function() {
+
+    it('should attach the viewer', function(done) {
+
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      var viewer = new Viewer();
+
+      viewer.importXML(xml, function(err, warnings) {
+
+        // assume
+        expect(viewer._container.parentNode).not.to.exist;
+
+        // when
+        viewer.attachTo(container);
+
+        // then
+        expect(viewer._container.parentNode).to.equal(container);
+
+        done(err, warnings);
+      });
+    });
+
+  });
+
+
+  describe('#detach', function() {
+
+    it('should detach the viewer', function(done) {
+
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      var viewer = new Viewer({ container: container });
+
+      viewer.importXML(xml, function(err, warnings) {
+
+        // assume
+        expect(viewer._container.parentNode).to.equal(container);
+
+        // when
+        viewer.detach();
+
+        // then
+        expect(viewer._container.parentNode).not.to.exist;
+
+        done(err, warnings);
+      });
     });
 
   });

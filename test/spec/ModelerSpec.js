@@ -60,7 +60,7 @@ describe('Modeler', function() {
 
   describe('defaults', function() {
 
-    it('should use <body> as default parent', function(done) {
+    it('should not attach per default', function(done) {
 
       var xml = require('../fixtures/cmmn/simple.cmmn');
 
@@ -68,7 +68,7 @@ describe('Modeler', function() {
 
       modeler.importXML(xml, function(err, warnings) {
 
-        expect(modeler._container.parentNode).to.equal(document.body);
+        expect(modeler._container.parentNode).not.to.exist;
 
         done(err, warnings);
       });
