@@ -169,14 +169,11 @@ describe('Viewer', function() {
       createViewer(xml, function(err, warnings) {
 
         // then
-        expect(err).to.not.be.ok;
+        expect(err).to.exist;
+        expect(err.message).to.match(/failed to parse document as <cmmn:Definitions>/);
 
         expectWarnings(warnings, [
-          /unparsable content <case> detected/,
-          'unresolved reference <CasePlanModel_1>',
-          'unresolved reference <PI_Task_1>',
-          'no cmmnElement referenced in <cmmndi:CMMNShape id="DI_CasePlanModel_1" />',
-          'no cmmnElement referenced in <cmmndi:CMMNShape id="DI_PI_Task_1" />'
+          /unparsable content <definitions> detected/
         ]);
 
         done();
