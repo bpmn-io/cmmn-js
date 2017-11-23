@@ -50,6 +50,7 @@ describe('label bounds', function() {
 
     }));
 
+
     describe('label dimensions', function() {
 
       it('should expand width', inject(function(elementRegistry) {
@@ -61,7 +62,7 @@ describe('label bounds', function() {
         updateLabel(shape, 'Foooooooooobar');
 
         // then
-        expect(shape.label.width).to.be.within(82, 87);
+        expect(shape.label.width).to.be.within(82, 88);
       }));
 
 
@@ -142,6 +143,7 @@ describe('label bounds', function() {
       }));
 
     });
+
 
     describe('label outlines', function() {
 
@@ -239,7 +241,7 @@ describe('label bounds', function() {
           var width = parseInt(matches[1]),
               height = parseInt(matches[2]);
 
-          expect(width).to.be.within(43, 45);
+          expect(width).to.be.within(43, 46);
           expect(height).to.be.within(12, 15);
 
           done();
@@ -283,7 +285,7 @@ describe('label bounds', function() {
           var width = parseInt(matches[1]),
               height = parseInt(matches[2]);
 
-          expect(width).to.be.within(43, 45);
+          expect(width).to.be.within(43, 46);
           expect(height).to.be.within(12, 15);
 
           done();
