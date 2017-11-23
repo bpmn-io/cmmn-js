@@ -68,7 +68,7 @@ describe('Modeler', function() {
 
       modeler.importXML(xml, function(err, warnings) {
 
-        expect(modeler.container.parentNode).to.equal(document.body);
+        expect(modeler._container.parentNode).to.equal(document.body);
 
         done(err, warnings);
       });

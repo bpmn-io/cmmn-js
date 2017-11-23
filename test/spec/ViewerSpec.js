@@ -27,7 +27,21 @@ describe('Viewer', function() {
 
   it('should import simple case', function(done) {
     var xml = require('../fixtures/cmmn/simple.cmmn');
-    createViewer(xml, done);
+
+    // when
+    createViewer(xml, function(err, warnings, viewer) {
+
+      // then
+      expect(err).not.to.exist;
+      expect(warnings).to.be.empty;
+
+      var definitions = viewer.getDefinitions();
+
+      expect(definitions).to.exist;
+      expect(definitions).to.eql(viewer._definitions);
+
+      done();
+    });
   });
 
 
@@ -80,7 +94,7 @@ describe('Viewer', function() {
 
       viewer.importXML(xml, function(err, warnings) {
 
-        expect(viewer.container.parentNode).to.equal(document.body);
+        expect(viewer._container.parentNode).to.equal(document.body);
 
         done(err, warnings);
       });
@@ -121,7 +135,7 @@ describe('Viewer', function() {
 
         expect(err).to.be.ok;
 
-        expectMessage(err, /Text data outside of root node./);
+        expectMessage(err, /missing start tag/);
 
         done();
       });
@@ -344,7 +358,7 @@ describe('Viewer', function() {
           return done(err);
         }
 
-        var svgDoc = viewer.container.childNodes[1].childNodes[1];
+        var svgDoc = viewer._container.childNodes[1].childNodes[1];
 
 
 
@@ -436,9 +450,9 @@ describe('Viewer', function() {
       });
 
       // then
-      expect(viewer.container.style.position).to.equal('fixed');
-      expect(viewer.container.style.width).to.equal('200px');
-      expect(viewer.container.style.height).to.equal('100px');
+      expect(viewer._container.style.position).to.equal('fixed');
+      expect(viewer._container.style.width).to.equal('200px');
+      expect(viewer._container.style.height).to.equal('100px');
     });
 
   });
@@ -613,7 +627,7 @@ describe('Viewer', function() {
       viewer.destroy();
 
       // then
-      expect(viewer.container.parentNode).not.to.exist;
+      expect(viewer._container.parentNode).not.to.exist;
     });
 
 
