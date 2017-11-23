@@ -23,13 +23,13 @@ describe('Modeler', function() {
   }
 
 
-  it('should import simple process', function(done) {
+  it('should import complex', function(done) {
     var xml = require('../fixtures/cmmn/complex.cmmn');
     createModeler(xml, done);
   });
 
 
-  it('should re-import simple process', function(done) {
+  it('should re-import simple diagram', function(done) {
 
     var xml = require('../fixtures/cmmn/simple.cmmn');
 
