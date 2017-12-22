@@ -5,6 +5,10 @@
 var modelingModule = require('../../../../../lib/features/modeling'),
     coreModule = require('../../../../../lib/core');
 
+var ATTACH = {
+  attach: true
+};
+
 
 describe('features/behavior - AttachCriterionBehavior', function() {
 
@@ -30,7 +34,7 @@ describe('features/behavior - AttachCriterionBehavior', function() {
       casePlanModel = elementRegistry.get('CasePlanModel_1');
 
       // when
-      modeling.createShape(criterion, { x: 87, y: 60 }, casePlanModel, true);
+      modeling.createShape(criterion, { x: 87, y: 60 }, casePlanModel, ATTACH);
     }));
 
 
@@ -72,7 +76,7 @@ describe('features/behavior - AttachCriterionBehavior', function() {
         criterion = elementRegistry.get('ExitCriterion_2');
 
         // when
-        modeling.moveElements([ criterion ], { x: -268, y: 50 }, casePlanModel, true);
+        modeling.moveElements([ criterion ], { x: -268, y: 50 }, casePlanModel, ATTACH);
 
       }));
 
@@ -115,7 +119,7 @@ describe('features/behavior - AttachCriterionBehavior', function() {
         sentry = criterion.businessObject.sentryRef;
 
         // when
-        modeling.moveElements([ criterion ], { x: -168, y: 50 }, casePlanModel, true);
+        modeling.moveElements([ criterion ], { x: -168, y: 50 }, casePlanModel, ATTACH);
 
         newCriterion = itemRegistry.getShapes(itemRegistry.getReferences(sentry))[0];
 
@@ -160,7 +164,7 @@ describe('features/behavior - AttachCriterionBehavior', function() {
         criterion = elementRegistry.get('ExitCriterion_1');
 
         // when
-        modeling.moveElements([ criterion ], { x: -0, y: 50 }, casePlanModel, true);
+        modeling.moveElements([ criterion ], { x: -0, y: 50 }, casePlanModel, ATTACH);
 
       }));
 

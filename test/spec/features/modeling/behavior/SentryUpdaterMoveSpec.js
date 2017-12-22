@@ -5,6 +5,10 @@
 var modelingModule = require('../../../../../lib/features/modeling'),
     coreModule = require('../../../../../lib/core');
 
+var ATTACH = {
+  attach: true
+};
+
 
 describe('features/modeling - #SentryUpdater - move', function() {
 
@@ -32,7 +36,7 @@ describe('features/modeling - #SentryUpdater - move', function() {
         newParent = target.businessObject.$parent;
 
         // when
-        modeling.moveElements([ criterion ], { x: -37, y: 250 }, target, true);
+        modeling.moveElements([ criterion ], { x: -37, y: 250 }, target, ATTACH);
       }));
 
       it('should execute', function() {
@@ -82,7 +86,7 @@ describe('features/modeling - #SentryUpdater - move', function() {
         newParent = target.businessObject;
 
         // when
-        modeling.moveElements([ criterion ], { x: -67, y: 0 }, target, true);
+        modeling.moveElements([ criterion ], { x: -67, y: 0 }, target, ATTACH);
       }));
 
       it('should execute', function() {
@@ -131,7 +135,7 @@ describe('features/modeling - #SentryUpdater - move', function() {
         newParent = target.businessObject.$parent;
 
         // when
-        modeling.moveElements([ criterion ], { x: -37, y: 180 }, target, true);
+        modeling.moveElements([ criterion ], { x: -37, y: 180 }, target, ATTACH);
       }));
 
       it('should execute', function() {
@@ -181,7 +185,7 @@ describe('features/modeling - #SentryUpdater - move', function() {
         newParent = target.businessObject.$parent;
 
         // when
-        modeling.moveElements([ criterionShape ], { x: -177, y: 250 }, target, true);
+        modeling.moveElements([ criterionShape ], { x: -177, y: 250 }, target, ATTACH);
       }));
 
       it('should execute', function() {
@@ -697,7 +701,7 @@ describe('features/modeling - #SentryUpdater - move', function() {
       connection = elementRegistry.get('CaseFileItemOnPart_2_2_di').businessObject;
 
       // when
-      modeling.moveElements([ criterion ], { x: -50, y: 135 }, target, true);
+      modeling.moveElements([ criterion ], { x: -50, y: 135 }, target, ATTACH);
 
       newSentry = criterion.businessObject.sentryRef;
       newOnPart = newSentry.onParts[0];
@@ -817,7 +821,7 @@ describe('features/modeling - #SentryUpdater - move', function() {
       connection = elementRegistry.get('PlanItemOnPart_2_2_di').businessObject;
 
       // when
-      modeling.moveElements([ criterion ], { x: -50, y: 135 }, target, true);
+      modeling.moveElements([ criterion ], { x: -50, y: 135 }, target, ATTACH);
 
       newSentry = criterion.businessObject.sentryRef;
       newOnPart = newSentry.onParts[0];

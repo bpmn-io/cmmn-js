@@ -5,6 +5,10 @@
 var modelingModule = require('../../../../../lib/features/modeling'),
     coreModule = require('../../../../../lib/core');
 
+var ATTACH = {
+  attach: true
+};
+
 
 describe('features/modeling/behavior - replace element', function() {
 
@@ -24,7 +28,7 @@ describe('features/modeling/behavior - replace element', function() {
           entryCriterion = elementFactory.createCriterionShape('cmmn:EntryCriterion');
 
       // when
-      var newCriterion = modeling.createShape(entryCriterion, { x: 107, y: 100 }, casePlanModel, true);
+      var newCriterion = modeling.createShape(entryCriterion, { x: 107, y: 100 }, casePlanModel, ATTACH);
 
       // then
       expect(newCriterion.type).to.equal('cmmn:ExitCriterion');
@@ -40,7 +44,7 @@ describe('features/modeling/behavior - replace element', function() {
           entryCriterion = elementFactory.createCriterionShape('cmmn:EntryCriterion');
 
       // when
-      var newCriterion = modeling.createShape(entryCriterion, { x: 239, y: 150 }, task, true);
+      var newCriterion = modeling.createShape(entryCriterion, { x: 239, y: 150 }, task, ATTACH);
 
       // then
       expect(newCriterion.type).to.equal('cmmn:EntryCriterion');
@@ -57,7 +61,7 @@ describe('features/modeling/behavior - replace element', function() {
           sentry = entryCriterion.businessObject.sentryRef;
 
       // when
-      modeling.moveElements([ entryCriterion ], { x: 170, y: 0 }, casePlanModel, true);
+      modeling.moveElements([ entryCriterion ], { x: 170, y: 0 }, casePlanModel, ATTACH);
 
 
       var replacement = elementRegistry.filter(function(element) {
@@ -82,7 +86,7 @@ describe('features/modeling/behavior - replace element', function() {
           sentry = entryCriterion.businessObject.sentryRef;
 
       // when
-      modeling.moveElements([ entryCriterion ], { x: -10, y: 100 }, milestone, true);
+      modeling.moveElements([ entryCriterion ], { x: -10, y: 100 }, milestone, ATTACH);
 
 
       var criterion = elementRegistry.filter(function(element) {
@@ -292,7 +296,7 @@ describe('features/modeling/behavior - replace element', function() {
           var criterion = elementRegistry.get('EntryCriterion_1');
 
           // when
-          modeling.moveElements([ criterion ], { x: 138, y: 0 }, casePlanModel, true);
+          modeling.moveElements([ criterion ], { x: 138, y: 0 }, casePlanModel, ATTACH);
 
         }));
 
@@ -332,7 +336,7 @@ describe('features/modeling/behavior - replace element', function() {
           var criterion = elementRegistry.get('ExitCriterion_1');
 
           // when
-          modeling.moveElements([ criterion ], { x: -50, y: 160 }, task, true);
+          modeling.moveElements([ criterion ], { x: -50, y: 160 }, task, ATTACH);
 
         }));
 
@@ -376,7 +380,7 @@ describe('features/modeling/behavior - replace element', function() {
           var criterion = elementRegistry.get('EntryCriterion_2');
 
           // when
-          modeling.moveElements([ criterion ], { x: 138, y: 0 }, casePlanModel, true);
+          modeling.moveElements([ criterion ], { x: 138, y: 0 }, casePlanModel, ATTACH);
 
         }));
 
@@ -416,7 +420,7 @@ describe('features/modeling/behavior - replace element', function() {
           var criterion = elementRegistry.get('ExitCriterion_2');
 
           // when
-          modeling.moveElements([ criterion ], { x: -50, y: 45 }, task, true);
+          modeling.moveElements([ criterion ], { x: -50, y: 45 }, task, ATTACH);
 
         }));
 

@@ -11,7 +11,8 @@ var coreModule = require('../../../../lib/core'),
     modelingModule = require('../../../../lib/features/modeling'),
     resizeModule = require('diagram-js/lib/features/resize'),
     createModule = require('diagram-js/lib/features/create'),
-    rulesModule = require('../../../../lib/features/rules');
+    rulesModule = require('../../../../lib/features/rules'),
+    moveModule = require('diagram-js/lib/features/move');
 
 
 describe('features/snapping - CmmnSnapping', function() {
@@ -22,7 +23,8 @@ describe('features/snapping - CmmnSnapping', function() {
     resizeModule,
     rulesModule,
     snappingModule,
-    createModule
+    createModule,
+    moveModule
   ];
 
   describe('on CasePlanModel resize', function() {

@@ -6,12 +6,19 @@
 var modelingModule = require('../../../../lib/features/modeling'),
     coreModule = require('../../../../lib/core');
 
+var ATTACH = {
+  attach: true
+};
+
 
 describe('features/modeling - update attachment', function() {
 
   var diagramXML = require('./UpdateAttachment.cmmn');
 
-  var testModules = [ coreModule, modelingModule ];
+  var testModules = [
+    coreModule,
+    modelingModule
+  ];
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
@@ -39,7 +46,7 @@ describe('features/modeling - update attachment', function() {
         host = hostShape.businessObject;
 
         // when
-        modeling.createShape(criterionShape, { x: 296, y: 210 }, hostShape, true);
+        modeling.createShape(criterionShape, { x: 296, y: 210 }, hostShape, ATTACH);
       }));
 
       it('should execute', function() {
@@ -88,7 +95,7 @@ describe('features/modeling - update attachment', function() {
         host = hostShape.businessObject;
 
         // when
-        modeling.createShape(criterionShape, { x: 296, y: 210 }, hostShape, true);
+        modeling.createShape(criterionShape, { x: 296, y: 210 }, hostShape, ATTACH);
       }));
 
       it('should execute', function() {
@@ -144,7 +151,7 @@ describe('features/modeling - update attachment', function() {
         newHost = newHostShape.businessObject;
 
         // when
-        modeling.moveElements([ criterionShape ], { x: 129, y: 0 }, newHostShape, true);
+        modeling.moveElements([ criterionShape ], { x: 129, y: 0 }, newHostShape, ATTACH);
 
       }));
 
@@ -195,7 +202,7 @@ describe('features/modeling - update attachment', function() {
         newHost = newHostShape.businessObject;
 
         // when
-        modeling.moveElements([ criterionShape ], { x: -122, y: 0 }, newHostShape, true);
+        modeling.moveElements([ criterionShape ], { x: -122, y: 0 }, newHostShape, ATTACH);
 
       }));
 
