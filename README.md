@@ -2,22 +2,25 @@
 
 [![Build Status](https://travis-ci.org/bpmn-io/cmmn-js.svg?branch=master)](https://travis-ci.org/bpmn-io/cmmn-js)
 
-[cmmn-js](https://github.com/bpmn-io/cmmn-js) is the CMMN 1.1 diagram rendering toolkit that powers [bpmn.io](http://bpmn.io).
+View and edit CMMN 1.1 diagrams in the browser.
 
 
-> the project is still in an early stage. Documentation may be missing and examples may be broken.
+## Installation
 
+Include the library [pre-packaged](https://github.com/bpmn-io/cmmn-js-examples/tree/master/pre-packaged)
+or include it [via npm](https://github.com/bpmn-io/cmmn-js-examples/tree/master/bundling)
+into your node-style web-application.
 
 ## Usage
 
-Get the library via [npm](http://npmjs.org) or [bower](http://bower.io) and use it in your web applications to display [CMMN 1.1 diagrams](http://www.omg.org/spec/CMMN/).
-
+To get started, create a [cmmn-js](https://github.com/bpmn-io/cmmn-js) instance
+and render [CMMN 1.1 diagrams](http://www.omg.org/spec/CMMN/1.1/) in the browser:
 
 ```javascript
-var CmmnViewer = require('cmmn-js');
-
 var xml; // my CMMN 1.1 xml
-var viewer = new CmmnViewer({ container: 'body' });
+var viewer = new CmmnJS({
+  container: 'body'
+});
 
 viewer.importXML(xml, function(err) {
 
@@ -29,44 +32,58 @@ viewer.importXML(xml, function(err) {
 });
 ```
 
+Checkout our [examples](https://github.com/bpmn-io/cmmn-js-examples) for many
+more supported usage scenarios.
 
-## Install cmmn-js
 
-### via bower
+### Dynamic Attach/Detach
 
+You may attach or detach the viewer dynamically to any element on the page, too:
+
+```javascript
+var viewer = new CmmnJS();
+
+// attach it to some element
+viewer.attachTo('#container');
+
+// detach the panel
+viewer.detach();
 ```
-bower install cmmn-js
-```
-
-Make sure to include the library + all dependencies into the website.
-
-### via npm
-
-```
-npm install --save cmmn-js
-```
-
-Make sure you use [browserify](http://browserify.org) or the like to bundle your project and cmmn-js for the browser.
 
 
 ## Resources
 
+*   [Demo](http://demo.bpmn.io)
 *   [Issues](https://github.com/bpmn-io/cmmn-js/issues)
+*   [Examples](https://github.com/bpmn-io/cmmn-js-examples)
+*   [Forum](https://forum.bpmn.io)
 
 
-## Tools
+## Building the Project
 
-cmmn-js builds on top of a few additional powerful tools
+Perform the following steps to build the library, including running all tests:
+
+```
+cd cmmn-js
+npm install
+npm run all
+```
+
+You may need to perform [additional project setup](./docs/project/SETUP.md) when
+building the latest development snapshot.
+
+Please checkout our [contributing guidelines](./CONTRIBUTING.md) if you plan to
+file an issue or pull request.
+
+
+## Related
+
+cmmn-js builds on top of a few additional powerful tools:
 
 * [cmmn-moddle](https://github.com/bpmn-io/cmmn-moddle): Read / write support for CMMN 1.1 XML in the browsers
 * [diagram-js](https://github.com/bpmn-io/diagram-js): Diagram rendering and editing toolkit
 
 
-## Building the Project
-
-As long as the project is in alpha stage, you must make sure you setup the whole development environment, including a number of [project dependencies](https://github.com/bpmn-io) according to [our development setup](https://github.com/bpmn-io/cmmn-js/blob/master/docs/project/SETUP.md).
-
-
 ## License
 
-Use under the terms of the [cmmn-js license](http://bpmn.io/license).
+Use under the terms of the [bpmn.io license](http://bpmn.io/license).
