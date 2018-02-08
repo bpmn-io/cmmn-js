@@ -21,6 +21,10 @@ jobs:
         - sleep 3
       script:
         - TEST_BROWSERS=Firefox,PhantomJS npm run all
+    - stage: update examples
+      script: './tasks/stages/update-examples'
 
 stages:
   - test
+  - name: update examples
+    if: tag =~ ^v\d
