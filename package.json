@@ -64,6 +64,7 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
+    "cmmn-font": "^0.5.0",
     "cmmn-moddle": "^2.1.0",
     "diagram-js": "^0.28.1",
     "diagram-js-direct-editing": "^0.22.0",
