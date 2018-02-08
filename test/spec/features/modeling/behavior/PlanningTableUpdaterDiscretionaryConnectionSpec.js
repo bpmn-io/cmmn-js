@@ -389,6 +389,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
     });
 
+
     describe('should add discretionary item to existing human tasks planning table (inside stage)', function() {
 
       beforeEach(inject(function(elementRegistry, modeling) {
@@ -513,6 +514,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
       }));
 
     });
+
 
     describe('should add to existing planning table', function() {
 
@@ -744,7 +746,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
     it('should execute', function() {
       var tableItems = oldTarget.businessObject.definitionRef.planningTable.get('tableItems');
-      
+
       // then
       expect(tableItems).to.include(newTarget.businessObject);
       expect(casePlanModel.planningTable.get('tableItems')).to.include(oldTarget.businessObject);
@@ -757,7 +759,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
       commandStack.undo();
 
       var tableItems = oldSource.businessObject.definitionRef.planningTable.get('tableItems');
-      
+
       // then
       expect(tableItems).to.include(oldTarget.businessObject);
       expect(casePlanModel.planningTable.get('tableItems')).to.include(newTarget.businessObject);
@@ -771,7 +773,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
       commandStack.redo();
 
       var tableItems = oldTarget.businessObject.definitionRef.planningTable.get('tableItems');
-      
+
       // then
       expect(tableItems).to.include(newTarget.businessObject);
       expect(casePlanModel.planningTable.get('tableItems')).to.include(oldTarget.businessObject);

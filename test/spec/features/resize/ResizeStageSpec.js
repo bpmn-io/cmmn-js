@@ -20,7 +20,7 @@ function expectTargetWaypoint(actualWaypoints, expected) {
 
 function assertWaypoint(actual, expected) {
   expect(actual.x).to.equal(expected.x);
-  expect(actual.y).to.equal(expected.y); 
+  expect(actual.y).to.equal(expected.y);
 }
 
 describe('features - resize', function() {

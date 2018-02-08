@@ -27,41 +27,47 @@ describe('features/modeling - id claim management', function() {
 
   describe('unclaim', function() {
 
-    it('should unclaim id when removing plan item', inject(function(modeling, moddle) {
-      // when
-      modeling.removeElements([ element ]);
+    it('should unclaim id when removing plan item', inject(
+      function(modeling, moddle) {
+        // when
+        modeling.removeElements([ element ]);
 
-      // then
-      expect(moddle.ids.assigned(id)).to.be.false;
-    }));
-
-
-    it('should revert unclaim action on restoring plan item', inject(function(modeling, moddle, commandStack) {
-      // given
-      modeling.removeElements([ element ]);
-
-      // when
-      commandStack.undo();
-
-      // then
-      expect(moddle.ids.assigned(id)).to.eql(moddleElement);
-    }));
+        // then
+        expect(moddle.ids.assigned(id)).to.be.false;
+      }
+    ));
 
 
-    it('should unclaim id when removing case plan model', inject(function(elementRegistry, modeling, moddle) {
-      // given
-      var casePlanModel = elementRegistry.get('CasePlanModel_1');
+    it('should revert unclaim action on restoring plan item', inject(
+      function(modeling, moddle, commandStack) {
+        // given
+        modeling.removeElements([ element ]);
 
-      // when
-      modeling.removeElements([ casePlanModel ]);
+        // when
+        commandStack.undo();
 
-      // then
-      expect(moddle.ids.assigned('CasePlanModel_1')).to.be.false;
-    }));
+        // then
+        expect(moddle.ids.assigned(id)).to.eql(moddleElement);
+      }
+    ));
 
 
-    it('should revert unclaim action on restoring case plan model',
-      inject(function(elementRegistry, modeling, moddle, commandStack) {
+    it('should unclaim id when removing case plan model', inject(
+      function(elementRegistry, modeling, moddle) {
+        // given
+        var casePlanModel = elementRegistry.get('CasePlanModel_1');
+
+        // when
+        modeling.removeElements([ casePlanModel ]);
+
+        // then
+        expect(moddle.ids.assigned('CasePlanModel_1')).to.be.false;
+      }
+    ));
+
+
+    it('should revert unclaim action on restoring case plan model', inject(
+      function(elementRegistry, modeling, moddle, commandStack) {
 
         // given
         var casePlanModel = elementRegistry.get('CasePlanModel_1');
@@ -72,7 +78,9 @@ describe('features/modeling - id claim management', function() {
         commandStack.undo();
 
         // then
-        expect(moddle.ids.assigned('CasePlanModel_1')).to.eql(casePlanModel.businessObject);
+        expect(
+          moddle.ids.assigned('CasePlanModel_1')
+        ).to.eql(casePlanModel.businessObject);
       }
     ));
 
@@ -84,27 +92,36 @@ describe('features/modeling - id claim management', function() {
     it('should retain id - execute', inject(function(moddle, cmmnReplace) {
 
       // when
-      var processTaskPI = cmmnReplace.replaceElement(element, { type: 'cmmn:PlanItem', definitionType: 'cmmn:ProcessTask' });
+      var processTaskPI = cmmnReplace.replaceElement(element, {
+        type: 'cmmn:PlanItem',
+        definitionType: 'cmmn:ProcessTask'
+      });
 
       // then
-      // expect the new process task plan item to get the id of the replaced human task
+      // expect the new process task plan item to
+      // get the id of the replaced human task
       expect(moddle.ids.assigned(id)).to.eql(processTaskPI.businessObject);
 
     }));
 
 
-    it('should retain id - undo', inject(function(moddle, cmmnReplace, commandStack) {
+    it('should retain id - undo', inject(
+      function(moddle, cmmnReplace, commandStack) {
 
-      // given
-      cmmnReplace.replaceElement(element, { type: 'cmmn:PlanItem', definitionType: 'cmmn:ProcessTask' });
+        // given
+        cmmnReplace.replaceElement(element, {
+          type: 'cmmn:PlanItem',
+          definitionType: 'cmmn:ProcessTask'
+        });
 
-      // when
-      commandStack.undo();
+        // when
+        commandStack.undo();
 
-      // then
-      expect(moddle.ids.assigned(id)).to.eql(moddleElement);
+        // then
+        expect(moddle.ids.assigned(id)).to.eql(moddleElement);
 
-    }));
+      }
+    ));
 
   });
 

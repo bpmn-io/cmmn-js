@@ -27,8 +27,8 @@ describe('features/auto-resize', function() {
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-  it('should expand stage',
-    inject(function(elementRegistry, modeling) {
+  it('should expand stage', inject(
+    function(elementRegistry, modeling) {
 
       // given
       var stagePI = elementRegistry.get('PI_Stage_1'),
@@ -43,12 +43,12 @@ describe('features/auto-resize', function() {
       var expectedBounds = assign(originalBounds, { x: 148, width: 482 });
 
       expect(stagePI).to.have.bounds(expectedBounds);
-    })
-  );
+    }
+  ));
 
 
-  it('should expand case plan model',
-    inject(function(elementRegistry, modeling, elementFactory) {
+  it('should expand case plan model', inject(
+    function(elementRegistry, modeling, elementFactory) {
 
       // given
       var casePlanModelPI = elementRegistry.get('CasePlanModel_1'),
@@ -62,12 +62,12 @@ describe('features/auto-resize', function() {
       var expectedBounds = assign(originalBounds, { x: 0, width: 1052 });
 
       expect(casePlanModelPI).to.have.bounds(expectedBounds);
-    })
-  );
+    }
+  ));
 
 
-  it('should expand plan fragment',
-    inject(function(elementRegistry, modeling, elementFactory) {
+  it('should expand plan fragment', inject(
+    function(elementRegistry, modeling, elementFactory) {
 
       // given
       var PlanFragmentDI = elementRegistry.get('DI_PlanFragment_1'),
@@ -81,12 +81,12 @@ describe('features/auto-resize', function() {
       var expectedBounds = assign(originalBounds, { y: 153, height: 263 });
 
       expect(PlanFragmentDI).to.have.bounds(expectedBounds);
-    })
-  );
+    }
+  ));
 
 
-  it('should not expand when creating criterions',
-    inject(function(elementRegistry, elementFactory, dragging, create) {
+  it('should not expand when creating criterions', inject(
+    function(elementRegistry, elementFactory, dragging, create) {
 
       // given
       dragging.setOptions({ manual: true });
@@ -113,8 +113,8 @@ describe('features/auto-resize', function() {
   ));
 
 
-  it('should expand when moving task with attached criterion',
-    inject(function(elementRegistry, modeling, dragging, create) {
+  it('should expand when moving task with attached criterion', inject(
+    function(elementRegistry, modeling, dragging, create) {
 
       var stagePI = elementRegistry.get('PI_Stage_1'),
           taskPI = elementRegistry.get('PI_Task_3');

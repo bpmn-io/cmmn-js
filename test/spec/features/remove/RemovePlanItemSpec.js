@@ -138,7 +138,7 @@ describe('features/modeling - #remove plan item', function() {
       // then
       expect(casePlanModel.planItems).to.include(stagePlanItem);
       expect(stagePlanItem.$parent).to.equal(casePlanModel);
-      
+
       expect(stage.planItems).to.include(taskPlanItem);
       expect(taskPlanItem.$parent).to.equal(stage);
     }));
@@ -152,7 +152,7 @@ describe('features/modeling - #remove plan item', function() {
       // then
       expect(casePlanModel.planItems).not.to.include(stagePlanItem);
       expect(stagePlanItem.$parent).to.be.null;
-      
+
       expect(stage.planItems).not.to.include(taskPlanItem);
       expect(taskPlanItem.$parent).to.be.null;
     }));

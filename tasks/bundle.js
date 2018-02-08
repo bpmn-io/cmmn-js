@@ -92,11 +92,11 @@ module.exports = function(grunt) {
       debug: true,
       builtins: false,
       insertGlobalVars: {
-        process: function () {
-            return 'undefined';
+        process: function() {
+          return 'undefined';
         },
-        Buffer: function () {
-            return 'undefined';
+        Buffer: function() {
+          return 'undefined';
         }
       }
     };
@@ -138,9 +138,9 @@ module.exports = function(grunt) {
 
         try {
           bannerBundled = concat([ bundled ])
-                            .prepend(banner + '\n')
-                            .add('//# sourceMappingURL=' + variant + '.js.map')
-                            .toStringWithSourceMap();
+            .prepend(banner + '\n')
+            .add('//# sourceMappingURL=' + variant + '.js.map')
+            .toStringWithSourceMap();
         } catch (e) {
           console.error(e.stack);
           throw e;

@@ -207,7 +207,7 @@ describe('features/modeling - #SentryUpdater - discretionary connection', functi
       // then
       expect(source.sentries).to.include(sentry);
       expect(target.sentries).not.to.include(sentry);
-      
+
       expect(oldEndSource.sentries).to.include(oldEndSentry);
       expect(oldEndTarget.sentries).not.to.include(oldEndSentry);
     }));
@@ -221,7 +221,7 @@ describe('features/modeling - #SentryUpdater - discretionary connection', functi
       // then
       expect(source.sentries).not.to.include(sentry);
       expect(target.sentries).to.include(sentry);
-      
+
       expect(oldEndSource.sentries).not.to.include(oldEndSentry);
       expect(oldEndTarget.sentries).to.include(oldEndSentry);
     }));
@@ -269,7 +269,7 @@ describe('features/modeling - #SentryUpdater - discretionary connection', functi
       // then
       expect(source.sentries).to.include(sentry);
       expect(target.sentries).to.include(sentry);
-      
+
       expect(newSource.sentries).not.to.include(newSentry);
       expect(newTarget.sentries).not.to.include(newSentry);
     }));
@@ -283,7 +283,7 @@ describe('features/modeling - #SentryUpdater - discretionary connection', functi
       // then
       expect(source.sentries).to.include(sentry);
       expect(target.sentries).to.include(sentry);
-      
+
       expect(newSource.sentries).not.to.include(newSentry);
       expect(newTarget.sentries).to.include(newSentry);
     }));

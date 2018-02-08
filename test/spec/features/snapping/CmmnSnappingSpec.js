@@ -615,8 +615,8 @@ describe('features/snapping - CmmnSnapping', function() {
         }));
 
 
-        it('should not snap horizontally on create',
-          inject(function(create, dragging, elementFactory, elementRegistry) {
+        it('should not snap horizontally on create', inject(
+          function(create, dragging, elementFactory, elementRegistry) {
 
             // given
             var newTask = elementFactory.createPlanItemShape('cmmn:Task'),
@@ -636,8 +636,8 @@ describe('features/snapping - CmmnSnapping', function() {
         ));
 
 
-        it('should not snap vertically on create',
-          inject(function(canvas, create, dragging, elementFactory, elementRegistry) {
+        it('should not snap vertically on create', inject(
+          function(canvas, create, dragging, elementFactory, elementRegistry) {
 
             // given
             var newTask = elementFactory.createPlanItemShape('cmmn:Task'),
