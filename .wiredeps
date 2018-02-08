@@ -19,8 +19,8 @@
       "version": "bpmn-io/cmmn-moddle",
       "requires": {
         "lodash": "3.10.1",
-        "moddle": "1.2.1",
-        "moddle-xml": "2.1.1"
+        "moddle": "bpmn-io/moddle",
+        "moddle-xml": "bpmn-io/moddle-xml"
       }
     },
     "component-classes": {
@@ -154,17 +154,17 @@
       }
     },
     "moddle": {
-      "version": "1.2.1",
+      "version": "bpmn-io/moddle",
       "requires": {
         "lodash": "3.10.1"
       }
     },
     "moddle-xml": {
-      "version": "2.1.1",
+      "version": "bpmn-io/moddle-xml",
       "requires": {
         "lodash": "3.10.1",
-        "moddle": "1.2.1",
-        "saxen": "5.4.1",
+        "moddle": "bpmn-io/moddle",
+        "saxen": "5.7.0",
         "tiny-stack": "0.1.0"
       }
     },
