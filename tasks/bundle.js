@@ -2,58 +2,40 @@
 
 var browserify = require('browserify'),
     derequire = require('browserify-derequire'),
-    UglifyJS = require('uglify-js'),
     collapse = require('bundle-collapser/plugin'),
-    concat = require('source-map-concat'),
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    flattenBundle = require('browser-pack-flat/plugin'),
+    commonShake = require('common-shakeify'),
+    unassertify = require('unassertify'),
+    uglify = require('uglify-es'),
+    envify = require('envify');
+
+var pkg = require('../package');
+
+var asyncSeries = require('./helpers').asyncSeries;
+
+var BANNER = fs.readFileSync(__dirname + '/../resources/banner.txt', 'utf8'),
+    BANNER_MIN = fs.readFileSync(__dirname + '/../resources/banner-min.txt', 'utf8');
 
 
-var BANNER = fs.readFileSync(__dirname + '/banner.txt', 'utf8'),
-    BANNER_MIN = fs.readFileSync(__dirname + '/banner-min.txt', 'utf8');
+module.exports = function bundleAll(dest, targets, done) {
 
-var SOURCE_MAP_HEADER = '//# sourceMappingURL=data:application/json;charset=utf-8;base64,';
+  var fns = Object.keys(targets).map(function(k) {
 
+    var variant = k;
+    var entry = targets[k];
 
-function extractSourceMap(content) {
+    return function(done) {
+      console.log('\nbundle ' + variant);
 
-  var idx = content.indexOf(SOURCE_MAP_HEADER),
-      map, code;
-
-  if (idx !== -1) {
-    code = content.substring(0, idx);
-    map = content.substring(idx + SOURCE_MAP_HEADER.length);
-
-    map = new Buffer(map, 'base64').toString();
-
-    map = map.replace(/\\\\/g, '/'); // convert \\ -> /
-
-    var dir = __dirname;
-
-    var dirPattern = dir.replace(/\\/g, '/').replace(/\./g, '\\.') + '/';
-
-    var pattern = new RegExp(dirPattern, 'g');
-
-    map = map.replace(pattern, '');
-
-    return {
-      code: code,
-      map: JSON.parse(map)
+      bundle(dest, variant, entry, done);
     };
-  } else {
-    throw new Error('no attached source map');
-  }
-}
-
-
-function uglify(bundle, preamble) {
-  return UglifyJS.minify(bundle.code, {
-    fromString: true,
-    output: {
-      preamble: preamble
-    }
   });
-}
+
+  asyncSeries(fns, done);
+};
+
 
 
 function Timer() {
@@ -61,103 +43,157 @@ function Timer() {
 }
 
 Timer.prototype.done = function(message) {
-  console.log(message, '[' + (this.now() - this.start) + 'ms]');
+  console.log(message, '[' + (this.now() - this.s) + 'ms]');
   this.reset();
 };
 
 Timer.prototype.reset = function() {
-  this.start = this.now();
+  this.s = this.now();
+};
+
+Timer.prototype.start = function(msg) {
+  this.reset();
 };
 
 Timer.prototype.now = function() {
   return new Date().getTime();
 };
 
+function processTemplate(str, args) {
+  return str.replace(/\{\{\s*([^\s]+)\s*\}\}/g, function(_, n) {
 
-module.exports = function(grunt) {
+    var replacement = args[n];
 
-  grunt.registerMultiTask('bundle', function(target) {
+    if (!replacement) {
+      throw new Error('unknown template {{ ' + n + '}}');
+    }
 
-    var data = this.data,
-        variant = data.name,
-        dest = data.dest,
-        src = path.resolve(data.src);
-
-    grunt.config.set('config.variant', variant);
-
-    var done = this.async();
-
-    var browserifyOptions = {
-      standalone: 'CmmnJS',
-      debug: true,
-      builtins: false,
-      insertGlobalVars: {
-        process: function() {
-          return 'undefined';
-        },
-        Buffer: function() {
-          return 'undefined';
-        }
-      }
-    };
-
-    var timer = new Timer();
-
-    var targetFileBase = path.join(dest, variant);
-
-    var banner = grunt.template.process(BANNER, grunt.config.get()),
-        bannerMin = grunt.template.process(BANNER_MIN, grunt.config.get());
-
-    browserify(browserifyOptions)
-      .plugin(derequire)
-      .plugin(collapse)
-      .add(src)
-      .bundle(function(err, result) {
-
-        timer.done('bundled');
-
-        if (err) {
-          return done(err);
-        }
-
-        var bundled, minified;
-
-        bundled = extractSourceMap(result.toString('utf8'));
-
-        timer.done('extracted source map');
-
-        try {
-          minified = uglify(bundled, bannerMin);
-        } catch (e) {
-          return done(e);
-        }
-
-        timer.done('minified');
-
-        var bannerBundled;
-
-        try {
-          bannerBundled = concat([ bundled ])
-            .prepend(banner + '\n')
-            .add('//# sourceMappingURL=' + variant + '.js.map')
-            .toStringWithSourceMap();
-        } catch (e) {
-          console.error(e.stack);
-          throw e;
-        }
-
-        timer.done('added banner');
-
-        grunt.file.write(targetFileBase + '.js', bannerBundled.code, 'utf8');
-        grunt.file.write(targetFileBase + '.js.map', bannerBundled.map, 'utf8');
-
-        grunt.file.write(targetFileBase + '.min.js', minified.code, 'utf8');
-
-        timer.done('all saved');
-
-        done();
-      });
-
+    return replacement;
   });
+}
 
-};
+function pad(n) {
+  if (n < 10) {
+    return '0' + n;
+  } else {
+    return n;
+  }
+}
+
+function today() {
+  var d = new Date();
+
+  return [
+    d.getFullYear(),
+    pad(d.getMonth() + 1),
+    pad(d.getDay())
+  ].join('-');
+}
+
+function bundle(dest, variant, entry, done) {
+
+  var src = path.resolve(entry);
+
+  var config = {
+    variant: variant,
+    version: pkg.version,
+    date: today()
+  };
+
+  var browserifyOptions = {
+    standalone: 'CmmnJS',
+    builtins: false,
+    insertGlobalVars: {
+      process: function() {
+        return 'undefined';
+      },
+      Buffer: function() {
+        return 'undefined';
+      }
+    }
+  };
+
+  var targetFileBase = path.join(dest, variant);
+
+  var banner = processTemplate(BANNER, config),
+      bannerMin = processTemplate(BANNER_MIN, config);
+
+  var timer = new Timer();
+
+  var fns = [
+
+    // production
+    function(done) {
+
+      timer.start('build prod');
+
+      browserify(browserifyOptions)
+        .transform(envify, {
+          NODE_ENV: 'production'
+        })
+        .transform(unassertify)
+        .plugin(commonShake)
+        .plugin(flattenBundle)
+        .plugin(collapse)
+        .plugin(derequire)
+        .add(src)
+        .bundle(function(err, result) {
+
+          timer.done('bundled');
+
+          if (err) {
+            return done(err);
+          }
+
+          var str = result.toString('utf-8');
+
+          var minified = uglify.minify(str, {
+            compress: true,
+            mangle: true,
+            output: {
+              preamble: bannerMin
+            }
+          });
+
+          timer.done('minified');
+
+          fs.writeFileSync(targetFileBase + '.production.min.js', minified.code, 'utf8');
+
+          timer.done('wrote ' + targetFileBase + '.production.min.js');
+
+          done();
+        });
+    },
+
+    // development
+    function(done) {
+      timer.start('build dev');
+
+      browserify(browserifyOptions)
+        .transform(envify, {
+          NODE_ENV: 'development'
+        })
+        .plugin(collapse)
+        .plugin(derequire)
+        .add(src)
+        .bundle(function(err, result) {
+
+          timer.done('bundled');
+
+          if (err) {
+            return done(err);
+          }
+
+          var code = banner + result.toString('utf-8');
+
+          fs.writeFileSync(targetFileBase + '.development.js', code, 'utf8');
+
+          timer.done('wrote ' + targetFileBase + '.development.js');
+
+          done();
+        });
+    }
+  ];
+
+  asyncSeries(fns, done);
+}
