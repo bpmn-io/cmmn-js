@@ -7,7 +7,7 @@ View and edit CMMN 1.1 diagrams in the browser.
 
 ## Installation
 
-Include the library [pre-packaged](https://github.com/bpmn-io/cmmn-js-examples/tree/master/pre-packaged)
+Use the library [pre-packaged](https://github.com/bpmn-io/cmmn-js-examples/tree/master/pre-packaged)
 or include it [via npm](https://github.com/bpmn-io/cmmn-js-examples/tree/master/bundling)
 into your node-style web-application.
 
