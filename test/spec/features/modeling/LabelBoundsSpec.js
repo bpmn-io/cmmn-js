@@ -240,7 +240,7 @@ describe('label bounds', function() {
           var width = parseInt(matches[1]),
               height = parseInt(matches[2]);
 
-          expect(width).to.be.within(43, 46);
+          expect(width).to.be.within(43, 47);
           expect(height).to.be.within(12, 15);
 
           done();
@@ -283,7 +283,7 @@ describe('label bounds', function() {
           var width = parseInt(matches[1]),
               height = parseInt(matches[2]);
 
-          expect(width).to.be.within(43, 46);
+          expect(width).to.be.within(43, 47);
           expect(height).to.be.within(12, 15);
 
           done();

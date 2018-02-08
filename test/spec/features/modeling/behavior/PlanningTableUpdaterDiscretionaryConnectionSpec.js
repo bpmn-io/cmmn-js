@@ -479,7 +479,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
         expect(target.$parent).to.equal(newSourceDefinition.planningTable);
 
-        expect(oldSourceDefinition.planningTable).not.to.exists;
+        expect(oldSourceDefinition.planningTable).not.to.exist;
       });
 
 
@@ -510,7 +510,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
         expect(target.$parent).to.equal(newSourceDefinition.planningTable);
 
-        expect(oldSourceDefinition.planningTable).not.to.exists;
+        expect(oldSourceDefinition.planningTable).not.to.exist;
       }));
 
     });
@@ -548,7 +548,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
         expect(target.$parent).to.equal(newSourceDefinition.planningTable);
 
-        expect(oldSourceDefinition.planningTable).not.to.exists;
+        expect(oldSourceDefinition.planningTable).not.to.exist;
       });
 
 
@@ -580,7 +580,7 @@ describe('features/modeling - #PlanningTableUpdater - discretionary connection',
 
         expect(target.$parent).to.equal(newSourceDefinition.planningTable);
 
-        expect(oldSourceDefinition.planningTable).not.to.exists;
+        expect(oldSourceDefinition.planningTable).not.to.exist;
       }));
 
     });

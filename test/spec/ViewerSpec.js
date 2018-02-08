@@ -108,7 +108,7 @@ describe('Viewer', function() {
 
     function expectMessage(e, expectedMessage) {
 
-      expect(e).to.be.defined;
+      expect(e).to.exist;
 
       if (expectedMessage instanceof RegExp) {
         expect(e.message).to.match(expectedMessage);
@@ -362,7 +362,7 @@ describe('Viewer', function() {
         appendTestRect(svgDoc);
         appendTestRect(svgDoc);
 
-        expect(svgDoc.querySelectorAll('.outer-bound-marker')).to.be.defined;
+        expect(svgDoc.querySelectorAll('.outer-bound-marker')).to.exist;
 
         // when
         viewer.saveSVG(function(err, svg) {

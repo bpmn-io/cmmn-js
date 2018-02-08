@@ -222,7 +222,9 @@ describe('features/replace-preview', function() {
       // then
       var gfx = getGfx({
         type: 'cmmn:PlanItem',
-        definitionType: 'cmmn:Stage'
+        definitionType: 'cmmn:Stage',
+        width: item.width,
+        height: item.height
       });
 
       expect(getInnerHTML(dragGroup.childNodes[0])).to.equal(getInnerHTML(gfx));
@@ -246,7 +248,9 @@ describe('features/replace-preview', function() {
       // then
       var gfx = getGfx({
         type: 'cmmn:PlanItem',
-        definitionType: 'cmmn:Stage'
+        definitionType: 'cmmn:Stage',
+        width: item.width,
+        height: item.height
       });
 
       expect(getInnerHTML(dragGroup.childNodes[0])).to.equal(getInnerHTML(gfx));
