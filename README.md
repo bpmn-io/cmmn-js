@@ -53,7 +53,7 @@ viewer.detach();
 
 ## Resources
 
-*   [Demo](http://demo.bpmn.io)
+*   [Demo](http://demo.bpmn.io/cmmn)
 *   [Issues](https://github.com/bpmn-io/cmmn-js/issues)
 *   [Examples](https://github.com/bpmn-io/cmmn-js-examples)
 *   [Forum](https://forum.bpmn.io)
