@@ -6,7 +6,6 @@ tasks
 test/*
 !test/util
 !test/helper
-!test/matchers
 .eslintignore
 .eslintrc
 .travis.yml
