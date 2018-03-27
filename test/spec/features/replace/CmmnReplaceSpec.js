@@ -1304,7 +1304,7 @@ describe('features/replace - cmmn replace', function() {
           // given
           var element = elementRegistry.get('DIS_Task_1');
 
-          var target =  {
+          var target = {
             type: 'cmmn:PlanItem',
             definitionType: 'cmmn:Task'
           };
@@ -1348,7 +1348,7 @@ describe('features/replace - cmmn replace', function() {
           // given
           var element = elementRegistry.get('DIS_Task_1');
 
-          var target =  {
+          var target = {
             type: 'cmmn:DiscretionaryItem',
             definitionType: 'cmmn:HumanTask'
           };
@@ -1396,7 +1396,7 @@ describe('features/replace - cmmn replace', function() {
           // given
           var element = elementRegistry.get('PI_Task_2');
 
-          var target =  {
+          var target = {
             type: 'cmmn:DiscretionaryItem',
             definitionType: 'cmmn:Task'
           };
@@ -1439,7 +1439,7 @@ describe('features/replace - cmmn replace', function() {
           // given
           var element = elementRegistry.get('PI_Task_2');
 
-          var target =  {
+          var target = {
             type: 'cmmn:PlanItem',
             definitionType: 'cmmn:HumanTask'
           };
@@ -1521,7 +1521,7 @@ describe('features/replace - cmmn replace', function() {
         // given
         var task = elementRegistry.get('PI_Task_1');
 
-        var newElementData =  {
+        var newElementData = {
           type: 'cmmn:PlanItem',
           definitionType: 'cmmn:HumanTask'
         };

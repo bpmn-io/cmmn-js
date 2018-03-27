@@ -1524,7 +1524,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       target = targetShape.businessObject;
 
       // when
-      modeling.moveElements( [ disTaskShape, taskShape ], { x: 600, y: 0 }, targetShape, { primaryShape: taskShape });
+      modeling.moveElements([ disTaskShape, taskShape ], { x: 600, y: 0 }, targetShape, { primaryShape: taskShape });
     }));
 
 
@@ -1581,7 +1581,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       target = targetShape.businessObject;
 
       // when
-      modeling.moveElements( [ disTaskShape, taskShape ], { x: 600, y: 0 }, targetShape, { primaryShape: taskShape });
+      modeling.moveElements([ disTaskShape, taskShape ], { x: 600, y: 0 }, targetShape, { primaryShape: taskShape });
     }));
 
 
@@ -1656,7 +1656,7 @@ describe('features/modeling - #PlanItemDefinitionUpdater', function() {
       task = taskShape.businessObject;
 
       // when
-      modeling.moveElements( [ planFragmentShape ], { x: 425, y: 0 }, target);
+      modeling.moveElements([ planFragmentShape ], { x: 425, y: 0 }, target);
     }));
 
 

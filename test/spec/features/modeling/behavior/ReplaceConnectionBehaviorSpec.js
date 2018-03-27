@@ -48,7 +48,7 @@ describe('features/modeling - #ReplaceConnectionBehavior - connection', function
       var targetShape = elementRegistry.get('CasePlanModel_1');
 
       // when
-      modeling.moveElements( [ shape ], { x: 0, y: 150 }, targetShape, { primaryShape: shape });
+      modeling.moveElements([ shape ], { x: 0, y: 150 }, targetShape, { primaryShape: shape });
 
     }));
 
