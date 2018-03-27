@@ -6,7 +6,7 @@ var coreModule = require('../../../../lib/core'),
     selectionModule = require('diagram-js/lib/features/selection'),
     outlineModule = require('../../../../lib/features/outline');
 
-var domQuery = require('min-dom/lib/query');
+var domQuery = require('min-dom').query;
 
 /* global bootstrapModeler, inject */
 

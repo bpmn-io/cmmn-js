@@ -10,8 +10,8 @@ var coreModule = require('../../../../lib/core'),
     modelingModule = require('../../../../lib/features/modeling'),
     replaceMenuProviderModule = require('../../../../lib/features/popup-menu');
 
-var domQuery = require('min-dom/lib/query'),
-    domClasses = require('min-dom/lib/classes');
+var domQuery = require('min-dom').query,
+    domClasses = require('min-dom').classes;
 
 function queryEntry(popupMenu, id) {
   return queryPopup(popupMenu, '[data-id="' + id + '"]');

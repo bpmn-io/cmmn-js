@@ -16,7 +16,7 @@ var labelEditingModule = require('../../../../lib/features/label-editing'),
 
 var LabelUtil = require('../../../../lib/features/label-editing/LabelUtil');
 
-var domQuery = require('min-dom/lib/query');
+var domQuery = require('min-dom').query;
 
 
 function triggerKeyEvent(element, event, code) {

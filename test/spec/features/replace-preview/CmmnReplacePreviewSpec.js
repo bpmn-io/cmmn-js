@@ -10,7 +10,7 @@ var canvasEvent = require('../../../util/MockEvents').createCanvasEvent;
 
 var assign = require('lodash/object/assign');
 
-var domQuery = require('min-dom/lib/query');
+var domQuery = require('min-dom').query;
 
 var innerSVG = require('tiny-svg/lib/innerSVG'),
     svgAttr = require('tiny-svg/lib/attr'),
