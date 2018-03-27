@@ -8,7 +8,7 @@ var replacePreviewModule = require('../../../../lib/features/replace-preview'),
 
 var canvasEvent = require('../../../util/MockEvents').createCanvasEvent;
 
-var assign = require('lodash/object/assign');
+var assign = require('min-dash').assign;
 
 var domQuery = require('min-dom').query;
 

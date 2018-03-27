@@ -5,7 +5,7 @@
 var modelingModule = require('../../../../lib/features/modeling'),
     coreModule = require('../../../../lib/core');
 
-var forEach = require('lodash/collection/forEach');
+var forEach = require('min-dash').forEach;
 
 describe('features/modeling CmmnFactory', function() {
 

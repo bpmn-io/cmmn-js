@@ -6,7 +6,7 @@ var modelingModule = require('../../../../../lib/features/modeling'),
     coreModule = require('../../../../../lib/core');
 
 var is = require('../../../../../lib/util/ModelUtil').is,
-    find = require('lodash/collection/find');
+    find = require('min-dash').find;
 
 function getConnection(source, target, connectionOrType) {
   return find(source.outgoing, function(c) {

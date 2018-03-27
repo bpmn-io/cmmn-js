@@ -28,10 +28,9 @@
  * ```
  */
 
-var unique = require('lodash/array/unique'),
-    isFunction = require('lodash/lang/isFunction'),
-    assign = require('lodash/object/assign'),
-    forEach = require('lodash/collection/forEach');
+var isFunction = require('min-dash').isFunction,
+    assign = require('min-dash').assign,
+    forEach = require('min-dash').forEach;
 
 var TestContainer = require('mocha-test-container-support');
 
@@ -88,9 +87,7 @@ function bootstrapCmmnJs(CmmnJs, diagram, options, locals) {
       _options.modules = [].concat(_options.modules || [], [ mockModule ]);
     }
 
-    _options.modules = unique(_options.modules);
-
-    if (!_options.modules.length) {
+    if (_options.modules && !_options.modules.length) {
       _options.modules = undefined;
     }
 

@@ -6,7 +6,8 @@ var modelingModule = require('../../../../../lib/features/modeling'),
     coreModule = require('../../../../../lib/core'),
     getParents = require('../../../../../lib/features/modeling/util/ModelingUtil').getParents;
 
-var intersection = require('lodash/array/intersection');
+var filter = require('min-dash').filter;
+
 
 describe('features/modeling - #PlanningTableUpdater', function() {
 
@@ -944,3 +945,14 @@ describe('features/modeling - #PlanningTableUpdater', function() {
   });
 
 });
+
+
+// helpers /////////////////
+
+
+function intersection(a, b) {
+
+  return filter(a, function(e) {
+    return b.indexOf(e) !== -1;
+  });
+}
