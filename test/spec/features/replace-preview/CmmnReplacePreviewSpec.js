@@ -12,9 +12,9 @@ var assign = require('min-dash').assign;
 
 var domQuery = require('min-dom').query;
 
-var innerSVG = require('tiny-svg/lib/innerSVG'),
-    svgAttr = require('tiny-svg/lib/attr'),
-    svgClone = require('tiny-svg/lib/clone');
+var innerSVG = require('tiny-svg').innerSVG,
+    svgAttr = require('tiny-svg').attr,
+    svgClone = require('tiny-svg').clone;
 
 
 describe('features/replace-preview', function() {
