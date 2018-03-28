@@ -1,6 +1,6 @@
 {
   "name": "cmmn-js",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "A cmmn 1.1 toolkit",
   "scripts": {
     "all": "run-s lint test distro test:distro",
