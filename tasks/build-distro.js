@@ -37,5 +37,7 @@ bundle(dest, {
 
   if (err) {
     console.error('bundling failed', err);
+
+    process.exit(1);
   }
 });
