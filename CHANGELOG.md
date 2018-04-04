@@ -6,6 +6,14 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.14.2
+
+* `CHORE`: be able to consume library without `add-module-exports` transform
+
+## 0.14.1
+
+_Rebuild of un-published v0.14.0._
+
 ## 0.14.0
 
 ### Breaking Changes
