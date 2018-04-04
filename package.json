@@ -33,7 +33,6 @@
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.6.1",
     "babelify": "^8.0.0",
     "browser-pack-flat": "^3.0.8",
@@ -75,7 +74,7 @@
   "dependencies": {
     "cmmn-font": "^0.5.0",
     "cmmn-moddle": "^5.0.0",
-    "diagram-js": "^1.1.0",
+    "diagram-js": "^1.1.1",
     "diagram-js-direct-editing": "^1.2.0",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",

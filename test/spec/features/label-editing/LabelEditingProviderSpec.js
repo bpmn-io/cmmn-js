@@ -12,7 +12,7 @@ TestHelper.insertCSS('diagram-js-label-editing.css',
 var labelEditingModule = require('../../../../lib/features/label-editing'),
     modelingModule = require('../../../../lib/features/modeling'),
     coreModule = require('../../../../lib/core'),
-    draggingModule = require('diagram-js/lib/features/dragging');
+    draggingModule = require('diagram-js/lib/features/dragging').default;
 
 var LabelUtil = require('../../../../lib/features/label-editing/LabelUtil');
 

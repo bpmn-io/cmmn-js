@@ -1,7 +1,5 @@
 'use strict';
 
-var bbl = require('babel-plugin-add-module-exports');
-
 var path = require('path');
 
 var basePath = '../../';
@@ -24,9 +22,9 @@ var browsers =
         if (process.platform === 'linux') {
           return 'ChromeHeadless_Linux';
         }
-      } else {
-        return browser;
       }
+
+      return browser;
     });
 
 
@@ -77,9 +75,8 @@ module.exports = function(karma) {
         [ 'babelify', {
           global: true,
           babelrc: false,
-          presets: [ 'env' ],
-          plugins: [
-            bbl
+          presets: [
+            'env'
           ]
         } ],
         [ 'stringify', {

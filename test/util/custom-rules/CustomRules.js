@@ -2,7 +2,7 @@
 
 var inherits = require('inherits');
 
-var RuleProvider = require('diagram-js/lib/features/rules/RuleProvider');
+var RuleProvider = require('diagram-js/lib/features/rules/RuleProvider').default;
 
 function CustomRules(eventBus) {
   RuleProvider.call(this, eventBus);

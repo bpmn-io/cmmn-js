@@ -5,7 +5,7 @@ var TestContainer = require('mocha-test-container-support');
 var coreModule = require('../../../../lib/core'),
     modelingModule = require('../../../../lib/features/modeling'),
     keyboardModule = require('../../../../lib/features/keyboard'),
-    editorActionsModule = require('diagram-js/lib/features/editor-actions');
+    editorActionsModule = require('diagram-js/lib/features/editor-actions').default;
 
 var createKeyEvent = require('diagram-js/test/util/KeyEvents').createKeyEvent;
 

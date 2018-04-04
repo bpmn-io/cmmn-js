@@ -11,8 +11,6 @@ var browserify = require('browserify'),
     uglify = require('uglify-es'),
     envify = require('envify');
 
-var bbl = require('babel-plugin-add-module-exports');
-
 var pkg = require('../package');
 
 var asyncSeries = require('./helpers').asyncSeries;
@@ -133,9 +131,6 @@ function bundle(dest, variant, entry, done) {
         .transform('babelify', {
           babelrc: false,
           global: true,
-          plugins: [
-            bbl
-          ],
           presets: [ 'env' ]
         })
         .transform(envify, {
@@ -183,9 +178,6 @@ function bundle(dest, variant, entry, done) {
         .transform('babelify', {
           babelrc: false,
           global: true,
-          plugins: [
-            bbl
-          ],
           presets: [ 'env' ]
         })
         .transform(envify, {

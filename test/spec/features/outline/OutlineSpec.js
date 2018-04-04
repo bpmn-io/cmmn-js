@@ -3,7 +3,7 @@
 require('../../../TestHelper');
 
 var coreModule = require('../../../../lib/core'),
-    selectionModule = require('diagram-js/lib/features/selection'),
+    selectionModule = require('diagram-js/lib/features/selection').default,
     outlineModule = require('../../../../lib/features/outline');
 
 var domQuery = require('min-dom').query;

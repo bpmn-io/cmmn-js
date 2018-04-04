@@ -9,7 +9,7 @@ var pick = require('min-dash').pick,
 
 var autoResizeModule = require('../../../../lib/features/auto-resize'),
     modelingModule = require('../../../../lib/features/modeling'),
-    createModule = require('diagram-js/lib/features/create'),
+    createModule = require('diagram-js/lib/features/create').default,
     coreModule = require('../../../../lib/core');
 
 var canvasEvent = require('../../../util/MockEvents').createCanvasEvent;

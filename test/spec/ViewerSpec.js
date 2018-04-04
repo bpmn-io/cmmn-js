@@ -2,7 +2,7 @@
 
 var TestContainer = require('mocha-test-container-support');
 
-var Diagram = require('diagram-js/lib/Diagram');
+var Diagram = require('diagram-js/lib/Diagram').default;
 
 var Viewer = require('../../lib/Viewer');
 

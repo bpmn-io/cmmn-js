@@ -8,7 +8,7 @@ var canvasEvent = require('../../../util/MockEvents').createCanvasEvent;
 
 var coreModule = require('../../../../lib/core'),
     modelingModule = require('../../../../lib/features/modeling'),
-    resizeModule = require('diagram-js/lib/features/resize');
+    resizeModule = require('diagram-js/lib/features/resize').default;
 
 function expectSourceWaypoint(actualWaypoints, expected) {
   assertWaypoint(actualWaypoints[0], expected);

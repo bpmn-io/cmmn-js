@@ -9,10 +9,10 @@ var canvasEvent = require('../../../util/MockEvents').createCanvasEvent;
 var coreModule = require('../../../../lib/core'),
     snappingModule = require('../../../../lib/features/snapping'),
     modelingModule = require('../../../../lib/features/modeling'),
-    resizeModule = require('diagram-js/lib/features/resize'),
-    createModule = require('diagram-js/lib/features/create'),
+    resizeModule = require('diagram-js/lib/features/resize').default,
+    createModule = require('diagram-js/lib/features/create').default,
     rulesModule = require('../../../../lib/features/rules'),
-    moveModule = require('diagram-js/lib/features/move');
+    moveModule = require('diagram-js/lib/features/move').default;
 
 
 describe('features/snapping - CmmnSnapping', function() {
