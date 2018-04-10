@@ -74,7 +74,8 @@
   "dependencies": {
     "cmmn-font": "^0.5.0",
     "cmmn-moddle": "^5.0.0",
-    "diagram-js": "^1.1.1",
+    "css.escape": "^1.5.1",
+    "diagram-js": "^1.2.2",
     "diagram-js-direct-editing": "^1.2.0",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",

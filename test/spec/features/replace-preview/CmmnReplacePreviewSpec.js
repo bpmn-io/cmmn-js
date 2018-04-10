@@ -34,8 +34,8 @@ describe('features/replace-preview', function() {
 
   beforeEach(inject(function(canvas, elementRegistry, elementFactory, move, dragging) {
 
-    exitCriterion = elementRegistry.get('ExitCriterion_1');
-    milestone = elementRegistry.get('PI_Milestone_1');
+    exitCriterion = elementRegistry.get('ExitCriterion_.1');
+    milestone = elementRegistry.get('PI_Milestone._1');
 
     /**
      * returns the gfx representation of an element type

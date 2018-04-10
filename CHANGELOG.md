@@ -6,6 +6,10 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.14.3
+
+* `FIX`: escape `data-element-id` in CSS selectors
+
 ## 0.14.2
 
 * `CHORE`: be able to consume library without `add-module-exports` transform
