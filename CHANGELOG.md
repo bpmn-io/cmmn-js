@@ -6,6 +6,11 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.14.4
+
+* `CHORE`: update to `diagram-js@1.3.0`
+* `FIX`: focus label editing box on element creation
+
 ## 0.14.3
 
 * `FIX`: escape `data-element-id` in CSS selectors
