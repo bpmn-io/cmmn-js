@@ -6,6 +6,11 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.14.5
+
+* `CHORE`: bump dependency versions
+* `FIX`: correct line-breaks vanishing during direct editing in IE
+
 ## 0.14.4
 
 * `CHORE`: update to `diagram-js@1.3.0`
