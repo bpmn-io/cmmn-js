@@ -50,10 +50,16 @@ describe('features/popup-menu - replace menu provider', function() {
 
     TestHelper.getCmmnJs().invoke(function(popupMenu) {
 
-      popupMenu.create('cmmn-replace', element);
+      var position = {
+        x: element.x + offset,
+        y: element.y + offset
+      };
 
-      popupMenu.open({ x: element.x + offset, y: element.y + offset });
-
+      popupMenu.open(
+        element,
+        'cmmn-replace',
+        position
+      );
     });
   };
 
