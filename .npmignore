@@ -9,5 +9,4 @@ test/*
 .eslintignore
 .eslintrc
 .travis.yml
-.wiredeps
 CONTRIBUTING.md
