@@ -6,6 +6,10 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.15.1
+
+* `FIX`: correct case plan model label positioning
+
 ## 0.15.0
 
 * `CHORE`: bump to `diagram-js@2`
