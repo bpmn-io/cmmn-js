@@ -6,6 +6,10 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.15.2
+
+* `FIX`: correct horizontal embedded label alignment
+
 ## 0.15.1
 
 * `FIX`: correct case plan model label positioning
