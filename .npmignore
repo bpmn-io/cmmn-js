@@ -9,4 +9,3 @@ test/*
 .eslintignore
 .eslintrc
 .travis.yml
-CONTRIBUTING.md

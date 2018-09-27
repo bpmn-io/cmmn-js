@@ -19,22 +19,23 @@ Create a pull request if you would like to have an in-depth discussion about som
 ## Setting up the project locally
 
 The project development runs on top of the [diagram-js](https://github.com/bpmn-io/diagram-js) master branch. The following code snippet sets up both libraries linking diagram-js to cmmn-js.
-    
-    mkdir bpmn.io
-    cd bpmn.io
 
-    git clone git@github.com:bpmn-io/diagram-js.git
-    (cd diagram-js && npm i)
+```sh
+mkdir bpmn.io
+cd bpmn.io
 
-    git clone git@github.com:bpmn-io/cmmn-js.git
-    (cd cmmn-js && npm install && npm link ../diagram-js)
-    
-    // Run the test suite
-    grunt
-    
-    // Running the test suite with every file change
-    TEST_BROWSERS=(Chrome|Firefox|IE) grunt auto-test
+git clone git@github.com:bpmn-io/diagram-js.git
+(cd diagram-js && npm i)
 
+git clone git@github.com:bpmn-io/cmmn-js.git
+(cd cmmn-js && npm install && npm link ../diagram-js)
+
+// Run the test suite
+npm test
+
+// Running the test suite with every file change
+TEST_BROWSERS=(Chrome|Firefox|IE) npm run dev
+```
 
 ## Creating pull requests
 
@@ -47,9 +48,9 @@ Some things that make it easier for us to accept your pull requests
     * single-quotes
     * ...
 * The code is tested
-* The `grunt` build passes (executes tests + linting)
+* The `npm run all` build passes (executes tests + linting)
 * The work is combined into a single commit
-* The commit messages adhere to our [guideline](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y)
+* The commit messages adhere to the [conventional commits guideline](https://www.conventionalcommits.org)
 
 
 We'd be glad to assist you if you do not get these things right in the first place.
