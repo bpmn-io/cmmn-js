@@ -107,6 +107,7 @@ describe('Modeler', function() {
 
   });
 
+
   describe('ids', function() {
 
     it('should provide ids with moddle', function() {
@@ -197,6 +198,42 @@ describe('Modeler', function() {
   it('should create new diagram', function(done) {
     var modeler = new Modeler({ container: container });
     modeler.createDiagram(done);
+  });
+
+
+  describe('editor actions support', function() {
+
+    it('should ship all actions', function() {
+
+      // given
+      var expectedActions = [
+        'undo',
+        'redo',
+        'stepZoom',
+        'zoom',
+        'removeSelection',
+        'moveCanvas',
+        'moveSelection',
+        'selectElements',
+        'spaceTool',
+        'lassoTool',
+        'handTool',
+        'globalConnectTool',
+        'directEditing',
+        'find'
+      ];
+
+      var modeler = new Modeler();
+
+      // when
+      var editorActions = modeler.get('editorActions');
+
+      // then
+      var actualActions = editorActions.getActions();
+
+      expect(actualActions).to.eql(expectedActions);
+    });
+
   });
 
 
