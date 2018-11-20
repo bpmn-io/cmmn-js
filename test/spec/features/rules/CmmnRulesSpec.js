@@ -1186,4 +1186,59 @@ describe('features/modeling/rules - CmmnRules', function() {
 
   });
 
+
+  describe('start connection', function() {
+
+    var diagramXML = require('../../../fixtures/cmmn/simple.cmmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+
+    it('should allow start for given element types', inject(function(elementFactory, rules) {
+      // given
+      var types = [
+        'cmmn:CaseFileItem',
+        'cmmn:Criterion',
+        'cmmn:DiscretionaryItem',
+        'cmmn:PlanItem'
+      ];
+
+      // when
+      var results = types.map(function(type) {
+        var element = elementFactory.createShape({ type: type });
+        return rules.allowed('connection.start', { source: element });
+      });
+
+      // then
+      results.forEach(function(result) {
+        expect(result).to.be.true;
+      });
+    }));
+
+
+    it('should ignore label elements', inject(function(elementFactory, rules) {
+      // given
+      var label = elementFactory.createShape({ type: 'cmmn:PlanItem', labelTarget: {} });
+
+      // when
+      var result = rules.allowed('connection.start', { source: label });
+
+      // then
+      expect(result).to.be.null;
+    }));
+
+
+    it('should NOT allow start on unknown element', inject(function(rules) {
+      // given
+      var element = { type: 'cmmn:SomeUnknownType' };
+
+      // when
+      var result = rules.allowed('connection.start', { source: element });
+
+      // then
+      expect(result).to.be.false;
+    }));
+
+  });
+
 });
