@@ -2,8 +2,6 @@
 
 var forEach = require('min-dash').forEach;
 
-var TestContainer = require('mocha-test-container-support');
-
 var coreModule = require('lib/core');
 var editorActionsModule = require('lib/features/editor-actions');
 var searchModule = require('lib/features/search');
@@ -16,7 +14,7 @@ var modelingModule = require('lib/features/modeling');
 var labelEditingModule = require('lib/features/label-editing');
 
 
-var createKeyEvent = require('../../../util/KeyEvents').createKeyEvent;
+var createKeyEvent = require('test/util/KeyEvents').createKeyEvent;
 
 
 /* global bootstrapViewer, inject, sinon */
@@ -42,13 +40,6 @@ describe('features/keyboard', function() {
 
 
   describe('cmmn keyboard bindings', function() {
-
-    var container;
-
-    beforeEach(function() {
-      container = TestContainer.get(this);
-    });
-
 
     it('should include triggers inside editorActions', inject(function(editorActions) {
       // given
@@ -78,7 +69,7 @@ describe('features/keyboard', function() {
         sinon.spy(globalConnect, 'toggle');
 
         // given
-        var e = createKeyEvent(container, key, false);
+        var e = createKeyEvent(key);
 
         // when
         keyboard._keyHandler(e);
@@ -97,7 +88,7 @@ describe('features/keyboard', function() {
         sinon.spy(lassoTool, 'activateSelection');
 
         // given
-        var e = createKeyEvent(container, key, false);
+        var e = createKeyEvent(key);
 
         // when
         keyboard._keyHandler(e);
@@ -116,7 +107,7 @@ describe('features/keyboard', function() {
         sinon.spy(spaceTool, 'activateSelection');
 
         // given
-        var e = createKeyEvent(container, key, false);
+        var e = createKeyEvent(key);
 
         // when
         keyboard._keyHandler(e);
@@ -139,7 +130,7 @@ describe('features/keyboard', function() {
 
         selection.select(task);
 
-        var e = createKeyEvent(container, key, false);
+        var e = createKeyEvent(key);
 
         // when
         keyboard._keyHandler(e);
@@ -157,7 +148,7 @@ describe('features/keyboard', function() {
         inject(function(canvas, keyboard, selection, elementRegistry) {
 
           // given
-          var e = createKeyEvent(container, key, true);
+          var e = createKeyEvent(key, { ctrlKey: true });
 
           var allElements = elementRegistry.getAll(),
               rootElement = canvas.getRootElement();
@@ -183,7 +174,7 @@ describe('features/keyboard', function() {
         sinon.spy(searchPad, 'toggle');
 
         // given
-        var e = createKeyEvent(container, key, true);
+        var e = createKeyEvent(key, { ctrlKey: true });
 
         // when
         keyboard._keyHandler(e);
