@@ -242,7 +242,74 @@ describe('Viewer', function() {
   });
 
 
-  describe('export', function() {
+  describe('#saveXML', function() {
+
+    it('should export XML', function(done) {
+
+      // given
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      createViewer(xml, function(err, warnings, viewer) {
+
+        // when
+        viewer.saveXML({ format: true }, function(err, xml) {
+
+          // then
+          expect(xml).to.contain('<?xml version="1.0" encoding="UTF-8"?>');
+          expect(xml).to.contain('<cmmn:definitions');
+          expect(xml).to.contain('  ');
+
+          done();
+        });
+      });
+
+    });
+
+
+    it('should emit <saveXML.*> events', function(done) {
+
+      var xml = require('../fixtures/cmmn/simple.cmmn');
+
+      createViewer(xml, function(err, warnings, viewer) {
+
+        var events = [];
+
+        viewer.on([
+          'saveXML.start',
+          'saveXML.serialized',
+          'saveXML.done'
+        ], function(e) {
+          // log event type + event arguments
+          events.push([
+            e.type,
+            Object.keys(e).filter(function(key) {
+              return key !== 'type';
+            })
+          ]);
+        });
+
+        viewer.importXML(xml, function(err) {
+
+          // when
+          viewer.saveXML(function(err) {
+            // then
+            console.log('events', events);
+            expect(events).to.eql([
+              [ 'saveXML.start', [ 'definitions' ] ],
+              [ 'saveXML.serialized', ['error', 'xml' ] ],
+              [ 'saveXML.done', ['error', 'xml' ] ]
+            ]);
+
+            done(err);
+          });
+        });
+      });
+    });
+
+  });
+
+
+  describe('#saveSVG', function() {
 
     function currentTime() {
       return new Date().getTime();
