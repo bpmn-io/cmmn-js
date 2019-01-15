@@ -6,6 +6,9 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.17.0
+
+* `FEAT`: add lifecycle events for `Viewer#saveXML`
 * `CHORE`: bump to `diagram-js@3.1`
 
 ## 0.16.0
