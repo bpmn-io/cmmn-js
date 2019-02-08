@@ -6,6 +6,10 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.17.1
+
+* `FIX`: update to `tiny-svg@2.2.1` to circumvent MS Edge bug
+
 ## 0.17.0
 
 * `FEAT`: add lifecycle events for `Viewer#saveXML`
