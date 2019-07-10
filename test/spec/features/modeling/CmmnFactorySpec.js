@@ -263,6 +263,19 @@ describe('features/modeling CmmnFactory', function() {
 
     }));
 
+
+    it('should NOT monkey-patch input attrs', inject(function(elementFactory) {
+
+      // given
+      var attrs = { type: 'cmmn:PlanItemOnPart' };
+
+      // when
+      elementFactory.createCmmnElement('connection', attrs);
+
+      // then
+      expect(attrs.type).to.equal('cmmn:PlanItemOnPart');
+    }));
+
   });
 
 });
