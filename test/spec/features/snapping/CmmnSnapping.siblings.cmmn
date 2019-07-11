@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn" exporter="cmmn-js (https://demo.bpmn.io/cmmn)" exporterVersion="0.18.1">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
-      <cmmn:planItem id="PI_Task_1" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Task_1" name="Task_1" definitionRef="Task_1" />
       <cmmn:planItem id="PI_Stage_1" definitionRef="Stage_1">
         <cmmn:entryCriterion id="EntryCriterion_0j7oltv" sentryRef="Sentry_0fes2p3" />
         <cmmn:entryCriterion id="EntryCriterion_135b39y" sentryRef="Sentry_0qh4aky" />
@@ -10,24 +10,12 @@
       </cmmn:planItem>
       <cmmn:planItem id="PI_Milestone_1" definitionRef="Milestone_1" />
       <cmmn:planItem id="PI_EventListener_1" definitionRef="EventListener_1" />
-      <cmmn:sentry id="Sentry_0fes2p3">
-        <cmmn:planItemOnPart id="PlanItemOnPart_05b5vf9" sourceRef="PI_Task_1">
-          <cmmn:standardEvent>complete</cmmn:standardEvent>
-        </cmmn:planItemOnPart>
-      </cmmn:sentry>
-      <cmmn:sentry id="Sentry_0ewbjk8">
-        <cmmn:planItemOnPart id="PlanItemOnPart_1j85zej" sourceRef="PI_Task_2">
-          <cmmn:standardEvent>complete</cmmn:standardEvent>
-        </cmmn:planItemOnPart>
-      </cmmn:sentry>
-      <cmmn:sentry id="Sentry_0qh4aky">
-        <cmmn:planItemOnPart id="PlanItemOnPart_11t88ii" sourceRef="PI_EventListener_1">
-          <cmmn:standardEvent>occur</cmmn:standardEvent>
-        </cmmn:planItemOnPart>
-      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_0fes2p3" />
+      <cmmn:sentry id="Sentry_0ewbjk8" />
+      <cmmn:sentry id="Sentry_0qh4aky" />
       <cmmn:task id="Task_1" />
       <cmmn:stage id="Stage_1">
-        <cmmn:planItem id="PI_Task_2" definitionRef="Task_2" />
+        <cmmn:planItem id="PI_Task_2" name="Task_2" definitionRef="Task_2" />
         <cmmn:task id="Task_2" />
       </cmmn:stage>
       <cmmn:milestone id="Milestone_1" />
@@ -67,39 +55,14 @@
         <dc:Bounds x="458" y="333" width="20" height="28" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
-      <cmmndi:CMMNEdge id="PlanItemOnPart_05b5vf9_di" cmmnElementRef="PlanItemOnPart_05b5vf9" targetCMMNElementRef="EntryCriterion_0j7oltv" isStandardEventVisible="true">
-        <di:waypoint xsi:type="dc:Point" x="179" y="157" />
-        <di:waypoint xsi:type="dc:Point" x="179" y="347" />
-        <di:waypoint xsi:type="dc:Point" x="458" y="347" />
-        <cmmndi:CMMNLabel>
-          <dc:Bounds x="194" y="318" width="53" height="12" />
-        </cmmndi:CMMNLabel>
-      </cmmndi:CMMNEdge>
       <cmmndi:CMMNShape id="ExitCriterion_0cm9b1w_di" cmmnElementRef="ExitCriterion_0cm9b1w">
         <dc:Bounds x="808" y="315" width="20" height="28" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
-      <cmmndi:CMMNEdge id="PlanItemOnPart_1j85zej_di" cmmnElementRef="PlanItemOnPart_1j85zej" targetCMMNElementRef="ExitCriterion_0cm9b1w" isStandardEventVisible="true">
-        <di:waypoint xsi:type="dc:Point" x="606" y="387" />
-        <di:waypoint xsi:type="dc:Point" x="707" y="387" />
-        <di:waypoint xsi:type="dc:Point" x="707" y="329" />
-        <di:waypoint xsi:type="dc:Point" x="808" y="329" />
-        <cmmndi:CMMNLabel>
-          <dc:Bounds x="633" y="364" width="53" height="12" />
-        </cmmndi:CMMNLabel>
-      </cmmndi:CMMNEdge>
       <cmmndi:CMMNShape id="EntryCriterion_135b39y_di" cmmnElementRef="EntryCriterion_135b39y">
         <dc:Bounds x="555" y="237" width="20" height="28" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
-      <cmmndi:CMMNEdge id="PlanItemOnPart_11t88ii_di" cmmnElementRef="PlanItemOnPart_11t88ii" targetCMMNElementRef="EntryCriterion_135b39y" isStandardEventVisible="true">
-        <di:waypoint xsi:type="dc:Point" x="434" y="133" />
-        <di:waypoint xsi:type="dc:Point" x="565" y="133" />
-        <di:waypoint xsi:type="dc:Point" x="565" y="237" />
-        <cmmndi:CMMNLabel>
-          <dc:Bounds x="515" y="139" width="35" height="12" />
-        </cmmndi:CMMNLabel>
-      </cmmndi:CMMNEdge>
     </cmmndi:CMMNDiagram>
   </cmmndi:CMMNDI>
 </cmmn:definitions>
