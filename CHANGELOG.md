@@ -6,6 +6,10 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.19.1
+
+* `FIX`: provide missing `connection.updateWaypoints` rule
+
 ## 0.19.0
 
 * `FEAT`: add grid snapping
