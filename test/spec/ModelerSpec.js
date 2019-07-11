@@ -35,6 +35,12 @@ describe('Modeler', function() {
   });
 
 
+  it('should import containers', function(done) {
+    var xml = require('../fixtures/cmmn/containers.cmmn');
+    createModeler(xml, done);
+  });
+
+
   it('should re-import simple diagram', function(done) {
 
     var xml = require('../fixtures/cmmn/simple.cmmn');

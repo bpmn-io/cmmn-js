@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn" exporter="cmmn-js (https://demo.bpmn.io/cmmn)" exporterVersion="0.18.1">
+  <cmmn:case id="Case_1e3g0bj">
+    <cmmn:casePlanModel id="CasePlanModel_0rsy0pk">
+      <cmmn:planItem id="PlanItem_02lljth" definitionRef="Stage_0ozyyik" />
+      <cmmn:planItem id="PlanItem_1pxq5t2" definitionRef="Task_0uwx0ns" />
+      <cmmn:planItem id="PlanItem_1bvp7bi" definitionRef="Stage_10h98bj" />
+      <cmmn:planningTable id="PlanningTable_0c8zq24">
+        <cmmn:discretionaryItem id="PlanItem_1eq176u" definitionRef="Stage_1ue5m1a" />
+        <cmmn:discretionaryItem id="PlanItem_0q3ixwc" definitionRef="Stage_170app5" />
+      </cmmn:planningTable>
+      <cmmn:stage id="Stage_1ue5m1a" name="" />
+      <cmmn:stage id="Stage_170app5" />
+      <cmmn:stage id="Stage_0ozyyik" name="" />
+      <cmmn:task id="Task_0uwx0ns" />
+      <cmmn:stage id="Stage_10h98bj" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmn:case id="Case_0xq2ajm">
+    <cmmn:casePlanModel id="CasePlanModel_0i100xl" />
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram sharedStyle="b243f551-296a-4bc8-8a8a-0d5e343ed60f" id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2" name="Claims File">
+      <cmmndi:Size width="1313.31396484375" height="1009" />
+      <cmmndi:CMMNShape id="CasePlanModel_0rsy0pk_di" cmmnElementRef="CasePlanModel_0rsy0pk">
+        <dc:Bounds x="183" y="115" width="578" height="701" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CasePlanModel_0i100xl_di" cmmnElementRef="CasePlanModel_0i100xl">
+        <dc:Bounds x="858" y="175" width="400" height="250" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DiscretionaryItem_18o9m83_di" cmmnElementRef="PlanItem_1eq176u">
+        <dc:Bounds x="311" y="239" width="243" height="120" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DiscretionaryItem_176xg1x_di" cmmnElementRef="PlanItem_0q3ixwc">
+        <dc:Bounds x="314" y="397" width="238" height="135" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_02lljth_di" cmmnElementRef="PlanItem_02lljth">
+        <dc:Bounds x="315" y="556" width="229" height="161" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_1pxq5t2_di" cmmnElementRef="PlanItem_1pxq5t2">
+        <dc:Bounds x="622" y="241" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_0590apd_di" cmmnElementRef="PlanItem_1bvp7bi" isCollapsed="true">
+        <dc:Bounds x="622" y="556" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+    <cmmndi:CMMNStyle id="b243f551-296a-4bc8-8a8a-0d5e343ed60f" fontFamily="Arial,Helvetica,sans-serif" />
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
