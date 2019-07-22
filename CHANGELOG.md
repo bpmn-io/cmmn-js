@@ -16,7 +16,6 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 0.19.0
 
-* `FEAT`: add grid snapping
 * `FEAT`: improve connect snapping
 * `FEAT`: snap to source and target dockings
 * `FEAT`: add connect previews
