@@ -11,28 +11,8 @@ var coreModule = require('../../../../lib/core'),
     replaceMenuProviderModule = require('../../../../lib/features/popup-menu');
 
 var domQuery = require('min-dom').query,
+    domQueryAll = require('min-dom').queryAll,
     domClasses = require('min-dom').classes;
-
-function queryEntry(popupMenu, id) {
-  return queryPopup(popupMenu, '[data-id="' + id + '"]');
-}
-
-function queryPopup(popupMenu, selector) {
-  return domQuery(selector, popupMenu._current.container);
-}
-
-/**
- * Gets all menu entries from the current open popup menu
- *
- * @param  {PopupMenu} popupMenu
- *
- * @return {<Array>}
- */
-function getEntries(popupMenu) {
-  var element = popupMenu._current.element;
-
-  return popupMenu._current.provider.getEntries(element);
-}
 
 describe('features/popup-menu - replace menu provider', function() {
 
@@ -155,14 +135,12 @@ describe('features/popup-menu - replace menu provider', function() {
 
         openPopup(casePlanModel);
 
-        var entry = queryEntry(popupMenu, 'toggle-auto-complete');
-
         // when
-        popupMenu.trigger(globalEvent(entry, { x: 0, y: 0 }));
+        triggerAction('toggle-auto-complete');
 
         openPopup(casePlanModel);
 
-        var autoCompleteEntry = queryEntry(popupMenu, 'toggle-auto-complete');
+        var autoCompleteEntry = queryEntry('toggle-auto-complete');
 
         // then
         expect(casePlanModel.businessObject.autoComplete).to.be.false;
@@ -178,14 +156,12 @@ describe('features/popup-menu - replace menu provider', function() {
 
         openPopup(task);
 
-        var entry = queryEntry(popupMenu, 'toggle-is-blocking');
-
         // when
-        popupMenu.trigger(globalEvent(entry, { x: 0, y: 0 }));
+        triggerAction('toggle-is-blocking');
 
         openPopup(task);
 
-        var nonBlockingEntry = queryEntry(popupMenu, 'toggle-is-blocking');
+        var nonBlockingEntry = queryEntry('toggle-is-blocking');
 
         // then
         expect(task.businessObject.definitionRef.isBlocking).to.be.false;
@@ -201,14 +177,12 @@ describe('features/popup-menu - replace menu provider', function() {
 
         openPopup(task);
 
-        var entry = queryEntry(popupMenu, 'toggle-required-rule');
-
         // when
-        popupMenu.trigger(globalEvent(entry, { x: 0, y: 0 }));
+        triggerAction('toggle-required-rule');
 
         openPopup(task);
 
-        var requiredRuleEntry = queryEntry(popupMenu, 'toggle-required-rule');
+        var requiredRuleEntry = queryEntry('toggle-required-rule');
 
         // then
         expect(task.businessObject.itemControl.requiredRule).not.to.exist;
@@ -224,14 +198,12 @@ describe('features/popup-menu - replace menu provider', function() {
 
         openPopup(task);
 
-        var entry = queryEntry(popupMenu, 'toggle-manual-activation-rule');
-
         // when
-        popupMenu.trigger(globalEvent(entry, { x: 0, y: 0 }));
+        triggerAction('toggle-manual-activation-rule');
 
         openPopup(task);
 
-        var manualActivationRuleEntry = queryEntry(popupMenu, 'toggle-manual-activation-rule');
+        var manualActivationRuleEntry = queryEntry('toggle-manual-activation-rule');
 
         // then
         expect(task.businessObject.itemControl.manualActivationRule).not.to.exist;
@@ -247,14 +219,12 @@ describe('features/popup-menu - replace menu provider', function() {
 
         openPopup(task);
 
-        var entry = queryEntry(popupMenu, 'toggle-repetition-rule');
-
         // when
-        popupMenu.trigger(globalEvent(entry, { x: 0, y: 0 }));
+        triggerAction('toggle-repetition-rule');
 
         openPopup(task);
 
-        var repetitionRuleEntry = queryEntry(popupMenu, 'toggle-repetition-rule');
+        var repetitionRuleEntry = queryEntry('toggle-repetition-rule');
 
         // then
         expect(task.businessObject.itemControl.repetitionRule).not.to.exist;
@@ -284,8 +254,8 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(eventListener);
 
           // then
-          expect(queryEntry(popupMenu, 'replace-with-event-listener-plan-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(2);
+          expect(queryEntry('replace-with-event-listener-plan-item')).to.be.null;
+          expect(queryEntries(popupMenu)).to.have.length(2);
 
         })
       );
@@ -310,8 +280,8 @@ describe('features/popup-menu - replace menu provider', function() {
           // - a discretionary item from the same task type
           // - expanded stage
           // - collapsed stage
-          expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(7);
+          expect(queryEntry('replace-with-task-plan-item')).to.be.null;
+          expect(queryEntries(popupMenu)).to.have.length(7);
 
         })
       );
@@ -332,8 +302,8 @@ describe('features/popup-menu - replace menu provider', function() {
           // - a non discretionary item from the same task type
           // - discretionary expanded stage
           // - discretionary collapsed stage
-          expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(7);
+          expect(queryEntry('replace-with-task-discretionary-item')).to.be.null;
+          expect(queryEntries(popupMenu)).to.have.length(7);
 
         })
       );
@@ -349,7 +319,7 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(task);
 
           // then
-          expect(queryEntry(popupMenu, 'replace-with-blocking-human-task-plan-item')).to.exist;
+          expect(queryEntry('replace-with-blocking-human-task-plan-item')).to.exist;
 
         })
       );
@@ -370,8 +340,8 @@ describe('features/popup-menu - replace menu provider', function() {
           // - a discretionary item from the same task type
           // - expanded stage
           // - collapsed stage
-          expect(queryEntry(popupMenu, 'replace-with-task-plan-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(7);
+          expect(queryEntry('replace-with-task-plan-item')).to.be.null;
+          expect(queryEntries(popupMenu)).to.have.length(7);
 
         })
       );
@@ -392,8 +362,8 @@ describe('features/popup-menu - replace menu provider', function() {
           // - a non discretionary item from the same task type
           // - discretionary expanded stage
           // - discretionary collapsed stage
-          expect(queryEntry(popupMenu, 'replace-with-task-discretionary-item')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(7);
+          expect(queryEntry('replace-with-task-discretionary-item')).to.be.null;
+          expect(queryEntries(popupMenu)).to.have.length(7);
 
         })
       );
@@ -409,7 +379,7 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(task);
 
           // then
-          expect(queryEntry(popupMenu, 'replace-with-non-blocking-human-task-plan-item')).to.exist;
+          expect(queryEntry('replace-with-non-blocking-human-task-plan-item')).to.exist;
 
         })
       );
@@ -429,7 +399,7 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(eventListener);
 
           // then
-          expect(getEntries(popupMenu)).to.be.empty;
+          expect(queryEntries(popupMenu)).to.be.empty;
 
         })
       );
@@ -449,7 +419,7 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(eventListener);
 
           // then
-          expect(getEntries(popupMenu)).to.have.length(2);
+          expect(queryEntries(popupMenu)).to.have.length(2);
 
         })
       );
@@ -474,7 +444,7 @@ describe('features/popup-menu - replace menu provider', function() {
           // - expanded stage
           // - discretionary collapsed stage
           // - discretionary expanded stage
-          expect(getEntries(popupMenu)).to.have.length(8);
+          expect(queryEntries(popupMenu)).to.have.length(8);
 
         })
       );
@@ -499,7 +469,7 @@ describe('features/popup-menu - replace menu provider', function() {
           // - expanded stage
           // - collapsed stage
           // - discretionary expanded stage
-          expect(getEntries(popupMenu)).to.have.length(8);
+          expect(queryEntries(popupMenu)).to.have.length(8);
 
         })
       );
@@ -523,7 +493,7 @@ describe('features/popup-menu - replace menu provider', function() {
           // - all discretionary tasks
           // - discretionary collapsed stage
           // - discretionary expanded stage
-          expect(getEntries(popupMenu)).to.have.length(7);
+          expect(queryEntries(popupMenu)).to.have.length(7);
 
         })
       );
@@ -543,8 +513,8 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(eventListener);
 
           // then
-          expect(queryEntry(popupMenu, 'replace-with-entry-criterion')).not.to.exist;
-          expect(getEntries(popupMenu)).to.have.length(1);
+          expect(queryEntry('replace-with-entry-criterion')).not.to.exist;
+          expect(queryEntries(popupMenu)).to.have.length(1);
 
         })
       );
@@ -564,8 +534,8 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(eventListener);
 
           // then
-          expect(queryEntry(popupMenu, 'replace-with-exit-criterion')).not.to.exist;
-          expect(getEntries(popupMenu)).to.have.length(1);
+          expect(queryEntry('replace-with-exit-criterion')).not.to.exist;
+          expect(queryEntries(popupMenu)).to.have.length(1);
 
         })
       );
@@ -575,3 +545,29 @@ describe('features/popup-menu - replace menu provider', function() {
   });
 
 });
+
+// helpers //////////
+
+function queryEntry(id) {
+  var container = TestHelper.getCmmnJs().get('canvas').getContainer();
+
+  return domQuery('.djs-popup [data-id="' + id + '"]', container);
+}
+
+function queryEntries() {
+  var container = TestHelper.getCmmnJs().get('canvas').getContainer();
+
+  return domQueryAll('.djs-popup .entry', container);
+}
+
+function triggerAction(id) {
+  var entry = queryEntry(id);
+
+  if (!entry) {
+    throw new Error('entry "'+ id +'" not found in replace menu');
+  }
+
+  var popupMenu = TestHelper.getCmmnJs().get('popupMenu');
+
+  popupMenu.trigger(globalEvent(entry, { x: 0, y: 0 }));
+}
