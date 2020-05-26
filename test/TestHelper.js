@@ -11,7 +11,8 @@ TestHelper.insertCSS('cmmn-embedded.css',
 );
 
 TestHelper.insertCSS('diagram-js-testing.css',
-  '.test-container .result { height: 500px; }' + '.test-container > div'
+  'body .test-container { height: auto }' +
+  'body .test-container .test-content-container { height: 90vmin; }'
 );
 
 global.chai.use(require('diagram-js/test/matchers/BoundsMatchers').default);
