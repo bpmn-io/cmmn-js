@@ -6,6 +6,11 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.20.0
+
+* `CHORE`: apply new project watermark
+* `CHORE`: clarify license terms
+
 ## 0.19.2
 
 * `FIX`: es5ify
