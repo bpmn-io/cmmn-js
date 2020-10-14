@@ -1,6 +1,6 @@
 # cmmn-js - CMMN 1.1 for the web
 
-[![Build Status](https://travis-ci.org/bpmn-io/cmmn-js.svg?branch=develop)](https://travis-ci.org/bpmn-io/cmmn-js)
+[![Build Status](https://travis-ci.com/bpmn-io/cmmn-js.svg?branch=develop)](https://travis-ci.com/bpmn-io/cmmn-js)
 
 View and edit CMMN 1.1 diagrams in the browser.
 
